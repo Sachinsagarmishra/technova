@@ -50,3 +50,10 @@ function technova_acf_json_load_point($paths)
     $paths[] = get_stylesheet_directory() . '/acf-json';
     return $paths;
 }
+
+// Fallback for get_field function to prevent fatal errors when ACF plugin is inactive
+if ( ! function_exists( 'get_field' ) ) {
+    function get_field( $selector, $post_id = false, $format_value = true ) {
+        return null;
+    }
+}
