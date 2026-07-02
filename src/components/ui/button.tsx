@@ -11,11 +11,13 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         glass: "liquid-glass text-foreground hover:scale-[1.03]",
+        "glass-dark": "liquid-glass-dark text-[#0b132b] hover:scale-[1.03]",
       },
       size: {
         default: "h-9 px-4 py-2",
         nav: "rounded-full px-6 py-2.5 text-sm",
         hero: "rounded-full px-14 py-5 text-base",
+        cta: "rounded-full px-[30px] py-[20px] text-base h-auto",
       },
     },
     defaultVariants: {

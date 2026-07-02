@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -10,6 +10,13 @@ import {
   FileUser,
   UserRoundSearch,
   UsersRound,
+  Building2,
+  Users,
+  Clock,
+  ShieldCheck,
+  Linkedin,
+  Facebook,
+  Instagram,
 } from "lucide-react";
 import awsLogo from "@/assets/trusted-logos/aws.png";
 import ciscoLogo from "@/assets/trusted-logos/cisco.png";
@@ -30,7 +37,12 @@ import technologyIllustration from "../imges/Industries/Technology.svg";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
 import technovaLogo from "../imges/Technova Systems Logo final-13 1.svg";
+import darkLogo from "../imges/darklogo.svg";
 import workforceConsultingIllustration from "../imges/Workforce-Consulting.svg";
+import aiPoweredVideo from "../imges/AI-Powered.mp4";
+import futureOfWorkAiThumbnail from "../imges/future-of-work-ai.png";
+import techSkills2026Thumbnail from "../imges/tech-skills-2026.png";
+import aiStaffingTrendsThumbnail from "../imges/ai-staffing-trends.png";
 
 const navLinks = [
   "Industries",
@@ -225,6 +237,66 @@ const industryCards = [
   },
 ];
 
+const insightArticles = [
+  {
+    title: "The Future of Work in the Age of AI",
+    thumbnail: futureOfWorkAiThumbnail,
+    link: "#",
+  },
+  {
+    title: "Top 10 In-Demand Tech skills in 2026",
+    thumbnail: techSkills2026Thumbnail,
+    link: "#",
+  },
+  {
+    title: "AI in Staffing: Trends Shaping the Industry",
+    thumbnail: aiStaffingTrendsThumbnail,
+    link: "#",
+  },
+];
+
+function Counter({ value, suffix = "", duration = 2000 }: { value: number; suffix?: string; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          let start = 0;
+          const end = value;
+          const totalMiliseconds = duration;
+          const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 15);
+          
+          const timer = setInterval(() => {
+            start += Math.ceil(end / (totalMiliseconds / incrementTime));
+            if (start >= end) {
+              clearInterval(timer);
+              setCount(end);
+            } else {
+              setCount(start);
+            }
+          }, incrementTime);
+
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [value, duration]);
+
+  return <span ref={elementRef}>{count}{suffix}</span>;
+}
+
 function App() {
   useEffect(() => {
     const revealItems = document.querySelectorAll(".scroll-reveal-section, .scroll-reveal-card");
@@ -360,7 +432,7 @@ function App() {
 
         <div className="relative z-10 flex flex-col items-center justify-center px-6 py-[90px] pb-40 pt-32 text-center">
           <h1
-            className="wave-heading animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-8xl"
+            className="wave-heading animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-[85px]"
             style={{ fontFamily: "'Instrument Serif', serif" }}
             aria-label={headlineText}
           >
@@ -636,6 +708,381 @@ function App() {
           </div>
         </div>
       </section>
+
+      <section className="scroll-reveal-section w-full bg-white grid grid-cols-1 lg:grid-cols-12 text-[#0b132b]">
+        {/* Left Panel */}
+        <div className="relative overflow-hidden lg:col-span-5 bg-[#001726] text-white p-8 sm:p-12 lg:p-16 xl:p-20 flex flex-col justify-between min-h-[500px]">
+          {/* Background Video */}
+          <video
+            className="absolute inset-0 h-full w-full object-cover z-0 mix-blend-screen object-right"
+            src={aiPoweredVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#001726]/80 via-transparent to-[#001726]/95 z-[1]" />
+          
+          {/* Content Wrapper aligned to the right inside the left column */}
+          <div className="relative z-10 flex flex-col h-full justify-between gap-12 w-full max-w-[480px] lg:ml-auto">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B]">
+                AI & Technology Leadership
+              </p>
+              <h3 
+                className="wave-heading font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight"
+                aria-label="AI-Powered. Human-Led. Future-Ready"
+              >
+                <WaveLetters parts={[{ text: "AI-Powered." }]} /> <br />
+                <WaveLetters parts={[{ text: "Human-Led." }]} /> <br />
+                <WaveLetters parts={[{ text: "Future-Ready" }]} />
+              </h3>
+              <p className="mt-6 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[320px]">
+                We combine the power of AI with human expertise to deliver scaling, hiring, deeper insights and better outcomes.
+              </p>
+            </div>
+            <div className="mt-auto">
+              <Button variant="glass" size="cta" className="transition-all hover:scale-[1.02] border border-white/20">
+                Explore AI Solutions
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Panel */}
+        <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 xl:p-20 flex flex-col justify-center bg-white">
+          {/* Content Wrapper aligned to the left inside the right column */}
+          <div className="w-full max-w-[720px] lg:mr-auto">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              {/* Left col of right panel: description */}
+              <div className="md:col-span-5 flex flex-col justify-between h-full">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[#0e2a90]">
+                    Insights & Resources
+                  </p>
+                  <h3 
+                    className="wave-heading font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
+                    aria-label="Insights That Drive What's Next"
+                  >
+                    <WaveLetters parts={[{ text: "Insights That" }]} /> <br />
+                    <WaveLetters parts={[{ text: "Drive What's Next" }]} />
+                  </h3>
+                  <p className="mt-5 text-sm text-slate-600 leading-relaxed">
+                    Stay ahead with the latest trends, reports and expert perspectives.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <Button variant="glass-dark" size="cta" className="transition-all hover:scale-[1.02]">
+                    View All Insights
+                  </Button>
+                </div>
+              </div>
+
+              {/* Right col of right panel: blog items */}
+              <div className="md:col-span-7 flex flex-col gap-6">
+                {insightArticles.map((article, index) => (
+                  <a 
+                    href={article.link} 
+                    key={index} 
+                    className="group flex gap-4 items-start p-3 rounded-xl hover:bg-slate-50 transition-all duration-300"
+                  >
+                    <div className="w-24 h-16 sm:w-28 sm:h-20 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-100">
+                      <img 
+                        src={article.thumbnail} 
+                        alt={article.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center h-full">
+                      <h4 className="font-semibold text-sm sm:text-base text-slate-900 line-clamp-2 group-hover:text-[#0e2a90] transition-colors leading-snug">
+                        {article.title}
+                      </h4>
+                      <span className="inline-flex items-center text-xs font-semibold text-[#0e2a90] mt-2 group-hover:underline">
+                        Read More <ArrowRight className="ml-1 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats / Numbers Impact Section */}
+      <section className="scroll-reveal-section bg-white px-4 py-10 text-[#0b132b] sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl border border-violet-100/80 bg-gradient-to-r from-violet-50 via-indigo-50/50 to-purple-50 p-8 sm:p-12 shadow-[0_15px_40px_rgba(139,92,246,0.03)] relative">
+          <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] pointer-events-none z-0" />
+          
+          <div className="relative z-10 flex flex-col items-center">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6]">
+              Our Impact in Numbers
+            </span>
+            
+            <div className="mt-10 grid w-full grid-cols-2 gap-8 md:grid-cols-4 md:gap-4 lg:gap-8">
+              {/* Stat 1 */}
+              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60 first:border-0 md:first:border-0">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
+                  <Building2 size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
+                    <Counter value={500} suffix="+" />
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                    Enterprise Clients
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
+                  <Users size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
+                    <Counter value={1000} suffix="+" />
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                    Successful Placements
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
+                    <Counter value={48} suffix="H" />
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                    Average Shortlisting Time
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 4 */}
+              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
+                  <ShieldCheck size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
+                    <Counter value={95} suffix="%" />
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                    Client Retention Rate
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="scroll-reveal-section bg-white px-4 py-8 text-[#0b132b] sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl border border-orange-100/70 bg-gradient-to-r from-orange-50/70 via-rose-50/50 to-orange-50/40 p-8 sm:p-12 lg:p-16 shadow-[0_15px_40px_rgba(249,115,22,0.02)] relative flex flex-col lg:flex-row justify-between items-center gap-8 min-h-[280px]">
+          {/* Content side */}
+          <div className="relative z-10 max-w-2xl w-full text-center lg:text-left">
+            <h2 
+              className="wave-heading font-display text-4xl sm:text-5xl font-normal leading-tight text-slate-800 tracking-tight"
+              aria-label="Let's Build Your Next High-Performance Team"
+            >
+              <WaveLetters parts={[{ text: "Let's Build Your Next" }]} /> <br className="hidden sm:inline" />
+              <WaveLetters parts={[{ text: "High-Performance Team" }]} />
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Whether you're hiring top talent or looking for workforce solutions, TechNova Systems is here to engineer your success.
+            </p>
+          </div>
+
+          {/* Action side */}
+          <div className="relative z-10 flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-end xl:mr-[140px] w-full lg:w-auto">
+            <Button className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#EA580C] font-semibold rounded-full shadow-lg shadow-orange-500/10 flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform" style={{ padding: "30px 25px" }}>
+              Schedule a Consultation <ArrowRight size={18} />
+            </Button>
+            <Button variant="glass-dark" className="w-full sm:w-auto rounded-full flex items-center justify-center gap-2 border border-slate-200/80 bg-white hover:bg-slate-50 transition-all hover:scale-[1.02]" style={{ padding: "30px 25px" }}>
+              Contact Our Team <ArrowRight size={18} />
+            </Button>
+          </div>
+
+          {/* Illustration on the far right */}
+          <div className="absolute right-0 bottom-0 h-[180px] w-[180px] opacity-20 pointer-events-none md:opacity-100 lg:opacity-100 xl:opacity-100 md:h-[220px] md:w-[220px] z-0 overflow-hidden">
+            <img 
+              src={forTalentIllustration} 
+              alt="" 
+              className="h-full w-full object-contain object-bottom translate-x-6 translate-y-6" 
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="scroll-reveal-section bg-white text-[#0b132b] pt-16 pb-8 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12">
+            {/* Bio Column */}
+            <div className="lg:col-span-3 flex flex-col gap-6">
+              <a href="#" className="flex items-center" aria-label="TechNova Systems Home">
+                <img src={darkLogo} alt="TechNova Systems" className="h-10 w-auto" />
+              </a>
+              <p className="text-sm text-slate-500 leading-relaxed">
+                AI staffing and technology consulting solutions that help organizations innovate, scale and lead in the digital-first world.
+              </p>
+              <div className="flex gap-4 text-slate-400">
+                <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="LinkedIn">
+                  <Linkedin size={20} />
+                </a>
+                <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="X (formerly Twitter)">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="Facebook">
+                  <Facebook size={20} />
+                </a>
+                <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="Instagram">
+                  <Instagram size={20} />
+                </a>
+              </div>
+            </div>
+
+            {/* Solutions Column */}
+            <div className="lg:col-span-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Solutions</h4>
+              <ul className="mt-4 space-y-2.5">
+                {megaMenuSolutions.map((item) => (
+                  <li key={item.title}>
+                    <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* For Employers Column */}
+            <div className="lg:col-span-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">For Employers</h4>
+              <ul className="mt-4 space-y-2.5">
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Hire Talent
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Solutions Overview
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Case Studies
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Resource Center
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* For Talent Column */}
+            <div className="lg:col-span-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">For Talent</h4>
+              <ul className="mt-4 space-y-2.5">
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Browse Jobs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Submit Resume
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Career Resources
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Why TechNova
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company Column */}
+            <div className="lg:col-span-1.5 lg:col-start-10">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Company</h4>
+              <ul className="mt-4 space-y-2.5">
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Leadership
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    News & Insights
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Subscribe Column */}
+            <div className="lg:col-span-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Subscribe</h4>
+              <p className="text-sm text-slate-500 mt-4">
+                Get the latest updates and insights.
+              </p>
+              <div className="relative mt-4 flex items-center">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 pr-12 text-sm text-slate-800 placeholder-slate-400 focus:border-[#8B5CF6] focus:outline-none focus:ring-1 focus:ring-[#8B5CF6]"
+                />
+                <button className="absolute right-1.5 p-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full transition-colors" aria-label="Subscribe">
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Copyright Row */}
+          <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-medium">
+            <div>
+              &copy; 2026 TechNova Systems. All rights reserved.
+            </div>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-[#8B5CF6] transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-[#8B5CF6] transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
