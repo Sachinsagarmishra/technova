@@ -61,10 +61,31 @@ We will create a new custom WordPress theme named `technova-theme` in the `/wp-c
 
 ---
 
+## Development & Deployment Workflow
+
+To ensure maximum safety, smooth client reviews, and pixel-perfect handover, we adhere to the following workflow:
+
+```mermaid
+graph TD
+    A[Receive Change Request] --> B[Implement & Test in React/Vite]
+    B --> C[Deploy React Build for Client Showcase/Review]
+    C --> D{Client Approved?}
+    D -- No --> B
+    D -- Yes --> E[Convert Code to WordPress PHP Theme Templates]
+    E --> F[Deploy Theme Files to Hostinger Server via SSH/SFTP]
+    F --> G[Verify Live WordPress Site]
+```
+
+1. **Phase 1 (React/Vite First)**: All UI, text adjustments, layouts, and animations are coded and verified in the React/Vite codebase. The React/Vite code remains the source of truth for the frontend styling and UI logic.
+2. **Phase 2 (Client Showcasing)**: The built static site is showcased to the client. Any tweaks or iterations requested by the client are made and approved within this React container.
+3. **Phase 3 (WordPress Compilation)**: Once the changes are fully approved, we port the new components, HTML markup, and compiled CSS variables into our custom `/wordpress-theme/` folder and upload them to the Hostinger WordPress server.
+
+---
+
 ## Verification Plan
 
 ### Manual Verification
 1. **WP Admin Dashboard Test**: Log into the WordPress dashboard and ensure the editing fields for Hero text, Capabilities, and CTA buttons exist and save content properly.
 2. **Animation check**: Test page hover states and make sure the letter-wave animation triggers correctly on all headings.
 3. **Responsiveness test**: Inspect the layout on Mobile, Tablet, and Desktop screens to verify it remains 100% pixel-perfect.
-4. **Performance check**: Test page load speed on Google PageSpeed Insights after deploying to the GoDaddy hosting.
+4. **Performance check**: Test page load speed on Google PageSpeed Insights after deploying to the Hostinger hosting.
