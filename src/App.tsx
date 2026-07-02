@@ -20,6 +20,11 @@ import {
   Mail,
   Phone,
   MapPin,
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
 } from "lucide-react";
 import awsLogo from "@/assets/trusted-logos/aws.png";
 import ciscoLogo from "@/assets/trusted-logos/cisco.png";
@@ -85,19 +90,82 @@ const megaMenuSolutions = [
   { title: "Managed Teams", description: "Dedicated delivery pods built around outcomes", icon: BadgeCheck },
 ];
 
-const headlineParts = [
-  { text: "We Build ", accent: false },
-  { text: "High-Performance", accent: true },
-  { text: " Teams That Drive ", accent: false },
-  { text: "What's Next", accent: true },
-];
-
 type WavePart = {
   text: string;
   accent?: boolean;
 };
 
-const headlineText = headlineParts.map((part) => part.text).join("");
+const slides = [
+  {
+    bgType: "video",
+    bgUrl: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
+    headlineParts: [
+      { text: "We Build ", accent: false },
+      { text: "High-Performance", accent: true },
+      { text: " Teams That Drive ", accent: false },
+      { text: "What's Next", accent: true },
+    ],
+    description: "AI-powered talent solutions and technology consulting that help organizations innovate, scale and lead in a digital-first world.",
+    ctaButtons: [
+      { text: "Hire Top Talent", link: "#", primary: true },
+      { text: "Explore AI Solutions", link: "#", primary: false }
+    ]
+  },
+  {
+    bgType: "video",
+    bgUrl: aiPoweredVideo,
+    headlineParts: [
+      { text: "Accelerate ", accent: false },
+      { text: "Digital", accent: true },
+      { text: " & ", accent: false },
+      { text: "AI Transformation", accent: true },
+    ],
+    description: "Modernize your operations, automate complex workflows, and unlock growth with custom intelligence.",
+    ctaButtons: [
+      { text: "Talk to an Expert", link: "#", primary: true }
+    ]
+  },
+  {
+    bgType: "image",
+    bgUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop",
+    headlineParts: [
+      { text: "Build ", accent: false },
+      { text: "Visionary Leadership", accent: true },
+      { text: " For What's Ahead", accent: false },
+    ],
+    description: "Direct-hire and executive search for critical technology and business-driving leadership roles.",
+    ctaButtons: [
+      { text: "Find Leaders", link: "#", primary: true },
+      { text: "Our Methodology", link: "#", primary: false }
+    ]
+  },
+  {
+    bgType: "image",
+    bgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop",
+    headlineParts: [
+      { text: "Dedicated ", accent: false },
+      { text: "Managed Teams", accent: true },
+      { text: " Built For Speed", accent: false },
+    ],
+    description: "Deploy complete, high-impact engineering and data squads structured around your business outcomes.",
+    ctaButtons: [
+      { text: "Request a Pod", link: "#", primary: true }
+    ]
+  },
+  {
+    bgType: "image",
+    bgUrl: "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop",
+    headlineParts: [
+      { text: "Strategic ", accent: false },
+      { text: "Workforce", accent: true },
+      { text: " Planning & Design", accent: false },
+    ],
+    description: "Align your talent acquisition strategy directly with technical roadmaps and business growth goals.",
+    ctaButtons: [
+      { text: "Schedule Consultation", link: "#", primary: true }
+    ]
+  }
+];
 
 function WaveLetters({ parts }: { parts: WavePart[] }) {
   let waveIndex = 0;
@@ -305,6 +373,38 @@ function App() {
   // Site Key: 0x4AAAAAADumwXCngu01f3kg
   // Secret Key: 0x4AAAAAADumwY5ZXx8UQKuIGL-lZS90Prk (use on your backend server to verify the token)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    // Pause all videos
+    videoRefs.current.forEach((vid) => {
+      if (vid) vid.pause();
+    });
+
+    // Play active video if isPlaying is true
+    const activeSlide = slides[currentSlide];
+    if (activeSlide && activeSlide.bgType === "video") {
+      const activeVid = videoRefs.current[currentSlide];
+      if (activeVid) {
+        if (isPlaying) {
+          activeVid.play().catch((err) => console.log("Video play interrupted:", err));
+        } else {
+          activeVid.pause();
+        }
+      }
+    }
+  }, [currentSlide, isPlaying]);
 
   useEffect(() => {
     // Dynamically load Cloudflare Turnstile API script
@@ -370,14 +470,37 @@ function App() {
   return (
     <main className="bg-[#f2f5f9] font-body text-foreground">
       <section className="relative min-h-screen overflow-hidden bg-background">
-        <video
-          className="absolute inset-0 z-0 h-full w-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        {/* Background cross-fade elements */}
+        {slides.map((slide, index) => {
+          if (slide.bgType === "video") {
+            return (
+              <video
+                key={index}
+                ref={(el) => (videoRefs.current[index] = el)}
+                className={`absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                  currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+                src={slide.bgUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            );
+          } else {
+            return (
+              <div
+                key={index}
+                className={`absolute inset-0 z-0 h-full w-full bg-cover bg-center transition-opacity duration-1000 ${
+                  currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+                style={{ backgroundImage: `url(${slide.bgUrl})` }}
+              />
+            );
+          }
+        })}
+        {/* Dark overlay to ensure text contrast */}
+        <div className="absolute inset-0 bg-[#001726]/40 z-[1] pointer-events-none" />
 
         <nav className="relative z-[100] mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
           <a
@@ -476,27 +599,80 @@ function App() {
           </Button>
         </nav>
 
-        <div className="relative z-10 flex flex-col items-center justify-center px-6 py-[90px] pb-40 pt-32 text-center">
+        {/* Carousel Content */}
+        <div 
+          key={currentSlide}
+          className="relative z-10 flex flex-col items-center justify-center px-6 py-[90px] pb-40 pt-32 text-center max-w-7xl mx-auto w-full min-h-[calc(100vh-100px)]"
+        >
           <h1
-            className="wave-heading animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-[85px]"
+            className="wave-heading animate-fade-rise max-w-5xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-white sm:text-7xl md:text-[85px]"
             style={{ fontFamily: "'Instrument Serif', serif" }}
-            aria-label={headlineText}
+            aria-label={slides[currentSlide].headlineParts.map((part) => part.text).join("")}
           >
-            <WaveLetters parts={headlineParts} />
+            <WaveLetters parts={slides[currentSlide].headlineParts} />
           </h1>
 
-          <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-white sm:text-lg">
-            AI-powered talent solutions and technology consulting that help
-            organizations innovate, scale and lead in a digital-first world.
+          <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+            {slides[currentSlide].description}
           </p>
 
-          <Button
-            variant="glass"
-            size="hero"
-            className="animate-fade-rise-delay-2 mt-12 cursor-pointer"
+          <div className="animate-fade-rise-delay-2 mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {slides[currentSlide].ctaButtons.map((btn, btnIndex) => (
+              <Button
+                key={btnIndex}
+                variant={btn.primary ? "default" : "glass"}
+                size="hero"
+                className={`cursor-pointer font-semibold transition-all ${
+                  btn.primary 
+                    ? "bg-[#f59e0c] text-white hover:bg-[#d97706] border border-[#f59e0c]/20 shadow-lg shadow-amber-500/20 hover:scale-[1.03]" 
+                    : ""
+                }`}
+                asChild
+              >
+                <a href={btn.link}>{btn.text}</a>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-10 left-8 md:left-12 z-20 hidden md:flex items-center gap-2 text-white/50 pointer-events-none animate-bounce">
+          <ChevronDown size={24} />
+        </div>
+
+        {/* Carousel controls (bottom-right) */}
+        <div className="absolute bottom-8 right-8 md:right-12 z-20 flex items-center gap-4">
+          {/* Pill Indicator */}
+          <div className="bg-black/50 text-white px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-widest backdrop-blur-md border border-white/10 shadow-lg">
+            0{currentSlide + 1} / 0{slides.length}
+          </div>
+
+          {/* Play/Pause Button */}
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="text-white hover:text-[#f59e0c] transition-colors p-2 cursor-pointer flex items-center justify-center bg-black/40 hover:bg-black/60 rounded-full h-10 w-10 border border-white/10 backdrop-blur-md"
+            aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
           >
-            Hire Top Talent
-          </Button>
+            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+
+          {/* Navigation Arrows */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+              className="h-11 w-11 rounded-full bg-[#f59e0c] hover:bg-[#d97706] text-white flex items-center justify-center transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer shadow-md shadow-amber-500/10"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={20} strokeWidth={2.5} />
+            </button>
+            <button
+              onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+              className="h-11 w-11 rounded-full bg-[#f59e0c] hover:bg-[#d97706] text-white flex items-center justify-center transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer shadow-md shadow-amber-500/10"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={20} strokeWidth={2.5} />
+            </button>
+          </div>
         </div>
       </section>
 
