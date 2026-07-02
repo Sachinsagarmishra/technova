@@ -1,8 +1,0 @@
-<?php
-/**
- * TechNova Theme Footer
- */
-?>
-<?php wp_footer(); ?>
-</body>
-</html>
