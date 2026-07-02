@@ -658,20 +658,22 @@ function App() {
 
           {/* Navigation Arrows */}
           <div className="flex gap-2">
-            <button
+            <Button
               onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-              className="h-11 w-11 rounded-full bg-[#f59e0c] hover:bg-[#d97706] text-white flex items-center justify-center transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer shadow-md shadow-amber-500/10"
+              variant="glass"
+              className="h-10 w-10 rounded-full flex items-center justify-center p-0 cursor-pointer text-white"
               aria-label="Previous slide"
             >
               <ChevronLeft size={20} strokeWidth={2.5} />
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-              className="h-11 w-11 rounded-full bg-[#f59e0c] hover:bg-[#d97706] text-white flex items-center justify-center transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer shadow-md shadow-amber-500/10"
+              variant="glass"
+              className="h-10 w-10 rounded-full flex items-center justify-center p-0 cursor-pointer text-white"
               aria-label="Next slide"
             >
               <ChevronRight size={20} strokeWidth={2.5} />
-            </button>
+            </Button>
           </div>
         </div>
       </section>
