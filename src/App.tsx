@@ -17,6 +17,9 @@ import {
   Linkedin,
   Facebook,
   Instagram,
+  Mail,
+  Phone,
+  MapPin,
 } from "lucide-react";
 import awsLogo from "@/assets/trusted-logos/aws.png";
 import ciscoLogo from "@/assets/trusted-logos/cisco.png";
@@ -884,40 +887,180 @@ function App() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Contact Section */}
       <section className="scroll-reveal-section bg-white px-4 py-8 text-[#0b132b] sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl border border-orange-100/70 bg-gradient-to-r from-orange-50/70 via-rose-50/50 to-orange-50/40 p-8 sm:p-12 lg:p-16 shadow-[0_15px_40px_rgba(249,115,22,0.02)] relative flex flex-col lg:flex-row justify-between items-center gap-8 min-h-[280px]">
-          {/* Content side */}
-          <div className="relative z-10 max-w-2xl w-full text-center lg:text-left">
-            <h2 
-              className="wave-heading font-display text-4xl sm:text-5xl font-normal leading-tight text-slate-800 tracking-tight"
-              aria-label="Let's Build Your Next High-Performance Team"
-            >
-              <WaveLetters parts={[{ text: "Let's Build Your Next" }]} /> <br className="hidden sm:inline" />
-              <WaveLetters parts={[{ text: "High-Performance Team" }]} />
-            </h2>
-            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Whether you're hiring top talent or looking for workforce solutions, TechNova Systems is here to engineer your success.
-            </p>
-          </div>
+        <div className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl border border-orange-100/70 bg-gradient-to-r from-orange-50/70 via-rose-50/50 to-orange-50/40 p-8 sm:p-12 lg:p-16 shadow-[0_15px_40px_rgba(249,115,22,0.02)] relative">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">
+            {/* Left Column */}
+            <div className="lg:col-span-5 flex flex-col justify-between text-left">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-teal-600 mb-4">
+                  — CONTACT
+                </p>
+                <h2 
+                  className="wave-heading font-display text-4xl sm:text-5xl font-normal leading-[1.1] text-slate-800 tracking-tight"
+                  aria-label="Let's build something exceptional together."
+                >
+                  <WaveLetters parts={[{ text: "Let's build" }]} /> <br />
+                  <WaveLetters parts={[{ text: "something" }]} /> <br />
+                  <span className="font-serif italic text-teal-600 font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                    <WaveLetters parts={[{ text: "exceptional" }]} />
+                  </span> <br />
+                  <WaveLetters parts={[{ text: "together." }]} />
+                </h2>
+                <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-md">
+                  Tell us about your hiring or consulting needs. We respond to every inquiry within <strong className="text-slate-800 font-semibold">4 business hours</strong>.
+                </p>
+              </div>
 
-          {/* Action side */}
-          <div className="relative z-10 flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-end xl:mr-[140px] w-full lg:w-auto">
-            <Button className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#EA580C] font-semibold rounded-full shadow-lg shadow-orange-500/10 flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform" style={{ padding: "30px 25px" }}>
-              Schedule a Consultation <ArrowRight size={18} />
-            </Button>
-            <Button variant="glass-dark" className="w-full sm:w-auto rounded-full flex items-center justify-center gap-2 border border-slate-200/80 bg-white hover:bg-slate-50 transition-all hover:scale-[1.02]" style={{ padding: "30px 25px" }}>
-              Contact Our Team <ArrowRight size={18} />
-            </Button>
-          </div>
+              <div className="mt-10 flex flex-col gap-6">
+                {/* Email */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Email</div>
+                    <a href="mailto:hello@technovasystems.com" className="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
+                      hello@technovasystems.com
+                    </a>
+                  </div>
+                </div>
 
-          {/* Illustration on the far right */}
-          <div className="absolute right-0 bottom-0 h-[180px] w-[180px] opacity-20 pointer-events-none md:opacity-100 lg:opacity-100 xl:opacity-100 md:h-[220px] md:w-[220px] z-0 overflow-hidden">
-            <img 
-              src={forTalentIllustration} 
-              alt="" 
-              className="h-full w-full object-contain object-bottom translate-x-6 translate-y-6" 
-            />
+                {/* Phone */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Phone</div>
+                    <a href="tel:+18005550199" className="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
+                      +1 (800) 555-0199
+                    </a>
+                  </div>
+                </div>
+
+                {/* Headquarters */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Headquarters</div>
+                    <div className="text-sm font-semibold text-slate-700">
+                      North America · Remote-first
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column (Form) */}
+            <div className="lg:col-span-7 w-full">
+              <div className="bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-xl shadow-slate-100/50 w-full text-left">
+                <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Full Name */}
+                  <div className="flex flex-col">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Jane Cooper"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                    />
+                  </div>
+
+                  {/* Company */}
+                  <div className="flex flex-col">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Acme Corp"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex flex-col">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="jane@acme.com"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                    />
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex flex-col">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="+1 555 010 1234"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                    />
+                  </div>
+
+                  {/* How can we help? */}
+                  <div className="flex flex-col md:col-span-2">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      How can we help?
+                    </label>
+                    <div className="relative">
+                      <select
+                        className="w-full bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 appearance-none focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                        defaultValue="Hire Talent"
+                      >
+                        <option value="Hire Talent">Hire Talent</option>
+                        <option value="Find Work">Find Work</option>
+                        <option value="AI / Consulting">AI / Consulting</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div className="flex flex-col md:col-span-2">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      placeholder="Tell us about the role, project, or transformation you have in mind..."
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm resize-none"
+                    />
+                  </div>
+
+                  {/* Send Message Button */}
+                  <div className="md:col-span-2 mt-2">
+                    <button
+                      type="submit"
+                      className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#EA580C] font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                    >
+                      Send Message
+                      <svg className="w-4 h-4 transform rotate-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
