@@ -894,7 +894,7 @@ function App() {
             {/* Left Column */}
             <div className="lg:col-span-5 flex flex-col justify-between text-left">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-teal-600 mb-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c] mb-4">
                   — CONTACT
                 </p>
                 <h2 
@@ -903,7 +903,7 @@ function App() {
                 >
                   <WaveLetters parts={[{ text: "Let's build" }]} /> <br />
                   <WaveLetters parts={[{ text: "something" }]} /> <br />
-                  <span className="font-serif italic text-teal-600 font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                  <span className="font-serif italic text-[#f59e0c] font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
                     <WaveLetters parts={[{ text: "exceptional" }]} />
                   </span> <br />
                   <WaveLetters parts={[{ text: "together." }]} />
@@ -916,12 +916,12 @@ function App() {
               <div className="mt-10 flex flex-col gap-6">
                 {/* Email */}
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-[#f59e0c]">
                     <Mail size={20} />
                   </div>
                   <div>
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Email</div>
-                    <a href="mailto:hello@technovasystems.com" className="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
+                    <a href="mailto:hello@technovasystems.com" className="text-sm font-semibold text-slate-700 hover:text-[#f59e0c] transition-colors">
                       hello@technovasystems.com
                     </a>
                   </div>
@@ -929,12 +929,12 @@ function App() {
 
                 {/* Phone */}
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-[#f59e0c]">
                     <Phone size={20} />
                   </div>
                   <div>
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Phone</div>
-                    <a href="tel:+18005550199" className="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
+                    <a href="tel:+18005550199" className="text-sm font-semibold text-slate-700 hover:text-[#f59e0c] transition-colors">
                       +1 (800) 555-0199
                     </a>
                   </div>
@@ -942,7 +942,7 @@ function App() {
 
                 {/* Headquarters */}
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-teal-600">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 shadow-sm text-[#f59e0c]">
                     <MapPin size={20} />
                   </div>
                   <div>
@@ -968,7 +968,7 @@ function App() {
                       type="text"
                       required
                       placeholder="Jane Cooper"
-                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
                   </div>
 
@@ -980,7 +980,7 @@ function App() {
                     <input
                       type="text"
                       placeholder="Acme Corp"
-                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
                   </div>
 
@@ -993,7 +993,7 @@ function App() {
                       type="email"
                       required
                       placeholder="jane@acme.com"
-                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
                   </div>
 
@@ -1005,7 +1005,7 @@ function App() {
                     <input
                       type="tel"
                       placeholder="+1 555 010 1234"
-                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
                   </div>
 
@@ -1016,7 +1016,7 @@ function App() {
                     </label>
                     <div className="relative">
                       <select
-                        className="w-full bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 appearance-none focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm"
+                        className="w-full bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 appearance-none focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                         defaultValue="Hire Talent"
                       >
                         <option value="Hire Talent">Hire Talent</option>
@@ -1042,7 +1042,7 @@ function App() {
                       required
                       rows={4}
                       placeholder="Tell us about the role, project, or transformation you have in mind..."
-                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-sm resize-none"
+                      className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm resize-none"
                     />
                   </div>
 
@@ -1050,7 +1050,7 @@ function App() {
                   <div className="md:col-span-2 mt-2">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#EA580C] font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                      className="w-full sm:w-auto bg-[#f59e0c] text-white hover:bg-[#d97706] font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm shadow-md shadow-amber-500/10 cursor-pointer"
                     >
                       Send Message
                       <svg className="w-4 h-4 transform rotate-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
