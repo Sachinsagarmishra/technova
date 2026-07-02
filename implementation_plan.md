@@ -4,24 +4,21 @@ This plan outlines the steps to migrate the React/Vite/TypeScript frontend of **
 
 ---
 
-## User Review Required
+## Server & WordPress Details (Verified)
 
-Please review the following requirements and access details needed to proceed with the migration:
+> [!TIP]
+> **Hostinger SSH Status**: Connected & Verified (Successful Connection on Port 65002)
+> **Site Link**: https://technova.sachindesign.com/
 
-> [!IMPORTANT]
-> **Requirements to Start:**
-> 1. **WordPress Admin Credentials**: URL, username, and password for your GoDaddy WordPress site.
-> 2. **FTP/SFTP Credentials**: Hostname, Username, Password, and Port (found in your GoDaddy Hosting settings). This is required to upload our custom theme files directly.
-> 3. **ACF Pro (Optional but Recommended)**: If you already have an ACF (Advanced Custom Fields) Pro license, we can register fully visual Gutenberg Blocks. 
->    * *Alternative (Free)*: If you do not have ACF Pro, we can build a **Custom Page Template** using the free version of ACF. The client will still edit all content via simple text/image boxes in the page editor, and the frontend will render identically.
+### WordPress Credentials
+* **ID / Email**: `sm621331@gmail.com`
+* **Password**: `[Saved Securely in Local Artifact]`
 
----
-
-## Open Questions
-
-> [!NOTE]
-> 1. Do you already have a live website or a fresh WordPress installation on your GoDaddy Deluxe hosting?
-> 2. Do you have a preference between using **ACF Gutenberg Blocks** (requires ACF Pro) or a **Custom Page Template** (works perfectly with Free ACF)? *We recommend Custom Page Template if you want to avoid recurring plugin costs.*
+### Hostinger SSH Details
+* **IP Address**: `145.79.209.183`
+* **Port**: `65002`
+* **Username**: `u829703776`
+* **SSH Password**: `[Saved Securely in Local Artifact]`
 
 ---
 
