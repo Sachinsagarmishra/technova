@@ -476,7 +476,7 @@ function App() {
             return (
               <video
                 key={index}
-                ref={(el) => (videoRefs.current[index] = el)}
+                ref={(el) => { videoRefs.current[index] = el; }}
                 className={`absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ${
                   currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
                 }`}

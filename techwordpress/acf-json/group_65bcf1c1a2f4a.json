@@ -1,0 +1,224 @@
+{
+  "key": "group_65bcf1c1a2f4a",
+  "title": "Homepage Settings",
+  "fields": [
+    {
+      "key": "field_65bcf1c1a2f4b",
+      "label": "Hero Slides",
+      "name": "hero_slides",
+      "type": "repeater",
+      "instructions": "Add up to 5 background slides with dynamic titles, descriptions, and CTA actions.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "collapsed": "field_65bcf1c1a2f4e",
+      "min": 1,
+      "max": 5,
+      "layout": "block",
+      "button_label": "Add Slide",
+      "sub_fields": [
+        {
+          "key": "field_65bcf1c1a2f4c",
+          "label": "Background Type",
+          "name": "bg_type",
+          "type": "select",
+          "choices": {
+            "video": "Video Background",
+            "image": "Image Background"
+          },
+          "default_value": "video",
+          "return_format": "value"
+        },
+        {
+          "key": "field_65bcf1c1a2f4d",
+          "label": "Background Media URL",
+          "name": "bg_url",
+          "type": "text",
+          "instructions": "Paste the video file URL (.mp4) or image file URL."
+        },
+        {
+          "key": "field_65bcf1c1a2f4e",
+          "label": "Slide Heading",
+          "name": "heading",
+          "type": "text",
+          "instructions": "Supports bold text <strong>High-Performance</strong> for orange brand coloring.",
+          "default_value": "We Build <strong>High-Performance</strong> Teams"
+        },
+        {
+          "key": "field_65bcf1c1a2f4f",
+          "label": "Slide Description",
+          "name": "description",
+          "type": "textarea",
+          "rows": 3
+        },
+        {
+          "key": "field_65bcf1c1a2f50",
+          "label": "CTA Buttons",
+          "name": "cta_buttons",
+          "type": "repeater",
+          "min": 1,
+          "max": 2,
+          "layout": "table",
+          "button_label": "Add Button",
+          "sub_fields": [
+            {
+              "key": "field_65bcf1c1a2f51",
+              "label": "Button Text",
+              "name": "text",
+              "type": "text"
+            },
+            {
+              "key": "field_65bcf1c1a2f52",
+              "label": "Button Link Target",
+              "name": "link",
+              "type": "text",
+              "default_value": "#contact"
+            },
+            {
+              "key": "field_65bcf1c1a2f53",
+              "label": "Primary Highlight?",
+              "name": "primary",
+              "type": "true_false",
+              "instructions": "Checks if button gets solid orange branding or clean glass outline styling.",
+              "default_value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_65bcf1c1a2f54",
+      "label": "Client Logos",
+      "name": "trusted_logos",
+      "type": "repeater",
+      "instructions": "Manage logos sliding in the Trusted innovators banner.",
+      "sub_fields": [
+        {
+          "key": "field_65bcf1c1a2f55",
+          "label": "Company Name",
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "key": "field_65bcf1c1a2f56",
+          "label": "Logo Image Source",
+          "name": "src",
+          "type": "text",
+          "instructions": "Direct link to Logo file."
+        }
+      ]
+    },
+    {
+      "key": "field_65bcf1c1a2f57",
+      "label": "Capabilities Solutions",
+      "name": "capabilities",
+      "type": "repeater",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_65bcf1c1a2f58",
+          "label": "Capability Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_65bcf1c1a2f59",
+          "label": "Full Description",
+          "name": "description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_65bcf1c1a2f5a",
+          "label": "Illustration Graphic",
+          "name": "image",
+          "type": "text",
+          "instructions": "Direct link to SVG illustration."
+        },
+        {
+          "key": "field_65bcf1c1a2f5b",
+          "label": "Bullet List items",
+          "name": "list",
+          "type": "textarea",
+          "instructions": "Enter list items, one per line."
+        }
+      ]
+    },
+    {
+      "key": "field_65bcf1c1a2f5c",
+      "label": "Industry Focus Cards",
+      "name": "industries",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_65bcf1c1a2f5d",
+          "label": "Industry Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_65bcf1c1a2f5e",
+          "label": "Description",
+          "name": "description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_65bcf1c1a2f5f",
+          "label": "Illustration Icon",
+          "name": "illustration",
+          "type": "text",
+          "instructions": "Path to SVG file."
+        }
+      ]
+    },
+    {
+      "key": "field_65bcf1c1a2f60",
+      "label": "Performance Stats counters",
+      "name": "stats_counters",
+      "type": "repeater",
+      "layout": "table",
+      "min": 4,
+      "max": 4,
+      "sub_fields": [
+        {
+          "key": "field_65bcf1c1a2f61",
+          "label": "Target Count Number",
+          "name": "target",
+          "type": "number"
+        },
+        {
+          "key": "field_65bcf1c1a2f62",
+          "label": "Count Suffix",
+          "name": "suffix",
+          "type": "text"
+        },
+        {
+          "key": "field_65bcf1c1a2f63",
+          "label": "Counter label Description",
+          "name": "label",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_type",
+        "operator": "==",
+        "value": "front_page"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": ""
+}
