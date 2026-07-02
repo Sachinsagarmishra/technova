@@ -301,6 +301,49 @@ function Counter({ value, suffix = "", duration = 2000 }: { value: number; suffi
 }
 
 function App() {
+  // Cloudflare Turnstile Keys:
+  // Site Key: 0x4AAAAAADumwXCngu01f3kg
+  // Secret Key: 0x4AAAAAADumwY5ZXx8UQKuIGL-lZS90Prk (use on your backend server to verify the token)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Dynamically load Cloudflare Turnstile API script
+    const scriptId = "cloudflare-turnstile-script";
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+
+    const renderWidget = () => {
+      const container = document.getElementById("turnstile-container");
+      if ((window as any).turnstile && container && container.childElementCount === 0) {
+        (window as any).turnstile.render("#turnstile-container", {
+          sitekey: "0x4AAAAAADumwXCngu01f3kg",
+          callback: (token: string) => {
+            setTurnstileToken(token);
+          },
+        });
+      }
+    };
+
+    if ((window as any).turnstile) {
+      renderWidget();
+    } else {
+      const checkInterval = setInterval(() => {
+        if ((window as any).turnstile) {
+          clearInterval(checkInterval);
+          renderWidget();
+        }
+      }, 100);
+      return () => clearInterval(checkInterval);
+    }
+  }, []);
+
   useEffect(() => {
     const revealItems = document.querySelectorAll(".scroll-reveal-section, .scroll-reveal-card");
 
@@ -1044,6 +1087,11 @@ function App() {
                       placeholder="Tell us about the role, project, or transformation you have in mind..."
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm resize-none"
                     />
+                  </div>
+
+                  {/* Cloudflare Turnstile CAPTCHA */}
+                  <div className="md:col-span-2 flex justify-start my-2">
+                    <div id="turnstile-container"></div>
                   </div>
 
                   {/* Send Message Button */}
