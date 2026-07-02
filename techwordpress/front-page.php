@@ -231,7 +231,7 @@ $cloudflare_sitekey = get_field('cloudflare_sitekey', 'option') ?: '0x4AAAAAADum
                                 <strong><?php echo esc_html($item['title']); ?></strong>
                                 <small><?php echo esc_html($item['description']); ?></small>
                             </a>
-                        <?php endphp ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <div className="mega-menu-solutions">
