@@ -45,7 +45,7 @@ import retailEcommerceIllustration from "../imges/Industries/Retail-E-Commerce.s
 import technologyIllustration from "../imges/Industries/Technology.svg";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
-import technovaLogo from "../imges/Technova Systems Logo final-13 1.svg";
+import technovaLogo from "../imges/Industries/technovalogo.svg";
 import darkLogo from "../imges/darklogo.svg";
 import workforceConsultingIllustration from "../imges/Workforce-Consulting.svg";
 import aiPoweredVideo from "../imges/AI-Powered.mp4";
@@ -615,7 +615,11 @@ function App() {
             ))}
           </div>
 
-          <Button variant="glass" size="nav">
+          <Button
+            variant="default"
+            size="nav"
+            className="bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03]"
+          >
             Let's Talk
           </Button>
         </nav>
@@ -1409,7 +1413,7 @@ function App() {
             </div>
 
             {/* Company Column */}
-            <div className="lg:col-span-1.5 lg:col-start-10">
+            <div className="lg:col-span-2 lg:col-start-10">
               <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Company</h4>
               <ul className="mt-4 space-y-2.5">
                 <li>
@@ -1438,24 +1442,6 @@ function App() {
                   </a>
                 </li>
               </ul>
-            </div>
-
-            {/* Subscribe Column */}
-            <div className="lg:col-span-2">
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Subscribe</h4>
-              <p className="text-sm text-slate-500 mt-4">
-                Get the latest updates and insights.
-              </p>
-              <div className="relative mt-4 flex items-center">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 pr-12 text-sm text-slate-800 placeholder-slate-400 focus:border-[#8B5CF6] focus:outline-none focus:ring-1 focus:ring-[#8B5CF6]"
-                />
-                <button className="absolute right-1.5 p-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-full transition-colors" aria-label="Subscribe">
-                  <ArrowRight size={16} />
-                </button>
-              </div>
             </div>
           </div>
 
