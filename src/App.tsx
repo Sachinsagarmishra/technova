@@ -38,6 +38,7 @@ import forEmployersIllustration from "../imges/For-Employers.svg";
 import forTalentIllustration from "../imges/For-Talent.svg";
 import financialServicesIllustration from "../imges/Industries/Financial-Services.svg";
 import governmentPublicSectorIllustration from "../imges/Industries/Government-Public-Sector.svg";
+import opportunityBadgeIcon from "../imges/Industries/fv.svg";
 import healthcareIllustration from "../imges/Industries/Healthcare.svg";
 import manufacturingIllustration from "../imges/Industries/Manufacturing.svg";
 import retailEcommerceIllustration from "../imges/Industries/Retail-E-Commerce.svg";
@@ -93,6 +94,8 @@ const megaMenuSolutions = [
 type WavePart = {
   text: string;
   accent?: boolean;
+  strike?: boolean;
+  breakAfter?: boolean;
 };
 
 const slides = [
@@ -156,11 +159,10 @@ const slides = [
     bgType: "image",
     bgUrl: "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop",
     headlineParts: [
-      { text: "Strategic ", accent: false },
-      { text: "Workforce", accent: true },
-      { text: " Planning & Design", accent: false },
+      { text: "Empty Promises.", strike: true, breakAfter: true },
+      { text: "Results Delivered.", accent: true },
     ],
-    description: "Align your talent acquisition strategy directly with technical roadmaps and business growth goals.",
+    description: "",
     ctaButtons: [
       { text: "Schedule Consultation", link: "#", primary: true }
     ]
@@ -175,21 +177,40 @@ function WaveLetters({ parts }: { parts: WavePart[] }) {
       {parts.map((part, partIndex) => (
         <span
           key={`${part.text}-${partIndex}`}
-          className={part.accent ? "text-[#F59E0B]" : undefined}
+          className={[
+            part.accent ? "text-[#F59E0B]" : "",
+            part.strike ? "wave-strike" : "",
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined}
         >
-          {Array.from(part.text).map((letter, index) => {
-            const currentIndex = letter.trim() ? waveIndex++ : waveIndex;
+          {(part.text.match(/\s+|\S+/g) ?? []).map((token, tokenIndex) => {
+            if (!token.trim()) {
+              return token;
+            }
 
             return (
               <span
-                key={`${partIndex}-${index}`}
-                className="wave-letter"
-                style={{ animationDelay: `${currentIndex * 0.035}s` }}
+                className="wave-word"
+                key={`${partIndex}-${tokenIndex}-${token}`}
               >
-                {letter === " " ? "\u00A0" : letter}
+                {Array.from(token).map((letter, letterIndex) => {
+                  const currentIndex = waveIndex++;
+
+                  return (
+                    <span
+                      key={`${partIndex}-${tokenIndex}-${letterIndex}`}
+                      className="wave-letter"
+                      style={{ animationDelay: `${currentIndex * 0.035}s` }}
+                    >
+                      {letter}
+                    </span>
+                  );
+                })}
               </span>
             );
           })}
+          {part.breakAfter ? <br /> : null}
         </span>
       ))}
     </span>
@@ -515,11 +536,11 @@ function App() {
             />
           </a>
 
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="nav-glass-menu hidden items-center md:flex">
             <div className="mega-menu-wrap">
               <a
                 href="#"
-                className="mega-menu-trigger text-sm text-foreground transition-colors"
+                className="mega-menu-trigger text-sm font-medium text-white transition-colors"
               >
                 Solutions
                 <span aria-hidden="true">⌄</span>
@@ -587,7 +608,7 @@ function App() {
               <a
                 key={link}
                 href="#"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="nav-glass-link text-sm font-medium transition-colors"
               >
                 {link}
               </a>
@@ -605,16 +626,18 @@ function App() {
           className="relative z-10 flex flex-col items-center justify-center px-6 py-[90px] pb-40 pt-32 text-center max-w-7xl mx-auto w-full min-h-[calc(100vh-100px)]"
         >
           <h1
-            className="wave-heading animate-fade-rise max-w-5xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-white sm:text-7xl md:text-[85px]"
+            className="wave-heading animate-fade-rise max-w-[1180px] text-5xl font-normal leading-[1.02] tracking-[-2.46px] text-white sm:text-6xl md:text-[76px] lg:text-[82px]"
             style={{ fontFamily: "'Instrument Serif', serif" }}
             aria-label={slides[currentSlide].headlineParts.map((part) => part.text).join("")}
           >
             <WaveLetters parts={slides[currentSlide].headlineParts} />
           </h1>
 
-          <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
-            {slides[currentSlide].description}
-          </p>
+          {slides[currentSlide].description ? (
+            <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+              {slides[currentSlide].description}
+            </p>
+          ) : null}
 
           <div className="animate-fade-rise-delay-2 mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
             {slides[currentSlide].ctaButtons.map((btn, btnIndex) => (
@@ -680,10 +703,10 @@ function App() {
 
       <section className="scroll-reveal-section overflow-hidden bg-white py-10 text-[#0b132b] sm:py-12">
         <h2
-          className="wave-heading font-display mx-auto max-w-4xl text-center text-4xl font-normal leading-none text-[#0b132b] sm:text-5xl"
-          aria-label="Trusted by innovators worldwide"
+          className="font-display mx-auto max-w-4xl text-center text-4xl font-normal leading-none text-[#0b132b] sm:text-5xl"
+          aria-label="Trusted by Leading Companies Worldwide"
         >
-          <WaveLetters parts={[{ text: "Trusted by innovators worldwide" }]} />
+          Trusted by Leading Companies Worldwide
         </h2>
 
         <div className="logo-marquee mt-9" aria-label="Trusted companies">
@@ -704,16 +727,16 @@ function App() {
         </div>
       </section>
 
-      <section className="scroll-reveal-section bg-white px-4 py-10 text-[#0b132b] sm:px-6 lg:px-8">
+      <section className="scroll-reveal-section bg-white px-4 pt-10 pb-16 text-[#0b132b] sm:px-6 lg:px-8">
         <div className="opportunity-grid mx-auto grid max-w-[1440px] gap-6 lg:grid-cols-2">
           <article className="scroll-reveal-card opportunity-card opportunity-card-employers">
             <div className="opportunity-content">
               <p className="section-kicker text-[#8B5CF6]">For Employers</p>
               <h2
-                className="wave-heading font-display mt-5 max-w-md text-4xl font-normal leading-[0.95] sm:text-5xl"
+                className="font-display mt-5 max-w-md text-4xl font-normal leading-[0.95] sm:text-5xl"
                 aria-label="Build. Scale. Succeed."
               >
-                <WaveLetters parts={[{ text: "Build. Scale. Succeed." }]} />
+                Build. Scale. Succeed.
               </h2>
               <p className="mt-5 max-w-md text-base leading-7 text-[#475569] sm:text-lg">
                 Access specialized talent, consulting expertise, and workforce
@@ -743,10 +766,10 @@ function App() {
             <div className="opportunity-content">
               <p className="section-kicker text-[#F59E0B]">For Talent</p>
               <h2
-                className="wave-heading font-display mt-5 max-w-lg text-4xl font-normal leading-[0.95] sm:text-5xl"
+                className="font-display mt-5 max-w-lg text-4xl font-normal leading-[0.95] sm:text-5xl"
                 aria-label="Your Next Move Starts Here."
               >
-                <WaveLetters parts={[{ text: "Your Next Move Starts Here." }]} />
+                Your Next Move Starts Here.
               </h2>
               <p className="mt-5 max-w-lg text-base leading-7 text-[#475569] sm:text-lg">
                 Explore high-impact opportunities with forward-thinking
@@ -773,7 +796,7 @@ function App() {
           </article>
 
           <div className="opportunity-brand-badge" aria-hidden="true">
-            <img src={technovaFavicon} alt="" />
+            <img src={opportunityBadgeIcon} alt="" />
           </div>
         </div>
       </section>
@@ -785,12 +808,10 @@ function App() {
               Our Core Capabilities
             </p>
             <h2
-              className="wave-heading font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
+              className="font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
               aria-label="End-to-End Talent & Technology Solutions"
             >
-              <WaveLetters
-                parts={[{ text: "End-to-End Talent & Technology Solutions" }]}
-              />
+              End-to-End Talent & Technology Solutions
             </h2>
           </div>
 
@@ -898,12 +919,10 @@ function App() {
               Industries We Support
             </p>
             <h2
-              className="wave-heading font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
+              className="font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
               aria-label="Strong Partnerships Across Every Industry"
             >
-              <WaveLetters
-                parts={[{ text: "Strong Partnerships Across Every Industry" }]}
-              />
+              Strong Partnerships Across Every Industry
             </h2>
           </div>
 
@@ -954,12 +973,12 @@ function App() {
                 AI & Technology Leadership
               </p>
               <h3 
-                className="wave-heading font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight"
+                className="font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight"
                 aria-label="AI-Powered. Human-Led. Future-Ready"
               >
-                <WaveLetters parts={[{ text: "AI-Powered." }]} /> <br />
-                <WaveLetters parts={[{ text: "Human-Led." }]} /> <br />
-                <WaveLetters parts={[{ text: "Future-Ready" }]} />
+                AI-Powered. <br />
+                Human-Led. <br />
+                Future-Ready
               </h3>
               <p className="mt-6 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[320px]">
                 We combine the power of AI with human expertise to deliver scaling, hiring, deeper insights and better outcomes.
@@ -985,11 +1004,11 @@ function App() {
                     Insights & Resources
                   </p>
                   <h3 
-                    className="wave-heading font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
+                    className="font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
                     aria-label="Insights That Drive What's Next"
                   >
-                    <WaveLetters parts={[{ text: "Insights That" }]} /> <br />
-                    <WaveLetters parts={[{ text: "Drive What's Next" }]} />
+                    Insights That <br />
+                    Drive What's Next
                   </h3>
                   <p className="mt-5 text-sm text-slate-600 leading-relaxed">
                     Stay ahead with the latest trends, reports and expert perspectives.
@@ -1119,15 +1138,15 @@ function App() {
                   — CONTACT
                 </p>
                 <h2 
-                  className="wave-heading font-display text-4xl sm:text-5xl font-normal leading-[1.1] text-slate-800 tracking-tight"
+                  className="font-display text-4xl sm:text-5xl font-normal leading-[1.1] text-slate-800 tracking-tight"
                   aria-label="Let's build something exceptional together."
                 >
-                  <WaveLetters parts={[{ text: "Let's build" }]} /> <br />
-                  <WaveLetters parts={[{ text: "something" }]} /> <br />
+                  Let's build <br />
+                  something <br />
                   <span className="font-serif italic text-[#f59e0c] font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                    <WaveLetters parts={[{ text: "exceptional" }]} />
+                    exceptional
                   </span> <br />
-                  <WaveLetters parts={[{ text: "together." }]} />
+                  together.
                 </h2>
                 <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-md">
                   Tell us about your hiring or consulting needs. We respond to every inquiry within <strong className="text-slate-800 font-semibold">4 business hours</strong>.
