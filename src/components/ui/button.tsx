@@ -17,7 +17,7 @@ const buttonVariants = cva(
         default: "h-9 px-4 py-2",
         nav: "rounded-full px-6 py-2.5 text-sm",
         hero: "rounded-full px-8 py-3.5 text-sm",
-        cta: "rounded-full px-[30px] py-[20px] text-base h-auto",
+        cta: "rounded-full px-7 py-3 text-sm font-semibold h-auto",
       },
     },
     defaultVariants: {

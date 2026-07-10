@@ -52,17 +52,33 @@ import dellLogo from "@/assets/trusted-logos/dell.png";
 import googleLogo from "@/assets/trusted-logos/google.png";
 import microsoftLogo from "@/assets/trusted-logos/microsoft.png";
 import oracleLogo from "@/assets/trusted-logos/oracle.png";
+import axisBankLogo from "../imges/icons/axis bank.png";
+import bluestoneLogo from "../imges/icons/bluestone.png";
+import capgeminiLogo from "../imges/icons/capgemini.png";
+import deloitteLogo from "../imges/icons/deloitte.png";
+import eyLogo from "../imges/icons/ey.png";
+import globallogicLogo from "../imges/icons/globallogic.png";
+import growwLogo from "../imges/icons/groww.png";
+import hdfcbankLogo from "../imges/icons/hdfcbank.png";
+import icicibankLogo from "../imges/icons/icicibank.png";
+import image102Logo from "../imges/icons/image 102.png";
+import infosysLogo from "../imges/icons/infosys.png";
+import kpmgLogo from "../imges/icons/kpmg.png";
+import mycaptionLogo from "../imges/icons/mycaption.png";
+import pumaLogo from "../imges/icons/puma.png";
+import pwcLogo from "../imges/icons/pwc.png";
+import walmartLogo from "../imges/icons/walmart.png";
 import aiTalentIllustration from "../imges/AI-Talent-Solution.svg";
 import contractStaffingIllustration from "../imges/Contract-Staffing.svg";
-import forEmployersIllustration from "../imges/For-Employers.svg";
-import forTalentIllustration from "../imges/For-Talent.svg";
-import financialServicesIllustration from "../imges/Industries/Financial-Services.svg";
-import governmentPublicSectorIllustration from "../imges/Industries/Government-Public-Sector.svg";
+import forEmployersGif from "../imges/Industries-videos/for-Employers.gif";
+import forTalentGif from "../imges/Industries-videos/for-talent.gif";
+import financialServicesVideo from "../imges/Industries-videos/Financial-Services.mp4";
+import governmentPublicSectorVideo from "../imges/Industries-videos/Government-Public-Sector.mp4";
 import opportunityBadgeIcon from "../imges/Industries/fv.svg";
-import healthcareIllustration from "../imges/Industries/Healthcare.svg";
-import manufacturingIllustration from "../imges/Industries/Manufacturing.svg";
-import retailEcommerceIllustration from "../imges/Industries/Retail-E-Commerce.svg";
-import technologyIllustration from "../imges/Industries/Technology.svg";
+import healthcareVideo from "../imges/Industries-videos/Healthcare.mp4";
+import manufacturingVideo from "../imges/Industries-videos/Manufacturing.mp4";
+import retailEcommerceVideo from "../imges/Industries-videos/Retail-E-Commerce.mp4";
+import technologyVideo from "../imges/Industries-videos/Technology.mp4";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
 import technovaLogo from "../imges/Industries/technovalogo.svg";
@@ -72,6 +88,10 @@ import solutionsSkyline from "../imges/solutions_skyline.png";
 import ctaCubes from "../imges/cta_cubes.png";
 import darkLogo from "../imges/darklogo.svg";
 import workforceConsultingIllustration from "../imges/Workforce-Consulting.svg";
+import firstSlideVideo from "../imges/slider/1st slide.mp4";
+import fourthSlideVideo from "../imges/slider/4thslider.mp4";
+import secondSlideVideo from "../imges/slider/2nd slider.mp4";
+import thirdSlideVideo from "../imges/slider/3slider.mp4";
 import aiPoweredVideo from "../imges/AI-Powered.mp4";
 import contactUsBackground from "../imges/contact-usbg.png";
 import ctaContactUsBackground from "../imges/ctacontactus.png";
@@ -127,7 +147,7 @@ type WavePart = {
 const slides = [
   {
     bgType: "video",
-    bgUrl: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
+    bgUrl: firstSlideVideo,
     headlineParts: [
       { text: "We Build ", accent: false },
       { text: "High-Performance", accent: true },
@@ -142,7 +162,7 @@ const slides = [
   },
   {
     bgType: "video",
-    bgUrl: aiPoweredVideo,
+    bgUrl: secondSlideVideo,
     headlineParts: [
       { text: "Accelerate ", accent: false },
       { text: "Digital", accent: true },
@@ -155,8 +175,8 @@ const slides = [
     ]
   },
   {
-    bgType: "image",
-    bgUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop",
+    bgType: "video",
+    bgUrl: thirdSlideVideo,
     headlineParts: [
       { text: "Build ", accent: false },
       { text: "Visionary Leadership", accent: true },
@@ -169,8 +189,8 @@ const slides = [
     ]
   },
   {
-    bgType: "image",
-    bgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop",
+    bgType: "video",
+    bgUrl: fourthSlideVideo,
     headlineParts: [
       { text: "Dedicated ", accent: false },
       { text: "Managed Teams", accent: true },
@@ -244,12 +264,22 @@ function WaveLetters({ parts }: { parts: WavePart[] }) {
 }
 
 const trustedLogos = [
-  // { name: "Microsoft", src: microsoftLogo },
-  // { name: "AWS", src: awsLogo },
-  { name: "Google", src: googleLogo },
-  // { name: "Oracle", src: oracleLogo },
-  { name: "Dell Technologies", src: dellLogo },
-  { name: "Cisco", src: ciscoLogo },
+  { name: "Axis Bank", src: axisBankLogo },
+  { name: "Bluestone", src: bluestoneLogo },
+  { name: "Capgemini", src: capgeminiLogo },
+  { name: "Deloitte", src: deloitteLogo },
+  { name: "EY", src: eyLogo },
+  { name: "GlobalLogic", src: globallogicLogo },
+  { name: "Groww", src: growwLogo },
+  { name: "HDFC Bank", src: hdfcbankLogo },
+  { name: "ICICI Bank", src: icicibankLogo },
+  { name: "Image 102", src: image102Logo },
+  { name: "Infosys", src: infosysLogo },
+  { name: "KPMG", src: kpmgLogo },
+  { name: "MyCaption", src: mycaptionLogo },
+  { name: "Puma", src: pumaLogo },
+  { name: "PwC", src: pwcLogo },
+  { name: "Walmart", src: walmartLogo },
 ];
 
 const employerBenefits = [
@@ -536,37 +566,37 @@ const industryCards = [
     title: "Technology",
     description: "Powering innovation with world-class tech talent and solutions.",
     visual: "technology",
-    illustration: technologyIllustration,
+    video: technologyVideo,
   },
   {
     title: "Healthcare",
     description: "Enhancing care through technology, data and specialized talent.",
     visual: "healthcare",
-    illustration: healthcareIllustration,
+    video: healthcareVideo,
   },
   {
     title: "Financial Services",
     description: "Driving growth with secure, compliant and future-ready solutions.",
     visual: "financial",
-    illustration: financialServicesIllustration,
+    video: financialServicesVideo,
   },
   {
     title: "Manufacturing",
     description: "Building resilient operations with engineering and tech excellence.",
     visual: "manufacturing",
-    illustration: manufacturingIllustration,
+    video: manufacturingVideo,
   },
   {
     title: "Retail & E-Commerce",
     description: "Scaling customer experiences with data, technology and agility.",
     visual: "retail",
-    illustration: retailEcommerceIllustration,
+    video: retailEcommerceVideo,
   },
   {
     title: "Government & Public Sector",
     description: "Delivering impact through technology, security and skilled professionals.",
     visual: "government",
-    illustration: governmentPublicSectorIllustration,
+    video: governmentPublicSectorVideo,
   },
 ];
 
@@ -3546,7 +3576,7 @@ function App() {
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 18000);
     return () => clearInterval(timer);
   }, [isPlaying]);
 
@@ -3791,7 +3821,7 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="building-illustration">
-                <img src={forEmployersIllustration} alt="" />
+                <img src={forEmployersGif} alt="" />
               </div>
             </div>
           </article>
@@ -3824,7 +3854,7 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="stairs-illustration">
-                <img src={forTalentIllustration} alt="" />
+                <img src={forTalentGif} alt="" />
               </div>
             </div>
           </article>
@@ -3881,64 +3911,6 @@ function App() {
                     <ArrowRight aria-hidden="true" size={22} strokeWidth={2.2} />
                   </button>
 
-                  {card.illustration && (
-                    <div
-                      className={`capability-asset-illustration capability-asset-${card.visual}`}
-                      aria-hidden="true"
-                    >
-                      <img src={card.illustration} alt="" />
-                    </div>
-                  )}
-
-                  {!card.illustration && card.visual === "orb" && (
-                    <div className="capability-orb" aria-hidden="true">
-                      <span className="orb-core" />
-                      <span className="orb-ring orb-ring-1" />
-                      <span className="orb-ring orb-ring-2" />
-                      <span className="orb-dot orb-dot-1" />
-                      <span className="orb-dot orb-dot-2" />
-                      <span className="orb-dot orb-dot-3" />
-                    </div>
-                  )}
-
-                  {!card.illustration && card.visual === "mini-building" && (
-                    <div className="capability-mini-building" aria-hidden="true">
-                      <span className="mini-building-block mini-building-block-1" />
-                      <span className="mini-building-block mini-building-block-2" />
-                      <span className="mini-building-block mini-building-block-3" />
-                    </div>
-                  )}
-
-                  {!card.illustration && card.visual === "cubes" && (
-                    <div className="capability-cubes" aria-hidden="true">
-                      <span className="cube cube-1" />
-                      <span className="cube cube-2" />
-                      <span className="cube cube-3" />
-                      <span className="cube cube-4" />
-                      <span className="cube cube-5" />
-                    </div>
-                  )}
-
-                  {!card.illustration && card.visual === "platform" && (
-                    <div className="capability-platform" aria-hidden="true">
-                      <span className="platform-layer platform-layer-1" />
-                      <span className="platform-layer platform-layer-2" />
-                      <span className="platform-layer platform-layer-3" />
-                      <span className="platform-bar platform-bar-1" />
-                      <span className="platform-bar platform-bar-2" />
-                      <span className="platform-bar platform-bar-3" />
-                    </div>
-                  )}
-
-                  {!card.illustration && card.visual === "chart" && (
-                    <div className="capability-chart" aria-hidden="true">
-                      <span className="chart-line" />
-                      <span className="chart-dot chart-dot-1" />
-                      <span className="chart-dot chart-dot-2" />
-                      <span className="chart-dot chart-dot-3" />
-                      <span className="chart-dot chart-dot-4" />
-                    </div>
-                  )}
                 </article>
               );
             })}
@@ -3968,17 +3940,18 @@ function App() {
                   key={card.title}
                 >
                   <div className={`industry-visual industry-visual-${card.visual}`} aria-hidden="true">
-                    <img src={card.illustration} alt="" />
+                    <video
+                      src={card.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controlsList="nodownload"
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
                   </div>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-                  <button
-                    className="industry-card-arrow"
-                    type="button"
-                    aria-label={`Explore ${card.title}`}
-                  >
-                    <ArrowRight aria-hidden="true" size={18} strokeWidth={2.4} />
-                  </button>
                 </article>
               );
             })}
