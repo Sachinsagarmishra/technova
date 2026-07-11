@@ -90,7 +90,7 @@ import darkLogo from "../imges/darklogo.svg";
 import workforceConsultingIllustration from "../imges/Workforce-Consulting.svg";
 import firstSlideVideo from "../imges/slider/1st slide.mp4";
 import fourthSlideVideo from "../imges/slider/4thslider.mp4";
-import secondSlideVideo from "../imges/slider/2nd slider.mp4";
+import secondSlideVideo from "../imges/slider/slide2nd.mp4";
 import thirdSlideVideo from "../imges/slider/3slider.mp4";
 import aiPoweredVideo from "../imges/AI-Powered.mp4";
 import contactUsBackground from "../imges/contact-usbg.png";
