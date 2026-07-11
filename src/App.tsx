@@ -3677,7 +3677,7 @@ function App() {
         })}
         {/* Dark overlay to ensure text contrast */}
         <div className={`absolute inset-0 transition-colors duration-1000 z-[1] pointer-events-none ${
-          currentSlide === 4 ? "bg-[#001726]/70" : "bg-[#001726]/40"
+          currentSlide === 3 || currentSlide === 4 ? "bg-[#001726]/70" : "bg-[#001726]/40"
         }`} />
 
         <SiteHeader />
