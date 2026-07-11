@@ -89,9 +89,10 @@ import ctaCubes from "../imges/cta_cubes.png";
 import darkLogo from "../imges/darklogo.svg";
 import workforceConsultingIllustration from "../imges/Workforce-Consulting.svg";
 import firstSlideVideo from "../imges/slider/1st slide.mp4";
-import fourthSlideVideo from "../imges/slider/4thslider.mp4";
-import secondSlideVideo from "../imges/slider/slide2nd.mp4";
+import fourthSlideVideo from "../imges/slider/4TH.mp4";
+import secondSlideVideo from "../imges/slider/2.mp4";
 import thirdSlideVideo from "../imges/slider/3slider.mp4";
+import fifthSlideVideo from "../imges/slider/5thslide.mp4";
 import aiPoweredVideo from "../imges/AI-Powered.mp4";
 import contactUsBackground from "../imges/contact-usbg.png";
 import ctaContactUsBackground from "../imges/ctacontactus.png";
@@ -202,8 +203,8 @@ const slides = [
     ]
   },
   {
-    bgType: "image",
-    bgUrl: "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop",
+    bgType: "video",
+    bgUrl: fifthSlideVideo,
     headlineParts: [
       { text: "Empty Promises.", strike: true, breakAfter: true },
       { text: "Results Delivered.", accent: true },
@@ -391,11 +392,11 @@ function SiteHeader({ light = false }: { light?: boolean }) {
             key={link}
             href={
               link === "About Us" ? "#about" :
-              link === "Industries" ? "#industries" :
-              link === "For Employers" ? "#employers" :
-              link === "For Talent" ? "#talent" :
-              link === "AI & Insights" ? "#insights" :
-              "#"
+                link === "Industries" ? "#industries" :
+                  link === "For Employers" ? "#employers" :
+                    link === "For Talent" ? "#talent" :
+                      link === "AI & Insights" ? "#insights" :
+                        "#"
             }
             className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
           >
@@ -434,7 +435,7 @@ function SiteFooter() {
               </a>
               <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="X (formerly Twitter)">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
               <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="Facebook">
@@ -633,7 +634,7 @@ function Counter({ value, suffix = "", duration = 2000 }: { value: number; suffi
           const end = value;
           const totalMiliseconds = duration;
           const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 15);
-          
+
           const timer = setInterval(() => {
             start += Math.ceil(end / (totalMiliseconds / incrementTime));
             if (start >= end) {
@@ -1304,7 +1305,7 @@ function IndustriesPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
-        
+
         <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
@@ -1733,7 +1734,7 @@ function EmployersPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
-        
+
         <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
@@ -2263,7 +2264,7 @@ function InsightsPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
-        
+
         <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
@@ -2853,7 +2854,7 @@ function TalentPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
-        
+
         <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
@@ -3089,9 +3090,8 @@ function TalentPage() {
                     onDragOver={handleDrag}
                     onDragLeave={handleDrag}
                     onDrop={handleDrop}
-                    className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition ${
-                      dragActive ? "border-[#8B5CF6] bg-purple-50/50" : "border-slate-200 bg-slate-50/50 hover:bg-slate-50"
-                    }`}
+                    className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition ${dragActive ? "border-[#8B5CF6] bg-purple-50/50" : "border-slate-200 bg-slate-50/50 hover:bg-slate-50"
+                      }`}
                   >
                     <input
                       type="file"
@@ -3498,15 +3498,13 @@ function TalentPage() {
                   <span className="text-sm leading-snug pr-4">{faq.q}</span>
                   <ChevronDown
                     size={18}
-                    className={`shrink-0 text-slate-400 transition-transform duration-300 ${
-                      openFaqIndex === i ? "rotate-180 text-[#8B5CF6]" : ""
-                    }`}
+                    className={`shrink-0 text-slate-400 transition-transform duration-300 ${openFaqIndex === i ? "rotate-180 text-[#8B5CF6]" : ""
+                      }`}
                   />
                 </button>
                 <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    openFaqIndex === i ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 h-0 overflow-hidden"
-                  }`}
+                  className={`grid transition-all duration-300 ease-in-out ${openFaqIndex === i ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 h-0 overflow-hidden"
+                    }`}
                 >
                   <div className="overflow-hidden">
                     <p className="text-xs leading-relaxed text-slate-500">{faq.a}</p>
@@ -3657,9 +3655,8 @@ function App() {
               <video
                 key={index}
                 ref={(el) => { videoRefs.current[index] = el; }}
-                className={`absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ${
-                  currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
+                className={`absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ${currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
                 src={slide.bgUrl}
                 autoPlay
                 loop
@@ -3671,21 +3668,22 @@ function App() {
             return (
               <div
                 key={index}
-                className={`absolute inset-0 z-0 h-full w-full bg-cover bg-center transition-opacity duration-1000 ${
-                  currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
+                className={`absolute inset-0 z-0 h-full w-full bg-cover bg-center transition-opacity duration-1000 ${currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
                 style={{ backgroundImage: `url(${slide.bgUrl})` }}
               />
             );
           }
         })}
         {/* Dark overlay to ensure text contrast */}
-        <div className="absolute inset-0 bg-[#001726]/40 z-[1] pointer-events-none" />
+        <div className={`absolute inset-0 transition-colors duration-1000 z-[1] pointer-events-none ${
+          currentSlide === 4 ? "bg-[#001726]/70" : "bg-[#001726]/40"
+        }`} />
 
         <SiteHeader />
 
         {/* Carousel Content */}
-        <div 
+        <div
           key={currentSlide}
           className="relative z-10 flex flex-col items-center justify-center px-6 py-[90px] pb-40 pt-32 text-center max-w-7xl mx-auto w-full min-h-[calc(100vh-100px)]"
         >
@@ -3709,11 +3707,10 @@ function App() {
                 key={btnIndex}
                 variant={btn.primary ? "default" : "glass"}
                 size="hero"
-                className={`cursor-pointer font-semibold transition-all ${
-                  btn.primary 
-                    ? "bg-[#f59e0c] text-white hover:bg-[#d97706] border border-[#f59e0c]/20 shadow-lg shadow-amber-500/20 hover:scale-[1.03]" 
+                className={`cursor-pointer font-semibold transition-all ${btn.primary
+                    ? "bg-[#f59e0c] text-white hover:bg-[#d97706] border border-[#f59e0c]/20 shadow-lg shadow-amber-500/20 hover:scale-[1.03]"
                     : ""
-                }`}
+                  }`}
                 asChild
               >
                 <a href={btn.link}>{btn.text}</a>
@@ -3972,14 +3969,14 @@ function App() {
             playsInline
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#001726]/80 via-transparent to-[#001726]/95 z-[1]" />
-          
+
           {/* Content Wrapper aligned to the right inside the left column */}
           <div className="relative z-10 flex flex-col h-full justify-between gap-12 w-full max-w-[480px] lg:ml-auto">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B]">
                 AI & Technology Leadership
               </p>
-              <h3 
+              <h3
                 className="font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight"
                 aria-label="AI-Powered. Human-Led. Future-Ready"
               >
@@ -4010,7 +4007,7 @@ function App() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#0e2a90]">
                     Insights & Resources
                   </p>
-                  <h3 
+                  <h3
                     className="font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
                     aria-label="Insights That Drive What's Next"
                   >
@@ -4031,16 +4028,16 @@ function App() {
               {/* Right col of right panel: blog items */}
               <div className="md:col-span-7 flex flex-col gap-6">
                 {insightArticles.map((article, index) => (
-                  <a 
-                    href={article.link} 
-                    key={index} 
+                  <a
+                    href={article.link}
+                    key={index}
                     className="group flex gap-4 items-start p-3 rounded-xl hover:bg-slate-50 transition-all duration-300"
                   >
                     <div className="w-24 h-16 sm:w-28 sm:h-20 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-100">
-                      <img 
-                        src={article.thumbnail} 
-                        alt={article.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                      <img
+                        src={article.thumbnail}
+                        alt={article.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="flex flex-col justify-center h-full">
@@ -4063,12 +4060,12 @@ function App() {
       <section className="scroll-reveal-section bg-white px-4 py-10 text-[#0b132b] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl border border-violet-100/80 bg-gradient-to-r from-violet-50 via-indigo-50/50 to-purple-50 p-8 sm:p-12 shadow-[0_15px_40px_rgba(139,92,246,0.03)] relative">
           <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] pointer-events-none z-0" />
-          
+
           <div className="relative z-10 flex flex-col items-center">
             <span className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6]">
               Our Impact in Numbers
             </span>
-            
+
             <div className="mt-10 grid w-full grid-cols-2 gap-8 md:grid-cols-4 md:gap-4 lg:gap-8">
               {/* Stat 1 */}
               <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60 first:border-0 md:first:border-0">
@@ -4144,7 +4141,7 @@ function App() {
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c] mb-4">
                   — CONTACT
                 </p>
-                <h2 
+                <h2
                   className="font-display text-4xl sm:text-5xl font-normal leading-[1.1] text-slate-800 tracking-tight"
                   aria-label="Let's build something exceptional together."
                 >
@@ -4274,7 +4271,7 @@ function App() {
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                       </div>
                     </div>
