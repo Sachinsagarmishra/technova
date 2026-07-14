@@ -26,10 +26,14 @@ jobs:
 
     - name: Prepare Assets for WordPress
       run: |
+        # Move all contents of dist/assets/ to dist/
+        mv dist/assets/* dist/ || true
+        # Remove the empty dist/assets/ folder
+        rm -rf dist/assets || true
         # Find the compiled index.js and rename to index.js
-        find dist/assets -name "index-*.js" -exec mv {} dist/assets/index.js \;
+        find dist/ -name "index-*.js" -exec mv {} dist/index.js \;
         # Find the compiled index.css and rename to index.css
-        find dist/assets -name "index-*.css" -exec mv {} dist/assets/index.css \;
+        find dist/ -name "index-*.css" -exec mv {} dist/index.css \;
 
     - name: SFTP Deploy to GoDaddy Production
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -38,6 +42,6 @@ jobs:
         username: ${{ secrets.SFTP_USERNAME }}
         password: ${{ secrets.SFTP_PASSWORD }}
         port: 22
-        local_path: './dist/assets/'
+        local_path: './dist/'
         remote_path: 'html/wp-content/themes/astra/react-app/'
         sftp_only: true
