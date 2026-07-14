@@ -1,0 +1,104 @@
+[
+  {
+    "key": "group_66e01234abcd1",
+    "title": "React Homepage Fields",
+    "fields": [
+      {
+        "key": "field_66e01234abcd2",
+        "label": "Hero Slides",
+        "name": "hero_slides",
+        "type": "repeater",
+        "layout": "table",
+        "sub_fields": [
+          {
+            "key": "field_66e01234abcd3",
+            "label": "Bg Type",
+            "name": "bg_type",
+            "type": "select",
+            "choices": {
+              "video": "Video",
+              "image": "Image"
+            },
+            "default_value": "video"
+          },
+          {
+            "key": "field_66e01234abcd4",
+            "label": "Video File",
+            "name": "video_file",
+            "type": "file",
+            "return_format": "url"
+          },
+          {
+            "key": "field_66e01234abcd5",
+            "label": "Image File",
+            "name": "image_file",
+            "type": "image",
+            "return_format": "url"
+          },
+          {
+            "key": "field_66e01234abcd6",
+            "label": "Headline Accent",
+            "name": "headline_accent",
+            "type": "text"
+          },
+          {
+            "key": "field_66e01234abcd7",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          }
+        ]
+      },
+      {
+        "key": "field_66e01234abcd8",
+        "label": "Industries List",
+        "name": "industries_list",
+        "type": "repeater",
+        "layout": "table",
+        "sub_fields": [
+          {
+            "key": "field_66e01234abcd9",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_66e01234abcda",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_66e01234abcdb",
+            "label": "Video File",
+            "name": "video_file",
+            "type": "file",
+            "return_format": "url"
+          },
+          {
+            "key": "field_66e01234abcdc",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_66e01234abcdd",
+            "label": "Color Class",
+            "name": "color_class",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-react.php"
+        }
+      ]
+    ],
+    "active": true
+  }
+]

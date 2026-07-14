@@ -449,12 +449,12 @@ function SiteHeader({ light = false }: { light?: boolean }) {
           <a
             key={link}
             href={
-              link === "About Us" ? "#about" :
-                link === "Industries" ? "#industries" :
-                  link === "For Employers" ? "#employers" :
-                    link === "For Talent" ? "#talent" :
-                      link === "AI & Insights" ? "#insights" :
-                        "#"
+              link === "About Us" ? "/about/" :
+                link === "Industries" ? "/industries/" :
+                  link === "For Employers" ? "/employers/" :
+                    link === "For Talent" ? "/talent/" :
+                      link === "AI & Insights" ? "/insights/" :
+                        "/"
             }
             className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
           >
@@ -536,7 +536,7 @@ function SiteFooter() {
             <ul className="mt-4 space-y-2.5">
               {["Browse Jobs", "Submit Resume", "Career Resources", "Why TechNova"].map((item) => (
                 <li key={item}>
-                  <a href="#talent" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                  <a href="/talent/" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
                     {item}
                   </a>
                 </li>
@@ -549,7 +549,7 @@ function SiteFooter() {
             <ul className="mt-4 space-y-2.5">
               {["About Us", "Leadership", "Careers", "News & Insights", "Contact Us"].map((item) => (
                 <li key={item}>
-                  <a href={item === "Contact Us" ? "#contact" : item === "About Us" ? "#about" : item === "News & Insights" ? "#insights" : "#"} className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                  <a href={item === "Contact Us" ? "/contact/" : item === "About Us" ? "/about/" : item === "News & Insights" ? "/insights/" : "/"} className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
                     {item}
                   </a>
                 </li>
@@ -959,6 +959,57 @@ function AboutPage() {
 }
 
 function ContactPage() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    company: "",
+    email: "",
+    phone: "",
+    subject: "Hire Talent",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = new FormData();
+    form.append("your-name", formData.fullName);
+    form.append("your-company", formData.company);
+    form.append("your-email", formData.email);
+    form.append("your-phone", formData.phone);
+    form.append("your-subject", formData.subject);
+    form.append("your-message", formData.message);
+
+    try {
+      const formId = window.wpData && window.wpData.contact_form_id ? window.wpData.contact_form_id : "1000";
+      const response = await fetch(
+        `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const result = await response.json();
+      if (result.status === "mail_sent") {
+        setStatus("success");
+        setFormData({
+          fullName: "",
+          company: "",
+          email: "",
+          phone: "",
+          subject: "Hire Talent",
+          message: "",
+        });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
+
   const responseItems = [
     { label: "Response within", detail: "1 Business Day", icon: Clock },
     { label: "Enterprise Staffing", detail: "& Consulting", icon: Users },
@@ -2341,34 +2392,65 @@ function InsightsPage() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
-  const handleSubscribeFormSubmit = (e: React.FormEvent) => {
+  const handleSubscribeFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubscribed(true);
-    setTimeout(() => {
-      setSubscribed(false);
-      setFormData({
-        fullName: "",
-        email: "",
-        company: "",
-        role: "",
+    const form = new FormData();
+    form.append("your-name", formData.fullName);
+    form.append("your-email", formData.email);
+    form.append("your-company", formData.company);
+    form.append("your-role", formData.role);
+    const chosenInterests = Object.keys(interests)
+      .filter((k) => (interests as any)[k])
+      .join(", ");
+    form.append("your-interests", chosenInterests);
+
+    try {
+      const formId = window.wpData && window.wpData.subscribe_form_id ? window.wpData.subscribe_form_id : "1002";
+      await fetch(`/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`, {
+        method: "POST",
+        body: form,
       });
-      setInterests({
-        aiStrategy: false,
-        digitalTransformation: false,
-        workforceTrends: false,
-        cybersecurity: false,
-        cloud: false,
-      });
-    }, 3000);
+      setTimeout(() => {
+        setSubscribed(false);
+        setFormData({
+          fullName: "",
+          email: "",
+          company: "",
+          role: "",
+        });
+        setInterests({
+          aiStrategy: false,
+          digitalTransformation: false,
+          workforceTrends: false,
+          cybersecurity: false,
+          cloud: false,
+        });
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleNewsletterBarSubmit = (e: React.FormEvent) => {
+  const handleNewsletterBarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setNewsletterSubscribed(true);
-    setTimeout(() => {
-      setNewsletterSubscribed(false);
-      setNewsletterEmail("");
-    }, 3000);
+    const form = new FormData();
+    form.append("your-email", newsletterEmail);
+
+    try {
+      const formId = window.wpData && window.wpData.newsletter_form_id ? window.wpData.newsletter_form_id : "1003";
+      await fetch(`/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`, {
+        method: "POST",
+        body: form,
+      });
+      setTimeout(() => {
+        setNewsletterSubscribed(false);
+        setNewsletterEmail("");
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -2938,27 +3020,65 @@ function TalentPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        fullName: "",
-        email: "",
-        mobile: "",
-        location: "",
-        jobTitle: "",
-        experience: "",
-        primarySkill: "",
-        jobType: "",
-        workLocation: "",
-        expectedSalary: "",
-        linkedin: "",
-        portfolio: "",
-      });
-      setResumeFile(null);
-    }, 3000);
+    setStatus("loading");
+
+    const form = new FormData();
+    form.append("your-name", formData.fullName);
+    form.append("your-email", formData.email);
+    form.append("your-phone", formData.mobile);
+    form.append("your-location", formData.location);
+    form.append("your-title", formData.jobTitle);
+    form.append("your-experience", formData.experience);
+    form.append("your-skill", formData.primarySkill);
+    form.append("your-jobtype", formData.jobType);
+    form.append("your-worklocation", formData.workLocation);
+    form.append("your-salary", formData.expectedSalary);
+    form.append("your-linkedin", formData.linkedin);
+    form.append("your-portfolio", formData.portfolio);
+    if (resumeFile) {
+      form.append("resume-file", resumeFile);
+    }
+
+    try {
+      const formId = window.wpData && window.wpData.talent_form_id ? window.wpData.talent_form_id : "1001";
+      const response = await fetch(
+        `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const result = await response.json();
+      if (result.status === "mail_sent") {
+        setStatus("success");
+        setSubmitted(true);
+        setFormData({
+          fullName: "",
+          email: "",
+          mobile: "",
+          location: "",
+          jobTitle: "",
+          experience: "",
+          primarySkill: "",
+          jobType: "",
+          workLocation: "",
+          expectedSalary: "",
+          linkedin: "",
+          portfolio: "",
+        });
+        setResumeFile(null);
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -3235,13 +3355,20 @@ function TalentPage() {
                   </div>
                 </div>
 
+                {status === "error" && (
+                  <div className="bg-rose-50 text-rose-800 text-sm px-4 py-3 rounded-xl border border-rose-100 font-medium mt-2">
+                    Oops! Something went wrong while submitting. Please try again.
+                  </div>
+                )}
+
                 <Button
                   type="submit"
                   variant="default"
                   size="hero"
-                  className="mt-4 w-full justify-center bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] text-white hover:opacity-90 shadow-lg shadow-purple-500/20 hover:scale-[1.01] transition-all cursor-pointer font-semibold"
+                  disabled={status === "loading"}
+                  className="mt-4 w-full justify-center bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] text-white hover:opacity-90 shadow-lg shadow-purple-500/20 hover:scale-[1.01] transition-all cursor-pointer font-semibold disabled:opacity-50"
                 >
-                  Submit Resume
+                  {status === "loading" ? "Submitting Resume..." : "Submit Resume"}
                   <ArrowRight size={18} className="ml-2" />
                 </Button>
                 <p className="text-center text-[10px] text-slate-400 mt-2">
@@ -3677,12 +3804,80 @@ function TalentPage() {
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [homeContactData, setHomeContactData] = useState({
+    fullName: "",
+    company: "",
+    email: "",
+    phone: "",
+    subject: "Hire Talent",
+    message: "",
+  });
+  const [homeContactStatus, setHomeContactStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleHomeContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setHomeContactStatus("loading");
+
+    const form = new FormData();
+    form.append("your-name", homeContactData.fullName);
+    form.append("your-company", homeContactData.company);
+    form.append("your-email", homeContactData.email);
+    form.append("your-phone", homeContactData.phone);
+    form.append("your-subject", homeContactData.subject);
+    form.append("your-message", homeContactData.message);
+
+    try {
+      const formId = window.wpData && window.wpData.contact_form_id ? window.wpData.contact_form_id : "1000";
+      const response = await fetch(
+        `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const result = await response.json();
+      if (result.status === "mail_sent") {
+        setHomeContactStatus("success");
+        setHomeContactData({
+          fullName: "",
+          company: "",
+          email: "",
+          phone: "",
+          subject: "Hire Talent",
+          message: "",
+        });
+      } else {
+        setHomeContactStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setHomeContactStatus("error");
+    }
+  };
   const [isPlaying, setIsPlaying] = useState(true);
-  const [routeHash, setRouteHash] = useState(() => window.location.hash);
+  const [routeHash, setRouteHash] = useState(() => {
+    const path = window.location.pathname.replace(/\/$/, "");
+    if (path.endsWith("/contact")) return "#contact";
+    if (path.endsWith("/about")) return "#about";
+    if (path.endsWith("/industries")) return "#industries";
+    if (path.endsWith("/employers")) return "#employers";
+    if (path.endsWith("/talent")) return "#talent";
+    if (path.endsWith("/insights")) return "#insights";
+    return window.location.hash || "#home";
+  });
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    const handleHashChange = () => setRouteHash(window.location.hash);
+    const handleHashChange = () => {
+      const path = window.location.pathname.replace(/\/$/, "");
+      if (path.endsWith("/contact")) setRouteHash("#contact");
+      else if (path.endsWith("/about")) setRouteHash("#about");
+      else if (path.endsWith("/industries")) setRouteHash("#industries");
+      else if (path.endsWith("/employers")) setRouteHash("#employers");
+      else if (path.endsWith("/talent")) setRouteHash("#talent");
+      else if (path.endsWith("/insights")) setRouteHash("#insights");
+      else setRouteHash(window.location.hash || "#home");
+    };
 
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
@@ -4325,7 +4520,7 @@ function App() {
             {/* Right Column (Form) */}
             <div className="lg:col-span-7 w-full">
               <div className="bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-xl shadow-slate-100/50 w-full text-left">
-                <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleHomeContactSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Full Name */}
                   <div className="flex flex-col">
                     <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
@@ -4334,6 +4529,8 @@ function App() {
                     <input
                       type="text"
                       required
+                      value={homeContactData.fullName}
+                      onChange={(e) => setHomeContactData({ ...homeContactData, fullName: e.target.value })}
                       placeholder="Jane Cooper"
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
@@ -4346,6 +4543,8 @@ function App() {
                     </label>
                     <input
                       type="text"
+                      value={homeContactData.company}
+                      onChange={(e) => setHomeContactData({ ...homeContactData, company: e.target.value })}
                       placeholder="Acme Corp"
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
@@ -4359,6 +4558,8 @@ function App() {
                     <input
                       type="email"
                       required
+                      value={homeContactData.email}
+                      onChange={(e) => setHomeContactData({ ...homeContactData, email: e.target.value })}
                       placeholder="jane@acme.com"
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
@@ -4371,6 +4572,8 @@ function App() {
                     </label>
                     <input
                       type="tel"
+                      value={homeContactData.phone}
+                      onChange={(e) => setHomeContactData({ ...homeContactData, phone: e.target.value })}
                       placeholder="+1 (571) 651 - 0246"
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
                     />
@@ -4383,8 +4586,9 @@ function App() {
                     </label>
                     <div className="relative">
                       <select
+                        value={homeContactData.subject}
+                        onChange={(e) => setHomeContactData({ ...homeContactData, subject: e.target.value })}
                         className="w-full bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 appearance-none focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm"
-                        defaultValue="Hire Talent"
                       >
                         <option value="Hire Talent">Hire Talent</option>
                         <option value="Find Work">Find Work</option>
@@ -4408,6 +4612,8 @@ function App() {
                     <textarea
                       required
                       rows={4}
+                      value={homeContactData.message}
+                      onChange={(e) => setHomeContactData({ ...homeContactData, message: e.target.value })}
                       placeholder="Tell us about the role, project, or transformation you have in mind..."
                       className="bg-slate-50/50 border border-slate-200/80 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] transition-all text-sm resize-none"
                     />
@@ -4418,13 +4624,26 @@ function App() {
                     <TurnstileWidget />
                   </div>
 
+                  {homeContactStatus === "success" && (
+                    <div className="md:col-span-2 bg-emerald-50 text-emerald-800 text-sm px-4 py-3 rounded-xl border border-emerald-100 font-medium">
+                      Thank you! Your message has been sent successfully.
+                    </div>
+                  )}
+
+                  {homeContactStatus === "error" && (
+                    <div className="md:col-span-2 bg-rose-50 text-rose-800 text-sm px-4 py-3 rounded-xl border border-rose-100 font-medium">
+                      Oops! Something went wrong. Please try again or email us directly.
+                    </div>
+                  )}
+
                   {/* Send Message Button */}
                   <div className="md:col-span-2 mt-2">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto bg-[#f59e0c] text-white hover:bg-[#d97706] font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm shadow-md shadow-amber-500/10 cursor-pointer"
+                      disabled={homeContactStatus === "loading"}
+                      className="w-full sm:w-auto bg-[#f59e0c] text-white hover:bg-[#d97706] font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm shadow-md shadow-amber-500/10 cursor-pointer disabled:opacity-50"
                     >
-                      Send Message
+                      {homeContactStatus === "loading" ? "Sending..." : "Send Message"}
                       <svg className="w-4 h-4 transform rotate-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                       </svg>
