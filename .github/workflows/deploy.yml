@@ -38,6 +38,7 @@ jobs:
         username: ${{ secrets.SFTP_USERNAME }}
         password: ${{ secrets.SFTP_PASSWORD }}
         port: 22
+        protocol: sftp
         local-dir: ./dist/assets/
         # Adjust /wp-content/themes/astra/react-app/ if your theme folder is different
         server-dir: /wp-content/themes/astra/react-app/
