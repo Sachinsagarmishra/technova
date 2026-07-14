@@ -1786,7 +1786,7 @@ function EmployersPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
               For Employers
             </p>
-            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
               Exceptional Talent. Measurable Impact.{" "}
               <span className="text-[#f59e0c]">Built Around You.</span>
             </h1>
@@ -2984,7 +2984,7 @@ function TalentPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
               For Talent
             </p>
-            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
               Find the Right Opportunity. Build the Career{" "}
               <span className="text-[#f59e0c]">You Deserve.</span>
             </h1>
@@ -3738,7 +3738,11 @@ function App() {
     revealItems.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
-  }, []);
+  }, [routeHash]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [routeHash]);
 
   if (routeHash === "#contact") {
     return <ContactPage />;
