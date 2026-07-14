@@ -1,0 +1,6 @@
+SSH Command
+ ssh client_b65cfd3dae_1164622@1164622.us17.ssh.myftpupload.com
+Username
+ client_b65cfd3dae_1164622
+Password
+ CRfS8Sgvyp33MJ

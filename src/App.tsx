@@ -1,4 +1,9 @@
 import { useEffect, useState, useRef } from "react";
+declare global {
+  interface Window {
+    wpData: any;
+  }
+}
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -79,6 +84,10 @@ import healthcareVideo from "../imges/Industries-videos/Healthcare.mp4";
 import manufacturingVideo from "../imges/Industries-videos/Manufacturing.mp4";
 import retailEcommerceVideo from "../imges/Industries-videos/Retail-E-Commerce.mp4";
 import technologyVideo from "../imges/Industries-videos/Technology.mp4";
+import logisticsVideo from "../imges/Industries-videos/Logistics.mp4";
+import realEstateVideo from "../imges/Industries-videos/Real-Estate.mp4";
+import educationVideo from "../imges/Industries-videos/Education.mp4";
+import industriesPageBgVideo from "../imges/Industries-videos/industiespagebg.mp4";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
 import technovaLogo from "../imges/Industries/technovalogo.svg";
@@ -145,7 +154,35 @@ type WavePart = {
   breakAfter?: boolean;
 };
 
-const slides = [
+const iconMap: Record<string, any> = {
+  Cpu,
+  ShoppingCart,
+  Landmark,
+  Heart,
+  Factory,
+  Truck,
+  GraduationCap,
+  Building
+};
+
+function parseHeadline(text: string): WavePart[] {
+  if (!text) return [];
+  const regex = /(\[accent\](.*?)\[\/accent\])|(\[strike\](.*?)\[\/strike\])|([^[\]]+)/g;
+  const parts: WavePart[] = [];
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match[2]) {
+      parts.push({ text: match[2], accent: true });
+    } else if (match[4]) {
+      parts.push({ text: match[4], strike: true, breakAfter: true });
+    } else if (match[5]) {
+      parts.push({ text: match[5] });
+    }
+  }
+  return parts;
+}
+
+const defaultSlides = [
   {
     bgType: "video",
     bgUrl: firstSlideVideo,
@@ -215,6 +252,19 @@ const slides = [
     ]
   }
 ];
+
+const slides = window.wpData && window.wpData.hero_slides
+  ? window.wpData.hero_slides.map((s: any) => ({
+      bgType: s.bg_type || "video",
+      bgUrl: s.bg_type === "image" ? s.image_file : s.video_file,
+      headlineParts: parseHeadline(s.headline_accent),
+      description: s.description || "",
+      ctaButtons: [
+        { text: "Schedule Consultation", link: "#contact", primary: true }
+      ]
+    }))
+  : defaultSlides;
+
 
 function WaveLetters({ parts }: { parts: WavePart[] }) {
   let waveIndex = 0;
@@ -741,7 +791,7 @@ function AboutPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/42" />
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -952,7 +1002,7 @@ function ContactPage() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.94)_0%,rgba(4,10,22,0.72)_24%,rgba(4,10,22,0.30)_50%,rgba(4,10,22,0.72)_76%,rgba(4,10,22,0.94)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-[34%] bg-white" />
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -1179,13 +1229,14 @@ function ContactPage() {
 }
 
 function IndustriesPage() {
-  const industries = [
+  const defaultIndustries = [
     {
       title: "Technology & IT",
       description: "Powering innovation with top tech talent and advanced solutions across emerging technologies.",
       icon: Cpu,
       color: "text-purple-500 bg-purple-50 hover:bg-purple-100",
       themeColor: "#8B5CF6",
+      video: technologyVideo,
     },
     {
       title: "Retail & E-commerce",
@@ -1193,6 +1244,7 @@ function IndustriesPage() {
       icon: ShoppingCart,
       color: "text-amber-500 bg-amber-50 hover:bg-amber-100",
       themeColor: "#f59e0c",
+      video: retailEcommerceVideo,
     },
     {
       title: "Banking & Financial Services",
@@ -1200,6 +1252,7 @@ function IndustriesPage() {
       icon: Landmark,
       color: "text-emerald-500 bg-emerald-50 hover:bg-emerald-100",
       themeColor: "#10B981",
+      video: financialServicesVideo,
     },
     {
       title: "Healthcare & Life Sciences",
@@ -1207,6 +1260,7 @@ function IndustriesPage() {
       icon: Heart,
       color: "text-rose-500 bg-rose-50 hover:bg-rose-100",
       themeColor: "#F43F5E",
+      video: healthcareVideo,
     },
     {
       title: "Manufacturing",
@@ -1214,6 +1268,7 @@ function IndustriesPage() {
       icon: Factory,
       color: "text-orange-500 bg-orange-50 hover:bg-orange-100",
       themeColor: "#F97316",
+      video: manufacturingVideo,
     },
     {
       title: "Logistics & Supply Chain",
@@ -1221,6 +1276,7 @@ function IndustriesPage() {
       icon: Truck,
       color: "text-indigo-500 bg-indigo-50 hover:bg-indigo-100",
       themeColor: "#6366F1",
+      video: logisticsVideo,
     },
     {
       title: "Education & EdTech",
@@ -1228,6 +1284,7 @@ function IndustriesPage() {
       icon: GraduationCap,
       color: "text-sky-500 bg-sky-50 hover:bg-sky-100",
       themeColor: "#0EA5E9",
+      video: educationVideo,
     },
     {
       title: "Real Estate & Construction",
@@ -1235,8 +1292,23 @@ function IndustriesPage() {
       icon: Building,
       color: "text-teal-500 bg-teal-50 hover:bg-teal-100",
       themeColor: "#14B8A6",
+      video: realEstateVideo,
     },
   ];
+
+  const industries = window.wpData && window.wpData.industries_list
+    ? window.wpData.industries_list.map((item: any) => {
+        const IconComponent = iconMap[item.icon_name] || Cpu;
+        return {
+          title: item.title,
+          description: item.description,
+          icon: IconComponent,
+          color: item.color_class || "text-purple-500 bg-purple-50 hover:bg-purple-100",
+          themeColor: "#8B5CF6",
+          video: item.video_file || undefined
+        };
+      })
+    : defaultIndustries;
 
   const stats = [
     { value: "25+", label: "Industries Served", icon: Building2 },
@@ -1297,16 +1369,18 @@ function IndustriesPage() {
     <main className="industries-page min-h-screen bg-[#f7f9fc] font-body text-[#0b132b]">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
-        <img
-          src={industryHeroBg}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
-          aria-hidden="true"
+        <video
+          src={industriesPageBgVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in pointer-events-none"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
 
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -1378,17 +1452,32 @@ function IndustriesPage() {
           </p>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {industries.map((item) => {
+            {industries.map((item: any) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="group rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-slate-200 flex flex-col justify-between min-h-[240px]"
+                  className="group rounded-xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-slate-200 flex flex-col justify-between min-h-[240px]"
                 >
                   <div>
-                    <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.color} transition-colors duration-300`}>
-                      <Icon size={24} />
-                    </span>
+                    {item.video ? (
+                      <div className="relative w-[142px] h-[120px] -ml-8 -mt-4 mb-2 pointer-events-none" aria-hidden="true">
+                        <video
+                          src={item.video}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-contain"
+                          controlsList="nodownload"
+                          onContextMenu={(e) => e.preventDefault()}
+                        />
+                      </div>
+                    ) : (
+                      <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.color} transition-colors duration-300`}>
+                        <Icon size={24} />
+                      </span>
+                    )}
                     <h3 className="mt-6 text-lg font-semibold text-slate-800 group-hover:text-[#8B5CF6] transition-colors">
                       {item.title}
                     </h3>
@@ -1508,63 +1597,6 @@ function IndustriesPage() {
         </div>
       </section>
 
-      {/* Case Studies / Success Stories Section */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 bg-white">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-                Success Stories
-              </p>
-              <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-                Real Impact Across Industries
-              </h2>
-            </div>
-            <a
-              href="#contact"
-              className="text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors inline-flex items-center gap-1.5"
-            >
-              View All Case Studies
-              <ArrowRight size={14} />
-            </a>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {caseStudies.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.client}
-                  className="group rounded-3xl border border-slate-100 bg-white p-8 flex flex-col justify-between shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-200"
-                >
-                  <div>
-                    <div className="flex items-center gap-3.5">
-                      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${item.color}`}>
-                        <Icon size={20} />
-                      </span>
-                      <div>
-                        <h4 className="font-semibold text-sm text-slate-800">{item.client}</h4>
-                        <p className="text-[10px] text-slate-400 font-medium">{item.industry}</p>
-                      </div>
-                    </div>
-                    <p className="mt-6 text-xs leading-relaxed text-slate-500">
-                      {item.description}
-                    </p>
-                  </div>
-                  <a
-                    href="#contact"
-                    className="text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors mt-8 inline-flex items-center gap-1 group-hover:gap-1.5"
-                  >
-                    Read Case Study
-                    <ArrowRight size={13} className="transition-transform duration-300" />
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="px-4 py-12 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-[1440px] relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
@@ -1606,6 +1638,7 @@ function IndustriesPage() {
 }
 
 function EmployersPage() {
+  const [activeStep, setActiveStep] = useState(0);
   const chooseReasons = [
     {
       title: "Deep Talent Network",
@@ -1681,12 +1714,12 @@ function EmployersPage() {
   ];
 
   const industries = [
-    { title: "Technology & IT", desc: "Powering innovation with top tech talent and advanced solutions.", icon: Cpu, color: "text-purple-500 bg-purple-50" },
-    { title: "Banking & Financial", desc: "Delivering expertise that drives growth and ensures compliance.", icon: Landmark, color: "text-emerald-500 bg-emerald-50" },
-    { title: "Healthcare", desc: "Connecting healthcare organizations with skilled professionals.", icon: Heart, color: "text-rose-500 bg-rose-50" },
-    { title: "Manufacturing", desc: "Empowering manufacturers with talent that drives efficiency.", icon: Factory, color: "text-orange-500 bg-orange-50" },
-    { title: "Retail & E-commerce", desc: "Building agile teams that enhance customer experience.", icon: ShoppingCart, color: "text-amber-500 bg-amber-50" },
-    { title: "Logistics & Supply Chain", desc: "Strengthening supply chains with expert talent and smart solutions.", icon: Truck, color: "text-indigo-500 bg-indigo-50" },
+    { title: "Technology & IT", desc: "Powering innovation with top tech talent and advanced solutions.", icon: Cpu, color: "text-purple-500 bg-purple-50", video: technologyVideo },
+    { title: "Banking & Financial", desc: "Delivering expertise that drives growth and ensures compliance.", icon: Landmark, color: "text-emerald-500 bg-emerald-50", video: financialServicesVideo },
+    { title: "Healthcare", desc: "Connecting healthcare organizations with skilled professionals.", icon: Heart, color: "text-rose-500 bg-rose-50", video: healthcareVideo },
+    { title: "Manufacturing", desc: "Empowering manufacturers with talent that drives efficiency.", icon: Factory, color: "text-orange-500 bg-orange-50", video: manufacturingVideo },
+    { title: "Retail & E-commerce", desc: "Building agile teams that enhance customer experience.", icon: ShoppingCart, color: "text-amber-500 bg-amber-50", video: retailEcommerceVideo },
+    { title: "Logistics & Supply Chain", desc: "Strengthening supply chains with expert talent and smart solutions.", icon: Truck, color: "text-indigo-500 bg-indigo-50", video: logisticsVideo },
   ];
 
   const caseStudies = [
@@ -1735,7 +1768,7 @@ function EmployersPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
 
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -1899,19 +1932,25 @@ function EmployersPage() {
       </section>
 
       {/* Trusted By Row */}
-      <section className="bg-white py-12 border-b border-slate-100 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1440px]">
-          <p className="text-center text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-slate-400">
-            Trusted by Organizations Worldwide
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center items-center gap-10 sm:gap-14 opacity-75">
-            <span className="font-display text-xl font-bold tracking-tight text-slate-700">CISCO</span>
-            <span className="font-sans text-xl font-extrabold tracking-tight text-slate-700">Microsoft</span>
-            <span className="font-sans text-xl font-semibold italic text-[#006699]">SIEMENS</span>
-            <span className="font-sans text-xl font-black text-slate-800">Deloitte<span className="text-green-500">.</span></span>
-            <span className="font-sans text-xl font-bold text-slate-700 italic">hp</span>
-            <span className="font-serif text-2xl font-black text-[#F80000]">ORACLE</span>
-            <span className="font-sans text-lg font-bold text-blue-900 tracking-wider">Capgemini</span>
+      <section className="bg-white py-10 overflow-hidden text-[#0b132b] sm:py-12 border-b border-slate-100">
+        <p className="text-center text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-slate-400">
+          Trusted by Organizations Worldwide
+        </p>
+
+        <div className="logo-marquee mt-8" aria-label="Trusted companies">
+          <div className="logo-marquee-track">
+            {[0, 1].map((groupIndex) => (
+              <div className="logo-marquee-group" key={groupIndex}>
+                {trustedLogos.map((logo) => (
+                  <div
+                    className="logo-marquee-item"
+                    key={`${logo.name}-${groupIndex}`}
+                  >
+                    <img src={logo.src} alt={logo.name} />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -2058,30 +2097,85 @@ function EmployersPage() {
           </div>
 
           {/* Right Column: Timeline Progression */}
-          <div className="lg:col-span-8 space-y-6 sm:space-y-0 sm:flex sm:gap-6 sm:overflow-x-auto pb-4">
-            {steps.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.step} className="flex-1 min-w-[200px] relative">
-                  {/* Step pill */}
-                  <span className="text-[10px] font-semibold text-[#8B5CF6] bg-purple-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                    {item.step}
-                  </span>
-                  <div className="mt-5 flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-600">
-                      <Icon size={16} />
+          <div className="lg:col-span-8 flex flex-col justify-center">
+            {/* Horizontal Timeline Bar */}
+            <div className="relative w-full h-1 bg-slate-100 rounded-full mb-10 hidden sm:block px-3">
+              {/* Active filled line */}
+              <div 
+                className="absolute top-0 left-3 h-full bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] transition-all duration-500 rounded-full"
+                style={{ width: `calc(${(activeStep / (steps.length - 1)) * 100}% - 8px)` }}
+              />
+              {/* Step Dots on the line */}
+              <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 flex justify-between px-3">
+                {steps.map((item, idx) => {
+                  const isActive = idx <= activeStep;
+                  const isCurrent = idx === activeStep;
+                  return (
+                    <button
+                      key={item.step}
+                      onClick={() => setActiveStep(idx)}
+                      onMouseEnter={() => setActiveStep(idx)}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                        isCurrent 
+                          ? "border-[#8B5CF6] bg-white scale-125 shadow-md shadow-purple-500/20"
+                          : isActive
+                          ? "border-[#8B5CF6] bg-[#8B5CF6] text-white scale-110"
+                          : "border-slate-200 bg-white text-slate-400 hover:border-slate-300"
+                      }`}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <span className="text-[10px] font-bold">{idx + 1}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Step Columns */}
+            <div className="space-y-6 sm:space-y-0 sm:flex sm:gap-4 sm:overflow-x-auto pb-4">
+              {steps.map((item, idx) => {
+                const Icon = item.icon;
+                const isCurrent = idx === activeStep;
+                return (
+                  <div 
+                    key={item.step} 
+                    className={`flex-1 min-w-[180px] p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
+                      isCurrent 
+                        ? "border-purple-200 bg-purple-50/30 shadow-[0_8px_20px_rgba(139,92,246,0.06)] -translate-y-1" 
+                        : "border-transparent bg-transparent hover:bg-slate-50/50"
+                    }`}
+                    onMouseEnter={() => setActiveStep(idx)}
+                    onClick={() => setActiveStep(idx)}
+                  >
+                    {/* Step pill */}
+                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider transition-colors duration-300 ${
+                      isCurrent 
+                        ? "text-white bg-[#8B5CF6]" 
+                        : "text-[#8B5CF6] bg-purple-50"
+                    }`}>
+                      {item.step}
                     </span>
-                    <h3 className="text-sm font-semibold text-slate-800">{item.title}</h3>
+                    
+                    <div className="mt-5 flex items-center gap-2">
+                      <span className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-300 ${
+                        isCurrent 
+                          ? "bg-[#8B5CF6] text-white" 
+                          : "bg-slate-50 text-slate-600"
+                      }`}>
+                        <Icon size={16} />
+                      </span>
+                      <h3 className={`text-sm font-semibold transition-colors duration-300 ${
+                        isCurrent ? "text-[#8B5CF6]" : "text-slate-800"
+                      }`}>{item.title}</h3>
+                    </div>
+                    
+                    <p className="mt-3 text-xs leading-relaxed text-slate-500">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p className="mt-3 text-xs leading-relaxed text-slate-500">
-                    {item.desc}
-                  </p>
-                  {idx < steps.length - 1 && (
-                    <div className="hidden sm:block absolute top-[13px] left-[170px] w-full border-t border-dashed border-slate-200" />
-                  )}
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -2099,12 +2193,29 @@ function EmployersPage() {
             {industries.map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm text-center">
-                  <span className={`mx-auto flex h-10 w-10 items-center justify-center rounded-xl ${item.color}`}>
-                    <Icon size={20} />
-                  </span>
-                  <h3 className="mt-4 text-xs font-bold text-slate-800">{item.title}</h3>
-                  <p className="mt-2 text-[10px] leading-relaxed text-slate-400">{item.desc}</p>
+                <div key={item.title} className="rounded-xl border border-slate-100 bg-white p-5 shadow-sm text-center flex flex-col justify-between min-h-[220px]">
+                  <div>
+                    {item.video ? (
+                      <div className="relative mx-auto w-[120px] h-[90px] mb-2 pointer-events-none" aria-hidden="true">
+                        <video
+                          src={item.video}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-contain"
+                          controlsList="nodownload"
+                          onContextMenu={(e) => e.preventDefault()}
+                        />
+                      </div>
+                    ) : (
+                      <span className={`mx-auto flex h-10 w-10 items-center justify-center rounded-xl ${item.color} mb-3`}>
+                        <Icon size={20} />
+                      </span>
+                    )}
+                    <h3 className="mt-4 text-xs font-bold text-slate-800">{item.title}</h3>
+                    <p className="mt-2 text-[10px] leading-relaxed text-slate-400">{item.desc}</p>
+                  </div>
                 </div>
               );
             })}
@@ -2265,7 +2376,7 @@ function InsightsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
 
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -2855,7 +2966,7 @@ function TalentPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
 
-        <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
           <SiteHeader />
         </div>
 
@@ -3649,7 +3760,7 @@ function App() {
     <main className="bg-[#f2f5f9] font-body text-foreground">
       <section className="relative min-h-screen overflow-hidden bg-background">
         {/* Background cross-fade elements */}
-        {slides.map((slide, index) => {
+        {slides.map((slide: any, index: number) => {
           if (slide.bgType === "video") {
             return (
               <video
@@ -3690,7 +3801,7 @@ function App() {
           <h1
             className="wave-heading animate-fade-rise max-w-[1180px] text-5xl font-normal leading-[1.02] tracking-[-2.46px] text-white sm:text-6xl md:text-[76px] lg:text-[82px]"
             style={{ fontFamily: "'Instrument Serif', serif" }}
-            aria-label={slides[currentSlide].headlineParts.map((part) => part.text).join("")}
+            aria-label={slides[currentSlide].headlineParts.map((part: any) => part.text).join("")}
           >
             <WaveLetters parts={slides[currentSlide].headlineParts} />
           </h1>
@@ -3702,7 +3813,7 @@ function App() {
           ) : null}
 
           <div className="animate-fade-rise-delay-2 mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {slides[currentSlide].ctaButtons.map((btn, btnIndex) => (
+            {slides[currentSlide].ctaButtons.map((btn: any, btnIndex: number) => (
               <Button
                 key={btnIndex}
                 variant={btn.primary ? "default" : "glass"}
