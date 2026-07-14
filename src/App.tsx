@@ -253,10 +253,18 @@ const defaultSlides = [
   }
 ];
 
+function getAcfUrl(field: any): string {
+  if (!field) return "";
+  if (typeof field === "object" && field.url) {
+    return field.url;
+  }
+  return String(field);
+}
+
 const slides = window.wpData && window.wpData.hero_slides
   ? window.wpData.hero_slides.map((s: any) => ({
       bgType: s.bg_type || "video",
-      bgUrl: s.bg_type === "image" ? s.image_file : s.video_file,
+      bgUrl: s.bg_type === "image" ? getAcfUrl(s.image_file) : getAcfUrl(s.video_file),
       headlineParts: parseHeadline(s.headline_accent),
       description: s.description || "",
       ctaButtons: [
@@ -1305,7 +1313,7 @@ function IndustriesPage() {
           icon: IconComponent,
           color: item.color_class || "text-purple-500 bg-purple-50 hover:bg-purple-100",
           themeColor: "#8B5CF6",
-          video: item.video_file || undefined
+          video: getAcfUrl(item.video_file) || undefined
         };
       })
     : defaultIndustries;
