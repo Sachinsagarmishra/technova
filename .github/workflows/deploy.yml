@@ -26,14 +26,10 @@ jobs:
 
     - name: Prepare Assets for WordPress
       run: |
-        # Move all contents of dist/assets/ to dist/
-        mv dist/assets/* dist/ || true
-        # Remove the empty dist/assets/ folder
-        rm -rf dist/assets || true
-        # Find the compiled index.js and rename to index.js
-        find dist/ -name "index-*.js" -exec mv {} dist/index.js \;
-        # Find the compiled index.css and rename to index.css
-        find dist/ -name "index-*.css" -exec mv {} dist/index.css \;
+        # Find the compiled index.js and rename to index.js inside dist/assets/
+        find dist/assets/ -name "index-*.js" -exec mv {} dist/assets/index.js \;
+        # Find the compiled index.css and rename to index.css inside dist/assets/
+        find dist/assets/ -name "index-*.css" -exec mv {} dist/assets/index.css \;
 
     - name: SFTP Deploy to GoDaddy Production
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
