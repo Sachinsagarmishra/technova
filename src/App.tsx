@@ -1152,43 +1152,70 @@ function ContactPage() {
               <p className="mt-2 text-sm leading-6 text-slate-500">
                 Fill out the form and our team will get back to you within one business day.
               </p>
-              <form onSubmit={(e) => e.preventDefault()} className="mt-7 grid gap-4 sm:grid-cols-2">
-                {["Full Name*", "Company Name", "Work Email*", "Phone Number*"].map((placeholder) => (
-                  <input
-                    key={placeholder}
-                    placeholder={placeholder}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c]"
-                  />
-                ))}
-                <select className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] sm:col-span-2" defaultValue="">
-                  <option value="" disabled>I am*</option>
-                  <option>Hiring for my company</option>
-                  <option>Looking for opportunities</option>
-                  <option>Exploring consulting support</option>
-                </select>
-                <select className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] sm:col-span-2" defaultValue="">
-                  <option value="" disabled>Service Interested In*</option>
-                  <option>AI Talent Solutions</option>
-                  <option>Contract Staffing</option>
-                  <option>Workforce Consulting</option>
-                  <option>Managed Teams</option>
-                </select>
+              <form onSubmit={handleContactSubmit} className="mt-7 grid gap-4 sm:grid-cols-2">
+                <input
+                  placeholder="Full Name*"
+                  required
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c]"
+                />
+                <input
+                  placeholder="Company Name"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c]"
+                />
+                <input
+                  placeholder="Work Email*"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c]"
+                />
+                <input
+                  placeholder="Phone Number*"
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c]"
+                />
                 <input
                   placeholder="Subject*"
+                  required
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] sm:col-span-2"
                 />
                 <textarea
                   rows={5}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us about your requirements or how we can help you."
                   className="resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#f59e0c] focus:ring-1 focus:ring-[#f59e0c] sm:col-span-2"
                 />
                 <TurnstileWidget className="sm:col-span-2" />
-                <label className="flex items-start gap-3 text-xs leading-5 text-slate-500 sm:col-span-2">
-                  <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
-                  I agree to the Privacy Policy and consent to being contacted by TechNova Systems.
-                </label>
-                <button className="flex items-center justify-center gap-2 rounded-xl bg-[#f59e0c] px-6 py-4 text-sm font-semibold text-white shadow-md shadow-amber-500/10 transition hover:bg-[#d97706] sm:col-span-2">
-                  Send Message
+
+                {status === "success" && (
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-800 sm:col-span-2">
+                    Thank you! Your message has been sent successfully.
+                  </div>
+                )}
+                {status === "error" && (
+                  <div className="rounded-xl bg-rose-50 border border-rose-200 p-4 text-sm text-rose-800 sm:col-span-2">
+                    Oops! Something went wrong. Please try again.
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-[#f59e0c] px-6 py-4 text-sm font-semibold text-white shadow-md shadow-amber-500/10 transition hover:bg-[#d97706] sm:col-span-2 disabled:opacity-50"
+                >
+                  {status === "loading" ? "Sending..." : "Send Message"}
                   <ArrowRight size={17} />
                 </button>
               </form>
