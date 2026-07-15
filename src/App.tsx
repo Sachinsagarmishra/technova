@@ -5,6 +5,7 @@ declare global {
   }
 }
 import { Button } from "@/components/ui/button";
+import * as LucideIcons from "lucide-react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -320,6 +321,12 @@ function WaveLetters({ parts }: { parts: WavePart[] }) {
       ))}
     </span>
   );
+}
+
+function getIconComponent(name: string): any {
+  if (!name) return LucideIcons.BriefcaseBusiness;
+  const Icon = (LucideIcons as any)[name];
+  return Icon || LucideIcons.BriefcaseBusiness;
 }
 
 const trustedLogos = [
@@ -3828,6 +3835,42 @@ function TalentPage() {
 }
 
 function App() {
+  const partnersList = window.wpData?.home_partners
+    ? window.wpData.home_partners.map((p: any) => ({ name: p.partner_name, src: p.logo_image }))
+    : trustedLogos;
+
+  const solutionsList = window.wpData?.home_solutions
+    ? window.wpData.home_solutions.map((s: any) => ({
+        title: s.title,
+        description: s.description,
+        icon: getIconComponent(s.icon_name),
+        color: s.color_class || "blue",
+        video: s.video_file,
+      }))
+    : capabilityCards;
+
+  const industriesList = window.wpData?.industries_list
+    ? window.wpData.industries_list.map((i: any) => ({
+        title: i.title,
+        description: i.description,
+        video: i.video_file,
+        visual: i.title.toLowerCase().split(" ")[0],
+      }))
+    : industryCards;
+
+  const statsList = window.wpData?.home_stats
+    ? window.wpData.home_stats.map((s: any) => ({
+        value: s.value,
+        label: s.label,
+        icon: getIconComponent(s.icon_name),
+      }))
+    : [
+        { value: "500+", label: "Enterprise Clients", icon: LucideIcons.Building2 },
+        { value: "1000+", label: "Successful Placements", icon: LucideIcons.Users },
+        { value: "48H", label: "Average Shortlisting Time", icon: LucideIcons.Clock },
+        { value: "95%", label: "Client Retention Rate", icon: LucideIcons.ShieldCheck }
+      ];
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [homeContactData, setHomeContactData] = useState({
     fullName: "",
@@ -4108,16 +4151,16 @@ function App() {
       <section className="scroll-reveal-section overflow-hidden bg-white py-10 text-[#0b132b] sm:py-12">
         <h2
           className="font-display mx-auto max-w-4xl text-center text-4xl font-normal leading-none text-[#0b132b] sm:text-5xl"
-          aria-label="Trusted by Leading Companies Worldwide"
+          aria-label={window.wpData?.home_partners_title || "Trusted by Leading Companies Worldwide"}
         >
-          Trusted by Leading Companies Worldwide
+          {window.wpData?.home_partners_title || "Trusted by Leading Companies Worldwide"}
         </h2>
 
         <div className="logo-marquee mt-9" aria-label="Trusted companies">
           <div className="logo-marquee-track">
             {[0, 1].map((groupIndex) => (
               <div className="logo-marquee-group" key={groupIndex}>
-                {trustedLogos.map((logo) => (
+                {partnersList.map((logo: any) => (
                   <div
                     className="logo-marquee-item"
                     key={`${logo.name}-${groupIndex}`}
@@ -4135,25 +4178,31 @@ function App() {
         <div className="opportunity-grid mx-auto grid max-w-[1440px] gap-6 lg:grid-cols-2">
           <article className="scroll-reveal-card opportunity-card opportunity-card-employers">
             <div className="opportunity-content">
-              <p className="section-kicker text-[#8B5CF6]">For Employers</p>
+              <p className="section-kicker text-[#8B5CF6]">
+                {window.wpData?.home_employers_card_kicker || "For Employers"}
+              </p>
               <h2
                 className="font-display mt-5 max-w-md text-4xl font-normal leading-[0.95] sm:text-5xl"
-                aria-label="Build. Scale. Succeed."
+                aria-label={window.wpData?.home_employers_card_title || "Build. Scale. Succeed."}
               >
-                Build. Scale. Succeed.
+                {window.wpData?.home_employers_card_title || "Build. Scale. Succeed."}
               </h2>
               <p className="mt-5 max-w-md text-base leading-7 text-[#475569] sm:text-lg">
-                Access specialized talent, consulting expertise, and workforce
-                solutions that drive real business impact.
+                Access specialized talent, consulting expertise, and workforce solutions that drive real business impact.
               </p>
 
               <div className="mt-8 grid max-w-2xl gap-y-2">
-                {employerBenefits.map((benefit) => (
-                  <div className="benefit-row" key={benefit}>
+                {(window.wpData?.home_employers_card_bullets || [
+                  { text: "Contract-to-Hire & Performance Staffing" },
+                  { text: "Executive Search & leadership hiring" },
+                  { text: "AI & Digital Transformation Consulting" },
+                  { text: "Managed Teams & Project Solutions" }
+                ]).map((bullet: any, idx: number) => (
+                  <div className="benefit-row" key={idx}>
                     <span className="benefit-check benefit-check-purple">
                       <Check aria-hidden="true" size={13} strokeWidth={3} />
                     </span>
-                    <span>{benefit}</span>
+                    <span>{bullet.text}</span>
                   </div>
                 ))}
               </div>
@@ -4161,32 +4210,38 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="building-illustration">
-                <img src={forEmployersGif} alt="" />
+                <img src={window.wpData?.home_employers_card_image || forEmployersGif} alt="" />
               </div>
             </div>
           </article>
 
           <article className="scroll-reveal-card opportunity-card opportunity-card-talent">
             <div className="opportunity-content">
-              <p className="section-kicker text-[#F59E0B]">For Talent</p>
+              <p className="section-kicker text-[#F59E0B]">
+                {window.wpData?.home_talent_card_kicker || "For Talent"}
+              </p>
               <h2
                 className="font-display mt-5 max-w-lg text-4xl font-normal leading-[0.95] sm:text-5xl"
-                aria-label="Your Next Move Starts Here."
+                aria-label={window.wpData?.home_talent_card_title || "Your Next Move Starts Here."}
               >
-                Your Next Move Starts Here.
+                {window.wpData?.home_talent_card_title || "Your Next Move Starts Here."}
               </h2>
               <p className="mt-5 max-w-lg text-base leading-7 text-[#475569] sm:text-lg">
-                Explore high-impact opportunities with forward-thinking
-                companies and accelerate your career.
+                Explore high-impact opportunities with forward-thinking companies and accelerate your career.
               </p>
 
               <div className="mt-8 grid max-w-2xl gap-y-2">
-                {talentBenefits.map((benefit) => (
-                  <div className="benefit-row" key={benefit}>
+                {(window.wpData?.home_talent_card_bullets || [
+                  { text: "Top Tech & AI Opportunities" },
+                  { text: "Career Growth & Upskilling" },
+                  { text: "Work with Innovative Teams" },
+                  { text: "Nationwide & Remote Roles" }
+                ]).map((bullet: any, idx: number) => (
+                  <div className="benefit-row" key={idx}>
                     <span className="benefit-check benefit-check-orange">
                       <Check aria-hidden="true" size={13} strokeWidth={3} />
                     </span>
-                    <span>{benefit}</span>
+                    <span>{bullet.text}</span>
                   </div>
                 ))}
               </div>
@@ -4194,7 +4249,7 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="stairs-illustration">
-                <img src={forTalentGif} alt="" />
+                <img src={window.wpData?.home_talent_card_image || forTalentGif} alt="" />
               </div>
             </div>
           </article>
@@ -4209,18 +4264,18 @@ function App() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center">
             <p className="section-kicker text-[#8B5CF6]">
-              Our Core Capabilities
+              {window.wpData?.home_solutions_kicker || "Our Core Capabilities"}
             </p>
             <h2
               className="font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
-              aria-label="End-to-End Talent & Technology Solutions"
+              aria-label={window.wpData?.home_solutions_title || "End-to-End Talent & Technology Solutions"}
             >
-              End-to-End Talent & Technology Solutions
+              {window.wpData?.home_solutions_title || "End-to-End Talent & Technology Solutions"}
             </h2>
           </div>
 
           <div className="capabilities-grid mt-10">
-            {capabilityCards.map((card) => {
+            {solutionsList.map((card: any) => {
               const Icon = card.icon;
 
               return (
@@ -4262,18 +4317,18 @@ function App() {
         <div className="industries-panel mx-auto max-w-[1440px]">
           <div className="text-center">
             <p className="section-kicker text-[#8B5CF6]">
-              Industries We Support
+              {window.wpData?.home_industries_kicker || "Industries We Support"}
             </p>
             <h2
               className="font-display mx-auto mt-4 max-w-5xl text-4xl font-normal leading-none sm:text-5xl"
-              aria-label="Strong Partnerships Across Every Industry"
+              aria-label={window.wpData?.home_industries_title || "Strong Partnerships Across Every Industry"}
             >
-              Strong Partnerships Across Every Industry
+              {window.wpData?.home_industries_title || "Strong Partnerships Across Every Industry"}
             </h2>
           </div>
 
           <div className="industries-row mt-8">
-            {industryCards.map((card) => {
+            {industriesList.map((card: any) => {
               return (
                 <article
                   className="scroll-reveal-card industry-card"
@@ -4317,23 +4372,29 @@ function App() {
           <div className="relative z-10 flex flex-col h-full justify-between gap-12 w-full max-w-[480px] lg:ml-auto">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B]">
-                AI & Technology Leadership
+                {window.wpData?.home_cta_left_kicker || "AI & Technology Leadership"}
               </p>
               <h3
-                className="font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight"
-                aria-label="AI-Powered. Human-Led. Future-Ready"
+                className="font-display mt-5 text-4xl sm:text-5xl font-normal leading-[1.05] tracking-tight text-white"
+                aria-label={window.wpData?.home_cta_left_title || "AI-Powered. Human-Led. Future-Ready"}
               >
-                AI-Powered. <br />
-                Human-Led. <br />
-                Future-Ready
+                {window.wpData && window.wpData.home_cta_left_title ? (
+                  <WaveLetters parts={parseHeadline(window.wpData.home_cta_left_title)} />
+                ) : (
+                  <>
+                    AI-Powered. <br />
+                    Human-Led. <br />
+                    Future-Ready
+                  </>
+                )}
               </h3>
               <p className="mt-6 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[320px]">
-                We combine the power of AI with human expertise to deliver scaling, hiring, deeper insights and better outcomes.
+                {window.wpData?.home_cta_left_desc || "We combine the power of AI with human expertise to deliver scaling, hiring, deeper insights and better outcomes."}
               </p>
             </div>
             <div className="mt-auto">
               <Button variant="glass" size="cta" className="transition-all hover:scale-[1.02] border border-white/20">
-                Explore AI Solutions
+                {window.wpData?.home_cta_left_btn_text || "Explore AI Solutions"}
               </Button>
             </div>
           </div>
@@ -4348,22 +4409,28 @@ function App() {
               <div className="md:col-span-5 flex flex-col justify-between h-full">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#0e2a90]">
-                    Insights & Resources
+                    {window.wpData?.home_cta_right_kicker || "Insights & Resources"}
                   </p>
                   <h3
                     className="font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
-                    aria-label="Insights That Drive What's Next"
+                    aria-label={window.wpData?.home_cta_right_title || "Insights That Drive What's Next"}
                   >
-                    Insights That <br />
-                    Drive What's Next
+                    {window.wpData && window.wpData.home_cta_right_title ? (
+                      <WaveLetters parts={parseHeadline(window.wpData.home_cta_right_title)} />
+                    ) : (
+                      <>
+                        Insights That <br />
+                        Drive What's Next
+                      </>
+                    )}
                   </h3>
                   <p className="mt-5 text-sm text-slate-600 leading-relaxed">
-                    Stay ahead with the latest trends, reports and expert perspectives.
+                    {window.wpData?.home_cta_right_desc || "Stay ahead with the latest trends, reports and expert perspectives."}
                   </p>
                 </div>
                 <div className="mt-8">
                   <Button variant="glass-dark" size="cta" className="transition-all hover:scale-[1.02]">
-                    View All Insights
+                    {window.wpData?.home_cta_right_btn_text || "View All Insights"}
                   </Button>
                 </div>
               </div>
@@ -4410,65 +4477,28 @@ function App() {
             </span>
 
             <div className="mt-10 grid w-full grid-cols-2 gap-8 md:grid-cols-4 md:gap-4 lg:gap-8">
-              {/* Stat 1 */}
-              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60 first:border-0 md:first:border-0">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
-                  <Building2 size={24} />
-                </div>
-                <div>
-                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
-                    <Counter value={500} suffix="+" />
-                  </div>
-                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-                    Enterprise Clients
-                  </div>
-                </div>
-              </div>
+              {statsList.map((stat: any, idx: number) => {
+                const Icon = stat.icon;
+                const numMatch = stat.value.match(/\d+/);
+                const num = numMatch ? parseInt(numMatch[0]) : 0;
+                const suffix = stat.value.replace(/\d+/, "");
 
-              {/* Stat 2 */}
-              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
-                  <Users size={24} />
-                </div>
-                <div>
-                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
-                    <Counter value={1000} suffix="+" />
+                return (
+                  <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60 first:border-0 md:first:border-0" key={idx}>
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
+                        {num > 0 ? <Counter value={num} suffix={suffix} /> : stat.value}
+                      </div>
+                      <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                        {stat.label}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-                    Successful Placements
-                  </div>
-                </div>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
-                  <Clock size={24} />
-                </div>
-                <div>
-                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
-                    <Counter value={48} suffix="H" />
-                  </div>
-                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-                    Average Shortlisting Time
-                  </div>
-                </div>
-              </div>
-
-              {/* Stat 4 */}
-              <div className="flex items-center gap-4 pl-2 md:pl-4 border-l border-slate-200/60">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white text-[#8B5CF6] shadow-md shadow-indigo-100/50">
-                  <ShieldCheck size={24} />
-                </div>
-                <div>
-                  <div className="text-3xl font-semibold sm:text-4xl text-slate-800 tracking-tight">
-                    <Counter value={95} suffix="%" />
-                  </div>
-                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-                    Client Retention Rate
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -4482,20 +4512,26 @@ function App() {
             <div className="lg:col-span-5 flex flex-col justify-between text-left">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c] mb-4">
-                  — CONTACT
+                  {window.wpData?.home_contact_kicker || "— CONTACT"}
                 </p>
                 <h2
                   className="font-display text-4xl sm:text-5xl font-normal leading-[1.1] text-slate-800 tracking-tight"
-                  aria-label="Let's build something exceptional together."
+                  aria-label={window.wpData?.home_contact_headline || "Let's build something exceptional together."}
                 >
-                  Let's build something <br />
-                  <span className="font-serif italic text-[#f59e0c] font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                    exceptional
-                  </span>{" "}
-                  together.
+                  {window.wpData && window.wpData.home_contact_headline ? (
+                    <WaveLetters parts={parseHeadline(window.wpData.home_contact_headline)} />
+                  ) : (
+                    <>
+                      Let's build something <br />
+                      <span className="font-serif italic text-[#f59e0c] font-normal inline-block" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                        exceptional
+                      </span>{" "}
+                      together.
+                    </>
+                  )}
                 </h2>
                 <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-md">
-                  Tell us about your hiring or consulting needs. We respond to every inquiry within <strong className="text-slate-800 font-semibold">4 business hours</strong>.
+                  {window.wpData?.home_contact_description || "Tell us about your hiring or consulting needs. We respond to every inquiry within 4 business hours."}
                 </p>
               </div>
 

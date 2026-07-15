@@ -51,6 +51,179 @@
         ]
       },
       {
+        "key": "field_home_partners_title",
+        "label": "Partners Title",
+        "name": "home_partners_title",
+        "type": "text",
+        "default_value": "Trusted by Leading Companies Worldwide"
+      },
+      {
+        "key": "field_home_partners",
+        "label": "Partners Logos",
+        "name": "home_partners",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Add Partner Logo",
+        "sub_fields": [
+          {
+            "key": "field_home_partner_name",
+            "label": "Partner Name",
+            "name": "partner_name",
+            "type": "text"
+          },
+          {
+            "key": "field_home_partner_logo",
+            "label": "Logo Image",
+            "name": "logo_image",
+            "type": "image",
+            "return_format": "url"
+          }
+        ]
+      },
+      {
+        "key": "field_home_emp_card_kicker",
+        "label": "Employers Card Kicker",
+        "name": "home_employers_card_kicker",
+        "type": "text",
+        "default_value": "For Employers"
+      },
+      {
+        "key": "field_home_emp_card_title",
+        "label": "Employers Card Title",
+        "name": "home_employers_card_title",
+        "type": "text",
+        "default_value": "Build. Scale. Succeed."
+      },
+      {
+        "key": "field_home_emp_card_bullets",
+        "label": "Employers Card Bullet Points",
+        "name": "home_employers_card_bullets",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Add Bullet",
+        "sub_fields": [
+          {
+            "key": "field_home_emp_bullet_text",
+            "label": "Text",
+            "name": "text",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_home_emp_card_image",
+        "label": "Employers Card Background Graphic",
+        "name": "home_employers_card_image",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
+        "key": "field_home_tal_card_kicker",
+        "label": "Talent Card Kicker",
+        "name": "home_talent_card_kicker",
+        "type": "text",
+        "default_value": "For Talent"
+      },
+      {
+        "key": "field_home_tal_card_title",
+        "label": "Talent Card Title",
+        "name": "home_talent_card_title",
+        "type": "text",
+        "default_value": "Your Next Move Starts Here."
+      },
+      {
+        "key": "field_home_tal_card_bullets",
+        "label": "Talent Card Bullet Points",
+        "name": "home_talent_card_bullets",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Add Bullet",
+        "sub_fields": [
+          {
+            "key": "field_home_tal_bullet_text",
+            "label": "Text",
+            "name": "text",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_home_tal_card_image",
+        "label": "Talent Card Background Graphic",
+        "name": "home_talent_card_image",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
+        "key": "field_home_sol_kicker",
+        "label": "Solutions Kicker",
+        "name": "home_solutions_kicker",
+        "type": "text",
+        "default_value": "Our Capabilities"
+      },
+      {
+        "key": "field_home_sol_title",
+        "label": "Solutions Title",
+        "name": "home_solutions_title",
+        "type": "text",
+        "default_value": "End-to-End Talent & Technology Solutions"
+      },
+      {
+        "key": "field_home_solutions",
+        "label": "Solutions Grid Items",
+        "name": "home_solutions",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Solution",
+        "sub_fields": [
+          {
+            "key": "field_home_sol_item_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_home_sol_item_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_home_sol_item_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_home_sol_item_color",
+            "label": "Color Class",
+            "name": "color_class",
+            "type": "text"
+          },
+          {
+            "key": "field_home_sol_item_video",
+            "label": "Video Preview File",
+            "name": "video_file",
+            "type": "file",
+            "return_format": "url"
+          }
+        ]
+      },
+      {
+        "key": "field_home_ind_kicker",
+        "label": "Industries Kicker",
+        "name": "home_industries_kicker",
+        "type": "text",
+        "default_value": "What We Serve"
+      },
+      {
+        "key": "field_home_ind_title",
+        "label": "Industries Title",
+        "name": "home_industries_title",
+        "type": "text",
+        "default_value": "Strong Partnerships Across Every Industry"
+      },
+      {
         "key": "field_home_industries_list",
         "label": "Industries List",
         "name": "industries_list",
@@ -59,37 +232,139 @@
         "button_label": "Add Industry",
         "sub_fields": [
           {
-            "key": "field_home_ind_title",
+            "key": "field_home_ind_item_title",
             "label": "Title",
             "name": "title",
             "type": "text"
           },
           {
-            "key": "field_home_ind_description",
+            "key": "field_home_ind_item_desc",
             "label": "Description",
             "name": "description",
             "type": "textarea"
           },
           {
-            "key": "field_home_ind_video_file",
+            "key": "field_home_ind_item_video",
             "label": "Video File",
             "name": "video_file",
             "type": "file",
             "return_format": "url"
           },
           {
-            "key": "field_home_ind_icon_name",
+            "key": "field_home_ind_item_icon",
             "label": "Icon Name",
             "name": "icon_name",
             "type": "text"
           },
           {
-            "key": "field_home_ind_color_class",
+            "key": "field_home_ind_item_color",
             "label": "Color Class",
             "name": "color_class",
             "type": "text"
           }
         ]
+      },
+      {
+        "key": "field_home_cta_left_kicker",
+        "label": "CTA Left Kicker",
+        "name": "home_cta_left_kicker",
+        "type": "text",
+        "default_value": "AI & Technology"
+      },
+      {
+        "key": "field_home_cta_left_title",
+        "label": "CTA Left Title",
+        "name": "home_cta_left_title",
+        "type": "text",
+        "default_value": "AI-Powered, Human-Led Talent Pools"
+      },
+      {
+        "key": "field_home_cta_left_desc",
+        "label": "CTA Left Description",
+        "name": "home_cta_left_desc",
+        "type": "textarea"
+      },
+      {
+        "key": "field_home_cta_left_btn_text",
+        "label": "CTA Left Button Text",
+        "name": "home_cta_left_btn_text",
+        "type": "text",
+        "default_value": "Submit Resume"
+      },
+      {
+        "key": "field_home_cta_right_kicker",
+        "label": "CTA Right Kicker",
+        "name": "home_cta_right_kicker",
+        "type": "text",
+        "default_value": "Insights & Trends"
+      },
+      {
+        "key": "field_home_cta_right_title",
+        "label": "CTA Right Title",
+        "name": "home_cta_right_title",
+        "type": "text",
+        "default_value": "Insights That Drive What's Next"
+      },
+      {
+        "key": "field_home_cta_right_desc",
+        "label": "CTA Right Description",
+        "name": "home_cta_right_desc",
+        "type": "textarea"
+      },
+      {
+        "key": "field_home_cta_right_btn_text",
+        "label": "CTA Right Button Text",
+        "name": "home_cta_right_btn_text",
+        "type": "text",
+        "default_value": "View All Insights"
+      },
+      {
+        "key": "field_home_stats",
+        "label": "Stats Counter Bar",
+        "name": "home_stats",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Add Stat",
+        "sub_fields": [
+          {
+            "key": "field_home_stat_value",
+            "label": "Value",
+            "name": "value",
+            "type": "text"
+          },
+          {
+            "key": "field_home_stat_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          },
+          {
+            "key": "field_home_stat_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_home_contact_kicker",
+        "label": "Contact Form Kicker",
+        "name": "home_contact_kicker",
+        "type": "text",
+        "default_value": "Contact Us"
+      },
+      {
+        "key": "field_home_contact_headline",
+        "label": "Contact Form Headline",
+        "name": "home_contact_headline",
+        "type": "text",
+        "default_value": "Let's build something exceptional together."
+      },
+      {
+        "key": "field_home_contact_description",
+        "label": "Contact Form Description",
+        "name": "home_contact_description",
+        "type": "textarea"
       }
     ],
     "location": [
