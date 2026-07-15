@@ -1014,6 +1014,8 @@ function ContactPage() {
           message: "",
         });
       } else {
+        console.error("CF7 Error Result:", result);
+        alert("CF7 Error Status: " + (result.status || "Unknown") + "\nMessage: " + (result.message || "Failed to submit. Check Form ID/Fields."));
         setStatus("error");
       }
     } catch (err) {
@@ -1767,6 +1769,8 @@ function EmployersPage() {
           requirements: "",
         });
       } else {
+        console.error("CF7 Error Result:", result);
+        alert("CF7 Error Status: " + (result.status || "Unknown") + "\nMessage: " + (result.message || "Failed to submit. Check Form ID/Fields."));
         setStatus("error");
       }
     } catch (err) {
@@ -3203,6 +3207,8 @@ function TalentPage() {
         setResumeFile(null);
         setTimeout(() => setSubmitted(false), 5000);
       } else {
+        console.error("CF7 Error Result:", result);
+        alert("CF7 Error Status: " + (result.status || "Unknown") + "\nMessage: " + (result.message || "Failed to submit. Check Form ID/Fields."));
         setStatus("error");
       }
     } catch (err) {
@@ -4020,6 +4026,8 @@ function App() {
           message: "",
         });
       } else {
+        console.error("CF7 Error Result:", result);
+        alert("CF7 Error Status: " + (result.status || "Unknown") + "\nMessage: " + (result.message || "Failed to submit. Check Form ID/Fields."));
         setHomeContactStatus("error");
       }
     } catch (err) {
