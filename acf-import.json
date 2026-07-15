@@ -609,6 +609,13 @@
             "type": "textarea"
           }
         ]
+      },
+      {
+        "key": "field_employers_form_id",
+        "label": "Contact Form 7 ID",
+        "name": "employers_form_id",
+        "type": "text",
+        "default_value": "1000"
       }
     ],
     "location": [

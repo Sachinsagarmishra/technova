@@ -281,7 +281,8 @@ $pages = [
                     'label' => 'Client Retention Rate',
                     'icon_name' => 'Star'
                 ]
-            ]
+            ],
+            'employers_form_id' => '1000'
         ]
     ],
     'insights' => [

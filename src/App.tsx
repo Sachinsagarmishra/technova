@@ -1713,6 +1713,65 @@ function IndustriesPage() {
 
 function EmployersPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    company: "",
+    phone: "",
+    role: "",
+    hiringFor: "",
+    numberOfHires: "",
+    timeline: "",
+    requirements: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = new FormData();
+    form.append("your-name", formData.fullName);
+    form.append("your-email", formData.email);
+    form.append("your-company", formData.company);
+    form.append("your-phone", formData.phone);
+    form.append("your-role", formData.role);
+    form.append("your-hiring-for", formData.hiringFor);
+    form.append("your-hires-count", formData.numberOfHires);
+    form.append("your-timeline", formData.timeline);
+    form.append("your-message", formData.requirements);
+
+    try {
+      const formId = window.wpData && window.wpData.employers_form_id ? window.wpData.employers_form_id : "1000";
+      const response = await fetch(
+        `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const result = await response.json();
+      if (result.status === "mail_sent") {
+        setStatus("success");
+        setFormData({
+          fullName: "",
+          email: "",
+          company: "",
+          phone: "",
+          role: "",
+          hiringFor: "",
+          numberOfHires: "",
+          timeline: "",
+          requirements: "",
+        });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
   const chooseReasons = [
     {
       title: "Deep Talent Network",
@@ -1925,18 +1984,22 @@ function EmployersPage() {
             <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500">
               Tell us about your hiring needs and our team will get back to you within one business day.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 grid gap-4">
+            <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <input
                   type="text"
                   placeholder="Full Name*"
                   required
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                 />
                 <input
                   type="email"
                   placeholder="Work Email*"
                   required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                 />
               </div>
@@ -1945,12 +2008,16 @@ function EmployersPage() {
                   type="text"
                   placeholder="Company Name*"
                   required
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                 />
                 <input
                   type="tel"
                   placeholder="Phone Number*"
                   required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                 />
               </div>
@@ -1958,10 +2025,17 @@ function EmployersPage() {
                 type="text"
                 placeholder="Job Role / Title*"
                 required
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                 className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
               />
               <div className="grid gap-4 sm:grid-cols-3">
-                <select className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]" defaultValue="">
+                <select
+                  required
+                  value={formData.hiringFor}
+                  onChange={(e) => setFormData({ ...formData, hiringFor: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
+                >
                   <option value="" disabled>Hiring For*</option>
                   <option>Software Engineering</option>
                   <option>AI & Machine Learning</option>
@@ -1970,14 +2044,24 @@ function EmployersPage() {
                   <option>Cloud & DevOps</option>
                   <option>Other Technology Roles</option>
                 </select>
-                <select className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]" defaultValue="">
+                <select
+                  required
+                  value={formData.numberOfHires}
+                  onChange={(e) => setFormData({ ...formData, numberOfHires: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
+                >
                   <option value="" disabled>Number of Hires*</option>
                   <option>1-2 hires</option>
                   <option>3-5 hires</option>
                   <option>6-10 hires</option>
                   <option>10+ hires</option>
                 </select>
-                <select className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]" defaultValue="">
+                <select
+                  required
+                  value={formData.timeline}
+                  onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                  className="rounded-xl border border-slate-200 bg-white px-3 py-3 text-xs sm:text-sm text-slate-500 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
+                >
                   <option value="" disabled>Timeline*</option>
                   <option>Immediate</option>
                   <option>Within 1 month</option>
@@ -1988,6 +2072,8 @@ function EmployersPage() {
               <textarea
                 rows={4}
                 required
+                value={formData.requirements}
+                onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                 placeholder="Tell us about your requirements* (Share details about the role, skills, experience...)"
                 className="resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
               />
@@ -1997,8 +2083,23 @@ function EmployersPage() {
                 <TurnstileWidget />
               </div>
 
-              <button className="flex items-center justify-center gap-2 rounded-xl bg-[#8B5CF6] px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-purple-500/10 transition hover:bg-[#7C3AED] w-full mt-2">
-                Submit Request
+              {status === "success" && (
+                <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-800">
+                  Thank you! Your request has been submitted successfully.
+                </div>
+              )}
+              {status === "error" && (
+                <div className="rounded-xl bg-rose-50 border border-rose-200 p-4 text-sm text-rose-800">
+                  Oops! Something went wrong. Please try again or email us directly.
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="flex items-center justify-center gap-2 rounded-xl bg-[#8B5CF6] px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-purple-500/10 transition hover:bg-[#7C3AED] w-full mt-2 disabled:opacity-50"
+              >
+                {status === "loading" ? "Submitting..." : "Submit Request"}
                 <ArrowRight size={17} />
               </button>
               <div className="flex items-center justify-center gap-2 text-xs text-slate-400 font-medium mt-3">
