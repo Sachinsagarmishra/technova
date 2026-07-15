@@ -985,6 +985,9 @@ function ContactPage() {
     setStatus("loading");
 
     const form = new FormData();
+    const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
+    form.append("_wpcf7", formId);
+    form.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
     form.append("your-name", formData.fullName);
     form.append("your-company", formData.company);
     form.append("your-email", formData.email);
@@ -994,7 +997,6 @@ function ContactPage() {
     form.append("form-source", "Contact Page Form");
 
     try {
-      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -1734,6 +1736,9 @@ function EmployersPage() {
     setStatus("loading");
 
     const form = new FormData();
+    const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
+    form.append("_wpcf7", formId);
+    form.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
     form.append("your-name", formData.fullName);
     form.append("your-email", formData.email);
     form.append("your-company", formData.company);
@@ -1746,7 +1751,6 @@ function EmployersPage() {
     form.append("form-source", "Employers Hire Request Form");
 
     try {
-      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -3160,6 +3164,9 @@ function TalentPage() {
     setStatus("loading");
 
     const form = new FormData();
+    const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
+    form.append("_wpcf7", formId);
+    form.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
     form.append("your-name", formData.fullName);
     form.append("your-email", formData.email);
     form.append("your-phone", formData.mobile);
@@ -3178,7 +3185,6 @@ function TalentPage() {
     form.append("form-source", "Talent Resume Submission");
 
     try {
-      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -3997,6 +4003,9 @@ function App() {
     setHomeContactStatus("loading");
 
     const form = new FormData();
+    const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
+    form.append("_wpcf7", formId);
+    form.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
     form.append("your-name", homeContactData.fullName);
     form.append("your-company", homeContactData.company);
     form.append("your-email", homeContactData.email);
@@ -4006,7 +4015,6 @@ function App() {
     form.append("form-source", "Homepage Contact Form");
 
     try {
-      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "21";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
