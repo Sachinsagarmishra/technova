@@ -991,9 +991,10 @@ function ContactPage() {
     form.append("your-phone", formData.phone);
     form.append("your-subject", formData.subject);
     form.append("your-message", formData.message);
+    form.append("form-source", "Contact Page Form");
 
     try {
-      const formId = window.wpData && window.wpData.contact_form_id ? window.wpData.contact_form_id : "1000";
+      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "2b1bd8e";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -1740,9 +1741,10 @@ function EmployersPage() {
     form.append("your-hires-count", formData.numberOfHires);
     form.append("your-timeline", formData.timeline);
     form.append("your-message", formData.requirements);
+    form.append("form-source", "Employers Hire Request Form");
 
     try {
-      const formId = window.wpData && window.wpData.employers_form_id ? window.wpData.employers_form_id : "1000";
+      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "2b1bd8e";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -3169,9 +3171,10 @@ function TalentPage() {
     if (resumeFile) {
       form.append("resume-file", resumeFile);
     }
+    form.append("form-source", "Talent Resume Submission");
 
     try {
-      const formId = window.wpData && window.wpData.talent_form_id ? window.wpData.talent_form_id : "1001";
+      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "2b1bd8e";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
@@ -3994,9 +3997,10 @@ function App() {
     form.append("your-phone", homeContactData.phone);
     form.append("your-subject", homeContactData.subject);
     form.append("your-message", homeContactData.message);
+    form.append("form-source", "Homepage Contact Form");
 
     try {
-      const formId = window.wpData && window.wpData.contact_form_id ? window.wpData.contact_form_id : "1000";
+      const formId = window.wpData?.contact_form_id || window.wpData?.employers_form_id || window.wpData?.talent_form_id || window.wpData?.home_contact_form_id || "2b1bd8e";
       const response = await fetch(
         `/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`,
         {
