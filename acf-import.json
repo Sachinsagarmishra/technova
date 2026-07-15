@@ -1,17 +1,18 @@
 [
   {
-    "key": "group_66e01234abcd1",
-    "title": "React Homepage Fields",
+    "key": "group_home_fields",
+    "title": "Home Page Fields",
     "fields": [
       {
-        "key": "field_66e01234abcd2",
+        "key": "field_home_hero_slides",
         "label": "Hero Slides",
         "name": "hero_slides",
         "type": "repeater",
-        "layout": "table",
+        "layout": "row",
+        "button_label": "Add Slide",
         "sub_fields": [
           {
-            "key": "field_66e01234abcd3",
+            "key": "field_home_bg_type",
             "label": "Bg Type",
             "name": "bg_type",
             "type": "select",
@@ -22,27 +23,27 @@
             "default_value": "video"
           },
           {
-            "key": "field_66e01234abcd4",
+            "key": "field_home_video_file",
             "label": "Video File",
             "name": "video_file",
             "type": "file",
             "return_format": "url"
           },
           {
-            "key": "field_66e01234abcd5",
+            "key": "field_home_image_file",
             "label": "Image File",
             "name": "image_file",
             "type": "image",
             "return_format": "url"
           },
           {
-            "key": "field_66e01234abcd6",
+            "key": "field_home_headline_accent",
             "label": "Headline Accent",
             "name": "headline_accent",
             "type": "text"
           },
           {
-            "key": "field_66e01234abcd7",
+            "key": "field_home_description",
             "label": "Description",
             "name": "description",
             "type": "textarea"
@@ -50,39 +51,40 @@
         ]
       },
       {
-        "key": "field_66e01234abcd8",
+        "key": "field_home_industries_list",
         "label": "Industries List",
         "name": "industries_list",
         "type": "repeater",
-        "layout": "table",
+        "layout": "row",
+        "button_label": "Add Industry",
         "sub_fields": [
           {
-            "key": "field_66e01234abcd9",
+            "key": "field_home_ind_title",
             "label": "Title",
             "name": "title",
             "type": "text"
           },
           {
-            "key": "field_66e01234abcda",
+            "key": "field_home_ind_description",
             "label": "Description",
             "name": "description",
             "type": "textarea"
           },
           {
-            "key": "field_66e01234abcdb",
+            "key": "field_home_ind_video_file",
             "label": "Video File",
             "name": "video_file",
             "type": "file",
             "return_format": "url"
           },
           {
-            "key": "field_66e01234abcdc",
+            "key": "field_home_ind_icon_name",
             "label": "Icon Name",
             "name": "icon_name",
             "type": "text"
           },
           {
-            "key": "field_66e01234abcdd",
+            "key": "field_home_ind_color_class",
             "label": "Color Class",
             "name": "color_class",
             "type": "text"
@@ -95,7 +97,380 @@
         {
           "param": "page_template",
           "operator": "==",
-          "value": "template-react.php"
+          "value": "template-home.php"
+        }
+      ]
+    ],
+    "active": true
+  },
+  {
+    "key": "group_about_fields",
+    "title": "About Page Fields",
+    "fields": [
+      {
+        "key": "field_about_kicker",
+        "label": "Kicker Text",
+        "name": "about_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_about_headline",
+        "label": "Headline",
+        "name": "about_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_about_description",
+        "label": "Description",
+        "name": "about_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_values",
+        "label": "Core Values",
+        "name": "about_values",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_about_val_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_about_val_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_about_val_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_about_leadership",
+        "label": "Leadership Team",
+        "name": "about_leadership",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_about_lead_name",
+            "label": "Name",
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "key": "field_about_lead_role",
+            "label": "Role",
+            "name": "role",
+            "type": "text"
+          },
+          {
+            "key": "field_about_lead_image",
+            "label": "Image URL",
+            "name": "image",
+            "type": "image",
+            "return_format": "url"
+          },
+          {
+            "key": "field_about_lead_linkedin",
+            "label": "LinkedIn Link",
+            "name": "linkedin",
+            "type": "url"
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-about.php"
+        }
+      ]
+    ],
+    "active": true
+  },
+  {
+    "key": "group_talent_fields",
+    "title": "Talent Page Fields",
+    "fields": [
+      {
+        "key": "field_talent_kicker",
+        "label": "Kicker Text",
+        "name": "talent_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_headline",
+        "label": "Headline",
+        "name": "talent_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_description",
+        "label": "Description",
+        "name": "talent_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_talent_stats",
+        "label": "Stats List",
+        "name": "talent_stats",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_stat_value",
+            "label": "Value",
+            "name": "value",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_stat_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_stat_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-talent.php"
+        }
+      ]
+    ],
+    "active": true
+  },
+  {
+    "key": "group_employers_fields",
+    "title": "Employers Page Fields",
+    "fields": [
+      {
+        "key": "field_employers_kicker",
+        "label": "Kicker Text",
+        "name": "employers_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_headline",
+        "label": "Headline",
+        "name": "employers_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_description",
+        "label": "Description",
+        "name": "employers_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_employers_stats",
+        "label": "Stats List",
+        "name": "employers_stats",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_stat_value",
+            "label": "Value",
+            "name": "value",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_stat_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_stat_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_employers_timeline",
+        "label": "Timeline / Stepper Cards",
+        "name": "employers_timeline",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_time_num",
+            "label": "Step Number",
+            "name": "step_number",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_time_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_time_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-employers.php"
+        }
+      ]
+    ],
+    "active": true
+  },
+  {
+    "key": "group_insights_fields",
+    "title": "Insights Page Fields",
+    "fields": [
+      {
+        "key": "field_insights_kicker",
+        "label": "Kicker Text",
+        "name": "insights_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_insights_headline",
+        "label": "Headline",
+        "name": "insights_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_insights_description",
+        "label": "Description",
+        "name": "insights_description",
+        "type": "textarea"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-insights.php"
+        }
+      ]
+    ],
+    "active": true
+  },
+  {
+    "key": "group_contact_fields",
+    "title": "Contact Page Fields",
+    "fields": [
+      {
+        "key": "field_contact_kicker",
+        "label": "Kicker Text",
+        "name": "contact_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_headline",
+        "label": "Headline",
+        "name": "contact_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_description",
+        "label": "Description",
+        "name": "contact_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_contact_offices",
+        "label": "Office Locations",
+        "name": "contact_offices",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_contact_off_city",
+            "label": "City / Office Name",
+            "name": "city",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_off_addr",
+            "label": "Address",
+            "name": "address",
+            "type": "textarea"
+          },
+          {
+            "key": "field_contact_off_phone",
+            "label": "Phone",
+            "name": "phone",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_off_email",
+            "label": "Email",
+            "name": "email",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_contact_form_id",
+        "label": "Contact Form 7 ID",
+        "name": "contact_form_id",
+        "type": "text",
+        "default_value": "1000"
+      },
+      {
+        "key": "field_contact_talent_form_id",
+        "label": "Talent Form 7 ID",
+        "name": "talent_form_id",
+        "type": "text",
+        "default_value": "1001"
+      },
+      {
+        "key": "field_contact_subscribe_form_id",
+        "label": "Subscribe Form 7 ID",
+        "name": "subscribe_form_id",
+        "type": "text",
+        "default_value": "1002"
+      },
+      {
+        "key": "field_contact_newsletter_form_id",
+        "label": "Newsletter Form 7 ID",
+        "name": "newsletter_form_id",
+        "type": "text",
+        "default_value": "1003"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-contact.php"
         }
       ]
     ],

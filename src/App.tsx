@@ -804,15 +804,19 @@ function AboutPage() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1440px] pt-12">
-          <p className="section-kicker text-[#a78bfa]">About Technova Systems</p>
-          <h1 className="font-display mt-5 max-w-3xl text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-            People. Technology. Impact That{" "}
-            <span className="text-[#f59e0c]">Lasts.</span>
+          <p className="section-kicker text-[#a78bfa]">{window.wpData?.about_kicker || "About Technova Systems"}</p>
+          <h1 className="font-display mt-5 max-w-3xl text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl text-white">
+            {window.wpData && window.wpData.about_headline ? (
+              <WaveLetters parts={parseHeadline(window.wpData.about_headline)} />
+            ) : (
+              <>
+                People. Technology. Impact That{" "}
+                <span className="text-[#f59e0c]">Lasts.</span>
+              </>
+            )}
           </h1>
           <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-            TechNova Systems bridges the gap between exceptional talent and
-            forward-thinking organizations through technology, expertise, and a
-            human-first approach.
+            {window.wpData?.about_description || "TechNova Systems bridges the gap between exceptional talent and forward-thinking organizations through technology, expertise, and a human-first approach."}
           </p>
 
           <div className="mt-10 grid gap-4 md:grid-cols-4">
@@ -1067,15 +1071,19 @@ function ContactPage() {
 
         <div className="relative z-10 mx-auto grid max-w-[1440px] gap-10 pt-8 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-7">
-            <p className="section-kicker text-[#8B5CF6]">Get In Touch</p>
+            <p className="section-kicker text-[#8B5CF6]">{window.wpData?.contact_kicker || "Get In Touch"}</p>
             <h1 className="font-display mt-5 max-w-3xl text-5xl font-normal leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Let's Start a Conversation That Moves You{" "}
-              <span className="text-[#f59e0c]">Forward.</span>
+              {window.wpData && window.wpData.contact_headline ? (
+                <WaveLetters parts={parseHeadline(window.wpData.contact_headline)} />
+              ) : (
+                <>
+                  Let's Start a Conversation That Moves You{" "}
+                  <span className="text-[#f59e0c]">Forward.</span>
+                </>
+              )}
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-              Whether you're looking to hire exceptional talent, explore workforce
-              consulting solutions, or discover your next career opportunity, our
-              team is here to help.
+              {window.wpData?.contact_description || "Whether you're looking to hire exceptional talent, explore workforce consulting solutions, or discover your next career opportunity, our team is here to help."}
             </p>
 
             <div className="mt-9 grid gap-4 sm:grid-cols-3">
@@ -1835,15 +1843,20 @@ function EmployersPage() {
           {/* Left Column */}
           <div className="lg:col-span-7 pt-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
-              For Employers
+              {window.wpData?.employers_kicker || "For Employers"}
             </p>
             <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
-              Exceptional Talent. Measurable Impact.{" "}
-              <span className="text-[#f59e0c]">Built Around You.</span>
+              {window.wpData && window.wpData.employers_headline ? (
+                <WaveLetters parts={parseHeadline(window.wpData.employers_headline)} />
+              ) : (
+                <>
+                  Exceptional Talent. Measurable Impact.{" "}
+                  <span className="text-[#f59e0c]">Built Around You.</span>
+                </>
+              )}
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-              TechNova Systems helps organizations hire, manage, and scale the
-              right talent with speed, precision, and flexibility.
+              {window.wpData?.employers_description || "TechNova Systems helps organizations hire, manage, and scale the right talent with speed, precision, and flexibility."}
             </p>
 
             <div className="mt-16 grid gap-6 sm:grid-cols-2 max-w-xl">
@@ -2474,13 +2487,19 @@ function InsightsPage() {
           {/* Left Column */}
           <div className="lg:col-span-7 pt-4 animate-fade-rise">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
-              AI & Insights
+              {window.wpData?.insights_kicker || "AI & Insights"}
             </p>
-            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-              Ideas. Insights. Intelligence. <span className="text-[#f59e0c]">Impact.</span>
+            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
+              {window.wpData && window.wpData.insights_headline ? (
+                <WaveLetters parts={parseHeadline(window.wpData.insights_headline)} />
+              ) : (
+                <>
+                  Ideas. Insights. Intelligence. <span className="text-[#f59e0c]">Impact.</span>
+                </>
+              )}
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-              Expert perspectives, industry trends, and practical strategies at the intersection of AI, technology, and the future of work.
+              {window.wpData?.insights_description || "Expert perspectives, industry trends, and practical strategies at the intersection of AI, technology, and the future of work."}
             </p>
 
             {/* Search Bar */}
@@ -3102,14 +3121,20 @@ function TalentPage() {
           {/* Left Column */}
           <div className="lg:col-span-7 pt-4 animate-fade-rise">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
-              For Talent
+              {window.wpData?.talent_kicker || "For Talent"}
             </p>
             <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
-              Find the Right Opportunity. Build the Career{" "}
-              <span className="text-[#f59e0c]">You Deserve.</span>
+              {window.wpData && window.wpData.talent_headline ? (
+                <WaveLetters parts={parseHeadline(window.wpData.talent_headline)} />
+              ) : (
+                <>
+                  Find the Right Opportunity. Build the Career{" "}
+                  <span className="text-[#f59e0c]">You Deserve.</span>
+                </>
+              )}
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-              We connect exceptional talent with forward-thinking companies and opportunities that help you grow, earn more, and make a real impact.
+              {window.wpData?.talent_description || "We connect exceptional talent with forward-thinking companies and opportunities that help you grow, earn more, and make a real impact."}
             </p>
 
             <div className="mt-16 grid gap-6 sm:grid-cols-3 max-w-2xl">
