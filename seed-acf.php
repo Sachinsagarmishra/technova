@@ -47,13 +47,63 @@ $pages = [
         'title' => 'Home',
         'template' => 'template-home.php',
         'fields' => [
+            'header_logo' => resolve_hashed_asset('technovalogo'),
+            'footer_logo' => resolve_hashed_asset('darklogo'),
             'hero_slides' => [
                 [
                     'bg_type' => 'video',
                     'video_file' => resolve_hashed_asset('1st slide'),
                     'image_file' => '',
                     'headline_accent' => 'We Build [accent]High-Performance[/accent] Teams That Drive What\'s Next',
-                    'description' => 'AI-powered talent solutions and technology consulting that help organizations innovate, scale and lead in a digital-first world.'
+                    'description' => 'AI-powered talent solutions and technology consulting that help organizations innovate, scale and lead in a digital-first world.',
+                    'button_1_text' => 'Hire Top Talent',
+                    'button_1_link' => '/employers/',
+                    'button_2_text' => 'Explore AI Solutions',
+                    'button_2_link' => '/insights/',
+                ],
+                [
+                    'bg_type' => 'video',
+                    'video_file' => resolve_hashed_asset('2-BIz'),
+                    'image_file' => '',
+                    'headline_accent' => 'Accelerate [accent]Digital[/accent] & [accent]AI Transformation[/accent]',
+                    'description' => 'Modernize your operations, automate complex workflows, and unlock growth with custom intelligence.',
+                    'button_1_text' => 'Talk to an Expert',
+                    'button_1_link' => '/contact/',
+                    'button_2_text' => '',
+                    'button_2_link' => '',
+                ],
+                [
+                    'bg_type' => 'video',
+                    'video_file' => resolve_hashed_asset('3slider'),
+                    'image_file' => '',
+                    'headline_accent' => 'Build [accent]Visionary Leadership[/accent] For What\'s Ahead',
+                    'description' => 'Direct-hire and executive search for critical technology and business-driving leadership roles.',
+                    'button_1_text' => 'Find Leaders',
+                    'button_1_link' => '/employers/',
+                    'button_2_text' => 'Our Methodology',
+                    'button_2_link' => '/about/',
+                ],
+                [
+                    'bg_type' => 'video',
+                    'video_file' => resolve_hashed_asset('4TH'),
+                    'image_file' => '',
+                    'headline_accent' => 'Dedicated [accent]Managed Teams[/accent] Built For Speed',
+                    'description' => 'Deploy complete, high-impact engineering and data squads structured around your business outcomes.',
+                    'button_1_text' => 'Request a Pod',
+                    'button_1_link' => '/contact/',
+                    'button_2_text' => '',
+                    'button_2_link' => '',
+                ],
+                [
+                    'bg_type' => 'video',
+                    'video_file' => resolve_hashed_asset('5thslide'),
+                    'image_file' => '',
+                    'headline_accent' => '[strike]Empty Promises.[/strike] [accent]Results Delivered.[/accent]',
+                    'description' => 'We align our engineering capacity precisely with your business goals.',
+                    'button_1_text' => 'Schedule Consultation',
+                    'button_1_link' => '/contact/',
+                    'button_2_text' => '',
+                    'button_2_link' => '',
                 ]
             ],
             'home_partners_title' => 'Trusted by Leading Companies Worldwide',
@@ -94,6 +144,7 @@ $pages = [
                 ['text' => 'Career guidance and mentorship']
             ],
             'home_talent_card_image' => resolve_hashed_asset('for-talent'),
+            'home_opportunity_badge' => resolve_hashed_asset('fv'),
             
             'home_solutions_kicker' => 'Our Capabilities',
             'home_solutions_title' => 'End-to-End Talent & Technology Solutions',
@@ -103,42 +154,48 @@ $pages = [
                     'description' => 'Find and engage top AI/ML, Data & Engineering talent fast.',
                     'icon_name' => 'BrainCircuit',
                     'color_class' => 'blue',
-                    'video_file' => resolve_hashed_asset('AI-Powered')
+                    'video_file' => resolve_hashed_asset('AI-Powered'),
+                    'link' => '/talent/'
                 ],
                 [
                     'title' => 'Executive Search',
                     'description' => 'C-Suite to Director level hiring for critical leadership roles.',
                     'icon_name' => 'UserRoundSearch',
                     'color_class' => 'orange',
-                    'video_file' => ''
+                    'video_file' => '',
+                    'link' => '/employers/'
                 ],
                 [
                     'title' => 'Workforce Consulting',
                     'description' => 'Strategic workforce planning aligned with your business goals.',
                     'icon_name' => 'UsersRound',
                     'color_class' => 'mint',
-                    'video_file' => ''
+                    'video_file' => '',
+                    'link' => '/employers/'
                 ],
                 [
                     'title' => 'Contract Staffing',
                     'description' => 'Flexible staffing models to meet dynamic business needs.',
                     'icon_name' => 'FileUser',
                     'color_class' => 'coral',
-                    'video_file' => ''
+                    'video_file' => '',
+                    'link' => '/talent/'
                 ],
                 [
                     'title' => 'Digital Transformation',
                     'description' => 'Modernize your business with technology, data and automation.',
                     'icon_name' => 'Cpu',
                     'color_class' => 'blue',
-                    'video_file' => ''
+                    'video_file' => '',
+                    'link' => '/about/'
                 ],
                 [
                     'title' => 'Managed Teams',
                     'description' => 'Build high-performing teams dedicated to your success.',
                     'icon_name' => 'UsersRound',
                     'color_class' => 'purple',
-                    'video_file' => ''
+                    'video_file' => '',
+                    'link' => '/employers/'
                 ]
             ],
             'home_industries_kicker' => 'What We Serve',
@@ -191,10 +248,12 @@ $pages = [
             'home_cta_left_title' => 'AI-Powered, Human-Led Talent Pools',
             'home_cta_left_desc' => 'We combine cutting-edge AI screening with human engineering expertise to build vetted pools of high-performance talent ready to hit the ground running.',
             'home_cta_left_btn_text' => 'Submit Resume',
+            'home_cta_left_btn_link' => '/talent/',
             'home_cta_right_kicker' => 'Insights & Trends',
             'home_cta_right_title' => 'Insights That Drive What\'s Next',
             'home_cta_right_desc' => 'Explore the latest talent intelligence trends, engineering hiring guides, and AI integration strategies written by our consultants.',
             'home_cta_right_btn_text' => 'View All Insights',
+            'home_cta_right_btn_link' => '/insights/',
             'home_stats' => [
                 ['value' => '500+', 'label' => 'Enterprise Partners', 'icon_name' => 'Users'],
                 ['value' => '1000+', 'label' => 'Successful Placements', 'icon_name' => 'BriefcaseBusiness'],

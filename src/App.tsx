@@ -263,15 +263,25 @@ function getAcfUrl(field: any): string {
 }
 
 const slides = window.wpData && window.wpData.hero_slides
-  ? window.wpData.hero_slides.map((s: any) => ({
-      bgType: s.bg_type || "video",
-      bgUrl: s.bg_type === "image" ? getAcfUrl(s.image_file) : getAcfUrl(s.video_file),
-      headlineParts: parseHeadline(s.headline_accent),
-      description: s.description || "",
-      ctaButtons: [
-        { text: "Schedule Consultation", link: "#contact", primary: true }
-      ]
-    }))
+  ? window.wpData.hero_slides.map((s: any) => {
+      const buttons = [];
+      if (s.button_1_text) {
+        buttons.push({ text: s.button_1_text, link: s.button_1_link || "#", primary: true });
+      }
+      if (s.button_2_text) {
+        buttons.push({ text: s.button_2_text, link: s.button_2_link || "#", primary: false });
+      }
+      if (buttons.length === 0) {
+        buttons.push({ text: "Schedule Consultation", link: "/contact/", primary: true });
+      }
+      return {
+        bgType: s.bg_type || "video",
+        bgUrl: s.bg_type === "image" ? getAcfUrl(s.image_file) : getAcfUrl(s.video_file),
+        headlineParts: parseHeadline(s.headline_accent),
+        description: s.description || "",
+        ctaButtons: buttons,
+      };
+    })
   : defaultSlides;
 
 
@@ -373,12 +383,12 @@ function SiteHeader({ light = false }: { light?: boolean }) {
       ].join(" ")}
     >
       <a
-        href="#home"
+        href="/"
         className="font-display text-3xl font-normal tracking-tight text-foreground"
         aria-label="Technova Systems home"
       >
         <img
-          src={technovaLogo}
+          src={window.wpData?.header_logo || technovaLogo}
           alt="Technova Systems"
           className="h-12 w-auto"
         />
@@ -476,7 +486,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
         className="bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03]"
         asChild
       >
-        <a href="#contact">Let's Talk</a>
+        <a href="/contact/">Let's Talk</a>
       </Button>
     </nav>
   );
@@ -488,8 +498,8 @@ function SiteFooter() {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12">
           <div className="lg:col-span-3 flex flex-col gap-6">
-            <a href="#home" className="flex items-center" aria-label="TechNova Systems Home">
-              <img src={darkLogo} alt="TechNova Systems" className="h-10 w-auto" />
+            <a href="/" className="flex items-center" aria-label="TechNova Systems Home">
+              <img src={window.wpData?.footer_logo || darkLogo} alt="TechNova Systems" className="h-10 w-auto" />
             </a>
             <p className="text-sm text-slate-500 leading-relaxed">
               AI staffing and technology consulting solutions that help organizations innovate, scale and lead in the digital-first world.
@@ -3989,6 +3999,7 @@ function App() {
         icon: getIconComponent(s.icon_name),
         color: s.color_class || "blue",
         video: s.video_file,
+        link: s.link || "/contact/",
       }))
     : capabilityCards;
 
@@ -4015,6 +4026,31 @@ function App() {
       ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [latestPosts, setLatestPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/wp-json/wp/v2/posts?per_page=3&_embed")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          const mapped = data.map((post: any) => {
+            let thumbnail = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=300";
+            if (post._embedded && post._embedded["wp:featuredmedia"] && post._embedded["wp:featuredmedia"][0]) {
+              thumbnail = post._embedded["wp:featuredmedia"][0].source_url || thumbnail;
+            }
+            return {
+              title: post.title?.rendered || "No Title",
+              thumbnail: thumbnail,
+              link: post.link || "#",
+            };
+          });
+          setLatestPosts(mapped);
+        }
+      })
+      .catch(err => {
+        console.error("Error fetching latest posts:", err);
+      });
+  }, []);
   const [homeContactData, setHomeContactData] = useState({
     fullName: "",
     company: "",
@@ -4178,6 +4214,8 @@ function App() {
   if (routeHash === "#insights") {
     return <InsightsPage />;
   }
+
+  const displayArticles = latestPosts.length > 0 ? latestPosts : insightArticles;
 
   return (
     <main className="bg-[#f2f5f9] font-body text-foreground">
@@ -4403,7 +4441,7 @@ function App() {
           </article>
 
           <div className="opportunity-brand-badge" aria-hidden="true">
-            <img src={opportunityBadgeIcon} alt="" />
+            <img src={window.wpData?.home_opportunity_badge || opportunityBadgeIcon} alt="" />
           </div>
         </div>
       </section>
@@ -4446,13 +4484,13 @@ function App() {
                     <p>{card.description}</p>
                   </div>
 
-                  <button
+                  <a
                     className="capability-arrow"
-                    type="button"
+                    href={card.link || "/contact/"}
                     aria-label={`Explore ${card.title}`}
                   >
                     <ArrowRight aria-hidden="true" size={22} strokeWidth={2.2} />
-                  </button>
+                  </a>
 
                 </article>
               );
@@ -4541,8 +4579,10 @@ function App() {
               </p>
             </div>
             <div className="mt-auto">
-              <Button variant="glass" size="cta" className="transition-all hover:scale-[1.02] border border-white/20">
-                {window.wpData?.home_cta_left_btn_text || "Explore AI Solutions"}
+              <Button variant="glass" size="cta" className="transition-all hover:scale-[1.02] border border-white/20" asChild>
+                <a href={window.wpData?.home_cta_left_btn_link || "/talent/"}>
+                  {window.wpData?.home_cta_left_btn_text || "Explore AI Solutions"}
+                </a>
               </Button>
             </div>
           </div>
@@ -4577,15 +4617,17 @@ function App() {
                   </p>
                 </div>
                 <div className="mt-8">
-                  <Button variant="glass-dark" size="cta" className="transition-all hover:scale-[1.02]">
-                    {window.wpData?.home_cta_right_btn_text || "View All Insights"}
+                  <Button variant="glass-dark" size="cta" className="transition-all hover:scale-[1.02]" asChild>
+                    <a href={window.wpData?.home_cta_right_btn_link || "/insights/"}>
+                      {window.wpData?.home_cta_right_btn_text || "View All Insights"}
+                    </a>
                   </Button>
                 </div>
               </div>
 
               {/* Right col of right panel: blog items */}
               <div className="md:col-span-7 flex flex-col gap-6">
-                {insightArticles.map((article, index) => (
+                {displayArticles.map((article, index) => (
                   <a
                     href={article.link}
                     key={index}

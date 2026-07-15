@@ -4,6 +4,20 @@
     "title": "Home Page Fields",
     "fields": [
       {
+        "key": "field_site_header_logo",
+        "label": "Header Logo",
+        "name": "header_logo",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
+        "key": "field_site_footer_logo",
+        "label": "Footer Logo",
+        "name": "footer_logo",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
         "key": "field_home_hero_slides",
         "label": "Hero Slides",
         "name": "hero_slides",
@@ -47,6 +61,32 @@
             "label": "Description",
             "name": "description",
             "type": "textarea"
+          },
+          {
+            "key": "field_home_button_1_text",
+            "label": "Button 1 Text",
+            "name": "button_1_text",
+            "type": "text",
+            "default_value": "Schedule Consultation"
+          },
+          {
+            "key": "field_home_button_1_link",
+            "label": "Button 1 Link",
+            "name": "button_1_link",
+            "type": "text",
+            "default_value": "#contact"
+          },
+          {
+            "key": "field_home_button_2_text",
+            "label": "Button 2 Text",
+            "name": "button_2_text",
+            "type": "text"
+          },
+          {
+            "key": "field_home_button_2_link",
+            "label": "Button 2 Link",
+            "name": "button_2_link",
+            "type": "text"
           }
         ]
       },
@@ -155,6 +195,13 @@
         "return_format": "url"
       },
       {
+        "key": "field_home_opportunity_badge",
+        "label": "Double Cards Center Badge",
+        "name": "home_opportunity_badge",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
         "key": "field_home_sol_kicker",
         "label": "Solutions Kicker",
         "name": "home_solutions_kicker",
@@ -206,6 +253,13 @@
             "name": "video_file",
             "type": "file",
             "return_format": "url"
+          },
+          {
+            "key": "field_home_sol_item_link",
+            "label": "Button/Card Link",
+            "name": "link",
+            "type": "text",
+            "default_value": "/contact/"
           }
         ]
       },
@@ -292,6 +346,13 @@
         "default_value": "Submit Resume"
       },
       {
+        "key": "field_home_cta_left_btn_link",
+        "label": "CTA Left Button Link",
+        "name": "home_cta_left_btn_link",
+        "type": "text",
+        "default_value": "/talent/"
+      },
+      {
         "key": "field_home_cta_right_kicker",
         "label": "CTA Right Kicker",
         "name": "home_cta_right_kicker",
@@ -317,6 +378,13 @@
         "name": "home_cta_right_btn_text",
         "type": "text",
         "default_value": "View All Insights"
+      },
+      {
+        "key": "field_home_cta_right_btn_link",
+        "label": "CTA Right Button Link",
+        "name": "home_cta_right_btn_link",
+        "type": "text",
+        "default_value": "/insights/"
       },
       {
         "key": "field_home_stats",
