@@ -123,7 +123,15 @@ function technova_custom_wpcf7_mail_components( $components, $form, $mail ) {
     </html>";
 
     $components['body'] = $html_body;
-    $components['headers'] .= "\r\nContent-Type: text/html; charset=UTF-8";
+
+    // Force Content-Type header to text/html to render styling in email clients
+    if ( is_string( $components['headers'] ) ) {
+        if ( stripos( $components['headers'], 'Content-Type: text/plain' ) !== false ) {
+            $components['headers'] = str_ireplace( 'Content-Type: text/plain', 'Content-Type: text/html', $components['headers'] );
+        } elseif ( stripos( $components['headers'], 'Content-Type:' ) === false ) {
+            $components['headers'] .= "\r\nContent-Type: text/html; charset=UTF-8";
+        }
+    }
 
     // Set custom subject line based on lead name & source
     if ( ! empty( $posted_data['your-name'] ) ) {
@@ -133,4 +141,10 @@ function technova_custom_wpcf7_mail_components( $components, $form, $mail ) {
     }
 
     return $components;
+}
+
+// Add filter to force wp_mail content type to HTML globally
+add_filter( 'wp_mail_content_type', 'technova_force_html_content_type' );
+function technova_force_html_content_type() {
+    return 'text/html';
 }
