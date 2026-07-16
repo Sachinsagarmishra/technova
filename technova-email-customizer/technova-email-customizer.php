@@ -140,6 +140,25 @@ function technova_custom_wpcf7_mail_components( $components, $form, $mail ) {
         $components['subject'] = "New Lead: {$lead_name} ({$lead_src})";
     }
 
+    // Automatically attach any uploaded files (like resume-file)
+    $uploaded_files = $submission->uploaded_files();
+    if ( ! empty( $uploaded_files ) ) {
+        if ( ! is_array( $components['attachments'] ) ) {
+            $components['attachments'] = array();
+        }
+        foreach ( $uploaded_files as $field_name => $filepath ) {
+            if ( is_string( $filepath ) && ! empty( $filepath ) && ! in_array( $filepath, $components['attachments'] ) ) {
+                $components['attachments'][] = $filepath;
+            } elseif ( is_array( $filepath ) ) {
+                foreach ( $filepath as $path ) {
+                    if ( ! empty( $path ) && ! in_array( $path, $components['attachments'] ) ) {
+                        $components['attachments'][] = $path;
+                    }
+                }
+            }
+        }
+    }
+
     return $components;
 }
 
