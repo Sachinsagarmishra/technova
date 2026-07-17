@@ -45,6 +45,20 @@ echo "<p>Starting database seeding...</p>";
 // Programmatically import/update ACF field groups from acf-import.json
 $acf_json_path = __DIR__ . '/acf-import.json';
 if (file_exists($acf_json_path)) {
+    echo "<p>Cleaning up duplicate and unwanted ACF Field Groups from database...</p>";
+    
+    $groups_posts = get_posts([
+        'post_type' => 'acf-field-group',
+        'posts_per_page' => -1,
+        'post_status' => 'any'
+    ]);
+    if (is_array($groups_posts)) {
+        foreach ($groups_posts as $gp) {
+            wp_delete_post($gp->ID, true);
+        }
+        echo "<p style='color: green;'>Successfully cleaned up existing ACF Field Groups database posts.</p>";
+    }
+
     echo "<p>Importing/updating ACF Field Groups from acf-import.json...</p>";
     $json_content = file_get_contents($acf_json_path);
     $field_groups = json_decode($json_content, true);
