@@ -92,6 +92,10 @@ import contractStaffingVideo from "../imges/Industries-videos/Contract-Staffing.
 import directHireVideo from "../imges/Industries-videos/Direct Hire.mp4";
 import managedTeamsVideo from "../imges/Industries-videos/Managed-Teams.mp4";
 import workforceConsultingVideo from "../imges/Industries-videos/Workforce-Consulting.mp4";
+import deepTalentNetworkIcon from "../imges/em/Deep Talent Network.gif";
+import industryExpertiseIcon from "../imges/em/Industry Expertise.gif";
+import flexibleEngagementIcon from "../imges/em/Flexible Engagement.gif";
+import qualityCountIcon from "../imges/em/Quality You Can Count On.gif";
 import industriesPageBgVideo from "../imges/Industries-videos/industiespagebg.mp4";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
@@ -1828,26 +1832,22 @@ function EmployersPage() {
     {
       title: "Deep Talent Network",
       description: "Access a vast pool of pre-vetted professionals across technologies and domains.",
-      icon: BrainCircuit,
-      color: "text-purple-500 bg-purple-50",
+      gif: deepTalentNetworkIcon,
     },
     {
       title: "Industry Expertise",
       description: "Our teams understand your industry challenges and deliver role-specific talent, faster.",
-      icon: Award,
-      color: "text-amber-500 bg-amber-50",
+      gif: industryExpertiseIcon,
     },
     {
       title: "Flexible Engagement",
       description: "From contract staffing to direct hire and managed teams—we offer what fits you best.",
-      icon: Users,
-      color: "text-emerald-500 bg-emerald-50",
+      gif: flexibleEngagementIcon,
     },
     {
       title: "Quality You Can Count On",
       description: "Rigorous screening, assessment, and validation to ensure the right talent every time.",
-      icon: Star,
-      color: "text-indigo-500 bg-indigo-50",
+      gif: qualityCountIcon,
     },
   ];
 
@@ -2204,13 +2204,14 @@ function EmployersPage() {
           {/* Right Grid */}
           <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
             {chooseReasons.map((item) => {
-              const Icon = item.icon;
               return (
-                <div key={item.title} className="rounded-2xl border border-slate-100 bg-[#f8fafc] p-6 shadow-sm">
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${item.color}`}>
-                    <Icon size={20} />
-                  </span>
-                  <h3 className="mt-5 text-sm font-semibold text-slate-800">{item.title}</h3>
+                <div key={item.title} className="rounded-2xl border border-slate-100 bg-[#f8fafc] p-6 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-start rounded-xl overflow-hidden mb-5">
+                      <img src={item.gif} alt="" className="h-full w-auto object-contain object-left" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-slate-800">{item.title}</h3>
+                  </div>
                   <p className="mt-2 text-xs leading-relaxed text-slate-500">{item.description}</p>
                 </div>
               );
