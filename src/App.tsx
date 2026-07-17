@@ -88,6 +88,10 @@ import technologyVideo from "../imges/Industries-videos/Technology.mp4";
 import logisticsVideo from "../imges/Industries-videos/Logistics.mp4";
 import realEstateVideo from "../imges/Industries-videos/Real-Estate.mp4";
 import educationVideo from "../imges/Industries-videos/Education.mp4";
+import contractStaffingVideo from "../imges/Industries-videos/Contract-Staffing.mp4";
+import directHireVideo from "../imges/Industries-videos/Direct Hire.mp4";
+import managedTeamsVideo from "../imges/Industries-videos/Managed-Teams.mp4";
+import workforceConsultingVideo from "../imges/Industries-videos/Workforce-Consulting.mp4";
 import industriesPageBgVideo from "../imges/Industries-videos/industiespagebg.mp4";
 import managedTeamsIllustration from "../imges/Managed-Teams .svg";
 import technovaFavicon from "../imges/favicon.png";
@@ -1851,29 +1855,25 @@ function EmployersPage() {
       title: "Direct Hire",
       description: "Full-time talent for long-term roles that drive your business forward.",
       bullets: ["Permanent placements", "Leadership hiring", "Executive search"],
-      icon: Users,
-      color: "text-purple-500 bg-purple-50",
+      video: directHireVideo,
     },
     {
       title: "Contract Staffing",
       description: "Skilled professionals for short-term or project-based needs.",
       bullets: ["Quick turnaround", "Specialized skills", "Flexible engagement"],
-      icon: Clock,
-      color: "text-amber-500 bg-amber-50",
+      video: contractStaffingVideo,
     },
     {
       title: "Managed Teams",
       description: "Dedicated teams that integrate with your operations and scale with you.",
       bullets: ["Team of experts", "Performance managed", "Scalable delivery"],
-      icon: ShieldCheck,
-      color: "text-emerald-500 bg-emerald-50",
+      video: managedTeamsVideo,
     },
     {
       title: "Workforce Consulting",
       description: "Data-driven insights and strategies to optimize your talent function.",
       bullets: ["Workforce planning", "Process optimization", "Market intelligence"],
-      icon: BriefcaseBusiness,
-      color: "text-indigo-500 bg-indigo-50",
+      video: workforceConsultingVideo,
     },
   ];
 
@@ -2241,13 +2241,19 @@ function EmployersPage() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {solutions.map((item) => {
-              const Icon = item.icon;
               return (
-                <div key={item.title} className="group rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md flex flex-col justify-between min-h-[300px]">
+                <div key={item.title} className="group rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md flex flex-col justify-between min-h-[380px]">
                   <div>
-                    <span className={`flex h-11 w-11 items-center justify-center rounded-2xl ${item.color}`}>
-                      <Icon size={22} />
-                    </span>
+                    <div className="relative w-full h-32 overflow-hidden rounded-2xl mb-6 bg-slate-50 border border-slate-100/60 flex items-center justify-center">
+                      <video
+                        className="w-full h-full object-cover"
+                        src={item.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      />
+                    </div>
                     <h3 className="mt-6 text-base font-semibold text-slate-800 group-hover:text-[#8B5CF6] transition-colors">
                       {item.title}
                     </h3>
