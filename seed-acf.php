@@ -507,17 +507,25 @@ foreach ($pages as $slug => $data) {
         echo "<p style='color: blue;'>Updated page template for: <strong>{$data['title']}</strong> (ID: $page_id)</p>";
     }
     
+    $force_overwrite = isset($_GET['force']) && $_GET['force'] === '1';
+
     // Seed ACF fields for this page
     if (function_exists('update_field')) {
         foreach ($data['fields'] as $key => $val) {
-            update_field($key, $val, $page_id);
+            $existing_val = get_field($key, $page_id, false);
+            if ($force_overwrite || $existing_val === null || $existing_val === false || $existing_val === '' || $existing_val === []) {
+                update_field($key, $val, $page_id);
+            }
         }
         echo "<p style='color: darkcyan;'>--> Seeded ACF fields for {$data['title']}</p>";
     } else {
         // Fallback to standard WP postmeta if ACF is inactive
         foreach ($data['fields'] as $key => $val) {
-            update_post_meta($page_id, $key, $val);
-            update_post_meta($page_id, '_' . $key, 'field_' . $slug . '_' . $key);
+            $existing_val = get_post_meta($page_id, $key, true);
+            if ($force_overwrite || $existing_val === null || $existing_val === false || $existing_val === '' || $existing_val === []) {
+                update_post_meta($page_id, $key, $val);
+                update_post_meta($page_id, '_' . $key, 'field_' . $slug . '_' . $key);
+            }
         }
         echo "<p style='color: darkorange;'>--> Seeded metadata fields directly (ACF inactive) for {$data['title']}</p>";
     }
