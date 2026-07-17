@@ -813,6 +813,162 @@
         "name": "newsletter_form_id",
         "type": "text",
         "default_value": "1003"
+      },
+      {
+        "key": "field_contact_response_items",
+        "label": "Response Items",
+        "name": "contact_response_items",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_contact_resp_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_resp_detail",
+            "label": "Detail",
+            "name": "detail",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_resp_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_contact_methods",
+        "label": "Contact Methods",
+        "name": "contact_methods",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_contact_method_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_method_detail",
+            "label": "Detail / Address / Phone",
+            "name": "detail",
+            "type": "textarea"
+          },
+          {
+            "key": "field_contact_method_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_contact_proof_items",
+        "label": "Trust Proof Items",
+        "name": "contact_proof_items",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_contact_proof_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_proof_description",
+            "label": "Description",
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_proof_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_contact_find_us_title",
+        "label": "Find Us - Title",
+        "name": "contact_find_us_title",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_find_us_description",
+        "label": "Find Us - Description",
+        "name": "contact_find_us_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_contact_find_us_address",
+        "label": "Find Us - Full Address",
+        "name": "contact_find_us_address",
+        "type": "textarea"
+      },
+      {
+        "key": "field_contact_find_us_button_text",
+        "label": "Find Us - Button Text",
+        "name": "contact_find_us_button_text",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_find_us_button_link",
+        "label": "Find Us - Map Directions Link",
+        "name": "contact_find_us_button_link",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_faqs",
+        "label": "Contact Page FAQs",
+        "name": "contact_faqs",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_contact_faq_question",
+            "label": "Question",
+            "name": "q",
+            "type": "text"
+          },
+          {
+            "key": "field_contact_faq_answer",
+            "label": "Answer",
+            "name": "a",
+            "type": "textarea"
+          }
+        ]
+      },
+      {
+        "key": "field_contact_immediate_title",
+        "label": "Immediate Assistance - Title",
+        "name": "contact_immediate_title",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_immediate_description",
+        "label": "Immediate Assistance - Description",
+        "name": "contact_immediate_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_contact_immediate_button_text",
+        "label": "Immediate Assistance - Button Text",
+        "name": "contact_immediate_button_text",
+        "type": "text"
+      },
+      {
+        "key": "field_contact_immediate_button_link",
+        "label": "Immediate Assistance - Button Link",
+        "name": "contact_immediate_button_link",
+        "type": "text"
       }
     ],
     "location": [

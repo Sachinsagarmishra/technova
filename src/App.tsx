@@ -1044,45 +1044,83 @@ function ContactPage() {
     }
   };
 
-  const responseItems = [
-    { label: "Response within", detail: "1 Business Day", icon: Clock },
-    { label: "Enterprise Staffing", detail: "& Consulting", icon: Users },
-    { label: "Dedicated Workforce", detail: "Specialists", icon: ShieldCheck },
-  ];
+  const responseItems = window.wpData?.contact_response_items
+    ? window.wpData.contact_response_items.map((i: any) => ({
+        label: i.label,
+        detail: i.detail,
+        icon: getIconComponent(i.icon_name || "Clock"),
+      }))
+    : [
+        { label: "Response within", detail: "1 Business Day", icon: Clock },
+        { label: "Enterprise Staffing", detail: "& Consulting", icon: Users },
+        { label: "Dedicated Workforce", detail: "Specialists", icon: ShieldCheck },
+      ];
 
-  const contactMethods = [
-    {
-      title: "Corporate Office",
-      detail: "3701 Pender Dr Suite 510\nFairfax, VA, 22030",
-      icon: MapPin,
-    },
-    {
-      title: "Email Us",
-      detail: "Info@technovasystemsinc.com",
-      icon: Mail,
-    },
-    {
-      title: "Call Us",
-      detail: "+1 (571) 651 - 0246",
-      icon: Phone,
-    },
-  ];
+  const contactMethods = window.wpData?.contact_methods
+    ? window.wpData.contact_methods.map((i: any) => ({
+        title: i.title,
+        detail: i.detail,
+        icon: getIconComponent(i.icon_name || "MapPin"),
+      }))
+    : [
+        {
+          title: "Corporate Office",
+          detail: "3701 Pender Dr Suite 510\nFairfax, VA, 22030",
+          icon: MapPin,
+        },
+        {
+          title: "Email Us",
+          detail: "Info@technovasystemsinc.com",
+          icon: Mail,
+        },
+        {
+          title: "Call Us",
+          detail: "+1 (571) 651 - 0246",
+          icon: Phone,
+        },
+      ];
 
-  const proofItems = [
-    { title: "Free Consultation", description: "No obligation. Just expert advice.", icon: Users },
-    { title: "Confidential", description: "Your information is 100% secure.", icon: ShieldCheck },
-    { title: "Global Reach", description: "Serving clients and talent worldwide.", icon: Building2 },
-    { title: "Proven Expertise", description: "AI-led solutions that deliver results.", icon: BadgeCheck },
-  ];
+  const proofItems = window.wpData?.contact_proof_items
+    ? window.wpData.contact_proof_items.map((i: any) => ({
+        title: i.title,
+        description: i.description,
+        icon: getIconComponent(i.icon_name || "Users"),
+      }))
+    : [
+        { title: "Free Consultation", description: "No obligation. Just expert advice.", icon: Users },
+        { title: "Confidential", description: "Your information is 100% secure.", icon: ShieldCheck },
+        { title: "Global Reach", description: "Serving clients and talent worldwide.", icon: Building2 },
+        { title: "Proven Expertise", description: "AI-led solutions that deliver results.", icon: BadgeCheck },
+      ];
 
-  const faqs = [
-    "How quickly will someone contact me?",
-    "Is there a consultation fee?",
-    "Do you work with startups as well as enterprises?",
-    "Can I submit my resume through this form?",
-    "Do you offer remote hiring solutions?",
-    "How is my information protected?",
-  ];
+  const faqs = window.wpData?.contact_faqs
+    ? window.wpData.contact_faqs
+    : [
+        {
+          q: "How quickly will someone contact me?",
+          a: "Our team typically responds to all inquiries within one business day."
+        },
+        {
+          q: "Is there a consultation fee?",
+          a: "No, all initial consultations are completely free and confidential."
+        },
+        {
+          q: "Do you work with startups as well as enterprises?",
+          a: "Yes, we partner with organizations of all sizes, from fast-growing startups to Fortune 500 enterprises."
+        },
+        {
+          q: "Can I submit my resume through this form?",
+          a: "Yes, candidates can use this form, or they can submit their details on our For Talent page to be added directly to our engineering pool."
+        },
+        {
+          q: "Do you offer remote hiring solutions?",
+          a: "Yes, we specialize in local, hybrid, and fully remote hiring solutions across various technology stacks."
+        },
+        {
+          q: "How is my information protected?",
+          a: "We take data security very seriously. All information is confidential, stored securely, and we are happy to sign NDAs prior to discussion."
+        }
+      ];
 
   return (
     <main className="min-h-screen bg-white font-body text-[#0b132b]">
@@ -1117,7 +1155,7 @@ function ContactPage() {
             </p>
 
             <div className="mt-9 grid gap-4 sm:grid-cols-3">
-              {responseItems.map((item) => {
+              {responseItems.map((item: any) => {
                 const Icon = item.icon;
 
                 return (
@@ -1141,7 +1179,7 @@ function ContactPage() {
                 Reach out to us through your preferred channel.
               </p>
               <div className="mt-8 grid gap-7 sm:grid-cols-2">
-                {contactMethods.map((item) => {
+                {contactMethods.map((item: any) => {
                   const Icon = item.icon;
 
                   return (
@@ -1244,7 +1282,7 @@ function ContactPage() {
 
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-[1440px] gap-4 rounded-3xl border border-slate-200/70 bg-white/86 p-6 shadow-[0_8px_24px_rgba(15,23,42,0.035)] sm:grid-cols-2 lg:grid-cols-4">
-          {proofItems.map((item) => {
+          {proofItems.map((item: any) => {
             const Icon = item.icon;
 
             return (
@@ -1274,21 +1312,28 @@ function ContactPage() {
             referrerPolicy="strict-origin-when-cross-origin"
           />
           <div className="relative z-10 m-6 ml-auto max-w-sm rounded-2xl bg-white p-7 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-            <h2 className="font-display text-3xl font-normal">Find Us</h2>
+            <h2 className="font-display text-3xl font-normal">{window.wpData?.contact_find_us_title || "Find Us"}</h2>
             <p className="mt-3 text-sm leading-6 text-slate-500">
-              Our headquarters is located in the heart of the business district,
-              easily accessible by public transport and major highways.
+              {window.wpData?.contact_find_us_description || "Our headquarters is located in the heart of the business district, easily accessible by public transport and major highways."}
             </p>
             <div className="mt-5 flex gap-3 text-sm text-slate-600">
               <MapPin className="mt-1 text-[#8B5CF6]" size={20} />
-              <span>
-                <strong className="block text-slate-800">TechNova Systems</strong>
-                3701 Pender Dr Suite 510<br />Fairfax, VA, 22030
+              <span className="whitespace-pre-line">
+                {window.wpData?.contact_find_us_address ? (
+                  window.wpData.contact_find_us_address
+                ) : (
+                  <>
+                    <strong className="block text-slate-800">TechNova Systems</strong>
+                    3701 Pender Dr Suite 510<br />Fairfax, VA, 22030
+                  </>
+                )}
               </span>
             </div>
-            <Button variant="glass-dark" size="nav" className="mt-6 border border-[#8B5CF6]/20 text-[#8B5CF6]">
-              Get Directions
-              <ArrowRight size={16} />
+            <Button variant="glass-dark" size="nav" className="mt-6 border border-[#8B5CF6]/20 text-[#8B5CF6]" asChild>
+              <a href={window.wpData?.contact_find_us_button_link || "https://maps.google.com/maps?q=3701+Pender+Dr+Suite+510,+Fairfax,+VA,+22030"} target="_blank" rel="noopener noreferrer">
+                {window.wpData?.contact_find_us_button_text || "Get Directions"}
+                <ArrowRight size={16} className="ml-1.5" />
+              </a>
             </Button>
           </div>
         </div>
@@ -1301,14 +1346,14 @@ function ContactPage() {
             Frequently Asked Questions
           </h2>
           <div className="mt-8 grid gap-4 text-left md:grid-cols-2">
-            {faqs.map((question) => (
-              <details className="group rounded-xl border border-slate-200 bg-white px-5 py-4 text-sm text-slate-700 shadow-sm" key={question}>
+            {faqs.map((faq: any, idx: number) => (
+              <details className="group rounded-xl border border-slate-200 bg-white px-5 py-4 text-sm text-slate-700 shadow-sm" key={idx}>
                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                  {question}
+                  {faq.q || faq}
                   <ChevronDown className="transition group-open:rotate-180" size={18} />
                 </summary>
-                <p className="mt-3 text-slate-500">
-                  Our team will review your request and share the best next step based on your goals.
+                <p className="mt-3 text-slate-500 whitespace-pre-line">
+                  {faq.a || "Our team will review your request and share the best next step based on your goals."}
                 </p>
               </details>
             ))}
@@ -1324,11 +1369,10 @@ function ContactPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#071224]/92 via-[#071224]/68 to-[#071224]/28" />
           <div className="relative z-10 lg:col-span-5">
             <h2 className="font-display text-4xl font-normal text-white">
-              Need Immediate Assistance?
+              {window.wpData?.contact_immediate_title || "Need Immediate Assistance?"}
             </h2>
             <p className="mt-3 text-sm leading-7 text-white">
-              Our specialists are available to discuss urgent hiring requirements,
-              consulting projects, or career-related questions.
+              {window.wpData?.contact_immediate_description || "Our specialists are available to discuss urgent hiring requirements, consulting projects, or career-related questions."}
             </p>
           </div>
           <div className="relative z-10 flex lg:col-span-7 lg:justify-center">
@@ -1338,9 +1382,9 @@ function ContactPage() {
               className="bg-[#f59e0c] text-white shadow-md shadow-amber-500/10 hover:bg-[#d97706]"
               asChild
             >
-              <a href="#contact-form">
-                Talk to an Expert
-                <ArrowRight size={18} />
+              <a href={window.wpData?.contact_immediate_button_link || "#contact-form"}>
+                {window.wpData?.contact_immediate_button_text || "Talk to an Expert"}
+                <ArrowRight size={18} className="ml-1.5" />
               </a>
             </Button>
           </div>

@@ -392,7 +392,98 @@ $pages = [
             'contact_form_id' => '1000',
             'talent_form_id' => '1001',
             'subscribe_form_id' => '1002',
-            'newsletter_form_id' => '1003'
+            'newsletter_form_id' => '1003',
+            'contact_response_items' => [
+                [
+                    'label' => 'Response within',
+                    'detail' => '1 Business Day',
+                    'icon_name' => 'Clock'
+                ],
+                [
+                    'label' => 'Enterprise Staffing',
+                    'detail' => '& Consulting',
+                    'icon_name' => 'Users'
+                ],
+                [
+                    'label' => 'Dedicated Workforce',
+                    'detail' => 'Specialists',
+                    'icon_name' => 'ShieldCheck'
+                ]
+            ],
+            'contact_methods' => [
+                [
+                    'title' => 'Corporate Office',
+                    'detail' => "3701 Pender Dr Suite 510\nFairfax, VA, 22030",
+                    'icon_name' => 'MapPin'
+                ],
+                [
+                    'title' => 'Email Us',
+                    'detail' => 'Info@technovasystemsinc.com',
+                    'icon_name' => 'Mail'
+                ],
+                [
+                    'title' => 'Call Us',
+                    'detail' => '+1 (571) 651 - 0246',
+                    'icon_name' => 'Phone'
+                ]
+            ],
+            'contact_proof_items' => [
+                [
+                    'title' => 'Free Consultation',
+                    'description' => 'No obligation. Just expert advice.',
+                    'icon_name' => 'Users'
+                ],
+                [
+                    'title' => 'Confidential',
+                    'description' => 'Your information is 100% secure.',
+                    'icon_name' => 'ShieldCheck'
+                ],
+                [
+                    'title' => 'Global Reach',
+                    'description' => 'Serving clients and talent worldwide.',
+                    'icon_name' => 'Building2'
+                ],
+                [
+                    'title' => 'Proven Expertise',
+                    'description' => 'AI-led solutions that deliver results.',
+                    'icon_name' => 'BadgeCheck'
+                ]
+            ],
+            'contact_find_us_title' => 'Find Us',
+            'contact_find_us_description' => 'Our headquarters is located in the heart of the business district, easily accessible by public transport and major highways.',
+            'contact_find_us_address' => "TechNova Systems\n3701 Pender Dr Suite 510\nFairfax, VA, 22030",
+            'contact_find_us_button_text' => 'Get Directions',
+            'contact_find_us_button_link' => 'https://maps.google.com/maps?q=3701+Pender+Dr+Suite+510,+Fairfax,+VA,+22030',
+            'contact_faqs' => [
+                [
+                    'q' => 'How quickly will someone contact me?',
+                    'a' => 'Our team typically responds to all inquiries within one business day.'
+                ],
+                [
+                    'q' => 'Is there a consultation fee?',
+                    'a' => 'No, all initial consultations are completely free and confidential.'
+                ],
+                [
+                    'q' => 'Do you work with startups as well as enterprises?',
+                    'a' => 'Yes, we partner with organizations of all sizes, from fast-growing startups to Fortune 500 enterprises.'
+                ],
+                [
+                    'q' => 'Can I submit my resume through this form?',
+                    'a' => 'Yes, candidates can use this form, or they can submit their details on our For Talent page to be added directly to our engineering pool.'
+                ],
+                [
+                    'q' => 'Do you offer remote hiring solutions?',
+                    'a' => 'Yes, we specialize in local, hybrid, and fully remote hiring solutions across various technology stacks.'
+                ],
+                [
+                    'q' => 'How is my information protected?',
+                    'a' => 'We take data security very seriously. All information is confidential, stored securely, and we are happy to sign NDAs prior to discussion.'
+                ]
+            ],
+            'contact_immediate_title' => 'Need Immediate Assistance?',
+            'contact_immediate_description' => 'Our specialists are available to discuss urgent hiring requirements, consulting projects, or career-related questions.',
+            'contact_immediate_button_text' => 'Talk to an Expert',
+            'contact_immediate_button_link' => '#contact'
         ]
     ]
 ];
