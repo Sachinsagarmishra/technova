@@ -981,5 +981,258 @@
       ]
     ],
     "active": true
+  },
+  {
+    "key": "group_industries_page_fields",
+    "title": "Industries Page Fields",
+    "fields": [
+      {
+        "key": "field_industries_kicker",
+        "label": "Hero Kicker Text",
+        "name": "industries_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_headline",
+        "label": "Hero Headline",
+        "name": "industries_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_description",
+        "label": "Hero Description",
+        "name": "industries_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_industries_bg_video",
+        "label": "Hero Background Video URL/File",
+        "name": "industries_bg_video",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_hero_features",
+        "label": "Hero Feature Cards",
+        "name": "industries_hero_features",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_ind_hero_feat_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_hero_feat_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_hero_feat_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_industries_grid_kicker",
+        "label": "Grid Section Kicker",
+        "name": "industries_grid_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_grid_title",
+        "label": "Grid Section Title",
+        "name": "industries_grid_title",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_grid_description",
+        "label": "Grid Section Description",
+        "name": "industries_grid_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_industries_list",
+        "label": "Industries Grid List",
+        "name": "industries_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_ind_item_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_item_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_ind_item_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_item_color",
+            "label": "Color Classes (Tailwind)",
+            "name": "color_class",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_item_video",
+            "label": "Animation Video URL",
+            "name": "video_file",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_industries_stats",
+        "label": "Stats Counters",
+        "name": "industries_stats",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_ind_stat_value",
+            "label": "Value (e.g. 500+)",
+            "name": "value",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_stat_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_stat_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_industries_solutions_kicker",
+        "label": "Solutions Kicker",
+        "name": "industries_solutions_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_solutions_title",
+        "label": "Solutions Title",
+        "name": "industries_solutions_title",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_solutions_list",
+        "label": "Solutions List",
+        "name": "industries_solutions_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_ind_sol_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_sol_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_ind_sol_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_industries_transform_title",
+        "label": "Transform Block Title",
+        "name": "industries_transform_title",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_transform_bg",
+        "label": "Transform Block Background Image URL",
+        "name": "industries_transform_bg",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_transform_items",
+        "label": "Transform Steps List",
+        "name": "industries_transform_items",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_ind_trans_title",
+            "label": "Title (e.g. Understand)",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_ind_trans_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_ind_trans_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_industries_cta_title",
+        "label": "Bottom CTA Title",
+        "name": "industries_cta_title",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_cta_description",
+        "label": "Bottom CTA Description",
+        "name": "industries_cta_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_industries_cta_button_text",
+        "label": "Bottom CTA Button Text",
+        "name": "industries_cta_button_text",
+        "type": "text"
+      },
+      {
+        "key": "field_industries_cta_button_link",
+        "label": "Bottom CTA Button Link",
+        "name": "industries_cta_button_link",
+        "type": "text"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-react.php"
+        }
+      ]
+    ],
+    "active": true
   }
 ]

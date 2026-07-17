@@ -1466,7 +1466,7 @@ function IndustriesPage() {
 
   const industries = window.wpData && window.wpData.industries_list
     ? window.wpData.industries_list.map((item: any) => {
-        const IconComponent = iconMap[item.icon_name] || Cpu;
+        const IconComponent = getIconComponent(item.icon_name || "Cpu");
         return {
           title: item.title,
           description: item.description,
@@ -1478,36 +1478,72 @@ function IndustriesPage() {
       })
     : defaultIndustries;
 
-  const stats = [
-    { value: "25+", label: "Industries Served", icon: Building2 },
-    { value: "500+", label: "Enterprise Clients", icon: Users },
-    { value: "1000+", label: "Successful Placements", icon: ShieldCheck },
-    { value: "20+", label: "Countries Reached", icon: Globe },
-    { value: "98%", label: "Client Satisfaction", icon: Star },
-  ];
+  const stats = window.wpData?.industries_stats
+    ? window.wpData.industries_stats.map((s: any) => ({
+        value: s.value,
+        label: s.label,
+        icon: getIconComponent(s.icon_name || "Building2"),
+      }))
+    : [
+        { value: "25+", label: "Industries Served", icon: Building2 },
+        { value: "500+", label: "Enterprise Clients", icon: Users },
+        { value: "1000+", label: "Successful Placements", icon: ShieldCheck },
+        { value: "20+", label: "Countries Reached", icon: Globe },
+        { value: "98%", label: "Client Satisfaction", icon: Star },
+      ];
 
-  const solutions = [
-    {
-      title: "Specialized Talent Networks",
-      description: "Access to pre-vetted professionals with industry-specific expertise.",
-      icon: Users,
-    },
-    {
-      title: "Consulting & Strategy",
-      description: "Advisory and consulting services to solve complex business challenges.",
-      icon: Award,
-    },
-    {
-      title: "Technology Solutions",
-      description: "Custom technology solutions that drive efficiency and innovation.",
-      icon: Cpu,
-    },
-    {
-      title: "Flexible Engagement Models",
-      description: "Scalable engagement models tailored to your business goals.",
-      icon: ShieldCheck,
-    },
-  ];
+  const solutions = window.wpData?.industries_solutions_list
+    ? window.wpData.industries_solutions_list.map((s: any) => ({
+        title: s.title,
+        description: s.description,
+        icon: getIconComponent(s.icon_name || "Users"),
+      }))
+    : [
+        {
+          title: "Specialized Talent Networks",
+          description: "Access to pre-vetted professionals with industry-specific expertise.",
+          icon: Users,
+        },
+        {
+          title: "Consulting & Strategy",
+          description: "Advisory and consulting services to solve complex business challenges.",
+          icon: Award,
+        },
+        {
+          title: "Technology Solutions",
+          description: "Custom technology solutions that drive efficiency and innovation.",
+          icon: Cpu,
+        },
+        {
+          title: "Flexible Engagement Models",
+          description: "Scalable engagement models tailored to your business goals.",
+          icon: ShieldCheck,
+        },
+      ];
+
+  const transformItems = window.wpData?.industries_transform_items
+    ? window.wpData.industries_transform_items.map((i: any) => ({
+        title: i.title,
+        description: i.description,
+        icon: getIconComponent(i.icon_name || "Search"),
+      }))
+    : [
+        { title: "Understand", description: "We learn your industry and business goals.", icon: Search },
+        { title: "Build", description: "We deliver the right talent and solutions.", icon: Wrench },
+        { title: "Transform", description: "We drive impact and long-term growth.", icon: Rocket },
+      ];
+
+  const heroFeatures = window.wpData?.industries_hero_features
+    ? window.wpData.industries_hero_features.map((item: any) => ({
+        title: item.title,
+        description: item.description,
+        icon: getIconComponent(item.icon_name || "Users"),
+      }))
+    : [
+        { title: "Industry-Aligned Talent", description: "Specialized professionals who understand your domain.", icon: Users },
+        { title: "Domain Expertise", description: "Deep knowledge of industry challenges and opportunities.", icon: Award },
+        { title: "Measurable Impact", description: "Solutions that drive growth, efficiency and innovation.", icon: TrendingUp },
+      ];
 
   const caseStudies = [
     {
@@ -1538,7 +1574,7 @@ function IndustriesPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
         <video
-          src={industriesPageBgVideo}
+          src={getAcfUrl(window.wpData?.industries_bg_video) || industriesPageBgVideo}
           autoPlay
           loop
           muted
@@ -1554,53 +1590,45 @@ function IndustriesPage() {
 
         <div className="relative z-10 mx-auto max-w-[1440px] pt-16">
           <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
-            Industries We Serve
+            {window.wpData?.industries_kicker || "Industries We Serve"}
           </p>
           <h1 className="font-display mt-5 max-w-4xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-            Enabling Every Industry With the Right Talent and{" "}
-            <span className="text-[#f59e0c]">Technology.</span>
+            {window.wpData && window.wpData.industries_headline ? (
+              <WaveLetters parts={parseHeadline(window.wpData.industries_headline)} />
+            ) : (
+              <>
+                Enabling Every Industry With the Right Talent and{" "}
+                <span className="text-[#f59e0c]">Technology.</span>
+              </>
+            )}
           </h1>
           <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-            From emerging startups to global enterprises, we deliver talent and
-            solutions tailored to the unique needs of your industry.
+            {window.wpData?.industries_description || "From emerging startups to global enterprises, we deliver talent and solutions tailored to the unique needs of your industry."}
           </p>
 
           <div className="mt-16 grid gap-6 md:grid-cols-3 max-w-5xl">
-            <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-500/20 text-purple-300">
-                <Users size={20} />
-              </span>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Industry-Aligned Talent</h3>
-                <p className="mt-2 text-xs leading-5 text-white/70">
-                  Specialized professionals who understand your domain.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
-                <Award size={20} />
-              </span>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Domain Expertise</h3>
-                <p className="mt-2 text-xs leading-5 text-white/70">
-                  Deep knowledge of industry challenges and opportunities.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-300">
-                <TrendingUp size={20} />
-              </span>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Measurable Impact</h3>
-                <p className="mt-2 text-xs leading-5 text-white/70">
-                  Solutions that drive growth, efficiency and innovation.
-                </p>
-              </div>
-            </div>
+            {heroFeatures.map((item: any, idx: number) => {
+              const Icon = item.icon;
+              const colorClasses = [
+                "bg-purple-500/20 text-purple-300",
+                "bg-amber-500/20 text-amber-300",
+                "bg-emerald-500/20 text-emerald-300"
+              ];
+              const resolvedColorClass = colorClasses[idx % colorClasses.length];
+              return (
+                <div key={idx} className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${resolvedColorClass}`}>
+                    <Icon size={20} />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">{item.title}</h3>
+                    <p className="mt-2 text-xs leading-5 text-white/70">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1609,14 +1637,13 @@ function IndustriesPage() {
       <section className="px-4 py-20 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-[1440px]">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-            Industries
+            {window.wpData?.industries_grid_kicker || "Industries"}
           </p>
           <h2 className="font-display mt-4 text-center text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-            Industry Expertise. Business Impact.
+            {window.wpData?.industries_grid_title || "Industry Expertise. Business Impact."}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-slate-500">
-            We partner with organizations across industries to build high-performing teams
-            and deliver technology solutions that create lasting impact.
+            {window.wpData?.industries_grid_description || "We partner with organizations across industries to build high-performing teams and deliver technology solutions that create lasting impact."}
           </p>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -1667,11 +1694,11 @@ function IndustriesPage() {
 
           {/* Stats Bar */}
           <div className="mt-20 rounded-3xl border border-slate-100 bg-[#f8fafc] p-8 sm:px-10 flex flex-wrap gap-8 justify-around items-center">
-            {stats.map((item) => {
+            {stats.map((item: any) => {
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex flex-col sm:flex-row items-center gap-3.5 text-center sm:text-left">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-[#8B5CF6]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-55 text-[#8B5CF6]">
                     <Icon size={20} />
                   </span>
                   <div>
@@ -1691,17 +1718,17 @@ function IndustriesPage() {
           {/* Left Column */}
           <div className="lg:col-span-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-              How We Help Industries
+              {window.wpData?.industries_solutions_kicker || "How We Help Industries"}
             </p>
             <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl max-w-lg">
-              Solutions Designed Around Your Industry Needs.
+              {window.wpData?.industries_solutions_title || "Solutions Designed Around Your Industry Needs."}
             </h2>
             <div className="mt-8 space-y-6">
-              {solutions.map((item) => {
+              {solutions.map((item: any) => {
                 const Icon = item.icon;
                 return (
                   <div className="flex gap-4 items-start" key={item.title}>
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-[#8B5CF6]">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-55 text-[#8B5CF6]">
                       <Icon size={20} />
                     </span>
                     <div>
@@ -1719,7 +1746,7 @@ function IndustriesPage() {
           {/* Right Column */}
           <div className="lg:col-span-6 rounded-3xl overflow-hidden relative p-8 sm:p-12 text-white min-h-[420px] flex flex-col justify-between shadow-xl">
             <img
-              src={solutionsSkyline}
+              src={getAcfUrl(window.wpData?.industries_transform_bg) || solutionsSkyline}
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -1728,38 +1755,25 @@ function IndustriesPage() {
 
             <div className="relative z-10">
               <h3 className="text-2xl sm:text-3xl font-display font-normal leading-snug max-w-md">
-                We go beyond staffing. We build partnerships that transform industries.
+                {window.wpData?.industries_transform_title || "We go beyond staffing. We build partnerships that transform industries."}
               </h3>
             </div>
 
             <div className="relative z-10 grid grid-cols-3 gap-4 pt-8 border-t border-white/10 mt-12">
-              <div>
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white/90 mb-3">
-                  <Search size={16} />
-                </span>
-                <h4 className="text-xs font-semibold text-white">Understand</h4>
-                <p className="text-[10px] leading-relaxed text-white/70 mt-1">
-                  We learn your industry and business goals.
-                </p>
-              </div>
-              <div>
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white/90 mb-3">
-                  <Wrench size={16} />
-                </span>
-                <h4 className="text-xs font-semibold text-white">Build</h4>
-                <p className="text-[10px] leading-relaxed text-white/70 mt-1">
-                  We deliver the right talent and solutions.
-                </p>
-              </div>
-              <div>
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white/90 mb-3">
-                  <Rocket size={16} />
-                </span>
-                <h4 className="text-xs font-semibold text-white">Transform</h4>
-                <p className="text-[10px] leading-relaxed text-white/70 mt-1">
-                  We drive impact and long-term growth.
-                </p>
-              </div>
+              {transformItems.map((item: any, idx: number) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx}>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white/90 mb-3">
+                      <Icon size={16} />
+                    </span>
+                    <h4 className="text-xs font-semibold text-white">{item.title}</h4>
+                    <p className="text-[10px] leading-relaxed text-white/70 mt-1">
+                      {item.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -1776,11 +1790,10 @@ function IndustriesPage() {
             />
             <div>
               <h2 className="font-display text-3xl sm:text-4xl font-normal leading-tight">
-                Let's Drive Industry Innovation Together
+                {window.wpData?.industries_cta_title || "Let's Drive Industry Innovation Together"}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-white/90 max-w-2xl">
-                Partner with TechNova Systems to access the right talent and technology
-                solutions for your industry.
+                {window.wpData?.industries_cta_description || "Partner with TechNova Systems to access the right talent and technology solutions for your industry."}
               </p>
             </div>
           </div>
@@ -1791,8 +1804,8 @@ function IndustriesPage() {
               className="bg-white/10 hover:bg-white/20 border-white/25 shadow-lg"
               asChild
             >
-              <a href="#contact">
-                Schedule a Consultation
+              <a href={window.wpData?.industries_cta_button_link || "#contact"}>
+                {window.wpData?.industries_cta_button_text || "Schedule a Consultation"}
                 <ArrowRight size={18} className="ml-1.5" />
               </a>
             </Button>

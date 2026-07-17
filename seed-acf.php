@@ -485,6 +485,148 @@ $pages = [
             'contact_immediate_button_text' => 'Talk to an Expert',
             'contact_immediate_button_link' => '#contact'
         ]
+    ],
+    'industries' => [
+        'title' => 'Industries',
+        'template' => 'template-react.php',
+        'fields' => [
+            'industries_kicker' => 'Industries We Serve',
+            'industries_headline' => 'Enabling Every Industry With the Right Talent and [accent]Technology.[/accent]',
+            'industries_description' => 'From emerging startups to global enterprises, we deliver talent and solutions tailored to the unique needs of your industry.',
+            'industries_bg_video' => resolve_hashed_asset('industiespagebg'),
+            'industries_hero_features' => [
+                [
+                    'title' => 'Industry-Aligned Talent',
+                    'description' => 'Specialized professionals who understand your domain.',
+                    'icon_name' => 'Users'
+                ],
+                [
+                    'title' => 'Domain Expertise',
+                    'description' => 'Deep knowledge of industry challenges and opportunities.',
+                    'icon_name' => 'Award'
+                ],
+                [
+                    'title' => 'Measurable Impact',
+                    'description' => 'Solutions that drive growth, efficiency and innovation.',
+                    'icon_name' => 'TrendingUp'
+                ]
+            ],
+            'industries_grid_kicker' => 'Industries',
+            'industries_grid_title' => 'Industry Expertise. Business Impact.',
+            'industries_grid_description' => 'We partner with organizations across industries to build high-performing teams and deliver technology solutions that create lasting impact.',
+            'industries_list' => [
+                [
+                    'title' => 'Technology & IT',
+                    'description' => 'Powering innovation with top tech talent and advanced solutions across emerging technologies.',
+                    'icon_name' => 'Cpu',
+                    'color_class' => 'text-purple-500 bg-purple-50 hover:bg-purple-100',
+                    'video_file' => resolve_hashed_asset('Technology')
+                ],
+                [
+                    'title' => 'Retail & E-commerce',
+                    'description' => 'Building agile teams and digital solutions that enhance customer experiences and drive growth.',
+                    'icon_name' => 'ShoppingCart',
+                    'color_class' => 'text-amber-500 bg-amber-50 hover:bg-amber-100',
+                    'video_file' => resolve_hashed_asset('Retail-E-Commerce')
+                ],
+                [
+                    'title' => 'Banking & Financial Services',
+                    'description' => 'Delivering compliance-driven talent and solutions for a secure and future-ready financial sector.',
+                    'icon_name' => 'Landmark',
+                    'color_class' => 'text-emerald-500 bg-emerald-50 hover:bg-emerald-100',
+                    'video_file' => resolve_hashed_asset('Financial-Services')
+                ],
+                [
+                    'title' => 'Healthcare & Life Sciences',
+                    'description' => 'Connecting healthcare organizations with skilled professionals and technology that saves lives.',
+                    'icon_name' => 'Heart',
+                    'color_class' => 'text-rose-500 bg-rose-50 hover:bg-rose-100',
+                    'video_file' => resolve_hashed_asset('Healthcare')
+                ],
+                [
+                    'title' => 'Manufacturing',
+                    'description' => 'Empowering manufacturing businesses with skilled talent and process-driven solutions.',
+                    'icon_name' => 'Factory',
+                    'color_class' => 'text-orange-500 bg-orange-50 hover:bg-orange-100',
+                    'video_file' => resolve_hashed_asset('Manufacturing')
+                ],
+                [
+                    'title' => 'Logistics & Supply Chain',
+                    'description' => 'Strengthening supply chains with expert talent and smart, scalable technology solutions.',
+                    'icon_name' => 'Truck',
+                    'color_class' => 'text-indigo-500 bg-indigo-50 hover:bg-indigo-100',
+                    'video_file' => resolve_hashed_asset('Logistics')
+                ],
+                [
+                    'title' => 'Education & EdTech',
+                    'description' => 'Building future-ready education platforms and connecting institutions with the right technology talent.',
+                    'icon_name' => 'GraduationCap',
+                    'color_class' => 'text-sky-500 bg-sky-50 hover:bg-sky-100',
+                    'video_file' => resolve_hashed_asset('Education')
+                ],
+                [
+                    'title' => 'Real Estate & Construction',
+                    'description' => 'Delivering on-time projects with specialized talent and solutions that build stronger tomorrow.',
+                    'icon_name' => 'Building',
+                    'color_class' => 'text-teal-500 bg-teal-50 hover:bg-teal-100',
+                    'video_file' => resolve_hashed_asset('Real-Estate')
+                ]
+            ],
+            'industries_stats' => [
+                ['value' => '25+', 'label' => 'Industries Served', 'icon_name' => 'Building2'],
+                ['value' => '500+', 'label' => 'Enterprise Clients', 'icon_name' => 'Users'],
+                ['value' => '1000+', 'label' => 'Successful Placements', 'icon_name' => 'ShieldCheck'],
+                ['value' => '20+', 'label' => 'Countries Reached', 'icon_name' => 'Globe'],
+                ['value' => '98%', 'label' => 'Client Satisfaction', 'icon_name' => 'Star']
+            ],
+            'industries_solutions_kicker' => 'How We Help Industries',
+            'industries_solutions_title' => 'Solutions Designed Around Your Industry Needs.',
+            'industries_solutions_list' => [
+                [
+                    'title' => 'Specialized Talent Networks',
+                    'description' => 'Access to pre-vetted professionals with industry-specific expertise.',
+                    'icon_name' => 'Users'
+                ],
+                [
+                    'title' => 'Consulting & Strategy',
+                    'description' => 'Advisory and consulting services to solve complex business challenges.',
+                    'icon_name' => 'Award'
+                ],
+                [
+                    'title' => 'Technology Solutions',
+                    'description' => 'Custom technology solutions that drive efficiency and innovation.',
+                    'icon_name' => 'Cpu'
+                ],
+                [
+                    'title' => 'Flexible Engagement Models',
+                    'description' => 'Scalable engagement models tailored to your business goals.',
+                    'icon_name' => 'ShieldCheck'
+                ]
+            ],
+            'industries_transform_title' => 'We go beyond staffing. We build partnerships that transform industries.',
+            'industries_transform_bg' => resolve_hashed_asset('solutions_skyline'),
+            'industries_transform_items' => [
+                [
+                    'title' => 'Understand',
+                    'description' => 'We learn your industry and business goals.',
+                    'icon_name' => 'Search'
+                ],
+                [
+                    'title' => 'Build',
+                    'description' => 'We deliver the right talent and solutions.',
+                    'icon_name' => 'Wrench'
+                ],
+                [
+                    'title' => 'Transform',
+                    'description' => 'We drive impact and long-term growth.',
+                    'icon_name' => 'Rocket'
+                ]
+            ],
+            'industries_cta_title' => 'Let\'s Drive Industry Innovation Together',
+            'industries_cta_description' => 'Partner with TechNova Systems to access the right talent and technology solutions for your industry.',
+            'industries_cta_button_text' => 'Schedule a Consultation',
+            'industries_cta_button_link' => '#contact'
+        ]
     ]
 ];
 
