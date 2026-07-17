@@ -1759,6 +1759,7 @@ function IndustriesPage() {
 
 function EmployersPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -2456,88 +2457,67 @@ function EmployersPage() {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 bg-white">
-        <div className="mx-auto max-w-[1440px] grid gap-12 lg:grid-cols-12 items-start">
-          {/* Left Side */}
-          <div className="lg:col-span-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-              Success Story
+      {/* FAQs Section */}
+      <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8 border-t border-slate-100">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
+              FAQs
             </p>
-            <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-              Real Impact. Real Results.
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+              Frequently Asked Questions
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-slate-500">
-              See how we help organizations achieve their hiring goals.
-            </p>
-            <a
-              href="#contact"
-              className="text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors mt-8 inline-flex items-center gap-1.5"
-            >
-              View All Case Studies
-              <ArrowRight size={14} />
-            </a>
           </div>
 
-          {/* Right Column: Case Studies */}
-          <div className="lg:col-span-8 grid gap-6 md:grid-cols-3">
-            {caseStudies.map((item) => {
-              return (
-                <div key={item.companyType} className={`rounded-3xl p-7 flex flex-col justify-between min-h-[320px] ${item.color}`}>
-                  <div>
-                    <span className="text-[9px] font-semibold tracking-wider text-[#a78bfa] uppercase">
-                      {item.companyType}
-                    </span>
-                    <h3 className="mt-4 text-sm font-semibold leading-relaxed">
-                      {item.headline}
-                    </h3>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 pt-6 border-t border-white/10 mt-6">
-                    {item.metrics.map((m) => (
-                      <div key={m.label}>
-                        <div className="text-lg font-bold text-white leading-none">{m.val}</div>
-                        <div className="text-[9px] font-medium text-white/60 mt-1">{m.label}</div>
-                      </div>
-                    ))}
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-2">
+            {[
+              {
+                q: "What is TechNova Systems' screening and vetting process?",
+                a: "We use a rigorous multi-stage vetting process that includes AI-powered technical assessments, portfolio reviews, and in-depth live engineering interviews to ensure only the top 3% of talent is presented to you."
+              },
+              {
+                q: "How fast can you place a candidate or deploy a managed team?",
+                a: "For individual contractors or direct-hires, we typically share qualified, vetted shortlists within 48 hours. Complete managed teams (squads) can be deployed and integrated within 2 to 3 weeks."
+              },
+              {
+                q: "What pricing or fee structures do you offer?",
+                a: "We offer flexible models tailored to your business: contingency-based direct hire placement fees, hourly contract billing, and fixed-scope monthly rates for dedicated managed engineering teams."
+              },
+              {
+                q: "Is there a warranty or replacement guarantee for direct hires?",
+                a: "Yes, we offer a comprehensive 90-day replacement guarantee on all direct-hire placements. If a candidate leaves or does not meet performance expectations, we will find a replacement at no additional cost."
+              },
+              {
+                q: "How do you handle IP protection and security compliance?",
+                a: "All contract developers and managed teams sign comprehensive NDAs and IP assignment agreements prior to onboarding. We strictly comply with your internal security standards, GDPR, and SOC2 requirements."
+              },
+              {
+                q: "Can we transition a contract developer to a full-time employee?",
+                a: "Absolutely! We offer a flexible contract-to-hire model that allows you to evaluate developers on your projects before converting them to full-time employees under structured transition terms."
+              }
+            ].map((faq, i) => (
+              <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 transition-all">
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  className="flex w-full items-center justify-between text-left font-bold text-slate-800 focus:outline-none"
+                >
+                  <span className="text-sm leading-snug pr-4">{faq.q}</span>
+                  <ChevronDown
+                    size={18}
+                    className={`shrink-0 text-slate-400 transition-transform duration-300 ${openFaqIndex === i ? "rotate-180 text-[#8B5CF6]" : ""
+                      }`}
+                  />
+                </button>
+                <div
+                  className={`grid transition-all duration-300 ease-in-out ${openFaqIndex === i ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 h-0 overflow-hidden"
+                    }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="text-xs leading-relaxed text-slate-500">{faq.a}</p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-4 py-12 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
-        <div className="mx-auto max-w-[1440px] relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
-          <div className="flex items-center gap-6">
-            <img
-              src={ctaCubes}
-              alt=""
-              className="h-24 w-auto hidden sm:block object-contain mix-blend-normal opacity-90 hover:scale-[1.05] transition-transform duration-500"
-            />
-            <div>
-              <h2 className="font-display text-3xl sm:text-4xl font-normal leading-tight">
-                Let's Build Your Dream Team
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-white/90 max-w-2xl">
-                Partner with TechNova Systems to find, hire, and manage the right talent—faster.
-                Your next great hire is just one conversation away.
-              </p>
-            </div>
-          </div>
-          <div className="shrink-0">
-            <Button
-              variant="glass"
-              size="hero"
-              className="bg-white/10 hover:bg-white/20 border-white/25 shadow-lg"
-              asChild
-            >
-              <a href="#contact">
-                Schedule a Consultation
-                <ArrowRight size={18} className="ml-1.5" />
-              </a>
-            </Button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
