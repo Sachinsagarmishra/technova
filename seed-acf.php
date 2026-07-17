@@ -42,6 +42,27 @@ function resolve_hashed_asset($prefix) {
 echo "<h1>TechNova Automated Seeder</h1>";
 echo "<p>Starting database seeding...</p>";
 
+// Programmatically import/update ACF field groups from acf-import.json
+$acf_json_path = __DIR__ . '/acf-import.json';
+if (file_exists($acf_json_path)) {
+    echo "<p>Importing/updating ACF Field Groups from acf-import.json...</p>";
+    $json_content = file_get_contents($acf_json_path);
+    $field_groups = json_decode($json_content, true);
+    
+    if (is_array($field_groups) && function_exists('acf_import_field_group')) {
+        foreach ($field_groups as $field_group) {
+            $imported = acf_import_field_group($field_group);
+            if ($imported) {
+                echo "<p style='color: green;'>Successfully imported Field Group: <strong>" . esc_html($field_group['title']) . "</strong></p>";
+            } else {
+                echo "<p style='color: red;'>Failed to import Field Group: <strong>" . esc_html($field_group['title']) . "</strong></p>";
+            }
+        }
+    } else {
+        echo "<p style='color: orange;'>Warning: ACF import function 'acf_import_field_group' is not available or JSON is invalid.</p>";
+    }
+}
+
 $pages = [
     'home' => [
         'title' => 'Home',
