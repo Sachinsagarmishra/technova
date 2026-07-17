@@ -2244,9 +2244,9 @@ function EmployersPage() {
               return (
                 <div key={item.title} className="group rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md flex flex-col justify-between min-h-[380px]">
                   <div>
-                    <div className="relative w-full h-32 overflow-hidden rounded-2xl mb-6 flex items-center justify-center">
+                    <div className="relative w-full h-32 overflow-hidden rounded-2xl mb-6 flex items-center justify-start">
                       <video
-                        className="w-full h-full object-contain"
+                        className="h-full object-contain object-left"
                         src={item.video}
                         autoPlay
                         loop
