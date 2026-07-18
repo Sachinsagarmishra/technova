@@ -856,10 +856,10 @@ $pages = [
                     'email' => 'Info@technovasystemsinc.com'
                 ]
             ],
-            'contact_form_id' => '1000',
-            'talent_form_id' => '1001',
-            'subscribe_form_id' => '1002',
-            'newsletter_form_id' => '1003',
+            'contact_form_id' => '21',
+            'talent_form_id' => '21',
+            'subscribe_form_id' => '21',
+            'newsletter_form_id' => '21',
             'contact_response_items' => [
                 [
                     'label' => 'Response within',
