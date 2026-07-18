@@ -133,6 +133,21 @@ function technova_custom_wpcf7_mail_components( $components, $form, $mail ) {
         }
     }
 
+    // Never send a blind copy. Keep the configured SMTP account unchanged.
+    if ( is_string( $components['headers'] ) ) {
+        $components['headers'] = preg_replace( '/^Bcc\s*:.*(?:\r\n|\r|\n|$)/mi', '', $components['headers'] );
+        $components['headers'] = trim( $components['headers'] );
+    } elseif ( is_array( $components['headers'] ) ) {
+        $components['headers'] = array_values(
+            array_filter(
+                $components['headers'],
+                static function ( $header ) {
+                    return ! is_string( $header ) || stripos( ltrim( $header ), 'Bcc:' ) !== 0;
+                }
+            )
+        );
+    }
+
     // Set custom subject line based on lead name & source
     if ( ! empty( $posted_data['your-name'] ) ) {
         $lead_name = esc_html( $posted_data['your-name'] );
