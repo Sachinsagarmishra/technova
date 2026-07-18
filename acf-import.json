@@ -628,7 +628,8 @@
         "key": "field_employers_bg_image",
         "label": "Hero Background Image",
         "name": "employers_bg_image",
-        "type": "text"
+        "type": "image",
+        "return_format": "url"
       },
       {
         "key": "field_employers_hero_features",
@@ -698,7 +699,8 @@
             "key": "field_employers_why_choose_card_gif",
             "label": "Card GIF URL/File",
             "name": "gif_file",
-            "type": "text"
+            "type": "file",
+            "return_format": "url"
           }
         ]
       },
@@ -737,7 +739,8 @@
             "key": "field_employers_sol_card_video",
             "label": "Card Video URL/File",
             "name": "video_file",
-            "type": "text"
+            "type": "file",
+            "return_format": "url"
           },
           {
             "key": "field_employers_sol_card_bullets",
@@ -882,7 +885,8 @@
             "key": "field_employers_ind_video",
             "label": "Video URL/File",
             "name": "video_file",
-            "type": "text"
+            "type": "file",
+            "return_format": "url"
           }
         ]
       },
