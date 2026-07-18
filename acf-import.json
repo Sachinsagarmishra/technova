@@ -625,6 +625,139 @@
         "type": "textarea"
       },
       {
+        "key": "field_employers_bg_image",
+        "label": "Hero Background Image",
+        "name": "employers_bg_image",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_hero_features",
+        "label": "Hero Features Badges",
+        "name": "employers_hero_features",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_hero_feat_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_hero_feat_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_hero_feat_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_employers_why_choose_kicker",
+        "label": "Why Choose Section Kicker",
+        "name": "employers_why_choose_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_why_choose_title",
+        "label": "Why Choose Section Title",
+        "name": "employers_why_choose_title",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_why_choose_description",
+        "label": "Why Choose Section Description",
+        "name": "employers_why_choose_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_employers_why_choose_list",
+        "label": "Why Choose Cards List",
+        "name": "employers_why_choose_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_why_choose_card_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_why_choose_card_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_employers_why_choose_card_gif",
+            "label": "Card GIF URL/File",
+            "name": "gif_file",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_employers_solutions_kicker",
+        "label": "Solutions Section Kicker",
+        "name": "employers_solutions_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_solutions_title",
+        "label": "Solutions Section Title",
+        "name": "employers_solutions_title",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_solutions_list",
+        "label": "Solutions Cards List",
+        "name": "employers_solutions_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_sol_card_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_sol_card_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_employers_sol_card_video",
+            "label": "Card Video URL/File",
+            "name": "video_file",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_sol_card_bullets",
+            "label": "Bullets List",
+            "name": "bullets",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Bullet",
+            "sub_fields": [
+              {
+                "key": "field_employers_sol_bullet_text",
+                "label": "Text",
+                "name": "text",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "key": "field_employers_stats",
         "label": "Stats List",
         "name": "employers_stats",
@@ -652,28 +785,124 @@
         ]
       },
       {
-        "key": "field_employers_timeline",
-        "label": "Timeline / Stepper Cards",
-        "name": "employers_timeline",
+        "key": "field_employers_how_work_kicker",
+        "label": "How We Work Kicker",
+        "name": "employers_how_work_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_how_work_title",
+        "label": "How We Work Title",
+        "name": "employers_how_work_title",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_how_work_description",
+        "label": "How We Work Description",
+        "name": "employers_how_work_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_employers_how_work_steps",
+        "label": "How We Work Steps List",
+        "name": "employers_how_work_steps",
         "type": "repeater",
         "layout": "row",
         "sub_fields": [
           {
-            "key": "field_employers_time_num",
-            "label": "Step Number",
-            "name": "step_number",
+            "key": "field_employers_step_num",
+            "label": "Step (e.g. STEP 01)",
+            "name": "step",
             "type": "text"
           },
           {
-            "key": "field_employers_time_title",
+            "key": "field_employers_step_title",
             "label": "Title",
             "name": "title",
             "type": "text"
           },
           {
-            "key": "field_employers_time_desc",
+            "key": "field_employers_step_desc",
             "label": "Description",
-            "name": "description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_employers_step_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_employers_industries_kicker",
+        "label": "Industries We Serve Kicker",
+        "name": "employers_industries_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_industries_title",
+        "label": "Industries We Serve Title",
+        "name": "employers_industries_title",
+        "type": "text"
+      },
+      {
+        "key": "field_employers_industries_list",
+        "label": "Industries We Serve List",
+        "name": "employers_industries_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_ind_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_ind_desc",
+            "label": "Description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_employers_ind_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_ind_color",
+            "label": "Color Class",
+            "name": "color_class",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_ind_video",
+            "label": "Video URL/File",
+            "name": "video_file",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_employers_faqs",
+        "label": "FAQs List",
+        "name": "employers_faqs",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_employers_faq_q",
+            "label": "Question",
+            "name": "q",
+            "type": "text"
+          },
+          {
+            "key": "field_employers_faq_a",
+            "label": "Answer",
+            "name": "a",
             "type": "textarea"
           }
         ]
@@ -683,7 +912,7 @@
         "label": "Contact Form 7 ID",
         "name": "employers_form_id",
         "type": "text",
-        "default_value": "1000"
+        "default_value": "21"
       }
     ],
     "location": [

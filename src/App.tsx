@@ -1885,80 +1885,165 @@ function EmployersPage() {
       setStatus("error");
     }
   };
-  const chooseReasons = [
-    {
-      title: "Deep Talent Network",
-      description: "Access a vast pool of pre-vetted professionals across technologies and domains.",
-      gif: deepTalentNetworkIcon,
-    },
-    {
-      title: "Industry Expertise",
-      description: "Our teams understand your industry challenges and deliver role-specific talent, faster.",
-      gif: industryExpertiseIcon,
-    },
-    {
-      title: "Flexible Engagement",
-      description: "From contract staffing to direct hire and managed teams—we offer what fits you best.",
-      gif: flexibleEngagementIcon,
-    },
-    {
-      title: "Quality You Can Count On",
-      description: "Rigorous screening, assessment, and validation to ensure the right talent every time.",
-      gif: qualityCountIcon,
-    },
-  ];
+  const heroFeatures = window.wpData?.employers_hero_features
+    ? window.wpData.employers_hero_features.map((item: any) => ({
+        title: item.title,
+        description: item.description,
+        icon: getIconComponent(item.icon_name || "Users"),
+      }))
+    : [
+        { title: "Access Top Pre-vetted Talent", description: "Skilled professionals ready to deliver.", icon: Users },
+        { title: "Hire Faster with Quality", description: "Reduce time-to-hire without compromising quality.", icon: Clock },
+        { title: "Reduce Costs & Improve Efficiency", description: "Optimize your hiring and operational costs.", icon: Wallet },
+        { title: "Scale Teams On Demand", description: "Flexible staffing that grows with your business.", icon: TrendingUp },
+      ];
 
-  const solutions = [
-    {
-      title: "Direct Hire",
-      description: "Full-time talent for long-term roles that drive your business forward.",
-      bullets: ["Permanent placements", "Leadership hiring", "Executive search"],
-      video: directHireVideo,
-    },
-    {
-      title: "Contract Staffing",
-      description: "Skilled professionals for short-term or project-based needs.",
-      bullets: ["Quick turnaround", "Specialized skills", "Flexible engagement"],
-      video: contractStaffingVideo,
-    },
-    {
-      title: "Managed Teams",
-      description: "Dedicated teams that integrate with your operations and scale with you.",
-      bullets: ["Team of experts", "Performance managed", "Scalable delivery"],
-      video: managedTeamsVideo,
-    },
-    {
-      title: "Workforce Consulting",
-      description: "Data-driven insights and strategies to optimize your talent function.",
-      bullets: ["Workforce planning", "Process optimization", "Market intelligence"],
-      video: workforceConsultingVideo,
-    },
-  ];
+  const chooseReasons = window.wpData?.employers_why_choose_list
+    ? window.wpData.employers_why_choose_list.map((item: any, idx: number) => {
+        const fallbackGifs = [deepTalentNetworkIcon, industryExpertiseIcon, flexibleEngagementIcon, qualityCountIcon];
+        return {
+          title: item.title,
+          description: item.description,
+          gif: getAcfUrl(item.gif_file) || fallbackGifs[idx % 4],
+        };
+      })
+    : [
+        {
+          title: "Deep Talent Network",
+          description: "Access a vast pool of pre-vetted professionals across technologies and domains.",
+          gif: deepTalentNetworkIcon,
+        },
+        {
+          title: "Industry Expertise",
+          description: "Our teams understand your industry challenges and deliver role-specific talent, faster.",
+          gif: industryExpertiseIcon,
+        },
+        {
+          title: "Flexible Engagement",
+          description: "From contract staffing to direct hire and managed teams—we offer what fits you best.",
+          gif: flexibleEngagementIcon,
+        },
+        {
+          title: "Quality You Can Count On",
+          description: "Rigorous screening, assessment, and validation to ensure the right talent every time.",
+          gif: qualityCountIcon,
+        },
+      ];
 
-  const stats = [
-    { value: "500+", label: "Enterprise Clients", icon: Building2 },
-    { value: "1000+", label: "Successful Placements", icon: Users },
-    { value: "48H", label: "Average Time to Shortlist", icon: Clock },
-    { value: "95%", label: "Client Retention Rate", icon: ShieldCheck },
-    { value: "8+", label: "Industries Served", icon: Globe },
-  ];
+  const solutions = window.wpData?.employers_solutions_list
+    ? window.wpData.employers_solutions_list.map((item: any, idx: number) => {
+        const fallbackVideos = [directHireVideo, contractStaffingVideo, managedTeamsVideo, workforceConsultingVideo];
+        return {
+          title: item.title,
+          description: item.description,
+          bullets: item.bullets ? item.bullets.map((b: any) => b.text) : [],
+          video: getAcfUrl(item.video_file) || fallbackVideos[idx % 4],
+        };
+      })
+    : [
+        {
+          title: "Direct Hire",
+          description: "Full-time talent for long-term roles that drive your business forward.",
+          bullets: ["Permanent placements", "Leadership hiring", "Executive search"],
+          video: directHireVideo,
+        },
+        {
+          title: "Contract Staffing",
+          description: "Skilled professionals for short-term or project-based needs.",
+          bullets: ["Quick turnaround", "Specialized skills", "Flexible engagement"],
+          video: contractStaffingVideo,
+        },
+        {
+          title: "Managed Teams",
+          description: "Dedicated teams that integrate with your operations and scale with you.",
+          bullets: ["Team of experts", "Performance managed", "Scalable delivery"],
+          video: managedTeamsVideo,
+        },
+        {
+          title: "Workforce Consulting",
+          description: "Data-driven insights and strategies to optimize your talent function.",
+          bullets: ["Workforce planning", "Process optimization", "Market intelligence"],
+          video: workforceConsultingVideo,
+        },
+      ];
 
-  const steps = [
-    { step: "STEP 01", title: "Understand", desc: "We learn your goals, challenges, and hiring needs.", icon: Search },
-    { step: "STEP 02", title: "Source", desc: "We identify and shortlist the best-matched talent.", icon: UserRoundSearch },
-    { step: "STEP 03", title: "Evaluate", desc: "We assess skills, culture fit, and potential.", icon: BadgeCheck },
-    { step: "STEP 04", title: "Deliver", desc: "We present pre-vetted candidates for your final selection.", icon: FileUser },
-    { step: "STEP 05", title: "Onboard & Support", desc: "Smooth onboarding and ongoing support for long-term success.", icon: ShieldCheck },
-  ];
+  const stats = window.wpData?.employers_stats
+    ? window.wpData.employers_stats.map((s: any) => ({
+        value: s.value,
+        label: s.label,
+        icon: getIconComponent(s.icon_name || "Building2"),
+      }))
+    : [
+        { value: "500+", label: "Enterprise Clients", icon: Building2 },
+        { value: "1000+", label: "Successful Placements", icon: Users },
+        { value: "48H", label: "Average Time to Shortlist", icon: Clock },
+        { value: "95%", label: "Client Retention Rate", icon: ShieldCheck },
+        { value: "8+", label: "Industries Served", icon: Globe },
+      ];
 
-  const industries = [
-    { title: "Technology & IT", desc: "Powering innovation with top tech talent and advanced solutions.", icon: Cpu, color: "text-purple-500 bg-purple-50", video: technologyVideo },
-    { title: "Banking & Financial", desc: "Delivering expertise that drives growth and ensures compliance.", icon: Landmark, color: "text-emerald-500 bg-emerald-50", video: financialServicesVideo },
-    { title: "Healthcare", desc: "Connecting healthcare organizations with skilled professionals.", icon: Heart, color: "text-rose-500 bg-rose-50", video: healthcareVideo },
-    { title: "Manufacturing", desc: "Empowering manufacturers with talent that drives efficiency.", icon: Factory, color: "text-orange-500 bg-orange-50", video: manufacturingVideo },
-    { title: "Retail & E-commerce", desc: "Building agile teams that enhance customer experience.", icon: ShoppingCart, color: "text-amber-500 bg-amber-50", video: retailEcommerceVideo },
-    { title: "Logistics & Supply Chain", desc: "Strengthening supply chains with expert talent and smart solutions.", icon: Truck, color: "text-indigo-500 bg-indigo-50", video: logisticsVideo },
-  ];
+  const steps = window.wpData?.employers_how_work_steps
+    ? window.wpData.employers_how_work_steps.map((item: any) => ({
+        step: item.step,
+        title: item.title,
+        desc: item.desc,
+        icon: getIconComponent(item.icon_name || "Search"),
+      }))
+    : [
+        { step: "STEP 01", title: "Understand", desc: "We learn your goals, challenges, and hiring needs.", icon: Search },
+        { step: "STEP 02", title: "Source", desc: "We identify and shortlist the best-matched talent.", icon: UserRoundSearch },
+        { step: "STEP 03", title: "Evaluate", desc: "We assess skills, culture fit, and potential.", icon: BadgeCheck },
+        { step: "STEP 04", title: "Deliver", desc: "We present pre-vetted candidates for your final selection.", icon: FileUser },
+        { step: "STEP 05", title: "Onboard & Support", desc: "Smooth onboarding and ongoing support for long-term success.", icon: ShieldCheck },
+      ];
+
+  const industries = window.wpData?.employers_industries_list
+    ? window.wpData.employers_industries_list.map((item: any, idx: number) => {
+        const fallbackVideos = [technologyVideo, financialServicesVideo, healthcareVideo, manufacturingVideo, retailEcommerceVideo, logisticsVideo];
+        return {
+          title: item.title,
+          desc: item.desc,
+          icon: getIconComponent(item.icon_name || "Cpu"),
+          color: item.color_class || "text-purple-500 bg-purple-50",
+          video: getAcfUrl(item.video_file) || fallbackVideos[idx % 6],
+        };
+      })
+    : [
+        { title: "Technology & IT", desc: "Powering innovation with top tech talent and advanced solutions.", icon: Cpu, color: "text-purple-500 bg-purple-50", video: technologyVideo },
+        { title: "Banking & Financial", desc: "Delivering expertise that drives growth and ensures compliance.", icon: Landmark, color: "text-emerald-500 bg-emerald-50", video: financialServicesVideo },
+        { title: "Healthcare", desc: "Connecting healthcare organizations with skilled professionals.", icon: Heart, color: "text-rose-500 bg-rose-50", video: healthcareVideo },
+        { title: "Manufacturing", desc: "Empowering manufacturers with talent that drives efficiency.", icon: Factory, color: "text-orange-500 bg-orange-50", video: manufacturingVideo },
+        { title: "Retail & E-commerce", desc: "Building agile teams that enhance customer experience.", icon: ShoppingCart, color: "text-amber-500 bg-amber-50", video: retailEcommerceVideo },
+        { title: "Logistics & Supply Chain", desc: "Strengthening supply chains with expert talent and smart solutions.", icon: Truck, color: "text-indigo-500 bg-indigo-50", video: logisticsVideo },
+      ];
+
+  const faqs = window.wpData?.employers_faqs
+    ? window.wpData.employers_faqs
+    : [
+        {
+          q: "What is TechNova Systems' screening and vetting process?",
+          a: "We use a rigorous multi-stage vetting process that includes AI-powered technical assessments, portfolio reviews, and in-depth live engineering interviews to ensure only the top 3% of talent is presented to you."
+        },
+        {
+          q: "How fast can you place a candidate or deploy a managed team?",
+          a: "For individual contractors or direct-hires, we typically share qualified, vetted shortlists within 48 hours. Complete managed teams (squads) can be deployed and integrated within 2 to 3 weeks."
+        },
+        {
+          q: "What pricing or fee structures do you offer?",
+          a: "We offer flexible models tailored to your business: contingency-based direct hire placement fees, hourly contract billing, and fixed-scope monthly rates for dedicated managed engineering teams."
+        },
+        {
+          q: "Is there a warranty or replacement guarantee for direct hires?",
+          a: "Yes, we offer a comprehensive 90-day replacement guarantee on all direct-hire placements. If a candidate leaves or does not meet performance expectations, we will find a replacement at no additional cost."
+        },
+        {
+          q: "How do you handle IP protection and security compliance?",
+          a: "All contract developers and managed teams sign comprehensive NDAs and IP assignment agreements prior to onboarding. We strictly comply with your internal security standards, GDPR, and SOC2 requirements."
+        },
+        {
+          q: "Can we transition a contract developer to a full-time employee?",
+          a: "Absolutely! We offer a flexible contract-to-hire model that allows you to evaluate developers on your projects before converting them to full-time employees under structured transition terms."
+        }
+      ];
 
   const caseStudies = [
     {
@@ -1998,7 +2083,7 @@ function EmployersPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
         <img
-          src={industryHeroBg}
+          src={getAcfUrl(window.wpData?.employers_bg_image) || industryHeroBg}
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
           aria-hidden="true"
@@ -2031,53 +2116,29 @@ function EmployersPage() {
             </p>
 
             <div className="mt-16 grid gap-6 sm:grid-cols-2 max-w-xl">
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-500/20 text-purple-300">
-                  <Users size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Access Top Pre-vetted Talent</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Skilled professionals ready to deliver.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
-                  <Clock size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Hire Faster with Quality</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Reduce time-to-hire without compromising quality.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-300">
-                  <Wallet size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Reduce Costs & Improve Efficiency</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Optimize your hiring and operational costs.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/20 text-indigo-300">
-                  <TrendingUp size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Scale Teams On Demand</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Flexible staffing that grows with your business.
-                  </p>
-                </div>
-              </div>
+              {heroFeatures.map((item: any, idx: number) => {
+                const Icon = item.icon;
+                const colors = [
+                  "bg-purple-500/20 text-purple-300",
+                  "bg-amber-500/20 text-amber-300",
+                  "bg-emerald-500/20 text-emerald-300",
+                  "bg-indigo-500/20 text-indigo-300"
+                ];
+                const resolvedColor = colors[idx % colors.length];
+                return (
+                  <div key={idx} className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${resolvedColor}`}>
+                      <Icon size={20} />
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">{item.title}</h3>
+                      <p className="mt-2 text-xs leading-5 text-white/70">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -2246,21 +2307,19 @@ function EmployersPage() {
           {/* Left Side */}
           <div className="lg:col-span-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-              Why Employers Choose TechNova
+              {window.wpData?.employers_why_choose_kicker || "Why Employers Choose TechNova"}
             </p>
             <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-              A Strategic Partner for All Your Talent Needs
+              {window.wpData?.employers_why_choose_title || "A Strategic Partner for All Your Talent Needs"}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-slate-500">
-              We go beyond traditional staffing. Our technology-driven approach and
-              consultative partnership help you achieve better outcomes at every stage
-              of your growth.
+              {window.wpData?.employers_why_choose_description || "We go beyond traditional staffing. Our technology-driven approach and consultative partnership help you achieve better outcomes at every stage of your growth."}
             </p>
           </div>
 
           {/* Right Grid */}
           <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
-            {chooseReasons.map((item) => {
+            {chooseReasons.map((item: any) => {
               return (
                 <div key={item.title} className="rounded-2xl border border-slate-100 bg-[#f8fafc] p-6 shadow-sm flex flex-col justify-between">
                   <div>
@@ -2283,10 +2342,10 @@ function EmployersPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-                Our Solutions
+                {window.wpData?.employers_solutions_kicker || "Our Solutions"}
               </p>
               <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-                Flexible Staffing Solutions Built Around Your Business
+                {window.wpData?.employers_solutions_title || "Flexible Staffing Solutions Built Around Your Business"}
               </h2>
             </div>
             <a
@@ -2299,7 +2358,7 @@ function EmployersPage() {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {solutions.map((item) => {
+            {solutions.map((item: any) => {
               return (
                 <div key={item.title} className="group rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md flex flex-col justify-between min-h-[380px]">
                   <div>
@@ -2320,7 +2379,7 @@ function EmployersPage() {
                       {item.description}
                     </p>
                     <ul className="mt-5 space-y-2">
-                      {item.bullets.map((b) => (
+                      {item.bullets.map((b: any) => (
                         <li key={b} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
                           <Check size={14} className="text-[#8B5CF6]" />
                           <span>{b}</span>
@@ -2342,7 +2401,7 @@ function EmployersPage() {
 
           {/* Stats Bar */}
           <div className="mt-20 rounded-3xl border border-slate-100 bg-white p-8 sm:px-10 flex flex-wrap gap-8 justify-around items-center shadow-sm">
-            {stats.map((item) => {
+            {stats.map((item: any) => {
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex flex-col sm:flex-row items-center gap-3.5 text-center sm:text-left">
@@ -2366,14 +2425,13 @@ function EmployersPage() {
           {/* Left Column */}
           <div className="lg:col-span-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-              How We Work
+              {window.wpData?.employers_how_work_kicker || "How We Work"}
             </p>
             <h2 className="font-display mt-4 text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-              A Simple Process. Powerful Results.
+              {window.wpData?.employers_how_work_title || "A Simple Process. Powerful Results."}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-slate-500">
-              We make hiring seamless so you can focus on what matters most—growing your
-              business.
+              {window.wpData?.employers_how_work_description || "We make hiring seamless so you can focus on what matters most—growing your business."}
             </p>
             <Button
               variant="default"
@@ -2399,7 +2457,7 @@ function EmployersPage() {
               />
               {/* Step Dots on the line */}
               <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 flex justify-between px-3">
-                {steps.map((item, idx) => {
+                {steps.map((item: any, idx: number) => {
                   const isActive = idx <= activeStep;
                   const isCurrent = idx === activeStep;
                   return (
@@ -2425,7 +2483,7 @@ function EmployersPage() {
 
             {/* Step Columns */}
             <div className="space-y-6 sm:space-y-0 sm:flex sm:gap-4 sm:overflow-x-auto pb-4">
-              {steps.map((item, idx) => {
+              {steps.map((item: any, idx: number) => {
                 const Icon = item.icon;
                 const isCurrent = idx === activeStep;
                 return (
@@ -2476,13 +2534,13 @@ function EmployersPage() {
       <section className="px-4 py-20 sm:px-6 lg:px-8 bg-[#f8fafc] border-t border-slate-100">
         <div className="mx-auto max-w-[1440px]">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#8B5CF6]">
-            Industries We Serve
+            {window.wpData?.employers_industries_kicker || "Industries We Serve"}
           </p>
           <h2 className="font-display mt-4 text-center text-3xl font-normal tracking-tight text-[#0b132b] sm:text-4xl">
-            Industry-Aligned Expertise
+            {window.wpData?.employers_industries_title || "Industry-Aligned Expertise"}
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
-            {industries.map((item) => {
+            {industries.map((item: any) => {
               const Icon = item.icon;
               return (
                 <div key={item.title} className="rounded-xl border border-slate-100 bg-white p-5 shadow-sm text-center flex flex-col justify-between min-h-[220px]">
@@ -2528,32 +2586,7 @@ function EmployersPage() {
           </div>
 
           <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-2">
-            {[
-              {
-                q: "What is TechNova Systems' screening and vetting process?",
-                a: "We use a rigorous multi-stage vetting process that includes AI-powered technical assessments, portfolio reviews, and in-depth live engineering interviews to ensure only the top 3% of talent is presented to you."
-              },
-              {
-                q: "How fast can you place a candidate or deploy a managed team?",
-                a: "For individual contractors or direct-hires, we typically share qualified, vetted shortlists within 48 hours. Complete managed teams (squads) can be deployed and integrated within 2 to 3 weeks."
-              },
-              {
-                q: "What pricing or fee structures do you offer?",
-                a: "We offer flexible models tailored to your business: contingency-based direct hire placement fees, hourly contract billing, and fixed-scope monthly rates for dedicated managed engineering teams."
-              },
-              {
-                q: "Is there a warranty or replacement guarantee for direct hires?",
-                a: "Yes, we offer a comprehensive 90-day replacement guarantee on all direct-hire placements. If a candidate leaves or does not meet performance expectations, we will find a replacement at no additional cost."
-              },
-              {
-                q: "How do you handle IP protection and security compliance?",
-                a: "All contract developers and managed teams sign comprehensive NDAs and IP assignment agreements prior to onboarding. We strictly comply with your internal security standards, GDPR, and SOC2 requirements."
-              },
-              {
-                q: "Can we transition a contract developer to a full-time employee?",
-                a: "Absolutely! We offer a flexible contract-to-hire model that allows you to evaluate developers on your projects before converting them to full-time employees under structured transition terms."
-              }
-            ].map((faq, i) => (
+            {faqs.map((faq: any, i: number) => (
               <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 transition-all">
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}

@@ -358,25 +358,234 @@ $pages = [
         'fields' => [
             'employers_kicker' => 'For Employers',
             'employers_headline' => 'Exceptional Talent. Measurable Impact. [accent]Built Around You.[/accent]',
-            'employers_description' => 'TechNova Systems helps enterprise engineering leaders scale their development capacity with speed, precision, and zero-headache.',
-            'employers_stats' => [
+            'employers_description' => 'TechNova Systems helps organizations hire, manage, and scale the right talent with speed, precision, and flexibility.',
+            'employers_bg_image' => resolve_hashed_asset('industry_hero_bg'),
+            'employers_hero_features' => [
                 [
-                    'value' => '25+',
-                    'label' => 'Industries Served',
-                    'icon_name' => 'Building2'
-                ],
-                [
-                    'value' => '500+',
-                    'label' => 'Enterprise Partners',
+                    'title' => 'Access Top Pre-vetted Talent',
+                    'description' => 'Skilled professionals ready to deliver.',
                     'icon_name' => 'Users'
                 ],
                 [
-                    'value' => '98%',
-                    'label' => 'Client Retention Rate',
-                    'icon_name' => 'Star'
+                    'title' => 'Hire Faster with Quality',
+                    'description' => 'Reduce time-to-hire without compromising quality.',
+                    'icon_name' => 'Clock'
+                ],
+                [
+                    'title' => 'Reduce Costs & Improve Efficiency',
+                    'description' => 'Optimize your hiring and operational costs.',
+                    'icon_name' => 'Wallet'
+                ],
+                [
+                    'title' => 'Scale Teams On Demand',
+                    'description' => 'Flexible staffing that grows with your business.',
+                    'icon_name' => 'TrendingUp'
                 ]
             ],
-            'employers_form_id' => '1000'
+            'employers_why_choose_kicker' => 'Why Employers Choose TechNova',
+            'employers_why_choose_title' => 'A Strategic Partner for All Your Talent Needs',
+            'employers_why_choose_description' => 'We go beyond traditional staffing. Our technology-driven approach and consultative partnership help you achieve better outcomes at every stage of your growth.',
+            'employers_why_choose_list' => [
+                [
+                    'title' => 'Deep Talent Network',
+                    'description' => 'Access a vast pool of pre-vetted professionals across technologies and domains.',
+                    'gif_file' => resolve_hashed_asset('Deep Talent Network')
+                ],
+                [
+                    'title' => 'Industry Expertise',
+                    'description' => 'Our teams understand your industry challenges and deliver role-specific talent, faster.',
+                    'gif_file' => resolve_hashed_asset('Industry Expertise')
+                ],
+                [
+                    'title' => 'Flexible Engagement',
+                    'description' => 'From contract staffing to direct hire and managed teams—we offer what fits you best.',
+                    'gif_file' => resolve_hashed_asset('Flexible Engagement')
+                ],
+                [
+                    'title' => 'Quality You Can Count On',
+                    'description' => 'Rigorous screening, assessment, and validation to ensure the right talent every time.',
+                    'gif_file' => resolve_hashed_asset('Quality You Can Count On')
+                ]
+            ],
+            'employers_solutions_kicker' => 'Our Solutions',
+            'employers_solutions_title' => 'Flexible Staffing Solutions Built Around Your Business',
+            'employers_solutions_list' => [
+                [
+                    'title' => 'Direct Hire',
+                    'description' => 'Full-time talent for long-term roles that drive your business forward.',
+                    'video_file' => resolve_hashed_asset('Direct Hire'),
+                    'bullets' => [
+                        ['text' => 'Permanent placements'],
+                        ['text' => 'Leadership hiring'],
+                        ['text' => 'Executive search']
+                    ]
+                ],
+                [
+                    'title' => 'Contract Staffing',
+                    'description' => 'Skilled professionals for short-term or project-based needs.',
+                    'video_file' => resolve_hashed_asset('Contract-Staffing'),
+                    'bullets' => [
+                        ['text' => 'Quick turnaround'],
+                        ['text' => 'Specialized skills'],
+                        ['text' => 'Flexible engagement']
+                    ]
+                ],
+                [
+                    'title' => 'Managed Teams',
+                    'description' => 'Dedicated teams that integrate with your operations and scale with you.',
+                    'video_file' => resolve_hashed_asset('Managed-Teams'),
+                    'bullets' => [
+                        ['text' => 'Team of experts'],
+                        ['text' => 'Performance managed'],
+                        ['text' => 'Scalable delivery']
+                    ]
+                ],
+                [
+                    'title' => 'Workforce Consulting',
+                    'description' => 'Data-driven insights and strategies to optimize your talent function.',
+                    'video_file' => resolve_hashed_asset('Workforce-Consulting'),
+                    'bullets' => [
+                        ['text' => 'Workforce planning'],
+                        ['text' => 'Process optimization'],
+                        ['text' => 'Market intelligence']
+                    ]
+                ]
+            ],
+            'employers_stats' => [
+                [
+                    'value' => '500+',
+                    'label' => 'Enterprise Clients',
+                    'icon_name' => 'Building2'
+                ],
+                [
+                    'value' => '1000+',
+                    'label' => 'Successful Placements',
+                    'icon_name' => 'Users'
+                ],
+                [
+                    'value' => '48H',
+                    'label' => 'Average Time to Shortlist',
+                    'icon_name' => 'Clock'
+                ],
+                [
+                    'value' => '95%',
+                    'label' => 'Client Retention Rate',
+                    'icon_name' => 'ShieldCheck'
+                ],
+                [
+                    'value' => '8+',
+                    'label' => 'Industries Served',
+                    'icon_name' => 'Globe'
+                ]
+            ],
+            'employers_how_work_kicker' => 'How We Work',
+            'employers_how_work_title' => 'A Simple Process. Powerful Results.',
+            'employers_how_work_description' => 'We make hiring seamless so you can focus on what matters most—growing your business.',
+            'employers_how_work_steps' => [
+                [
+                    'step' => 'STEP 01',
+                    'title' => 'Understand',
+                    'desc' => 'We learn your goals, challenges, and hiring needs.',
+                    'icon_name' => 'Search'
+                ],
+                [
+                    'step' => 'STEP 02',
+                    'title' => 'Source',
+                    'desc' => 'We identify and shortlist the best-matched talent.',
+                    'icon_name' => 'UserRoundSearch'
+                ],
+                [
+                    'step' => 'STEP 03',
+                    'title' => 'Evaluate',
+                    'desc' => 'We assess skills, culture fit, and potential.',
+                    'icon_name' => 'BadgeCheck'
+                ],
+                [
+                    'step' => 'STEP 04',
+                    'title' => 'Deliver',
+                    'desc' => 'We present pre-vetted candidates for your final selection.',
+                    'icon_name' => 'FileUser'
+                ],
+                [
+                    'step' => 'STEP 05',
+                    'title' => 'Onboard & Support',
+                    'desc' => 'Smooth onboarding and ongoing support for long-term success.',
+                    'icon_name' => 'ShieldCheck'
+                ]
+            ],
+            'employers_industries_kicker' => 'Industries We Serve',
+            'employers_industries_title' => 'Industry-Aligned Expertise',
+            'employers_industries_list' => [
+                [
+                    'title' => 'Technology & IT',
+                    'desc' => 'Powering innovation with top tech talent and advanced solutions.',
+                    'icon_name' => 'Cpu',
+                    'color_class' => 'text-purple-500 bg-purple-50',
+                    'video_file' => resolve_hashed_asset('Technology')
+                ],
+                [
+                    'title' => 'Banking & Financial',
+                    'desc' => 'Delivering expertise that drives growth and ensures compliance.',
+                    'icon_name' => 'Landmark',
+                    'color_class' => 'text-emerald-500 bg-emerald-50',
+                    'video_file' => resolve_hashed_asset('Financial-Services')
+                ],
+                [
+                    'title' => 'Healthcare',
+                    'desc' => 'Connecting healthcare organizations with skilled professionals.',
+                    'icon_name' => 'Heart',
+                    'color_class' => 'text-rose-500 bg-rose-50',
+                    'video_file' => resolve_hashed_asset('Healthcare')
+                ],
+                [
+                    'title' => 'Manufacturing',
+                    'desc' => 'Empowering manufacturers with talent that drives efficiency.',
+                    'icon_name' => 'Factory',
+                    'color_class' => 'text-orange-500 bg-orange-50',
+                    'video_file' => resolve_hashed_asset('Manufacturing')
+                ],
+                [
+                    'title' => 'Retail & E-commerce',
+                    'desc' => 'Building agile teams that enhance customer experience.',
+                    'icon_name' => 'ShoppingCart',
+                    'color_class' => 'text-amber-500 bg-amber-50',
+                    'video_file' => resolve_hashed_asset('Retail-E-Commerce')
+                ],
+                [
+                    'title' => 'Logistics & Supply Chain',
+                    'desc' => 'Strengthening supply chains with expert talent and smart solutions.',
+                    'icon_name' => 'Truck',
+                    'color_class' => 'text-indigo-500 bg-indigo-50',
+                    'video_file' => resolve_hashed_asset('Logistics')
+                ]
+            ],
+            'employers_faqs' => [
+                [
+                    'q' => "What is TechNova Systems' screening and vetting process?",
+                    'a' => 'We use a rigorous multi-stage vetting process that includes AI-powered technical assessments, portfolio reviews, and in-depth live engineering interviews to ensure only the top 3% of talent is presented to you.'
+                ],
+                [
+                    'q' => 'How fast can you place a candidate or deploy a managed team?',
+                    'a' => 'For individual contractors or direct-hires, we typically share qualified, vetted shortlists within 48 hours. Complete managed teams (squads) can be deployed and integrated within 2 to 3 weeks.'
+                ],
+                [
+                    'q' => 'What pricing or fee structures do you offer?',
+                    'a' => 'We offer flexible models tailored to your business: contingency-based direct hire placement fees, hourly contract billing, and fixed-scope monthly rates for dedicated managed engineering teams.'
+                ],
+                [
+                    'q' => 'Is there a warranty or replacement guarantee for direct hires?',
+                    'a' => 'Yes, we offer a comprehensive 90-day replacement guarantee on all direct-hire placements. If a candidate leaves or does not meet performance expectations, we will find a replacement at no additional cost.'
+                ],
+                [
+                    'q' => 'How do you handle IP protection and security compliance?',
+                    'a' => 'All contract developers and managed teams sign comprehensive NDAs and IP assignment agreements prior to onboarding. We strictly comply with your internal security standards, GDPR, and SOC2 requirements.'
+                ],
+                [
+                    'q' => 'Can we transition a contract developer to a full-time employee?',
+                    'a' => 'Absolutely! We offer a flexible contract-to-hire model that allows you to evaluate developers on your projects before converting them to full-time employees under structured transition terms.'
+                ]
+            ],
+            'employers_form_id' => '21'
         ]
     ],
     'insights' => [
