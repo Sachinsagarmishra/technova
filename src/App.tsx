@@ -3246,6 +3246,194 @@ function TalentPage() {
   const [submitted, setSubmitted] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
+  const heroBadges = window.wpData?.talent_hero_badges
+    ? window.wpData.talent_hero_badges.map((b: any) => ({
+        title: b.title,
+        description: b.description,
+        icon: getIconComponent(b.icon_name) || Building2
+      }))
+    : [
+        { title: "Top Companies", description: "Access leading organizations.", icon: Building2 },
+        { title: "Career Growth", description: "Opportunities that accelerate your career.", icon: TrendingUp },
+        { title: "Personalized Match", description: "AI-powered matching for the right roles.", icon: BadgeCheck }
+      ];
+
+  const talentStatsList = window.wpData?.talent_stats
+    ? window.wpData.talent_stats.map((s: any, idx: number) => {
+        const colors = [
+          "text-purple-400 bg-purple-500/10",
+          "text-amber-400 bg-amber-500/10",
+          "text-emerald-400 bg-emerald-500/10",
+          "text-blue-400 bg-blue-500/10"
+        ];
+        return {
+          value: s.value,
+          label: s.label,
+          icon: getIconComponent(s.icon_name) || BriefcaseBusiness,
+          color: colors[idx % 4]
+        };
+      })
+    : [
+        { value: "1000+", label: "Active Job Opportunities", icon: BriefcaseBusiness, color: "text-purple-400 bg-purple-500/10" },
+        { value: "500+", label: "Top Hiring Partners", icon: Building2, color: "text-amber-400 bg-amber-500/10" },
+        { value: "25K+", label: "Talents Placed", icon: Users, color: "text-emerald-400 bg-emerald-500/10" },
+        { value: "98%", label: "Candidate Satisfaction", icon: Star, color: "text-blue-400 bg-blue-500/10" },
+      ];
+
+  const talentJobsList = window.wpData?.talent_jobs_list
+    ? window.wpData.talent_jobs_list.map((j: any, idx: number) => {
+        const fallbacks = [
+          { title: "AI & Machine Learning", desc: "Build intelligent systems that shape the future.", icon: BrainCircuit, color: "text-purple-600 bg-purple-50 hover:bg-purple-100/50" },
+          { title: "Software Development", desc: "Create scalable applications and digital experiences.", icon: Cpu, color: "text-orange-600 bg-orange-50 hover:bg-orange-100/50" },
+          { title: "Cloud & DevOps", desc: "Design, deploy and scale modern cloud solutions.", icon: Globe, color: "text-emerald-600 bg-emerald-50 hover:bg-emerald-100/50" },
+          { title: "Cybersecurity", desc: "Protect systems and data in a digital-first world.", icon: Lock, color: "text-blue-600 bg-blue-50 hover:bg-blue-100/50" },
+          { title: "UI/UX Design", desc: "Design meaningful experiences people love.", icon: Palette, color: "text-[#db2777] bg-pink-50 hover:bg-pink-100/50" },
+          { title: "Data Science", desc: "Turn data into insights and business impact.", icon: TrendingUp, color: "text-cyan-600 bg-cyan-50 hover:bg-cyan-100/50" }
+        ];
+        const fb = fallbacks[idx % 6];
+        return {
+          title: j.title || fb.title,
+          desc: j.desc || fb.desc,
+          icon: getIconComponent(j.icon_name) || fb.icon,
+          color: j.color_class || fb.color
+        };
+      })
+    : [
+        { title: "AI & Machine Learning", desc: "Build intelligent systems that shape the future.", icon: BrainCircuit, color: "text-purple-600 bg-purple-50 hover:bg-purple-100/50" },
+        { title: "Software Development", desc: "Create scalable applications and digital experiences.", icon: Cpu, color: "text-orange-600 bg-orange-50 hover:bg-orange-100/50" },
+        { title: "Cloud & DevOps", desc: "Design, deploy and scale modern cloud solutions.", icon: Globe, color: "text-emerald-600 bg-emerald-50 hover:bg-emerald-100/50" },
+        { title: "Cybersecurity", desc: "Protect systems and data in a digital-first world.", icon: Lock, color: "text-blue-600 bg-blue-50 hover:bg-blue-100/50" },
+        { title: "UI/UX Design", desc: "Design meaningful experiences people love.", icon: Palette, color: "text-[#db2777] bg-pink-50 hover:bg-pink-100/50" },
+        { title: "Data Science", desc: "Turn data into insights and business impact.", icon: TrendingUp, color: "text-cyan-600 bg-cyan-50 hover:bg-cyan-100/50" }
+      ];
+
+  const talentWhyList = window.wpData?.talent_why_list
+    ? window.wpData.talent_why_list.map((w: any, idx: number) => {
+        const fallbacks = [
+          { title: "Career Growth", desc: "Access learning resources, upskilling programs, and challenging opportunities.", icon: TrendingUp, color: "text-purple-600 bg-purple-100/50", gradient: "from-purple-500/5 to-transparent" },
+          { title: "Top Employers", desc: "Work with leading companies that value talent and drive innovation.", icon: Building2, color: "text-amber-600 bg-amber-100/50", gradient: "from-amber-500/5 to-transparent" },
+          { title: "Personalized Matching", desc: "AI-powered matching connects you with roles that fit your skills and goals.", icon: BrainCircuit, color: "text-emerald-600 bg-emerald-100/50", gradient: "from-emerald-500/5 to-transparent" },
+          { title: "Dedicated Support", desc: "Our career experts are here to guide you at every stage of your journey.", icon: ShieldCheck, color: "text-blue-600 bg-blue-100/50", gradient: "from-blue-500/5 to-transparent" }
+        ];
+        const fb = fallbacks[idx % 4];
+        return {
+          title: w.title || fb.title,
+          desc: w.desc || fb.desc,
+          icon: getIconComponent(w.icon_name) || fb.icon,
+          color: w.color_class || fb.color,
+          gradient: w.gradient_class || fb.gradient
+        };
+      })
+    : [
+        { title: "Career Growth", desc: "Access learning resources, upskilling programs, and challenging opportunities.", icon: TrendingUp, color: "text-purple-600 bg-purple-100/50", gradient: "from-purple-500/5 to-transparent" },
+        { title: "Top Employers", desc: "Work with leading companies that value talent and drive innovation.", icon: Building2, color: "text-amber-600 bg-amber-100/50", gradient: "from-amber-500/5 to-transparent" },
+        { title: "Personalized Matching", desc: "AI-powered matching connects you with roles that fit your skills and goals.", icon: BrainCircuit, color: "text-emerald-600 bg-emerald-100/50", gradient: "from-emerald-500/5 to-transparent" },
+        { title: "Dedicated Support", desc: "Our career experts are here to guide you at every stage of your journey.", icon: ShieldCheck, color: "text-blue-600 bg-blue-100/50", gradient: "from-blue-500/5 to-transparent" }
+      ];
+
+  const talentHowWorkSteps = window.wpData?.talent_how_work_steps
+    ? window.wpData.talent_how_work_steps.map((item: any, idx: number) => {
+        const fallbacks = [
+          { step: "1", title: "Submit Resume", desc: "Share your profile and experience with us.", icon: FileUser, color: "border-purple-200 bg-purple-50 text-purple-600" },
+          { step: "2", title: "Profile Review", desc: "Our experts review your profile and understand your goals.", icon: UserRoundSearch, color: "border-amber-200 bg-amber-50 text-amber-600" },
+          { step: "3", title: "Interview Matching", desc: "We match you with the best opportunities.", icon: UsersRound, color: "border-emerald-200 bg-emerald-50 text-emerald-600" },
+          { step: "4", title: "Employer Interviews", desc: "Meet with top companies and showcase your skills.", icon: Building2, color: "border-blue-200 bg-blue-50 text-blue-600" },
+          { step: "5", title: "Offer & Onboarding", desc: "Get your offer and start your new career journey.", icon: BadgeCheck, color: "border-rose-200 bg-rose-50 text-rose-600" }
+        ];
+        const fb = fallbacks[idx % 5];
+        return {
+          step: item.step || fb.step,
+          title: item.title || fb.title,
+          desc: item.desc || fb.desc,
+          icon: getIconComponent(item.icon_name) || fb.icon,
+          color: item.color_class || fb.color
+        };
+      })
+    : [
+        { step: "1", title: "Submit Resume", desc: "Share your profile and experience with us.", icon: FileUser, color: "border-purple-200 bg-purple-50 text-purple-600" },
+        { step: "2", title: "Profile Review", desc: "Our experts review your profile and understand your goals.", icon: UserRoundSearch, color: "border-amber-200 bg-amber-50 text-amber-600" },
+        { step: "3", title: "Interview Matching", desc: "We match you with the best opportunities.", icon: UsersRound, color: "border-emerald-200 bg-emerald-50 text-emerald-600" },
+        { step: "4", title: "Employer Interviews", desc: "Meet with top companies and showcase your skills.", icon: Building2, color: "border-blue-200 bg-blue-50 text-blue-600" },
+        { step: "5", title: "Offer & Onboarding", desc: "Get your offer and start your new career journey.", icon: BadgeCheck, color: "border-rose-200 bg-rose-50 text-rose-600" }
+      ];
+
+  const talentStoriesList = window.wpData?.talent_stories_list
+    ? window.wpData.talent_stories_list.map((story: any, idx: number) => {
+        const fallbacks = [
+          { quote: "TechNova helped me transition into a product role at a top SaaS company. Their guidance and support made all the difference.", author: "Arjun Mehta", role: "Product Manager", logo: microsoftLogo, companyName: "Microsoft", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop" },
+          { quote: "The opportunities and mentorship I received through TechNova accelerated my growth beyond what I imagined.", author: "Priya Sharma", role: "Data Scientist", logo: null, companyName: "Deloitte.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" },
+          { quote: "Within weeks, I connected with the right team and the right role. Truly a game-changer for my career.", author: "Rahul Verma", role: "DevOps Engineer", logo: awsLogo, companyName: "AWS", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" },
+          { quote: "Designing user-centric products is my passion, and TechNova matched me with the exact creative team I was searching for.", author: "Anjali Rao", role: "UX Designer", logo: googleLogo, companyName: "Google", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop" },
+          { quote: "I wanted to work on high-scale systems. TechNova aligned my technical strengths with an amazing team.", author: "Vikram Singh", role: "Full Stack Engineer", logo: ciscoLogo, companyName: "Cisco", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop" },
+          { quote: "The transition from academia to industry was seamless. TechNova understood the unique nature of my AI background.", author: "Sneha Patel", role: "AI Research Engineer", logo: oracleLogo, companyName: "Oracle", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&auto=format&fit=crop" }
+        ];
+        const fb = fallbacks[idx % 6];
+        return {
+          quote: story.quote || fb.quote,
+          author: story.author || fb.author,
+          role: story.role || fb.role,
+          companyName: story.company_name || fb.companyName,
+          logo: getAcfUrl(story.company_logo) || fb.logo,
+          img: getAcfUrl(story.avatar) || fb.img
+        };
+      })
+    : [
+        { quote: "TechNova helped me transition into a product role at a top SaaS company. Their guidance and support made all the difference.", author: "Arjun Mehta", role: "Product Manager", logo: microsoftLogo, companyName: "Microsoft", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop" },
+        { quote: "The opportunities and mentorship I received through TechNova accelerated my growth beyond what I imagined.", author: "Priya Sharma", role: "Data Scientist", logo: null, companyName: "Deloitte.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" },
+        { quote: "Within weeks, I connected with the right team and the right role. Truly a game-changer for my career.", author: "Rahul Verma", role: "DevOps Engineer", logo: awsLogo, companyName: "AWS", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" },
+        { quote: "Designing user-centric products is my passion, and TechNova matched me with the exact creative team I was searching for.", author: "Anjali Rao", role: "UX Designer", logo: googleLogo, companyName: "Google", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop" },
+        { quote: "I wanted to work on high-scale systems. TechNova aligned my technical strengths with an amazing team.", author: "Vikram Singh", role: "Full Stack Engineer", logo: ciscoLogo, companyName: "Cisco", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop" },
+        { quote: "The transition from academia to industry was seamless. TechNova understood the unique nature of my AI background.", author: "Sneha Patel", role: "AI Research Engineer", logo: oracleLogo, companyName: "Oracle", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&auto=format&fit=crop" }
+      ];
+
+  const talentResourcesList = window.wpData?.talent_resources_list
+    ? window.wpData.talent_resources_list.map((r: any, idx: number) => {
+        const fallbacks = [
+          { title: "Resume Tips", desc: "Craft a resume that gets you noticed.", icon: FileUser, color: "text-purple-600 bg-purple-50" },
+          { title: "Interview Preparation", desc: "Ace your interviews with expert guidance and resources.", icon: BrainCircuit, color: "text-[#8b5cf6] bg-[#8b5cf6]/5" },
+          { title: "Salary Guide", desc: "Know your worth with role and industry insights.", icon: Wallet, color: "text-emerald-600 bg-emerald-50" },
+          { title: "AI Career Trends", desc: "Explore how AI is shaping the future of work.", icon: Cpu, color: "text-blue-600 bg-blue-50" }
+        ];
+        const fb = fallbacks[idx % 4];
+        return {
+          title: r.title || fb.title,
+          desc: r.desc || fb.desc,
+          icon: getIconComponent(r.icon_name) || fb.icon,
+          color: r.color_class || fb.color
+        };
+      })
+    : [
+        { title: "Resume Tips", desc: "Craft a resume that gets you noticed.", icon: FileUser, color: "text-purple-600 bg-purple-50" },
+        { title: "Interview Preparation", desc: "Ace your interviews with expert guidance and resources.", icon: BrainCircuit, color: "text-[#8b5cf6] bg-[#8b5cf6]/5" },
+        { title: "Salary Guide", desc: "Know your worth with role and industry insights.", icon: Wallet, color: "text-emerald-600 bg-emerald-50" },
+        { title: "AI Career Trends", desc: "Explore how AI is shaping the future of work.", icon: Cpu, color: "text-blue-600 bg-blue-50" }
+      ];
+
+  const talentFaqsList = window.wpData?.talent_faqs
+    ? window.wpData.talent_faqs.map((faq: any, idx: number) => {
+        const fallbacks = [
+          { q: "How can I apply for jobs through TechNova Systems?", a: "You can apply by submitting your resume through our online form above. Once submitted, our AI-powered matching system and career consultants will review your profile and match you with suitable open positions." },
+          { q: "How does TechNova match me with jobs?", a: "We use a combination of advanced AI-powered matching algorithms and expert human review to assess your skills, experience, and career goals, ensuring we find roles that are a perfect fit." },
+          { q: "Is there a fee to apply for jobs?", a: "No, there is absolutely no fee for candidates. Our recruitment services are entirely free for job seekers, as we partner with employers to fill their open roles." },
+          { q: "Can I update my resume after submitting?", a: "Yes! You can re-submit the form at any time with your updated resume, or reach out directly to your assigned TechNova career consultant to update your profile details." },
+          { q: "How long does the hiring process take?", a: "The timeline varies based on the role and employer requirements. Typically, we present shortlisted candidates to employers within 48 hours of initial review, and the full process takes between 2 to 4 weeks." },
+          { q: "What types of companies hire through TechNova?", a: "We work with a wide range of companies, from fast-growing technology startups to Fortune 500 enterprises, across industries like Tech, Finance, Healthcare, Retail, and Manufacturing." }
+        ];
+        const fb = fallbacks[idx % 6];
+        return {
+          q: faq.q || fb.q,
+          a: faq.a || fb.a
+        };
+      })
+    : [
+        { q: "How can I apply for jobs through TechNova Systems?", a: "You can apply by submitting your resume through our online form above. Once submitted, our AI-powered matching system and career consultants will review your profile and match you with suitable open positions." },
+        { q: "How does TechNova match me with jobs?", a: "We use a combination of advanced AI-powered matching algorithms and expert human review to assess your skills, experience, and career goals, ensuring we find roles that are a perfect fit." },
+        { q: "Is there a fee to apply for jobs?", a: "No, there is absolutely no fee for candidates. Our recruitment services are entirely free for job seekers, as we partner with employers to fill their open roles." },
+        { q: "Can I update my resume after submitting?", a: "Yes! You can re-submit the form at any time with your updated resume, or reach out directly to your assigned TechNova career consultant to update your profile details." },
+        { q: "How long does the hiring process take?", a: "The timeline varies based on the role and employer requirements. Typically, we present shortlisted candidates to employers within 48 hours of initial review, and the full process takes between 2 to 4 weeks." },
+        { q: "What types of companies hire through TechNova?", a: "We work with a wide range of companies, from fast-growing technology startups to Fortune 500 enterprises, across industries like Tech, Finance, Healthcare, Retail, and Manufacturing." }
+      ];
+
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -3342,7 +3530,7 @@ function TalentPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
         <img
-          src={industryHeroBg}
+          src={getAcfUrl(window.wpData?.talent_bg_image) || industryHeroBg}
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
           aria-hidden="true"
@@ -3375,41 +3563,27 @@ function TalentPage() {
             </p>
 
             <div className="mt-16 grid gap-6 sm:grid-cols-3 max-w-2xl">
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-500/20 text-purple-300">
-                  <Building2 size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Top Companies</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Access leading organizations.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
-                  <TrendingUp size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Career Growth</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    Opportunities that accelerate your career.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#8B5CF6]/20 text-[#a78bfa]">
-                  <BadgeCheck size={20} />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Personalized Match</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/70">
-                    AI-powered matching for the right roles.
-                  </p>
-                </div>
-              </div>
+              {heroBadges.map((badge: any, i: number) => {
+                const Icon = badge.icon;
+                const colors = [
+                  "bg-purple-500/20 text-purple-300",
+                  "bg-amber-500/20 text-amber-300",
+                  "bg-[#8B5CF6]/20 text-[#a78bfa]"
+                ];
+                return (
+                  <div key={i} className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${colors[i % 3]}`}>
+                      <Icon size={20} />
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">{badge.title}</h3>
+                      <p className="mt-2 text-xs leading-5 text-white/70">
+                        {badge.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -3646,12 +3820,7 @@ function TalentPage() {
       <section className="scroll-reveal-section relative z-10 -mt-12 mx-4 sm:mx-6 lg:mx-8">
         <div className="mx-auto max-w-[1440px] rounded-3xl bg-[#0b132b] px-6 py-8 shadow-2xl border border-white/10 text-white sm:px-12">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {[
-              { value: "1000+", label: "Active Job Opportunities", icon: BriefcaseBusiness, color: "text-purple-400 bg-purple-500/10" },
-              { value: "500+", label: "Top Hiring Partners", icon: Building2, color: "text-amber-400 bg-amber-500/10" },
-              { value: "25K+", label: "Talents Placed", icon: Users, color: "text-emerald-400 bg-emerald-500/10" },
-              { value: "98%", label: "Candidate Satisfaction", icon: Star, color: "text-blue-400 bg-blue-500/10" },
-            ].map((stat, i) => {
+            {talentStatsList.map((stat: any, i: number) => {
               const Icon = stat.icon;
               return (
                 <div key={i} className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
@@ -3674,22 +3843,15 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center animate-fade-rise">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-              Explore Opportunities
+              {window.wpData?.talent_jobs_kicker || "Explore Opportunities"}
             </p>
             <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              Featured Opportunities
+              {window.wpData?.talent_jobs_title || "Featured Opportunities"}
             </h2>
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
-            {[
-              { title: "AI & Machine Learning", desc: "Build intelligent systems that shape the future.", icon: BrainCircuit, color: "text-purple-600 bg-purple-50 hover:bg-purple-100/50" },
-              { title: "Software Development", desc: "Create scalable applications and digital experiences.", icon: Cpu, color: "text-orange-600 bg-orange-50 hover:bg-orange-100/50" },
-              { title: "Cloud & DevOps", desc: "Design, deploy and scale modern cloud solutions.", icon: Globe, color: "text-emerald-600 bg-emerald-50 hover:bg-emerald-100/50" },
-              { title: "Cybersecurity", desc: "Protect systems and data in a digital-first world.", icon: Lock, color: "text-blue-600 bg-blue-50 hover:bg-blue-100/50" },
-              { title: "UI/UX Design", desc: "Design meaningful experiences people love.", icon: Palette, color: "text-[#db2777] bg-pink-50 hover:bg-pink-100/50" },
-              { title: "Data Science", desc: "Turn data into insights and business impact.", icon: TrendingUp, color: "text-cyan-600 bg-cyan-50 hover:bg-cyan-100/50" },
-            ].map((role, i) => {
+            {talentJobsList.map((role: any, i: number) => {
               const Icon = role.icon;
               return (
                 <div key={i} className="flex flex-col justify-between p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-xl transition-all duration-300 group">
@@ -3716,44 +3878,15 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c]">
-              Why Choose TechNova
+              {window.wpData?.talent_why_kicker || "Why Choose TechNova"}
             </p>
             <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              We're With You at Every Step of Your Career Journey
+              {window.wpData?.talent_why_title || "We're With You at Every Step of Your Career Journey"}
             </h2>
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Career Growth",
-                desc: "Access learning resources, upskilling programs, and challenging opportunities.",
-                icon: TrendingUp,
-                color: "text-purple-600 bg-purple-100/50",
-                gradient: "from-purple-500/5 to-transparent"
-              },
-              {
-                title: "Top Employers",
-                desc: "Work with leading companies that value talent and drive innovation.",
-                icon: Building2,
-                color: "text-amber-600 bg-amber-100/50",
-                gradient: "from-amber-500/5 to-transparent"
-              },
-              {
-                title: "Personalized Matching",
-                desc: "AI-powered matching connects you with roles that fit your skills and goals.",
-                icon: BrainCircuit,
-                color: "text-emerald-600 bg-emerald-100/50",
-                gradient: "from-emerald-500/5 to-transparent"
-              },
-              {
-                title: "Dedicated Support",
-                desc: "Our career experts are here to guide you at every stage of your journey.",
-                icon: ShieldCheck,
-                color: "text-blue-600 bg-blue-100/50",
-                gradient: "from-blue-500/5 to-transparent"
-              },
-            ].map((reason, i) => {
+            {talentWhyList.map((reason: any, i: number) => {
               const Icon = reason.icon;
               return (
                 <div key={i} className={`relative overflow-hidden p-8 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${reason.gradient}`}>
@@ -3774,10 +3907,10 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-              How It Works
+              {window.wpData?.talent_how_work_kicker || "How It Works"}
             </p>
             <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              Your Journey to the Right Opportunity
+              {window.wpData?.talent_how_work_title || "Your Journey to the Right Opportunity"}
             </h2>
           </div>
 
@@ -3790,13 +3923,7 @@ function TalentPage() {
             </div>
 
             <div className="grid gap-8 lg:grid-cols-5 relative z-10">
-              {[
-                { step: "1", title: "Submit Resume", desc: "Share your profile and experience with us.", icon: FileUser, color: "border-purple-200 bg-purple-50 text-purple-600" },
-                { step: "2", title: "Profile Review", desc: "Our experts review your profile and understand your goals.", icon: UserRoundSearch, color: "border-amber-200 bg-amber-50 text-amber-600" },
-                { step: "3", title: "Interview Matching", desc: "We match you with the best opportunities.", icon: UsersRound, color: "border-emerald-200 bg-emerald-50 text-emerald-600" },
-                { step: "4", title: "Employer Interviews", desc: "Meet with top companies and showcase your skills.", icon: Building2, color: "border-blue-200 bg-blue-50 text-blue-600" },
-                { step: "5", title: "Offer & Onboarding", desc: "Get your offer and start your new career journey.", icon: BadgeCheck, color: "border-rose-200 bg-rose-50 text-rose-600" },
-              ].map((item, i) => {
+              {talentHowWorkSteps.map((item: any, i: number) => {
                 const Icon = item.icon;
                 return (
                   <div key={i} className="flex flex-col items-center text-center bg-white lg:bg-transparent p-4 lg:p-0 rounded-2xl">
@@ -3819,10 +3946,10 @@ function TalentPage() {
           <div className="flex flex-col sm:flex-row justify-between items-end mb-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-                Success Stories
+                {window.wpData?.talent_stories_kicker || "Success Stories"}
               </p>
               <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-                Real People. Real Journeys. Real Impact.
+                {window.wpData?.talent_stories_title || "Real People. Real Journeys. Real Impact."}
               </h2>
             </div>
             <a href="#resume-form" className="text-sm font-semibold text-[#8B5CF6] hover:text-[#7C3AED] flex items-center mt-4 sm:mt-0">
@@ -3837,56 +3964,7 @@ function TalentPage() {
           <div className="testimonial-marquee-track">
             {[0, 1].map((groupIndex) => (
               <div className="testimonial-marquee-group" key={groupIndex}>
-                {[
-                  {
-                    quote: "TechNova helped me transition into a product role at a top SaaS company. Their guidance and support made all the difference.",
-                    author: "Arjun Mehta",
-                    role: "Product Manager",
-                    logo: microsoftLogo,
-                    companyName: "Microsoft",
-                    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop"
-                  },
-                  {
-                    quote: "The opportunities and mentorship I received through TechNova accelerated my growth beyond what I imagined.",
-                    author: "Priya Sharma",
-                    role: "Data Scientist",
-                    logo: null,
-                    companyName: "Deloitte.",
-                    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
-                  },
-                  {
-                    quote: "Within weeks, I connected with the right team and the right role. Truly a game-changer for my career.",
-                    author: "Rahul Verma",
-                    role: "DevOps Engineer",
-                    logo: awsLogo,
-                    companyName: "AWS",
-                    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop"
-                  },
-                  {
-                    quote: "Designing user-centric products is my passion, and TechNova matched me with the exact creative team I was searching for.",
-                    author: "Anjali Rao",
-                    role: "UX Designer",
-                    logo: googleLogo,
-                    companyName: "Google",
-                    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop"
-                  },
-                  {
-                    quote: "I wanted to work on high-scale systems. TechNova aligned my technical strengths with an amazing team.",
-                    author: "Vikram Singh",
-                    role: "Full Stack Engineer",
-                    logo: ciscoLogo,
-                    companyName: "Cisco",
-                    img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
-                  },
-                  {
-                    quote: "The transition from academia to industry was seamless. TechNova understood the unique nature of my AI background.",
-                    author: "Sneha Patel",
-                    role: "AI Research Engineer",
-                    logo: oracleLogo,
-                    companyName: "Oracle",
-                    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&auto=format&fit=crop"
-                  }
-                ].map((story, i) => (
+                {talentStoriesList.map((story: any, i: number) => (
                   <div key={`${story.author}-${groupIndex}-${i}`} className="w-[360px] shrink-0 rounded-3xl border border-slate-100 bg-[#f8fafc] p-8 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-shadow duration-300">
                     <span className="text-6xl font-serif text-purple-200 absolute top-4 left-6 pointer-events-none font-display">“</span>
                     <p className="text-sm leading-relaxed text-slate-600 italic relative z-10 mb-8 mt-2 h-20 overflow-hidden line-clamp-3">
@@ -3924,20 +4002,15 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-              Career Resources
+              {window.wpData?.talent_resources_kicker || "Career Resources"}
             </p>
             <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              Tools and Insights to Accelerate Your Career
+              {window.wpData?.talent_resources_title || "Tools and Insights to Accelerate Your Career"}
             </h2>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { title: "Resume Tips", desc: "Craft a resume that gets you noticed.", icon: FileUser, color: "text-purple-600 bg-purple-50" },
-              { title: "Interview Preparation", desc: "Ace your interviews with expert guidance and resources.", icon: BrainCircuit, color: "text-[#8b5cf6] bg-[#8b5cf6]/5" },
-              { title: "Salary Guide", desc: "Know your worth with role and industry insights.", icon: Wallet, color: "text-emerald-600 bg-emerald-50" },
-              { title: "AI Career Trends", desc: "Explore how AI is shaping the future of work.", icon: Cpu, color: "text-blue-600 bg-blue-50" },
-            ].map((resource, i) => {
+            {talentResourcesList.map((resource: any, i: number) => {
               const Icon = resource.icon;
               return (
                 <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
@@ -3964,40 +4037,15 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c]">
-              FAQs
+              {window.wpData?.talent_faqs_kicker || "FAQs"}
             </p>
             <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              Frequently Asked Questions
+              {window.wpData?.talent_faqs_title || "Frequently Asked Questions"}
             </h2>
           </div>
 
           <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-2">
-            {[
-              {
-                q: "How can I apply for jobs through TechNova Systems?",
-                a: "You can apply by submitting your resume through our online form above. Once submitted, our AI-powered matching system and career consultants will review your profile and match you with suitable open positions."
-              },
-              {
-                q: "How does TechNova match me with jobs?",
-                a: "We use a combination of advanced AI-powered matching algorithms and expert human review to assess your skills, experience, and career goals, ensuring we find roles that are a perfect fit."
-              },
-              {
-                q: "Is there a fee to apply for jobs?",
-                a: "No, there is absolutely no fee for candidates. Our recruitment services are entirely free for job seekers, as we partner with employers to fill their open roles."
-              },
-              {
-                q: "Can I update my resume after submitting?",
-                a: "Yes! You can re-submit the form at any time with your updated resume, or reach out directly to your assigned TechNova career consultant to update your profile details."
-              },
-              {
-                q: "How long does the hiring process take?",
-                a: "The timeline varies based on the role and employer requirements. Typically, we present shortlisted candidates to employers within 48 hours of initial review, and the full process takes between 2 to 4 weeks."
-              },
-              {
-                q: "What types of companies hire through TechNova?",
-                a: "We work with a wide range of companies, from fast-growing technology startups to Fortune 500 enterprises, across industries like Tech, Finance, Healthcare, Retail, and Manufacturing."
-              }
-            ].map((faq, i) => (
+            {talentFaqsList.map((faq: any, i: number) => (
               <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 transition-all">
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
@@ -4034,10 +4082,10 @@ function TalentPage() {
 
           <div className="lg:col-span-8 relative z-10">
             <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl">
-              Your Next Opportunity Starts Here
+              {window.wpData?.talent_cta_title || "Your Next Opportunity Starts Here"}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/90 max-w-2xl">
-              Submit your resume today and let our experts help you find the right role, faster.
+              {window.wpData?.talent_cta_description || "Submit your resume today and let our experts help you find the right role, faster."}
             </p>
           </div>
           <div className="flex lg:col-span-4 lg:justify-end relative z-10">

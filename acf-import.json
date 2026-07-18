@@ -564,6 +564,40 @@
         "type": "textarea"
       },
       {
+        "key": "field_talent_bg_image",
+        "label": "Hero Background Image",
+        "name": "talent_bg_image",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
+        "key": "field_talent_hero_badges",
+        "label": "Hero Features Badges",
+        "name": "talent_hero_badges",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_badge_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_badge_desc",
+            "label": "Description",
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_badge_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
         "key": "field_talent_stats",
         "label": "Stats List",
         "name": "talent_stats",
@@ -589,6 +623,302 @@
             "type": "text"
           }
         ]
+      },
+      {
+        "key": "field_talent_jobs_kicker",
+        "label": "Featured Opportunities Kicker",
+        "name": "talent_jobs_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_jobs_title",
+        "label": "Featured Opportunities Title",
+        "name": "talent_jobs_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_jobs_list",
+        "label": "Featured Opportunities List",
+        "name": "talent_jobs_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_job_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_job_desc",
+            "label": "Description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_talent_job_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_job_color",
+            "label": "Color/CSS Class",
+            "name": "color_class",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_why_kicker",
+        "label": "Why Choose Section Kicker",
+        "name": "talent_why_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_why_title",
+        "label": "Why Choose Section Title",
+        "name": "talent_why_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_why_list",
+        "label": "Why Choose Cards List",
+        "name": "talent_why_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_why_card_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_why_card_desc",
+            "label": "Description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_talent_why_card_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_why_card_color",
+            "label": "Color Class",
+            "name": "color_class",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_why_card_gradient",
+            "label": "Gradient Class",
+            "name": "gradient_class",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_how_work_kicker",
+        "label": "How It Works Kicker",
+        "name": "talent_how_work_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_how_work_title",
+        "label": "How It Works Title",
+        "name": "talent_how_work_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_how_work_steps",
+        "label": "How It Works Steps",
+        "name": "talent_how_work_steps",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_step_num",
+            "label": "Step Number (e.g. 1)",
+            "name": "step",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_step_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_step_desc",
+            "label": "Description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_talent_step_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_step_color",
+            "label": "Color/CSS Class",
+            "name": "color_class",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_stories_kicker",
+        "label": "Success Stories Kicker",
+        "name": "talent_stories_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_stories_title",
+        "label": "Success Stories Title",
+        "name": "talent_stories_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_stories_list",
+        "label": "Success Stories List",
+        "name": "talent_stories_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_story_quote",
+            "label": "Quote",
+            "name": "quote",
+            "type": "textarea"
+          },
+          {
+            "key": "field_talent_story_author",
+            "label": "Author Name",
+            "name": "author",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_story_role",
+            "label": "Author Role",
+            "name": "role",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_story_company",
+            "label": "Company Name",
+            "name": "company_name",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_story_logo",
+            "label": "Company Logo (Image)",
+            "name": "company_logo",
+            "type": "image",
+            "return_format": "url"
+          },
+          {
+            "key": "field_talent_story_avatar",
+            "label": "Author Avatar (Image)",
+            "name": "avatar",
+            "type": "image",
+            "return_format": "url"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_resources_kicker",
+        "label": "Career Resources Kicker",
+        "name": "talent_resources_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_resources_title",
+        "label": "Career Resources Title",
+        "name": "talent_resources_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_resources_list",
+        "label": "Career Resources List",
+        "name": "talent_resources_list",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_res_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_res_desc",
+            "label": "Description",
+            "name": "desc",
+            "type": "textarea"
+          },
+          {
+            "key": "field_talent_res_icon",
+            "label": "Icon Name",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_res_color",
+            "label": "Color/CSS Class",
+            "name": "color_class",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_faqs_kicker",
+        "label": "FAQs Kicker",
+        "name": "talent_faqs_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_faqs_title",
+        "label": "FAQs Title",
+        "name": "talent_faqs_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_faqs",
+        "label": "FAQs List",
+        "name": "talent_faqs",
+        "type": "repeater",
+        "layout": "row",
+        "sub_fields": [
+          {
+            "key": "field_talent_faq_q",
+            "label": "Question",
+            "name": "q",
+            "type": "text"
+          },
+          {
+            "key": "field_talent_faq_a",
+            "label": "Answer",
+            "name": "a",
+            "type": "textarea"
+          }
+        ]
+      },
+      {
+        "key": "field_talent_cta_title",
+        "label": "Bottom CTA Title",
+        "name": "talent_cta_title",
+        "type": "text"
+      },
+      {
+        "key": "field_talent_cta_desc",
+        "label": "Bottom CTA Description",
+        "name": "talent_cta_description",
+        "type": "textarea"
       }
     ],
     "location": [
