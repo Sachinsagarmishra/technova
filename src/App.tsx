@@ -1592,7 +1592,7 @@ function IndustriesPage() {
           <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
             {window.wpData?.industries_kicker || "Industries We Serve"}
           </p>
-          <h1 className="font-display mt-5 max-w-4xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="font-display mt-5 max-w-4xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
             {window.wpData && window.wpData.industries_headline ? (
               <WaveLetters parts={parseHeadline(window.wpData.industries_headline)} />
             ) : (
@@ -2590,7 +2590,7 @@ function EmployersPage() {
               <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 transition-all">
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
-                  className="flex w-full items-center justify-between text-left font-bold text-slate-800 focus:outline-none"
+                  className="flex w-full items-center justify-between text-left font-bold text-slate-800 focus:outline-none select-none"
                 >
                   <span className="text-sm leading-snug pr-4">{faq.q}</span>
                   <ChevronDown
@@ -4049,7 +4049,7 @@ function TalentPage() {
               <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 transition-all">
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
-                  className="flex w-full items-center justify-between text-left font-bold text-slate-800 focus:outline-none"
+                  className="flex w-full items-center justify-between text-left font-bold text-slate-800 focus:outline-none select-none"
                 >
                   <span className="text-sm leading-snug pr-4">{faq.q}</span>
                   <ChevronDown
