@@ -10,7 +10,7 @@ $acf_data = get_fields(get_the_ID());
     <?php wp_head(); ?> 
     
     <!-- Updated path to load from assets subfolder -->
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.css">
+    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.css?v=<?php echo filemtime(get_stylesheet_directory().'/react-app/dist/assets/index.css'); ?>">
     
     <script>
         window.wpData = <?php echo $acf_data ? json_encode($acf_data) : 'null'; ?>;
@@ -20,7 +20,7 @@ $acf_data = get_fields(get_the_ID());
     <div id="root"></div>
     
     <!-- Updated path to load from assets subfolder -->
-    <script type="module" src="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.js"></script>
+    <script type="module" src="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.js?v=<?php echo filemtime(get_stylesheet_directory().'/react-app/dist/assets/index.js'); ?>"></script>
     
     <?php wp_footer(); ?>
 </body>

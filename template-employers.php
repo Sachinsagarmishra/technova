@@ -8,14 +8,14 @@ $acf_data = get_fields(get_the_ID());
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?> 
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.css">
+    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.css?v=<?php echo filemtime(get_stylesheet_directory().'/react-app/dist/assets/index.css'); ?>">
     <script>
         window.wpData = <?php echo $acf_data ? json_encode($acf_data) : 'null'; ?>;
     </script>
 </head>
 <body class="bg-[#f2f5f9]">
     <div id="root"></div>
-    <script type="module" src="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.js"></script>
+    <script type="module" src="<?php echo get_stylesheet_directory_uri(); ?>/react-app/dist/assets/index.js?v=<?php echo filemtime(get_stylesheet_directory().'/react-app/dist/assets/index.js'); ?>"></script>
     <?php wp_footer(); ?>
 </body>
 </html>
