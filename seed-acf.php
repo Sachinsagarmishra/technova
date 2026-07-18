@@ -848,6 +848,7 @@ $pages = [
             'contact_kicker' => 'Get In Touch',
             'contact_headline' => 'Let\'s Start a Conversation That Moves You [accent]Forward.[/accent]',
             'contact_description' => 'Whether you\'re looking to scale your engineering team, outsource software projects, or submit your resume, we\'re ready to partner with you.',
+            'contact_bg_media' => resolve_hashed_asset('contact-usbg'),
             'contact_offices' => [
                 [
                     'city' => 'Corporate Office',

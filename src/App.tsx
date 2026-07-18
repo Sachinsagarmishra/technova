@@ -270,6 +270,41 @@ function getAcfUrl(field: any): string {
   return String(field);
 }
 
+function isVideoMedia(field: any, url: string): boolean {
+  const mimeType = typeof field === "object" ? String(field?.mime_type || field?.type || "") : "";
+  return mimeType.toLowerCase().startsWith("video/") || /\.(mp4|webm|ogg|ogv|mov|m4v)(?:[?#]|$)/i.test(url);
+}
+
+function HeroBackgroundMedia({
+  media,
+  fallback,
+  className = "absolute inset-0 h-full w-full object-cover object-center",
+}: {
+  media: any;
+  fallback: string;
+  className?: string;
+}) {
+  const mediaUrl = getAcfUrl(media) || fallback;
+
+  if (isVideoMedia(media, mediaUrl)) {
+    return (
+      <video
+        key={mediaUrl}
+        src={mediaUrl}
+        className={className}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+    );
+  }
+
+  return <img src={mediaUrl} alt="" className={className} aria-hidden="true" />;
+}
+
 const slides = window.wpData && window.wpData.hero_slides
   ? window.wpData.hero_slides.map((s: any) => {
       const buttons = [];
@@ -1125,12 +1160,7 @@ function ContactPage() {
   return (
     <main className="min-h-screen bg-white font-body text-[#0b132b]">
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-10 text-white sm:px-6 lg:px-8">
-        <img
-          src={contactUsBackground}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          aria-hidden="true"
-        />
+        <HeroBackgroundMedia media={window.wpData?.contact_bg_media} fallback={contactUsBackground} />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.94)_0%,rgba(4,10,22,0.72)_24%,rgba(4,10,22,0.30)_50%,rgba(4,10,22,0.72)_76%,rgba(4,10,22,0.94)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-[34%] bg-white" />
         <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
@@ -2082,11 +2112,10 @@ function EmployersPage() {
     <main className="employers-page min-h-screen bg-[#f7f9fc] font-body text-[#0b132b]">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
-        <img
-          src={getAcfUrl(window.wpData?.employers_bg_image) || industryHeroBg}
-          alt=""
+        <HeroBackgroundMedia
+          media={window.wpData?.employers_bg_image}
+          fallback={industryHeroBg}
           className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
-          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
@@ -3529,11 +3558,10 @@ function TalentPage() {
     <main className="talent-page min-h-screen bg-[#f7f9fc] font-body text-[#0b132b]">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
-        <img
-          src={getAcfUrl(window.wpData?.talent_bg_image) || industryHeroBg}
-          alt=""
+        <HeroBackgroundMedia
+          media={window.wpData?.talent_bg_image}
+          fallback={industryHeroBg}
           className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
-          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
