@@ -536,8 +536,6 @@ function SiteHeader({ light = false }: { light?: boolean }) {
 
 function SiteFooter() {
   const mainMenuLinks = [
-    { label: "Home", href: "/" },
-    { label: "Solutions", href: "/#solutions" },
     { label: "Industries", href: "/industries/" },
     { label: "For Employers", href: "/employers/" },
     { label: "For Talent", href: "/talent/" },
@@ -551,17 +549,18 @@ function SiteFooter() {
     { label: "Contact Us", href: "/contact/" },
   ];
 
+  const socialUrl = "https://www.linkedin.com/company/technovasystemsinc/";
   const socialLinks = [
-    { label: "LinkedIn", href: "#", icon: Linkedin },
-    { label: "Facebook", href: "#", icon: Facebook },
-    { label: "Instagram", href: "#", icon: Instagram },
+    { label: "LinkedIn", href: socialUrl, icon: Linkedin },
+    { label: "Facebook", href: socialUrl, icon: Facebook },
+    { label: "Instagram", href: socialUrl, icon: Instagram },
   ];
 
   return (
     <footer className="scroll-reveal-section border-t border-slate-200 bg-white px-4 pb-8 pt-16 text-[#0b132b] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1440px]">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 xl:gap-14">
-          <div className="flex flex-col gap-6 lg:col-span-4 lg:pr-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 lg:gap-8 xl:gap-14">
+          <div className="col-span-2 flex flex-col gap-6 lg:col-span-4 lg:pr-8">
             <a href="/" className="flex items-center" aria-label="TechNova Systems Home">
               <img src={window.wpData?.footer_logo || darkLogo} alt="TechNova Systems" className="h-12 w-auto max-w-[240px] object-contain object-left" />
             </a>
@@ -573,6 +572,8 @@ function SiteFooter() {
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noreferrer"
                   aria-label={label}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition-all hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
                 >
@@ -580,7 +581,9 @@ function SiteFooter() {
                 </a>
               ))}
               <a
-                href="#"
+                href={socialUrl}
+                target="_blank"
+                rel="noreferrer"
                 aria-label="X (formerly Twitter)"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition-all hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
               >
@@ -591,7 +594,7 @@ function SiteFooter() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Main Menu</h4>
             <ul className="mt-7 space-y-4">
               {mainMenuLinks.map((item) => (
@@ -604,7 +607,7 @@ function SiteFooter() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Our Policies</h4>
             <ul className="mt-7 space-y-4">
               {policyLinks.map((item) => (
@@ -617,7 +620,7 @@ function SiteFooter() {
             </ul>
           </div>
 
-          <div className="lg:col-span-4">
+          <div className="col-span-2 lg:col-span-4">
             <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Quick Contact</h4>
             <div className="mt-7 space-y-5">
               <div className="flex items-start gap-4">
