@@ -2158,10 +2158,10 @@ function EmployersPage() {
         <div className="relative z-10 mx-auto max-w-[1440px] pt-16 grid gap-12 lg:grid-cols-12 items-start">
           {/* Left Column */}
           <div className="lg:col-span-7 pt-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_hero_kicker_color || "#a78bfa" }}>
               {window.wpData?.employers_kicker || "For Employers"}
             </p>
-            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
+            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl" style={{ color: window.wpData?.talent_hero_heading_color || "#ffffff" }}>
               {window.wpData && window.wpData.employers_headline ? (
                 <WaveLetters parts={parseHeadline(window.wpData.employers_headline)} />
               ) : (
@@ -2171,7 +2171,7 @@ function EmployersPage() {
                 </>
               )}
             </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
+            <p className="mt-7 max-w-2xl text-base leading-8 sm:text-lg" style={{ color: window.wpData?.talent_hero_description_color || "rgba(255,255,255,.86)" }}>
               {window.wpData?.employers_description || "TechNova Systems helps organizations hire, manage, and scale the right talent with speed, precision, and flexibility."}
             </p>
 
@@ -2703,34 +2703,33 @@ function TalentPage() {
     ? window.wpData.talent_hero_badges.map((b: any) => ({
         title: b.title,
         description: b.description,
-        icon: getIconComponent(b.icon_name) || Building2
+        icon: getIconComponent(b.icon_name) || Building2,
+        iconColor: b.icon_color || "#c4b5fd",
+        iconBgColor: b.icon_bg_color || "rgba(139, 92, 246, 0.2)",
       }))
     : [
-        { title: "Top Companies", description: "Access leading organizations.", icon: Building2 },
-        { title: "Career Growth", description: "Opportunities that accelerate your career.", icon: TrendingUp },
-        { title: "Personalized Match", description: "AI-powered matching for the right roles.", icon: BadgeCheck }
+        { title: "Top Companies", description: "Access leading organizations.", icon: Building2, iconColor: "#c4b5fd", iconBgColor: "rgba(139, 92, 246, 0.2)" },
+        { title: "Career Growth", description: "Opportunities that accelerate your career.", icon: TrendingUp, iconColor: "#fcd34d", iconBgColor: "rgba(245, 158, 11, 0.2)" },
+        { title: "Personalized Match", description: "AI-powered matching for the right roles.", icon: BadgeCheck, iconColor: "#a78bfa", iconBgColor: "rgba(139, 92, 246, 0.2)" }
       ];
 
   const talentStatsList = window.wpData?.talent_stats
     ? window.wpData.talent_stats.map((s: any, idx: number) => {
-        const colors = [
-          "text-purple-400 bg-purple-500/10",
-          "text-amber-400 bg-amber-500/10",
-          "text-emerald-400 bg-emerald-500/10",
-          "text-blue-400 bg-blue-500/10"
-        ];
+        const iconColors = ["#c084fc", "#fbbf24", "#34d399", "#60a5fa"];
+        const iconBgColors = ["rgba(168,85,247,.1)", "rgba(245,158,11,.1)", "rgba(16,185,129,.1)", "rgba(59,130,246,.1)"];
         return {
           value: s.value,
           label: s.label,
           icon: getIconComponent(s.icon_name) || BriefcaseBusiness,
-          color: colors[idx % 4]
+          iconColor: s.icon_color || iconColors[idx % 4],
+          iconBgColor: s.icon_bg_color || iconBgColors[idx % 4],
         };
       })
     : [
-        { value: "1000+", label: "Active Job Opportunities", icon: BriefcaseBusiness, color: "text-purple-400 bg-purple-500/10" },
-        { value: "500+", label: "Top Hiring Partners", icon: Building2, color: "text-amber-400 bg-amber-500/10" },
-        { value: "25K+", label: "Talents Placed", icon: Users, color: "text-emerald-400 bg-emerald-500/10" },
-        { value: "98%", label: "Candidate Satisfaction", icon: Star, color: "text-blue-400 bg-blue-500/10" },
+        { value: "1000+", label: "Active Job Opportunities", icon: BriefcaseBusiness, iconColor: "#c084fc", iconBgColor: "rgba(168,85,247,.1)" },
+        { value: "500+", label: "Top Hiring Partners", icon: Building2, iconColor: "#fbbf24", iconBgColor: "rgba(245,158,11,.1)" },
+        { value: "25K+", label: "Talents Placed", icon: Users, iconColor: "#34d399", iconBgColor: "rgba(16,185,129,.1)" },
+        { value: "98%", label: "Candidate Satisfaction", icon: Star, iconColor: "#60a5fa", iconBgColor: "rgba(59,130,246,.1)" },
       ];
 
   const talentJobsList = window.wpData?.talent_jobs_list
@@ -2748,16 +2747,19 @@ function TalentPage() {
           title: j.title || fb.title,
           desc: j.desc || fb.desc,
           icon: getIconComponent(j.icon_name) || fb.icon,
-          color: j.color_class || fb.color
+          iconColor: j.icon_color || "#7c3aed",
+          iconBgColor: j.icon_bg_color || "#f5f3ff",
+          linkText: j.link_text || "Explore Jobs",
+          link: j.link || "#resume-form",
         };
       })
     : [
-        { title: "AI & Machine Learning", desc: "Build intelligent systems that shape the future.", icon: BrainCircuit, color: "text-purple-600 bg-purple-50 hover:bg-purple-100/50" },
-        { title: "Software Development", desc: "Create scalable applications and digital experiences.", icon: Cpu, color: "text-orange-600 bg-orange-50 hover:bg-orange-100/50" },
-        { title: "Cloud & DevOps", desc: "Design, deploy and scale modern cloud solutions.", icon: Globe, color: "text-emerald-600 bg-emerald-50 hover:bg-emerald-100/50" },
-        { title: "Cybersecurity", desc: "Protect systems and data in a digital-first world.", icon: Lock, color: "text-blue-600 bg-blue-50 hover:bg-blue-100/50" },
-        { title: "UI/UX Design", desc: "Design meaningful experiences people love.", icon: Palette, color: "text-[#db2777] bg-pink-50 hover:bg-pink-100/50" },
-        { title: "Data Science", desc: "Turn data into insights and business impact.", icon: TrendingUp, color: "text-cyan-600 bg-cyan-50 hover:bg-cyan-100/50" }
+        { title: "AI & Machine Learning", desc: "Build intelligent systems that shape the future.", icon: BrainCircuit, iconColor: "#7c3aed", iconBgColor: "#f5f3ff", linkText: "Explore Jobs", link: "#resume-form" },
+        { title: "Software Development", desc: "Create scalable applications and digital experiences.", icon: Cpu, iconColor: "#ea580c", iconBgColor: "#fff7ed", linkText: "Explore Jobs", link: "#resume-form" },
+        { title: "Cloud & DevOps", desc: "Design, deploy and scale modern cloud solutions.", icon: Globe, iconColor: "#059669", iconBgColor: "#ecfdf5", linkText: "Explore Jobs", link: "#resume-form" },
+        { title: "Cybersecurity", desc: "Protect systems and data in a digital-first world.", icon: Lock, iconColor: "#2563eb", iconBgColor: "#eff6ff", linkText: "Explore Jobs", link: "#resume-form" },
+        { title: "UI/UX Design", desc: "Design meaningful experiences people love.", icon: Palette, iconColor: "#db2777", iconBgColor: "#fdf2f8", linkText: "Explore Jobs", link: "#resume-form" },
+        { title: "Data Science", desc: "Turn data into insights and business impact.", icon: TrendingUp, iconColor: "#0891b2", iconBgColor: "#ecfeff", linkText: "Explore Jobs", link: "#resume-form" }
       ];
 
   const talentWhyList = window.wpData?.talent_why_list
@@ -2773,15 +2775,16 @@ function TalentPage() {
           title: w.title || fb.title,
           desc: w.desc || fb.desc,
           icon: getIconComponent(w.icon_name) || fb.icon,
-          color: w.color_class || fb.color,
-          gradient: w.gradient_class || fb.gradient
+          iconColor: w.icon_color || "#7c3aed",
+          iconBgColor: w.icon_bg_color || "#f5f3ff",
+          cardBgColor: w.card_bg_color || "#ffffff",
         };
       })
     : [
-        { title: "Career Growth", desc: "Access learning resources, upskilling programs, and challenging opportunities.", icon: TrendingUp, color: "text-purple-600 bg-purple-100/50", gradient: "from-purple-500/5 to-transparent" },
-        { title: "Top Employers", desc: "Work with leading companies that value talent and drive innovation.", icon: Building2, color: "text-amber-600 bg-amber-100/50", gradient: "from-amber-500/5 to-transparent" },
-        { title: "Personalized Matching", desc: "AI-powered matching connects you with roles that fit your skills and goals.", icon: BrainCircuit, color: "text-emerald-600 bg-emerald-100/50", gradient: "from-emerald-500/5 to-transparent" },
-        { title: "Dedicated Support", desc: "Our career experts are here to guide you at every stage of your journey.", icon: ShieldCheck, color: "text-blue-600 bg-blue-100/50", gradient: "from-blue-500/5 to-transparent" }
+        { title: "Career Growth", desc: "Access learning resources, upskilling programs, and challenging opportunities.", icon: TrendingUp, iconColor: "#7c3aed", iconBgColor: "#f5f3ff", cardBgColor: "#ffffff" },
+        { title: "Top Employers", desc: "Work with leading companies that value talent and drive innovation.", icon: Building2, iconColor: "#d97706", iconBgColor: "#fffbeb", cardBgColor: "#ffffff" },
+        { title: "Personalized Matching", desc: "AI-powered matching connects you with roles that fit your skills and goals.", icon: BrainCircuit, iconColor: "#059669", iconBgColor: "#ecfdf5", cardBgColor: "#ffffff" },
+        { title: "Dedicated Support", desc: "Our career experts are here to guide you at every stage of your journey.", icon: ShieldCheck, iconColor: "#2563eb", iconBgColor: "#eff6ff", cardBgColor: "#ffffff" }
       ];
 
   const talentHowWorkSteps = window.wpData?.talent_how_work_steps
@@ -2799,15 +2802,17 @@ function TalentPage() {
           title: item.title || fb.title,
           desc: item.desc || fb.desc,
           icon: getIconComponent(item.icon_name) || fb.icon,
-          color: item.color_class || fb.color
+          iconColor: item.icon_color || "#7c3aed",
+          iconBgColor: item.icon_bg_color || "#f5f3ff",
+          iconBorderColor: item.icon_border_color || "#ddd6fe",
         };
       })
     : [
-        { step: "1", title: "Submit Resume", desc: "Share your profile and experience with us.", icon: FileUser, color: "border-purple-200 bg-purple-50 text-purple-600" },
-        { step: "2", title: "Profile Review", desc: "Our experts review your profile and understand your goals.", icon: UserRoundSearch, color: "border-amber-200 bg-amber-50 text-amber-600" },
-        { step: "3", title: "Interview Matching", desc: "We match you with the best opportunities.", icon: UsersRound, color: "border-emerald-200 bg-emerald-50 text-emerald-600" },
-        { step: "4", title: "Employer Interviews", desc: "Meet with top companies and showcase your skills.", icon: Building2, color: "border-blue-200 bg-blue-50 text-blue-600" },
-        { step: "5", title: "Offer & Onboarding", desc: "Get your offer and start your new career journey.", icon: BadgeCheck, color: "border-rose-200 bg-rose-50 text-rose-600" }
+        { step: "1", title: "Submit Resume", desc: "Share your profile and experience with us.", icon: FileUser, iconColor: "#7c3aed", iconBgColor: "#f5f3ff", iconBorderColor: "#ddd6fe" },
+        { step: "2", title: "Profile Review", desc: "Our experts review your profile and understand your goals.", icon: UserRoundSearch, iconColor: "#d97706", iconBgColor: "#fffbeb", iconBorderColor: "#fde68a" },
+        { step: "3", title: "Interview Matching", desc: "We match you with the best opportunities.", icon: UsersRound, iconColor: "#059669", iconBgColor: "#ecfdf5", iconBorderColor: "#a7f3d0" },
+        { step: "4", title: "Employer Interviews", desc: "Meet with top companies and showcase your skills.", icon: Building2, iconColor: "#2563eb", iconBgColor: "#eff6ff", iconBorderColor: "#bfdbfe" },
+        { step: "5", title: "Offer & Onboarding", desc: "Get your offer and start your new career journey.", icon: BadgeCheck, iconColor: "#e11d48", iconBgColor: "#fff1f2", iconBorderColor: "#fecdd3" }
       ];
 
   const talentStoriesList = window.wpData?.talent_stories_list
@@ -2852,14 +2857,17 @@ function TalentPage() {
           title: r.title || fb.title,
           desc: r.desc || fb.desc,
           icon: getIconComponent(r.icon_name) || fb.icon,
-          color: r.color_class || fb.color
+          iconColor: r.icon_color || "#7c3aed",
+          iconBgColor: r.icon_bg_color || "#f5f3ff",
+          linkText: r.link_text || "Read More",
+          link: r.link || "#resume-form",
         };
       })
     : [
-        { title: "Resume Tips", desc: "Craft a resume that gets you noticed.", icon: FileUser, color: "text-purple-600 bg-purple-50" },
-        { title: "Interview Preparation", desc: "Ace your interviews with expert guidance and resources.", icon: BrainCircuit, color: "text-[#8b5cf6] bg-[#8b5cf6]/5" },
-        { title: "Salary Guide", desc: "Know your worth with role and industry insights.", icon: Wallet, color: "text-emerald-600 bg-emerald-50" },
-        { title: "AI Career Trends", desc: "Explore how AI is shaping the future of work.", icon: Cpu, color: "text-blue-600 bg-blue-50" }
+        { title: "Resume Tips", desc: "Craft a resume that gets you noticed.", icon: FileUser, iconColor: "#7c3aed", iconBgColor: "#f5f3ff", linkText: "Read More", link: "#resume-form" },
+        { title: "Interview Preparation", desc: "Ace your interviews with expert guidance and resources.", icon: BrainCircuit, iconColor: "#8b5cf6", iconBgColor: "#f5f3ff", linkText: "Read More", link: "#resume-form" },
+        { title: "Salary Guide", desc: "Know your worth with role and industry insights.", icon: Wallet, iconColor: "#059669", iconBgColor: "#ecfdf5", linkText: "Read More", link: "#resume-form" },
+        { title: "AI Career Trends", desc: "Explore how AI is shaping the future of work.", icon: Cpu, iconColor: "#2563eb", iconBgColor: "#eff6ff", linkText: "Read More", link: "#resume-form" }
       ];
 
   const talentFaqsList = window.wpData?.talent_faqs
@@ -3017,14 +3025,9 @@ function TalentPage() {
             <div className="mt-16 grid gap-6 sm:grid-cols-3 max-w-2xl">
               {heroBadges.map((badge: any, i: number) => {
                 const Icon = badge.icon;
-                const colors = [
-                  "bg-purple-500/20 text-purple-300",
-                  "bg-amber-500/20 text-amber-300",
-                  "bg-[#8B5CF6]/20 text-[#a78bfa]"
-                ];
                 return (
                   <div key={i} className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
-                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${colors[i % 3]}`}>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style={{ color: badge.iconColor, backgroundColor: badge.iconBgColor }}>
                       <Icon size={20} />
                     </span>
                     <div>
@@ -3041,20 +3044,20 @@ function TalentPage() {
 
           {/* Right Column: Form Card */}
           <div id="resume-form" className="lg:col-span-5 scroll-mt-24 rounded-3xl border border-white/70 bg-white p-6 text-[#0b132b] shadow-2xl sm:p-8 animate-fade-rise-delay">
-            <h2 className="font-display text-2xl sm:text-3xl font-normal text-[#0b132b]">
-              Submit Your Resume
+            <h2 className="font-display text-2xl sm:text-3xl font-normal" style={{ color: window.wpData?.talent_form_heading_color || "#0b132b" }}>
+              {window.wpData?.talent_form_title || "Submit Your Resume"}
             </h2>
             <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500">
-              Take the next step in your career. We'll help you find the right opportunities.
+              {window.wpData?.talent_form_description || "Take the next step in your career. We'll help you find the right opportunities."}
             </p>
             {submitted ? (
               <div className="mt-8 flex flex-col items-center justify-center py-12 text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 animate-bounce">
                   <Check size={32} strokeWidth={3} />
                 </div>
-                <h3 className="mt-6 text-xl font-bold text-slate-800">Application Submitted!</h3>
+                <h3 className="mt-6 text-xl font-bold text-slate-800">{window.wpData?.talent_form_success_title || "Application Submitted!"}</h3>
                 <p className="mt-2 text-sm text-slate-500 max-w-xs">
-                  Thank you for submitting your resume. Our team will review your profile and contact you shortly.
+                  {window.wpData?.talent_form_success_description || "Thank you for submitting your resume. Our team will review your profile and contact you shortly."}
                 </p>
               </div>
             ) : (
@@ -3063,7 +3066,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      placeholder="Full Name*"
+                      placeholder={window.wpData?.talent_form_full_name_placeholder || "Full Name*"}
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -3073,7 +3076,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="email"
-                      placeholder="Email Address*"
+                      placeholder={window.wpData?.talent_form_email_placeholder || "Email Address*"}
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -3086,7 +3089,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="tel"
-                      placeholder="Mobile Number*"
+                      placeholder={window.wpData?.talent_form_mobile_placeholder || "Mobile Number*"}
                       required
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
@@ -3096,7 +3099,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      placeholder="Current Location*"
+                      placeholder={window.wpData?.talent_form_location_placeholder || "Current Location*"}
                       required
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
@@ -3109,7 +3112,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      placeholder="Current Job Title*"
+                      placeholder={window.wpData?.talent_form_job_title_placeholder || "Current Job Title*"}
                       required
                       value={formData.jobTitle}
                       onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
@@ -3123,7 +3126,7 @@ function TalentPage() {
                       onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                     >
-                      <option value="" disabled hidden>Years of Experience*</option>
+                      <option value="" disabled hidden>{window.wpData?.talent_form_experience_placeholder || "Years of Experience*"}</option>
                       <option value="1-2">1-2 Years</option>
                       <option value="3-5">3-5 Years</option>
                       <option value="5-8">5-8 Years</option>
@@ -3136,7 +3139,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="text"
-                      placeholder="Primary Skill*"
+                      placeholder={window.wpData?.talent_form_skill_placeholder || "Primary Skill*"}
                       required
                       value={formData.primarySkill}
                       onChange={(e) => setFormData({ ...formData, primarySkill: e.target.value })}
@@ -3150,7 +3153,7 @@ function TalentPage() {
                       onChange={(e) => setFormData({ ...formData, jobType: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                     >
-                      <option value="" disabled hidden>Preferred Job Type*</option>
+                      <option value="" disabled hidden>{window.wpData?.talent_form_job_type_placeholder || "Preferred Job Type*"}</option>
                       <option value="full-time">Full-time</option>
                       <option value="contract">Contract</option>
                       <option value="contract-to-hire">Contract-to-hire</option>
@@ -3167,7 +3170,7 @@ function TalentPage() {
                       onChange={(e) => setFormData({ ...formData, workLocation: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                     >
-                      <option value="" disabled hidden>Preferred Work Location*</option>
+                      <option value="" disabled hidden>{window.wpData?.talent_form_work_location_placeholder || "Preferred Work Location*"}</option>
                       <option value="on-site">On-site</option>
                       <option value="hybrid">Hybrid</option>
                       <option value="remote">Remote</option>
@@ -3180,7 +3183,7 @@ function TalentPage() {
                       onChange={(e) => setFormData({ ...formData, expectedSalary: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
                     >
-                      <option value="" disabled hidden>Expected Salary*</option>
+                      <option value="" disabled hidden>{window.wpData?.talent_form_salary_placeholder || "Expected Salary*"}</option>
                       <option value="<50k">&lt; $50k</option>
                       <option value="50k-100k">$50k - $100k</option>
                       <option value="100k-150k">$100k - $150k</option>
@@ -3193,7 +3196,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="url"
-                      placeholder="LinkedIn Profile (Optional)"
+                      placeholder={window.wpData?.talent_form_linkedin_placeholder || "LinkedIn Profile (Optional)"}
                       value={formData.linkedin}
                       onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
@@ -3202,7 +3205,7 @@ function TalentPage() {
                   <div className="flex flex-col">
                     <input
                       type="url"
-                      placeholder="Portfolio / GitHub (Optional)"
+                      placeholder={window.wpData?.talent_form_portfolio_placeholder || "Portfolio / GitHub (Optional)"}
                       value={formData.portfolio}
                       onChange={(e) => setFormData({ ...formData, portfolio: e.target.value })}
                       className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
@@ -3211,7 +3214,7 @@ function TalentPage() {
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-slate-700 mb-2">Upload Your Resume*</label>
+                  <label className="text-xs font-semibold text-slate-700 mb-2">{window.wpData?.talent_form_upload_label || "Upload Your Resume*"}</label>
                   <div
                     onDragEnter={handleDrag}
                     onDragOver={handleDrag}
@@ -3235,9 +3238,9 @@ function TalentPage() {
                     ) : (
                       <>
                         <p className="text-sm text-slate-600">
-                          Drag & drop your file here or <span className="text-[#8B5CF6] font-medium underline">Browse File</span>
+                          {window.wpData?.talent_form_upload_prompt || "Drag & drop your file here or"} <span className="text-[#8B5CF6] font-medium underline">{window.wpData?.talent_form_browse_text || "Browse File"}</span>
                         </p>
-                        <p className="mt-1 text-xs text-slate-400">PDF, DOC, DOCX (Max 5MB)</p>
+                        <p className="mt-1 text-xs text-slate-400">{window.wpData?.talent_form_file_help || "PDF, DOC, DOCX (Max 5MB)"}</p>
                       </>
                     )}
                   </div>
@@ -3245,7 +3248,7 @@ function TalentPage() {
 
                 {status === "error" && (
                   <div className="bg-rose-50 text-rose-800 text-sm px-4 py-3 rounded-xl border border-rose-100 font-medium mt-2">
-                    Oops! Something went wrong while submitting. Please try again.
+                    {window.wpData?.talent_form_error_text || "Oops! Something went wrong while submitting. Please try again."}
                   </div>
                 )}
 
@@ -3254,13 +3257,14 @@ function TalentPage() {
                   variant="default"
                   size="hero"
                   disabled={status === "loading"}
-                  className="mt-4 w-full justify-center bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] text-white hover:opacity-90 shadow-lg shadow-purple-500/20 hover:scale-[1.01] transition-all cursor-pointer font-semibold disabled:opacity-50"
+                  className="mt-4 w-full justify-center text-white hover:opacity-90 shadow-lg shadow-purple-500/20 hover:scale-[1.01] transition-all cursor-pointer font-semibold disabled:opacity-50"
+                  style={{ background: `linear-gradient(90deg, ${window.wpData?.talent_primary_color || "#8B5CF6"}, ${window.wpData?.talent_secondary_color || "#f59e0c"})` }}
                 >
-                  {status === "loading" ? "Submitting Resume..." : "Submit Resume"}
+                  {status === "loading" ? (window.wpData?.talent_form_loading_text || "Submitting Resume...") : (window.wpData?.talent_form_submit_text || "Submit Resume")}
                   <ArrowRight size={18} className="ml-2" />
                 </Button>
                 <p className="text-center text-[10px] text-slate-400 mt-2">
-                  🔒 Your information is secure and confidential.
+                  {window.wpData?.talent_form_security_text || "🔒 Your information is secure and confidential."}
                 </p>
               </form>
             )}
@@ -3270,13 +3274,13 @@ function TalentPage() {
 
       {/* Stats Section */}
       <section className="scroll-reveal-section relative z-10 -mt-12 mx-4 sm:mx-6 lg:mx-8">
-        <div className="mx-auto max-w-[1440px] rounded-3xl bg-[#0b132b] px-6 py-8 shadow-2xl border border-white/10 text-white sm:px-12">
+        <div className="mx-auto max-w-[1440px] rounded-3xl px-6 py-8 shadow-2xl border border-white/10 text-white sm:px-12" style={{ backgroundColor: window.wpData?.talent_stats_bg_color || "#0b132b" }}>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {talentStatsList.map((stat: any, i: number) => {
               const Icon = stat.icon;
               return (
                 <div key={i} className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
-                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${stat.color}`}>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ color: stat.iconColor, backgroundColor: stat.iconBgColor }}>
                     <Icon size={22} />
                   </span>
                   <div className="text-center sm:text-left">
@@ -3294,10 +3298,10 @@ function TalentPage() {
       <section className="scroll-reveal-section bg-white px-4 pt-20 pb-16 text-[#0b132b] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center animate-fade-rise">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_jobs_kicker_color || "#8B5CF6" }}>
               {window.wpData?.talent_jobs_kicker || "Explore Opportunities"}
             </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_jobs_heading_color || "#0b132b" }}>
               {window.wpData?.talent_jobs_title || "Featured Opportunities"}
             </h2>
           </div>
@@ -3308,14 +3312,14 @@ function TalentPage() {
               return (
                 <div key={i} className="flex flex-col justify-between p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-xl transition-all duration-300 group">
                   <div>
-                    <span className={`flex h-12 w-12 items-center justify-center rounded-full mb-6 ${role.color.split(" ")[1]} ${role.color.split(" ")[0]} transition-colors`}>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full mb-6 transition-colors" style={{ color: role.iconColor, backgroundColor: role.iconBgColor }}>
                       <Icon size={22} />
                     </span>
                     <h3 className="text-base font-semibold text-slate-800 leading-snug">{role.title}</h3>
                     <p className="mt-2.5 text-xs leading-relaxed text-slate-500">{role.desc}</p>
                   </div>
-                  <a href="#resume-form" className="mt-6 flex items-center text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors group-hover:translate-x-1 duration-200">
-                    Explore Jobs
+                  <a href={role.link} className="mt-6 flex items-center text-xs font-semibold transition-colors group-hover:translate-x-1 duration-200" style={{ color: window.wpData?.talent_primary_color || "#8B5CF6" }}>
+                    {role.linkText}
                     <ArrowRight size={14} className="ml-1" />
                   </a>
                 </div>
@@ -3329,10 +3333,10 @@ function TalentPage() {
       <section className="scroll-reveal-section bg-slate-50/50 px-4 py-16 text-[#0b132b] sm:px-6 lg:px-8 border-t border-b border-slate-100">
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_why_kicker_color || "#f59e0c" }}>
               {window.wpData?.talent_why_kicker || "Why Choose TechNova"}
             </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_why_heading_color || "#0b132b" }}>
               {window.wpData?.talent_why_title || "We're With You at Every Step of Your Career Journey"}
             </h2>
           </div>
@@ -3341,8 +3345,8 @@ function TalentPage() {
             {talentWhyList.map((reason: any, i: number) => {
               const Icon = reason.icon;
               return (
-                <div key={i} className={`relative overflow-hidden p-8 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${reason.gradient}`}>
-                  <span className={`flex h-12 w-12 items-center justify-center rounded-2xl mb-6 ${reason.color}`}>
+                <div key={i} className="relative overflow-hidden p-8 rounded-3xl border border-slate-200 hover:shadow-xl transition-all duration-300" style={{ backgroundColor: reason.cardBgColor }}>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl mb-6" style={{ color: reason.iconColor, backgroundColor: reason.iconBgColor }}>
                     <Icon size={24} />
                   </span>
                   <h3 className="text-lg font-semibold text-slate-800">{reason.title}</h3>
@@ -3358,10 +3362,10 @@ function TalentPage() {
       <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_how_work_kicker_color || "#8B5CF6" }}>
               {window.wpData?.talent_how_work_kicker || "How It Works"}
             </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_how_work_heading_color || "#0b132b" }}>
               {window.wpData?.talent_how_work_title || "Your Journey to the Right Opportunity"}
             </h2>
           </div>
@@ -3370,7 +3374,7 @@ function TalentPage() {
             {/* Connection Line */}
             <div className="absolute top-[32px] left-[10%] right-[10%] h-0.5 hidden lg:block z-0">
               <svg className="w-full h-full overflow-visible" fill="none" preserveAspectRatio="none">
-                <line x1="0" y1="1" x2="100%" y2="1" stroke="#cbd5e1" strokeWidth="2" className="animate-timeline-flow" />
+                <line x1="0" y1="1" x2="100%" y2="1" stroke={window.wpData?.talent_timeline_color || "#cbd5e1"} strokeWidth="2" className="animate-timeline-flow" />
               </svg>
             </div>
 
@@ -3379,7 +3383,7 @@ function TalentPage() {
                 const Icon = item.icon;
                 return (
                   <div key={i} className="flex flex-col items-center text-center bg-white lg:bg-transparent p-4 lg:p-0 rounded-2xl">
-                    <div className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-2 ${item.color} shadow-lg mb-6 hover:scale-110 transition-transform duration-300`}>
+                    <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-2 shadow-lg mb-6 hover:scale-110 transition-transform duration-300" style={{ color: item.iconColor, backgroundColor: item.iconBgColor, borderColor: item.iconBorderColor }}>
                       <Icon size={24} />
                     </div>
                     <h3 className="text-base font-bold text-slate-800">{item.step}. {item.title}</h3>
@@ -3397,15 +3401,15 @@ function TalentPage() {
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-end mb-12">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
+              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_stories_kicker_color || "#8B5CF6" }}>
                 {window.wpData?.talent_stories_kicker || "Success Stories"}
               </p>
-              <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+              <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_stories_heading_color || "#0b132b" }}>
                 {window.wpData?.talent_stories_title || "Real People. Real Journeys. Real Impact."}
               </h2>
             </div>
-            <a href="#resume-form" className="text-sm font-semibold text-[#8B5CF6] hover:text-[#7C3AED] flex items-center mt-4 sm:mt-0">
-              View All Stories
+            <a href={window.wpData?.talent_stories_link || "#resume-form"} className="text-sm font-semibold flex items-center mt-4 sm:mt-0" style={{ color: window.wpData?.talent_primary_color || "#8B5CF6" }}>
+              {window.wpData?.talent_stories_link_text || "View All Stories"}
               <ArrowRight size={16} className="ml-1.5" />
             </a>
           </div>
@@ -3417,7 +3421,7 @@ function TalentPage() {
             {[0, 1].map((groupIndex) => (
               <div className="testimonial-marquee-group" key={groupIndex}>
                 {talentStoriesList.map((story: any, i: number) => (
-                  <div key={`${story.author}-${groupIndex}-${i}`} className="w-[360px] shrink-0 rounded-3xl border border-slate-100 bg-[#f8fafc] p-8 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div key={`${story.author}-${groupIndex}-${i}`} className="w-[360px] shrink-0 rounded-3xl border border-slate-100 p-8 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-shadow duration-300" style={{ backgroundColor: window.wpData?.talent_testimonial_card_bg_color || "#f8fafc" }}>
                     <span className="text-6xl font-serif text-purple-200 absolute top-4 left-6 pointer-events-none font-display">“</span>
                     <p className="text-sm leading-relaxed text-slate-600 italic relative z-10 mb-8 mt-2 h-20 overflow-hidden line-clamp-3">
                       {story.quote}
@@ -3433,7 +3437,7 @@ function TalentPage() {
                       </div>
 
                       <div className="flex flex-col items-end">
-                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Placed At</span>
+                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">{window.wpData?.talent_stories_company_label || "Placed At"}</span>
                         {story.logo ? (
                           <img src={story.logo} alt={story.companyName} className="h-4 w-auto opacity-80" />
                         ) : (
@@ -3453,10 +3457,10 @@ function TalentPage() {
       <section className="scroll-reveal-section bg-slate-50/50 px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8 border-t border-b border-slate-100">
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_resources_kicker_color || "#8B5CF6" }}>
               {window.wpData?.talent_resources_kicker || "Career Resources"}
             </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_resources_heading_color || "#0b132b" }}>
               {window.wpData?.talent_resources_title || "Tools and Insights to Accelerate Your Career"}
             </h2>
           </div>
@@ -3467,14 +3471,14 @@ function TalentPage() {
               return (
                 <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
                   <div>
-                    <span className={`flex h-11 w-11 items-center justify-center rounded-xl mb-4 ${resource.color}`}>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl mb-4" style={{ color: resource.iconColor, backgroundColor: resource.iconBgColor }}>
                       <Icon size={20} />
                     </span>
                     <h4 className="text-sm font-bold text-slate-800 leading-snug">{resource.title}</h4>
                     <p className="mt-2 text-xs leading-relaxed text-slate-500">{resource.desc}</p>
                   </div>
-                  <a href="#resume-form" className="mt-6 flex items-center text-xs font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors group-hover:translate-x-0.5 duration-200">
-                    Read More
+                  <a href={resource.link} className="mt-6 flex items-center text-xs font-bold transition-colors group-hover:translate-x-0.5 duration-200" style={{ color: window.wpData?.talent_primary_color || "#8B5CF6" }}>
+                    {resource.linkText}
                     <ArrowRight size={12} className="ml-1" />
                   </a>
                 </div>
@@ -3488,10 +3492,10 @@ function TalentPage() {
       <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px]">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c]">
+            <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: window.wpData?.talent_faqs_kicker_color || "#f59e0c" }}>
               {window.wpData?.talent_faqs_kicker || "FAQs"}
             </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl" style={{ color: window.wpData?.talent_faqs_heading_color || "#0b132b" }}>
               {window.wpData?.talent_faqs_title || "Frequently Asked Questions"}
             </h2>
           </div>
@@ -3526,17 +3530,17 @@ function TalentPage() {
 
       {/* Bottom CTA Section */}
       <section className="scroll-reveal-section px-4 pb-16 pt-8 sm:px-6 lg:px-8 bg-white">
-        <div className="relative mx-auto grid max-w-[1440px] gap-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-10 text-white lg:grid-cols-12 lg:items-center">
+        <div className="relative mx-auto grid max-w-[1440px] gap-8 overflow-hidden rounded-3xl p-10 text-white lg:grid-cols-12 lg:items-center" style={{ background: `linear-gradient(90deg, ${window.wpData?.talent_cta_start_color || "#8B5CF6"}, ${window.wpData?.talent_cta_end_color || "#f59e0c"})` }}>
           {/* Decorative shapes */}
           <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
             <img src={ctaCubes} alt="" className="h-64 w-auto object-contain" />
           </div>
 
           <div className="lg:col-span-8 relative z-10">
-            <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl">
+            <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl" style={{ color: window.wpData?.talent_cta_heading_color || "#ffffff" }}>
               {window.wpData?.talent_cta_title || "Your Next Opportunity Starts Here"}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-white/90 max-w-2xl">
+            <p className="mt-4 text-base leading-relaxed max-w-2xl" style={{ color: window.wpData?.talent_cta_description_color || "rgba(255,255,255,.9)" }}>
               {window.wpData?.talent_cta_description || "Submit your resume today and let our experts help you find the right role, faster."}
             </p>
           </div>
@@ -3545,14 +3549,17 @@ function TalentPage() {
               variant="glass"
               size="hero"
               onClick={() => {
-                const element = document.getElementById("resume-form");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
+                const target = window.wpData?.talent_cta_button_link || "#resume-form";
+                if (target.startsWith("#")) {
+                  const element = document.querySelector(target);
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.location.href = target;
                 }
               }}
               className="bg-white text-slate-900 border-white hover:bg-white/90 font-semibold cursor-pointer shadow-xl hover:scale-[1.03]"
             >
-              Submit Your Resume
+              {window.wpData?.talent_cta_button_text || "Submit Your Resume"}
               <ArrowRight size={18} className="ml-2" />
             </Button>
           </div>

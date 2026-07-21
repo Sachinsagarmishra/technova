@@ -369,6 +369,38 @@ $pages = [
             'talent_headline' => 'Find the Right Opportunity. Build the Career [accent]You Deserve.[/accent]',
             'talent_description' => 'We connect exceptional engineering and tech talent with forward-thinking enterprises and fast-growing tech startups.',
             'talent_bg_image' => resolve_hashed_asset('industry_hero_bg'),
+            'talent_primary_color' => '#8B5CF6',
+            'talent_secondary_color' => '#f59e0c',
+            'talent_hero_kicker_color' => '#a78bfa',
+            'talent_hero_heading_color' => '#ffffff',
+            'talent_hero_description_color' => '#ffffff',
+            'talent_form_id' => '21',
+            'talent_form_title' => 'Submit Your Resume',
+            'talent_form_description' => "Take the next step in your career. We'll help you find the right opportunities.",
+            'talent_form_heading_color' => '#0b132b',
+            'talent_form_full_name_placeholder' => 'Full Name*',
+            'talent_form_email_placeholder' => 'Email Address*',
+            'talent_form_mobile_placeholder' => 'Mobile Number*',
+            'talent_form_location_placeholder' => 'Current Location*',
+            'talent_form_job_title_placeholder' => 'Current Job Title*',
+            'talent_form_experience_placeholder' => 'Years of Experience*',
+            'talent_form_skill_placeholder' => 'Primary Skill*',
+            'talent_form_job_type_placeholder' => 'Preferred Job Type*',
+            'talent_form_work_location_placeholder' => 'Preferred Work Location*',
+            'talent_form_salary_placeholder' => 'Expected Salary*',
+            'talent_form_linkedin_placeholder' => 'LinkedIn Profile (Optional)',
+            'talent_form_portfolio_placeholder' => 'Portfolio / GitHub (Optional)',
+            'talent_form_upload_label' => 'Upload Your Resume*',
+            'talent_form_upload_prompt' => 'Drag & drop your file here or',
+            'talent_form_browse_text' => 'Browse File',
+            'talent_form_file_help' => 'PDF, DOC, DOCX (Max 5MB)',
+            'talent_form_submit_text' => 'Submit Resume',
+            'talent_form_loading_text' => 'Submitting Resume...',
+            'talent_form_security_text' => '🔒 Your information is secure and confidential.',
+            'talent_form_success_title' => 'Application Submitted!',
+            'talent_form_success_description' => 'Thank you for submitting your resume. Our team will review your profile and contact you shortly.',
+            'talent_form_error_text' => 'Oops! Something went wrong while submitting. Please try again.',
+            'talent_stats_bg_color' => '#0b132b',
             'talent_hero_badges' => [
                 [
                     'title' => 'Top Companies',
@@ -410,6 +442,8 @@ $pages = [
             ],
             'talent_jobs_kicker' => 'Explore Opportunities',
             'talent_jobs_title' => 'Featured Opportunities',
+            'talent_jobs_kicker_color' => '#8B5CF6',
+            'talent_jobs_heading_color' => '#0b132b',
             'talent_jobs_list' => [
                 [
                     'title' => 'AI & Machine Learning',
@@ -450,6 +484,8 @@ $pages = [
             ],
             'talent_why_kicker' => 'Why Choose TechNova',
             'talent_why_title' => "We're With You at Every Step of Your Career Journey",
+            'talent_why_kicker_color' => '#f59e0c',
+            'talent_why_heading_color' => '#0b132b',
             'talent_why_list' => [
                 [
                     'title' => 'Career Growth',
@@ -482,6 +518,9 @@ $pages = [
             ],
             'talent_how_work_kicker' => 'How It Works',
             'talent_how_work_title' => 'Your Journey to the Right Opportunity',
+            'talent_how_work_kicker_color' => '#8B5CF6',
+            'talent_how_work_heading_color' => '#0b132b',
+            'talent_timeline_color' => '#cbd5e1',
             'talent_how_work_steps' => [
                 [
                     'step' => '1',
@@ -521,6 +560,12 @@ $pages = [
             ],
             'talent_stories_kicker' => 'Success Stories',
             'talent_stories_title' => 'Real People. Real Journeys. Real Impact.',
+            'talent_stories_kicker_color' => '#8B5CF6',
+            'talent_stories_heading_color' => '#0b132b',
+            'talent_stories_link_text' => 'View All Stories',
+            'talent_stories_link' => '#resume-form',
+            'talent_stories_company_label' => 'Placed At',
+            'talent_testimonial_card_bg_color' => '#f8fafc',
             'talent_stories_list' => [
                 [
                     'quote' => 'TechNova helped me transition into a product role at a top SaaS company. Their guidance and support made all the difference.',
@@ -573,6 +618,8 @@ $pages = [
             ],
             'talent_resources_kicker' => 'Career Resources',
             'talent_resources_title' => 'Tools and Insights to Accelerate Your Career',
+            'talent_resources_kicker_color' => '#8B5CF6',
+            'talent_resources_heading_color' => '#0b132b',
             'talent_resources_list' => [
                 [
                     'title' => 'Resume Tips',
@@ -601,6 +648,8 @@ $pages = [
             ],
             'talent_faqs_kicker' => 'FAQs',
             'talent_faqs_title' => 'Frequently Asked Questions',
+            'talent_faqs_kicker_color' => '#f59e0c',
+            'talent_faqs_heading_color' => '#0b132b',
             'talent_faqs' => [
                 [
                     'q' => 'How can I apply for jobs through TechNova Systems?',
@@ -628,7 +677,13 @@ $pages = [
                 ]
             ],
             'talent_cta_title' => 'Your Next Opportunity Starts Here',
-            'talent_cta_description' => 'Submit your resume today and let our experts help you find the right role, faster.'
+            'talent_cta_description' => 'Submit your resume today and let our experts help you find the right role, faster.',
+            'talent_cta_heading_color' => '#ffffff',
+            'talent_cta_description_color' => '#ffffff',
+            'talent_cta_start_color' => '#8B5CF6',
+            'talent_cta_end_color' => '#f59e0c',
+            'talent_cta_button_text' => 'Submit Your Resume',
+            'talent_cta_button_link' => '#resume-form'
         ]
     ],
     'employers' => [
