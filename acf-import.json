@@ -469,8 +469,242 @@
         "type": "textarea"
       },
       {
-        "key": "field_about_values",
+        "key": "field_about_bg_media",
+        "label": "Hero Background Media (Image or Video)",
+        "name": "about_bg_media",
+        "type": "file",
+        "return_format": "array",
+        "mime_types": "jpg,jpeg,png,gif,webp,avif,mp4,webm,ogg,ogv,mov,m4v"
+      },
+      {
+        "key": "field_about_hero_heading_color",
+        "label": "Hero Heading Color",
+        "name": "about_hero_heading_color",
+        "type": "color_picker",
+        "default_value": "#ffffff"
+      },
+      {
+        "key": "field_about_hero_values",
+        "label": "Hero Feature Cards",
+        "name": "about_hero_values",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Hero Card",
+        "sub_fields": [
+          {
+            "key": "field_about_hero_value_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_about_hero_value_description",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_about_hero_value_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_about_story_tab",
+        "label": "Story Section",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_about_story_kicker",
+        "label": "Story Kicker",
+        "name": "about_story_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_about_story_heading",
+        "label": "Story Heading",
+        "name": "about_story_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_story_heading_color",
+        "label": "Story Heading Color",
+        "name": "about_story_heading_color",
+        "type": "color_picker",
+        "default_value": "#0b132b"
+      },
+      {
+        "key": "field_about_story_paragraph_1",
+        "label": "Story Paragraph 1",
+        "name": "about_story_paragraph_1",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_story_paragraph_2",
+        "label": "Story Paragraph 2",
+        "name": "about_story_paragraph_2",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_story_highlight",
+        "label": "Story Highlight Text",
+        "name": "about_story_highlight",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_story_image",
+        "label": "Story Image",
+        "name": "about_story_image",
+        "type": "image",
+        "return_format": "url"
+      },
+      {
+        "key": "field_about_story_image_alt",
+        "label": "Story Image Alt Text",
+        "name": "about_story_image_alt",
+        "type": "text"
+      },
+      {
+        "key": "field_about_mission_tab",
+        "label": "Mission & Vision",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_about_mission_kicker",
+        "label": "Mission Kicker",
+        "name": "about_mission_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_about_mission_heading",
+        "label": "Mission Heading",
+        "name": "about_mission_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_mission_heading_color",
+        "label": "Mission Heading Color",
+        "name": "about_mission_heading_color",
+        "type": "color_picker",
+        "default_value": "#0b132b"
+      },
+      {
+        "key": "field_about_mission_description",
+        "label": "Mission Description",
+        "name": "about_mission_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_vision_kicker",
+        "label": "Vision Kicker",
+        "name": "about_vision_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_about_vision_heading",
+        "label": "Vision Heading",
+        "name": "about_vision_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_vision_heading_color",
+        "label": "Vision Heading Color",
+        "name": "about_vision_heading_color",
+        "type": "color_picker",
+        "default_value": "#0b132b"
+      },
+      {
+        "key": "field_about_vision_description",
+        "label": "Vision Description",
+        "name": "about_vision_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_differentiators_tab",
+        "label": "What Makes Us Different",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_about_differentiators_kicker",
+        "label": "Section Kicker",
+        "name": "about_differentiators_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_about_differentiators_heading",
+        "label": "Section Heading",
+        "name": "about_differentiators_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_differentiators_heading_color",
+        "label": "Section Heading Color",
+        "name": "about_differentiators_heading_color",
+        "type": "color_picker",
+        "default_value": "#ffffff"
+      },
+      {
+        "key": "field_about_differentiators",
+        "label": "Differentiator Cards",
+        "name": "about_differentiators",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Differentiator",
+        "sub_fields": [
+          {
+            "key": "field_about_diff_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_about_diff_description",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea"
+          },
+          {
+            "key": "field_about_diff_icon",
+            "label": "Icon Name (Lucide)",
+            "name": "icon_name",
+            "type": "text"
+          },
+          {
+            "key": "field_about_diff_icon_color",
+            "label": "Icon Color",
+            "name": "icon_color",
+            "type": "color_picker",
+            "default_value": "#a78bfa"
+          }
+        ]
+      },
+      {
+        "key": "field_about_values_tab",
         "label": "Core Values",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_about_values_heading",
+        "label": "Core Values Heading",
+        "name": "about_values_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_values_heading_color",
+        "label": "Core Values Heading Color",
+        "name": "about_values_heading_color",
+        "type": "color_picker",
+        "default_value": "#8B5CF6"
+      },
+      {
+        "key": "field_about_values",
+        "label": "Core Value Cards",
         "name": "about_values",
         "type": "repeater",
         "layout": "row",
@@ -496,38 +730,53 @@
         ]
       },
       {
-        "key": "field_about_leadership",
-        "label": "Leadership Team",
-        "name": "about_leadership",
-        "type": "repeater",
-        "layout": "row",
-        "sub_fields": [
-          {
-            "key": "field_about_lead_name",
-            "label": "Name",
-            "name": "name",
-            "type": "text"
-          },
-          {
-            "key": "field_about_lead_role",
-            "label": "Role",
-            "name": "role",
-            "type": "text"
-          },
-          {
-            "key": "field_about_lead_image",
-            "label": "Image URL",
-            "name": "image",
-            "type": "image",
-            "return_format": "url"
-          },
-          {
-            "key": "field_about_lead_linkedin",
-            "label": "LinkedIn Link",
-            "name": "linkedin",
-            "type": "url"
-          }
-        ]
+        "key": "field_about_cta_tab",
+        "label": "Bottom CTA",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_about_cta_heading",
+        "label": "CTA Heading",
+        "name": "about_cta_heading",
+        "type": "text"
+      },
+      {
+        "key": "field_about_cta_heading_color",
+        "label": "CTA Heading Color",
+        "name": "about_cta_heading_color",
+        "type": "color_picker",
+        "default_value": "#ffffff"
+      },
+      {
+        "key": "field_about_cta_description",
+        "label": "CTA Description",
+        "name": "about_cta_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_about_cta_primary_text",
+        "label": "Primary Button Text",
+        "name": "about_cta_primary_text",
+        "type": "text"
+      },
+      {
+        "key": "field_about_cta_primary_link",
+        "label": "Primary Button Link",
+        "name": "about_cta_primary_link",
+        "type": "text"
+      },
+      {
+        "key": "field_about_cta_secondary_text",
+        "label": "Secondary Button Text",
+        "name": "about_cta_secondary_text",
+        "type": "text"
+      },
+      {
+        "key": "field_about_cta_secondary_link",
+        "label": "Secondary Button Link",
+        "name": "about_cta_secondary_link",
+        "type": "text"
       }
     ],
     "location": [

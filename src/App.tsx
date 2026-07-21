@@ -823,40 +823,54 @@ function TurnstileWidget({ className = "" }: { className?: string }) {
 }
 
 function AboutPage() {
-  const heroValues = [
-    { title: "People First", description: "Human connection at the core of everything we do.", icon: Users },
-    { title: "AI-Powered", description: "Intelligent matching for better outcomes and faster results.", icon: BrainCircuit },
-    { title: "Trusted Partner", description: "Long-term relationships built on transparency and trust.", icon: ShieldCheck },
-    { title: "Results Driven", description: "Delivering measurable impact that accelerates growth.", icon: BadgeCheck },
-  ];
+  const heroValues = window.wpData?.about_hero_values?.length
+    ? window.wpData.about_hero_values.map((item: any) => ({
+        title: item.title,
+        description: item.description,
+        icon: getIconComponent(item.icon_name),
+      }))
+    : [
+        { title: "People First", description: "Human connection at the core of everything we do.", icon: Users },
+        { title: "AI-Powered", description: "Intelligent matching for better outcomes and faster results.", icon: BrainCircuit },
+        { title: "Trusted Partner", description: "Long-term relationships built on transparency and trust.", icon: ShieldCheck },
+        { title: "Results Driven", description: "Delivering measurable impact that accelerates growth.", icon: BadgeCheck },
+      ];
 
-  const differentiators = [
-    { title: "AI-Powered Matching", description: "Advanced AI helps us connect the right talent with the right opportunities faster and smarter.", icon: BrainCircuit, color: "text-[#8B5CF6]" },
-    { title: "Specialized Experts", description: "Access to a vast network of pre-vetted technology professionals across diverse domains.", icon: UserRoundSearch, color: "text-[#f59e0c]" },
-    { title: "Consulting + Staffing", description: "End-to-end solutions that go beyond hiring to solve complex business challenges.", icon: BriefcaseBusiness, color: "text-emerald-400" },
-    { title: "Speed with Quality", description: "Faster hiring without compromising on quality, precision, or cultural fit.", icon: Cpu, color: "text-blue-400" },
-    { title: "Risk-Free Partnership", description: "Transparent process, compliance-driven, and focused on long-term partnerships.", icon: ShieldCheck, color: "text-indigo-300" },
-    { title: "Impact That Scales", description: "Solutions designed to drive efficiency, innovation, and sustainable business growth.", icon: BadgeCheck, color: "text-orange-300" },
-  ];
+  const differentiators = window.wpData?.about_differentiators?.length
+    ? window.wpData.about_differentiators.map((item: any) => ({
+        title: item.title,
+        description: item.description,
+        icon: getIconComponent(item.icon_name),
+        color: item.icon_color || "#a78bfa",
+      }))
+    : [
+        { title: "AI-Powered Matching", description: "Advanced AI helps us connect the right talent with the right opportunities faster and smarter.", icon: BrainCircuit, color: "#8B5CF6" },
+        { title: "Specialized Experts", description: "Access to a vast network of pre-vetted technology professionals across diverse domains.", icon: UserRoundSearch, color: "#f59e0c" },
+        { title: "Consulting + Staffing", description: "End-to-end solutions that go beyond hiring to solve complex business challenges.", icon: BriefcaseBusiness, color: "#34d399" },
+        { title: "Speed with Quality", description: "Faster hiring without compromising on quality, precision, or cultural fit.", icon: Cpu, color: "#60a5fa" },
+        { title: "Risk-Free Partnership", description: "Transparent process, compliance-driven, and focused on long-term partnerships.", icon: ShieldCheck, color: "#a5b4fc" },
+        { title: "Impact That Scales", description: "Solutions designed to drive efficiency, innovation, and sustainable business growth.", icon: BadgeCheck, color: "#fdba74" },
+      ];
 
-  const values = [
-    { title: "Integrity", description: "We do the right thing, always.", icon: ShieldCheck },
-    { title: "Excellence", description: "We pursue the highest standards in everything we do.", icon: BadgeCheck },
-    { title: "Innovation", description: "We embrace change and create smarter solutions.", icon: BrainCircuit },
-    { title: "Partnership", description: "We win together with our clients and candidates.", icon: Users },
-    { title: "Human First", description: "We care, respect, and support each other.", icon: UsersRound },
-    { title: "Growth", description: "We grow together with our people, clients, and communities.", icon: Building2 },
-  ];
+  const values = window.wpData?.about_values?.length
+    ? window.wpData.about_values.map((item: any) => ({
+        title: item.title,
+        description: item.description,
+        icon: getIconComponent(item.icon_name),
+      }))
+    : [
+        { title: "Integrity", description: "We do the right thing, always.", icon: ShieldCheck },
+        { title: "Excellence", description: "We pursue the highest standards in everything we do.", icon: BadgeCheck },
+        { title: "Innovation", description: "We embrace change and create smarter solutions.", icon: BrainCircuit },
+        { title: "Partnership", description: "We win together with our clients and candidates.", icon: Users },
+        { title: "Human First", description: "We care, respect, and support each other.", icon: UsersRound },
+        { title: "Growth", description: "We grow together with our people, clients, and communities.", icon: Building2 },
+      ];
 
   return (
     <main className="about-page min-h-screen bg-[#f7f9fc] font-body text-[#0b132b]">
       <section className="relative overflow-hidden bg-[#071224] px-4 pb-20 text-white sm:px-6 lg:px-8">
-        <img
-          src={contactUsBackground}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          aria-hidden="true"
-        />
+        <HeroBackgroundMedia media={window.wpData?.about_bg_media} fallback={contactUsBackground} />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/42" />
         <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
@@ -865,7 +879,10 @@ function AboutPage() {
 
         <div className="relative z-10 mx-auto max-w-[1440px] pt-12">
           <p className="section-kicker text-[#a78bfa]">{window.wpData?.about_kicker || "About Technova Systems"}</p>
-          <h1 className="font-display mt-5 max-w-3xl text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl text-white">
+          <h1
+            className="font-display mt-5 max-w-3xl text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
+            style={{ color: window.wpData?.about_hero_heading_color || "#ffffff" }}
+          >
             {window.wpData && window.wpData.about_headline ? (
               <WaveLetters parts={parseHeadline(window.wpData.about_headline)} />
             ) : (
@@ -880,7 +897,7 @@ function AboutPage() {
           </p>
 
           <div className="mt-10 grid gap-4 md:grid-cols-4">
-            {heroValues.map((item) => {
+            {heroValues.map((item: any) => {
               const Icon = item.icon;
 
               return (
@@ -900,49 +917,49 @@ function AboutPage() {
       <section className="px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-[1440px] gap-6 lg:grid-cols-12">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 lg:col-span-5">
-            <p className="section-kicker text-[#8B5CF6]">Our Story</p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-tight">
-              Solving Today's Challenges. Building Tomorrow's Advantage.
+            <p className="section-kicker text-[#8B5CF6]">{window.wpData?.about_story_kicker || "Our Story"}</p>
+            <h2
+              className="font-display mt-4 text-4xl font-normal leading-tight"
+              style={{ color: window.wpData?.about_story_heading_color || "#0b132b" }}
+            >
+              {window.wpData?.about_story_heading || "Solving Today's Challenges. Building Tomorrow's Advantage."}
             </h2>
             <p className="mt-6 text-sm leading-7 text-slate-600">
-              The world of work is changing rapidly. Businesses need specialized
-              talent, smarter solutions, and the agility to adapt.
+              {window.wpData?.about_story_paragraph_1 || "The world of work is changing rapidly. Businesses need specialized talent, smarter solutions, and the agility to adapt."}
             </p>
             <p className="mt-4 text-sm leading-7 text-slate-600">
-              TechNova Systems was founded to meet that need. We combine deep
-              industry knowledge, technology intelligence, and a passion for
-              people to deliver staffing and consulting solutions that create
-              real impact.
+              {window.wpData?.about_story_paragraph_2 || "TechNova Systems was founded to meet that need. We combine deep industry knowledge, technology intelligence, and a passion for people to deliver staffing and consulting solutions that create real impact."}
             </p>
             <p className="mt-5 text-sm font-semibold leading-7 text-[#8B5CF6]">
-              We don't just fill positions. We build teams and partnerships that
-              shape the future.
+              {window.wpData?.about_story_highlight || "We don't just fill positions. We build teams and partnerships that shape the future."}
             </p>
           </div>
 
           <div className="overflow-hidden rounded-3xl border border-slate-200 lg:col-span-4">
             <img
-              src={aboutUsImage}
-              alt="TechNova Systems Office"
+              src={getAcfUrl(window.wpData?.about_story_image) || aboutUsImage}
+              alt={window.wpData?.about_story_image_alt || "TechNova Systems Office"}
               className="h-full min-h-[360px] w-full object-cover"
             />
           </div>
 
           <div className="grid gap-6 lg:col-span-3">
             <article className="rounded-3xl border border-slate-200 bg-white p-7">
-              <p className="section-kicker text-[#8B5CF6]">Our Mission</p>
-              <h3 className="mt-4 text-lg font-semibold">Empower organizations through exceptional talent.</h3>
+              <p className="section-kicker text-[#8B5CF6]">{window.wpData?.about_mission_kicker || "Our Mission"}</p>
+              <h3 className="mt-4 text-lg font-semibold" style={{ color: window.wpData?.about_mission_heading_color || "#0b132b" }}>
+                {window.wpData?.about_mission_heading || "Empower organizations through exceptional talent."}
+              </h3>
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                We create meaningful career opportunities while helping
-                companies innovate, grow, and deliver with confidence.
+                {window.wpData?.about_mission_description || "We create meaningful career opportunities while helping companies innovate, grow, and deliver with confidence."}
               </p>
             </article>
             <article className="rounded-3xl border border-slate-200 bg-white p-7">
-              <p className="section-kicker text-[#f59e0c]">Our Vision</p>
-              <h3 className="mt-4 text-lg font-semibold">Be the trusted partner for technology staffing and consulting.</h3>
+              <p className="section-kicker text-[#f59e0c]">{window.wpData?.about_vision_kicker || "Our Vision"}</p>
+              <h3 className="mt-4 text-lg font-semibold" style={{ color: window.wpData?.about_vision_heading_color || "#0b132b" }}>
+                {window.wpData?.about_vision_heading || "Be the trusted partner for technology staffing and consulting."}
+              </h3>
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                Recognized for transforming businesses and enriching lives
-                through people, innovation, and AI-driven solutions.
+                {window.wpData?.about_vision_description || "Recognized for transforming businesses and enriching lives through people, innovation, and AI-driven solutions."}
               </p>
             </article>
           </div>
@@ -952,18 +969,21 @@ function AboutPage() {
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px] rounded-3xl bg-[#071224] p-8 text-white">
           <div className="text-center">
-            <p className="section-kicker text-[#a78bfa]">What Makes Us Different</p>
-            <h2 className="font-display mt-3 text-4xl font-normal">
-              A Smarter Approach. Better Outcomes.
+            <p className="section-kicker text-[#a78bfa]">{window.wpData?.about_differentiators_kicker || "What Makes Us Different"}</p>
+            <h2
+              className="font-display mt-3 text-4xl font-normal"
+              style={{ color: window.wpData?.about_differentiators_heading_color || "#ffffff" }}
+            >
+              {window.wpData?.about_differentiators_heading || "A Smarter Approach. Better Outcomes."}
             </h2>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {differentiators.map((item) => {
+            {differentiators.map((item: any) => {
               const Icon = item.icon;
 
               return (
                 <article className="rounded-2xl bg-white/8 p-5" key={item.title}>
-                  <Icon className={item.color} size={30} />
+                  <Icon size={30} style={{ color: item.color }} />
                   <h3 className="mt-5 text-sm font-semibold text-white">{item.title}</h3>
                   <p className="mt-3 text-xs leading-6 text-white/70">{item.description}</p>
                 </article>
@@ -975,9 +995,14 @@ function AboutPage() {
 
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px] rounded-3xl border border-slate-200 bg-white p-7">
-          <p className="section-kicker text-center text-[#8B5CF6]">Our Core Values</p>
+          <p
+            className="section-kicker text-center"
+            style={{ color: window.wpData?.about_values_heading_color || "#8B5CF6" }}
+          >
+            {window.wpData?.about_values_heading || "Our Core Values"}
+          </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
-            {values.map((item) => {
+            {values.map((item: any) => {
               const Icon = item.icon;
 
               return (
@@ -999,19 +1024,27 @@ function AboutPage() {
       <section className="px-4 pb-16 pt-8 sm:px-6 lg:px-8">
         <div className="relative mx-auto grid max-w-[1440px] gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-8 text-white lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-6">
-            <h2 className="font-display text-4xl font-normal">Let's Build the Future Together</h2>
+            <h2
+              className="font-display text-4xl font-normal"
+              style={{ color: window.wpData?.about_cta_heading_color || "#ffffff" }}
+            >
+              {window.wpData?.about_cta_heading || "Let's Build the Future Together"}
+            </h2>
             <p className="mt-3 text-sm leading-7 text-white/84">
-              Partner with TechNova Systems for technology talent, strategic
-              consulting, and measurable business impact.
+              {window.wpData?.about_cta_description || "Partner with TechNova Systems for technology talent, strategic consulting, and measurable business impact."}
             </p>
           </div>
           <div className="flex flex-wrap gap-4 lg:col-span-6 lg:justify-end">
             <Button variant="glass" size="hero" asChild>
-              <a href="#contact">Schedule a Consultation</a>
+              <a href={window.wpData?.about_cta_primary_link || "/contact/"}>
+                {window.wpData?.about_cta_primary_text || "Schedule a Consultation"}
+              </a>
             </Button>
-            <Button variant="glass" size="hero">
-              Explore Our Solutions
-              <ArrowRight size={18} />
+            <Button variant="glass" size="hero" asChild>
+              <a href={window.wpData?.about_cta_secondary_link || "/employers/"}>
+                {window.wpData?.about_cta_secondary_text || "Explore Our Solutions"}
+                <ArrowRight size={18} />
+              </a>
             </Button>
           </div>
         </div>

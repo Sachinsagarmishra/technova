@@ -307,23 +307,58 @@ $pages = [
             'about_kicker' => 'Who We Are',
             'about_headline' => 'Empowering Innovation Through Strategic Talent & Solutions',
             'about_description' => 'TechNova Systems is a trusted technology partner and IT staffing agency. We specialize in connecting scaling enterprises with specialized engineering, product, and leadership talent while designing modern AI and digital solutions.',
+            'about_bg_media' => resolve_hashed_asset('contact-usbg'),
+            'about_hero_heading_color' => '#ffffff',
+            'about_hero_values' => [
+                ['title' => 'People First', 'description' => 'Human connection at the core of everything we do.', 'icon_name' => 'Users'],
+                ['title' => 'AI-Powered', 'description' => 'Intelligent matching for better outcomes and faster results.', 'icon_name' => 'BrainCircuit'],
+                ['title' => 'Trusted Partner', 'description' => 'Long-term relationships built on transparency and trust.', 'icon_name' => 'ShieldCheck'],
+                ['title' => 'Results Driven', 'description' => 'Delivering measurable impact that accelerates growth.', 'icon_name' => 'BadgeCheck']
+            ],
+            'about_story_kicker' => 'Our Story',
+            'about_story_heading' => "Solving Today's Challenges. Building Tomorrow's Advantage.",
+            'about_story_heading_color' => '#0b132b',
+            'about_story_paragraph_1' => 'The world of work is changing rapidly. Businesses need specialized talent, smarter solutions, and the agility to adapt.',
+            'about_story_paragraph_2' => 'TechNova Systems was founded to meet that need. We combine deep industry knowledge, technology intelligence, and a passion for people to deliver staffing and consulting solutions that create real impact.',
+            'about_story_highlight' => "We don't just fill positions. We build teams and partnerships that shape the future.",
+            'about_story_image' => resolve_hashed_asset('image'),
+            'about_story_image_alt' => 'TechNova Systems Office',
+            'about_mission_kicker' => 'Our Mission',
+            'about_mission_heading' => 'Empower organizations through exceptional talent.',
+            'about_mission_heading_color' => '#0b132b',
+            'about_mission_description' => 'We create meaningful career opportunities while helping companies innovate, grow, and deliver with confidence.',
+            'about_vision_kicker' => 'Our Vision',
+            'about_vision_heading' => 'Be the trusted partner for technology staffing and consulting.',
+            'about_vision_heading_color' => '#0b132b',
+            'about_vision_description' => 'Recognized for transforming businesses and enriching lives through people, innovation, and AI-driven solutions.',
+            'about_differentiators_kicker' => 'What Makes Us Different',
+            'about_differentiators_heading' => 'A Smarter Approach. Better Outcomes.',
+            'about_differentiators_heading_color' => '#ffffff',
+            'about_differentiators' => [
+                ['title' => 'AI-Powered Matching', 'description' => 'Advanced AI helps us connect the right talent with the right opportunities faster and smarter.', 'icon_name' => 'BrainCircuit', 'icon_color' => '#8B5CF6'],
+                ['title' => 'Specialized Experts', 'description' => 'Access to a vast network of pre-vetted technology professionals across diverse domains.', 'icon_name' => 'UserRoundSearch', 'icon_color' => '#f59e0c'],
+                ['title' => 'Consulting + Staffing', 'description' => 'End-to-end solutions that go beyond hiring to solve complex business challenges.', 'icon_name' => 'BriefcaseBusiness', 'icon_color' => '#34d399'],
+                ['title' => 'Speed with Quality', 'description' => 'Faster hiring without compromising on quality, precision, or cultural fit.', 'icon_name' => 'Cpu', 'icon_color' => '#60a5fa'],
+                ['title' => 'Risk-Free Partnership', 'description' => 'Transparent process, compliance-driven, and focused on long-term partnerships.', 'icon_name' => 'ShieldCheck', 'icon_color' => '#a5b4fc'],
+                ['title' => 'Impact That Scales', 'description' => 'Solutions designed to drive efficiency, innovation, and sustainable business growth.', 'icon_name' => 'BadgeCheck', 'icon_color' => '#fdba74']
+            ],
+            'about_values_heading' => 'Our Core Values',
+            'about_values_heading_color' => '#8B5CF6',
             'about_values' => [
-                [
-                    'title' => 'Innovation First',
-                    'description' => 'Embracing next-gen technologies to solve complex problems and build a stronger digital core.',
-                    'icon_name' => 'Cpu'
-                ],
-                [
-                    'title' => 'Quality Driven',
-                    'description' => 'Committed to delivery excellence and placing high-performance engineering candidates.',
-                    'icon_name' => 'ShieldCheck'
-                ],
-                [
-                    'title' => 'Human Centric',
-                    'description' => 'Fostering long-term collaborative partnerships built on trust, transparency, and impact.',
-                    'icon_name' => 'Users'
-                ]
-            ]
+                ['title' => 'Integrity', 'description' => 'We do the right thing, always.', 'icon_name' => 'ShieldCheck'],
+                ['title' => 'Excellence', 'description' => 'We pursue the highest standards in everything we do.', 'icon_name' => 'BadgeCheck'],
+                ['title' => 'Innovation', 'description' => 'We embrace change and create smarter solutions.', 'icon_name' => 'BrainCircuit'],
+                ['title' => 'Partnership', 'description' => 'We win together with our clients and candidates.', 'icon_name' => 'Users'],
+                ['title' => 'Human First', 'description' => 'We care, respect, and support each other.', 'icon_name' => 'UsersRound'],
+                ['title' => 'Growth', 'description' => 'We grow together with our people, clients, and communities.', 'icon_name' => 'Building2']
+            ],
+            'about_cta_heading' => "Let's Build the Future Together",
+            'about_cta_heading_color' => '#ffffff',
+            'about_cta_description' => 'Partner with TechNova Systems for technology talent, strategic consulting, and measurable business impact.',
+            'about_cta_primary_text' => 'Schedule a Consultation',
+            'about_cta_primary_link' => '/contact/',
+            'about_cta_secondary_text' => 'Explore Our Solutions',
+            'about_cta_secondary_link' => '/employers/'
         ]
     ],
     'talent' => [
