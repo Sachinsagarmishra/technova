@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import * as LucideIcons from "lucide-react";
 import {
   ArrowRight,
+  ArrowUp,
   BadgeCheck,
   BrainCircuit,
   BriefcaseBusiness,
@@ -534,42 +535,69 @@ function SiteHeader({ light = false }: { light?: boolean }) {
 }
 
 function SiteFooter() {
+  const mainMenuLinks = [
+    { label: "Home", href: "/" },
+    { label: "Solutions", href: "/#solutions" },
+    { label: "Industries", href: "/industries/" },
+    { label: "For Employers", href: "/employers/" },
+    { label: "For Talent", href: "/talent/" },
+    { label: "About Us", href: "/about/" },
+    { label: "Contact Us", href: "/contact/" },
+  ];
+
+  const policyLinks = [
+    { label: "Privacy Policy", href: "/privacy-policy/" },
+    { label: "Terms of Service", href: "/terms-of-service/" },
+    { label: "Contact Us", href: "/contact/" },
+  ];
+
+  const socialLinks = [
+    { label: "LinkedIn", href: "#", icon: Linkedin },
+    { label: "Facebook", href: "#", icon: Facebook },
+    { label: "Instagram", href: "#", icon: Instagram },
+  ];
+
   return (
-    <footer className="scroll-reveal-section bg-white text-[#0b132b] pt-16 pb-8 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+    <footer className="scroll-reveal-section border-t border-slate-200 bg-white px-4 pb-8 pt-16 text-[#0b132b] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1440px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12">
-          <div className="lg:col-span-3 flex flex-col gap-6">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 xl:gap-14">
+          <div className="flex flex-col gap-6 lg:col-span-4 lg:pr-8">
             <a href="/" className="flex items-center" aria-label="TechNova Systems Home">
-              <img src={window.wpData?.footer_logo || darkLogo} alt="TechNova Systems" className="h-10 w-auto" />
+              <img src={window.wpData?.footer_logo || darkLogo} alt="TechNova Systems" className="h-12 w-auto max-w-[240px] object-contain object-left" />
             </a>
-            <p className="text-sm text-slate-500 leading-relaxed">
+            <p className="max-w-md text-[15px] leading-7 text-slate-600">
               AI staffing and technology consulting solutions that help organizations innovate, scale and lead in the digital-first world.
             </p>
-            <div className="flex gap-4 text-slate-400">
-              <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="LinkedIn">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="X (formerly Twitter)">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map(({ label, href, icon: SocialIcon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition-all hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
+                >
+                  <SocialIcon size={19} />
+                </a>
+              ))}
+              <a
+                href="#"
+                aria-label="X (formerly Twitter)"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition-all hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
+              >
+                <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
-              </a>
-              <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="Facebook">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-[#8B5CF6] transition-colors" aria-label="Instagram">
-                <Instagram size={20} />
               </a>
             </div>
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Solutions</h4>
-            <ul className="mt-4 space-y-2.5">
-              {megaMenuSolutions.map((item) => (
-                <li key={item.title}>
-                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
-                    {item.title}
+            <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Main Menu</h4>
+            <ul className="mt-7 space-y-4">
+              {mainMenuLinks.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-[15px] text-slate-600 transition-colors hover:text-[#8B5CF6]">
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -577,51 +605,59 @@ function SiteFooter() {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">For Employers</h4>
-            <ul className="mt-4 space-y-2.5">
-              {["Hire Talent", "Solutions Overview", "Case Studies", "Resource Center"].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
-                    {item}
+            <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Our Policies</h4>
+            <ul className="mt-7 space-y-4">
+              {policyLinks.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-[15px] text-slate-600 transition-colors hover:text-[#8B5CF6]">
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">For Talent</h4>
-            <ul className="mt-4 space-y-2.5">
-              {["Browse Jobs", "Submit Resume", "Career Resources", "Why TechNova"].map((item) => (
-                <li key={item}>
-                  <a href="/talent/" className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2 lg:col-start-10">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Company</h4>
-            <ul className="mt-4 space-y-2.5">
-              {["About Us", "Leadership", "Careers", "Contact Us"].map((item) => (
-                <li key={item}>
-                  <a href={item === "Contact Us" ? "/contact/" : item === "About Us" ? "/about/" : "/"} className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="lg:col-span-4">
+            <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Quick Contact</h4>
+            <div className="mt-7 space-y-5">
+              <div className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-600">
+                  <MapPin size={20} />
+                </span>
+                <a href="https://maps.google.com/?q=3701+Pender+Dr+Suite+510+Fairfax+VA+22030" target="_blank" rel="noreferrer" className="pt-1 text-[15px] leading-6 text-slate-600 transition-colors hover:text-[#8B5CF6]">
+                  3701 Pender Dr Suite 510<br />Fairfax, VA, 22030
+                </a>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-600">
+                  <Phone size={20} />
+                </span>
+                <a href="tel:+15716510246" className="text-[15px] text-slate-600 transition-colors hover:text-[#8B5CF6]">
+                  +1 (571) 651 - 0246
+                </a>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-600">
+                  <Mail size={20} />
+                </span>
+                <a href="mailto:Info@technovasystemsinc.com" className="break-all text-[15px] text-slate-600 transition-colors hover:text-[#8B5CF6]">
+                  Info@technovasystemsinc.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-medium">
+        <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-slate-200 pt-7 text-sm font-medium text-slate-500 sm:flex-row">
           <div>&copy; 2026 TechNova Systems. All rights reserved.</div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-[#8B5CF6] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#8B5CF6] transition-colors">Terms of Service</a>
-          </div>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Scroll to top"
+            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition-all hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
+          >
+            <ArrowUp size={19} />
+          </button>
         </div>
       </div>
     </footer>
