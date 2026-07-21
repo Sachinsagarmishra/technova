@@ -357,14 +357,14 @@
         "label": "CTA Right Kicker",
         "name": "home_cta_right_kicker",
         "type": "text",
-        "default_value": "Insights & Trends"
+        "default_value": "About TechNova"
       },
       {
         "key": "field_home_cta_right_title",
         "label": "CTA Right Title",
         "name": "home_cta_right_title",
         "type": "text",
-        "default_value": "Insights That Drive What's Next"
+        "default_value": "People. Technology. Impact."
       },
       {
         "key": "field_home_cta_right_desc",
@@ -377,14 +377,14 @@
         "label": "CTA Right Button Text",
         "name": "home_cta_right_btn_text",
         "type": "text",
-        "default_value": "View All Insights"
+        "default_value": "About TechNova"
       },
       {
         "key": "field_home_cta_right_btn_link",
         "label": "CTA Right Button Link",
         "name": "home_cta_right_btn_link",
         "type": "text",
-        "default_value": "/insights/"
+        "default_value": "/about/"
       },
       {
         "key": "field_home_stats",
@@ -1506,40 +1506,6 @@
           "param": "page_template",
           "operator": "==",
           "value": "template-employers.php"
-        }
-      ]
-    ],
-    "active": true
-  },
-  {
-    "key": "group_insights_fields",
-    "title": "Insights Page Fields",
-    "fields": [
-      {
-        "key": "field_insights_kicker",
-        "label": "Kicker Text",
-        "name": "insights_kicker",
-        "type": "text"
-      },
-      {
-        "key": "field_insights_headline",
-        "label": "Headline",
-        "name": "insights_headline",
-        "type": "text"
-      },
-      {
-        "key": "field_insights_description",
-        "label": "Description",
-        "name": "insights_description",
-        "type": "textarea"
-      }
-    ],
-    "location": [
-      [
-        {
-          "param": "page_template",
-          "operator": "==",
-          "value": "template-insights.php"
         }
       ]
     ],

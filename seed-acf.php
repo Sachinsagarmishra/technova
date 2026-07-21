@@ -94,7 +94,7 @@ $pages = [
                     'button_1_text' => 'Hire Top Talent',
                     'button_1_link' => '/employers/',
                     'button_2_text' => 'Explore AI Solutions',
-                    'button_2_link' => '/insights/',
+                    'button_2_link' => '/about/',
                 ],
                 [
                     'bg_type' => 'video',
@@ -284,11 +284,11 @@ $pages = [
             'home_cta_left_desc' => 'We combine cutting-edge AI screening with human engineering expertise to build vetted pools of high-performance talent ready to hit the ground running.',
             'home_cta_left_btn_text' => 'Submit Resume',
             'home_cta_left_btn_link' => '/talent/',
-            'home_cta_right_kicker' => 'Insights & Trends',
-            'home_cta_right_title' => 'Insights That Drive What\'s Next',
-            'home_cta_right_desc' => 'Explore the latest talent intelligence trends, engineering hiring guides, and AI integration strategies written by our consultants.',
-            'home_cta_right_btn_text' => 'View All Insights',
-            'home_cta_right_btn_link' => '/insights/',
+            'home_cta_right_kicker' => 'About TechNova',
+            'home_cta_right_title' => 'People. Technology. Impact.',
+            'home_cta_right_desc' => 'Discover how TechNova combines specialized talent, technology expertise and human-first partnerships.',
+            'home_cta_right_btn_text' => 'About TechNova',
+            'home_cta_right_btn_link' => '/about/',
             'home_stats' => [
                 ['value' => '500+', 'label' => 'Enterprise Partners', 'icon_name' => 'Users'],
                 ['value' => '1000+', 'label' => 'Successful Placements', 'icon_name' => 'BriefcaseBusiness'],
@@ -865,15 +865,6 @@ $pages = [
                 ]
             ],
             'employers_form_id' => '21'
-        ]
-    ],
-    'insights' => [
-        'title' => 'AI & Insights',
-        'template' => 'template-insights.php',
-        'fields' => [
-            'insights_kicker' => 'TechNova Insights',
-            'insights_headline' => 'Knowledge to Power Your Digital Transformation',
-            'insights_description' => 'Stay ahead of the curve with our latest research, trend reports, and deep-dive technical guides.'
         ]
     ],
     'contact' => [

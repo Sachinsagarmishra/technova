@@ -122,7 +122,6 @@ const navLinks = [
   "Industries",
   "For Employers",
   "For Talent",
-  "AI & Insights",
   "About Us",
 ];
 
@@ -513,8 +512,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                 link === "Industries" ? "/industries/" :
                   link === "For Employers" ? "/employers/" :
                     link === "For Talent" ? "/talent/" :
-                      link === "AI & Insights" ? "/insights/" :
-                        "/"
+                      "/"
             }
             className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
           >
@@ -607,9 +605,9 @@ function SiteFooter() {
           <div className="lg:col-span-2 lg:col-start-10">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800">Company</h4>
             <ul className="mt-4 space-y-2.5">
-              {["About Us", "Leadership", "Careers", "News & Insights", "Contact Us"].map((item) => (
+              {["About Us", "Leadership", "Careers", "Contact Us"].map((item) => (
                 <li key={item}>
-                  <a href={item === "Contact Us" ? "/contact/" : item === "About Us" ? "/about/" : item === "News & Insights" ? "/insights/" : "/"} className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
+                  <a href={item === "Contact Us" ? "/contact/" : item === "About Us" ? "/about/" : "/"} className="text-sm text-slate-500 hover:text-[#8B5CF6] transition-colors">
                     {item}
                   </a>
                 </li>
@@ -2680,613 +2678,6 @@ function EmployersPage() {
   );
 }
 
-function InsightsPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    company: "",
-    role: "",
-  });
-  const [interests, setInterests] = useState({
-    aiStrategy: false,
-    digitalTransformation: false,
-    workforceTrends: false,
-    cybersecurity: false,
-    cloud: false,
-  });
-  const [subscribed, setSubscribed] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
-
-  const handleSubscribeFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubscribed(true);
-    const form = new FormData();
-    form.append("your-name", formData.fullName);
-    form.append("your-email", formData.email);
-    form.append("your-company", formData.company);
-    form.append("your-role", formData.role);
-    const chosenInterests = Object.keys(interests)
-      .filter((k) => (interests as any)[k])
-      .join(", ");
-    form.append("your-interests", chosenInterests);
-
-    try {
-      const formId = window.wpData && window.wpData.subscribe_form_id ? window.wpData.subscribe_form_id : "1002";
-      await fetch(`/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`, {
-        method: "POST",
-        body: form,
-      });
-      setTimeout(() => {
-        setSubscribed(false);
-        setFormData({
-          fullName: "",
-          email: "",
-          company: "",
-          role: "",
-        });
-        setInterests({
-          aiStrategy: false,
-          digitalTransformation: false,
-          workforceTrends: false,
-          cybersecurity: false,
-          cloud: false,
-        });
-      }, 3000);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleNewsletterBarSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setNewsletterSubscribed(true);
-    const form = new FormData();
-    form.append("your-email", newsletterEmail);
-
-    try {
-      const formId = window.wpData && window.wpData.newsletter_form_id ? window.wpData.newsletter_form_id : "1003";
-      await fetch(`/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`, {
-        method: "POST",
-        body: form,
-      });
-      setTimeout(() => {
-        setNewsletterSubscribed(false);
-        setNewsletterEmail("");
-      }, 3000);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  return (
-    <main className="insights-page min-h-screen bg-[#f7f9fc] font-body text-[#0b132b]">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[#071224] px-4 pb-24 text-white sm:px-6 lg:px-8">
-        <img
-          src={industryHeroBg}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center animate-fade-in"
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,22,0.96)_0%,rgba(4,10,22,0.74)_28%,rgba(4,10,22,0.34)_52%,rgba(4,10,22,0.70)_78%,rgba(4,10,22,0.92)_100%)] animate-fade-in" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071224]/50" />
-
-        <div className="relative z-30 -mx-4 sm:-mx-6 lg:-mx-8">
-          <SiteHeader />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-[1440px] pt-16 grid gap-12 lg:grid-cols-12 items-center">
-          {/* Left Column */}
-          <div className="lg:col-span-7 pt-4 animate-fade-rise">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#a78bfa]">
-              {window.wpData?.insights_kicker || "AI & Insights"}
-            </p>
-            <h1 className="font-display mt-5 max-w-2xl text-5xl font-normal leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl text-white">
-              {window.wpData && window.wpData.insights_headline ? (
-                <WaveLetters parts={parseHeadline(window.wpData.insights_headline)} />
-              ) : (
-                <>
-                  Ideas. Insights. Intelligence. <span className="text-[#f59e0c]">Impact.</span>
-                </>
-              )}
-            </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
-              {window.wpData?.insights_description || "Expert perspectives, industry trends, and practical strategies at the intersection of AI, technology, and the future of work."}
-            </p>
-
-            {/* Search Bar */}
-            <form onSubmit={(e) => e.preventDefault()} className="mt-10 max-w-xl flex gap-3">
-              <div className="relative flex-grow">
-                <input
-                  type="text"
-                  placeholder="Search articles, topics, or keywords..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-white/20 bg-white/10 px-5 py-4 pl-12 text-sm text-white placeholder-white/50 outline-none backdrop-blur-sm transition focus:border-white/40 focus:bg-white/15"
-                />
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50">
-                  <Search size={18} />
-                </span>
-              </div>
-              <button
-                type="submit"
-                className="flex items-center justify-center rounded-xl bg-[#8B5CF6] hover:bg-[#7c3aed] text-white px-6 transition-colors shadow-lg shadow-purple-500/20 cursor-pointer"
-                aria-label="Search"
-              >
-                <Search size={18} />
-              </button>
-            </form>
-          </div>
-
-          {/* Right Column: Newsletter Subscription Card */}
-          <div className="lg:col-span-5 scroll-mt-24 rounded-3xl border border-white/70 bg-white p-6 text-[#0b132b] shadow-2xl sm:p-8 animate-fade-rise-delay">
-            <h2 className="font-display text-2xl sm:text-3xl font-normal text-[#0b132b] flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 text-[#8B5CF6]">
-                <Mail size={16} />
-              </span>
-              Stay Ahead with AI & Technology
-            </h2>
-            <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500">
-              Get exclusive AI insights, technology trends, hiring reports, and digital transformation strategies delivered to your inbox.
-            </p>
-
-            {subscribed ? (
-              <div className="mt-8 flex flex-col items-center justify-center py-12 text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 animate-bounce">
-                  <Check size={32} strokeWidth={3} />
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-slate-800">Subscription Confirmed!</h3>
-                <p className="mt-2 text-sm text-slate-500 max-w-xs">
-                  Thank you for subscribing. We will send you our next update soon!
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribeFormSubmit} className="mt-6 grid gap-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    type="text"
-                    placeholder="Full Name*"
-                    required
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Work Email*"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
-                  />
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    type="text"
-                    placeholder="Company Name*"
-                    required
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
-                  />
-                  <select
-                    required
-                    value={formData.role}
-                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 placeholder-slate-400 outline-none transition focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6]"
-                  >
-                    <option value="" disabled hidden>I am...*</option>
-                    <option value="executive">Executive / C-Suite</option>
-                    <option value="manager">Manager / Director</option>
-                    <option value="contributor">Individual Contributor</option>
-                    <option value="consultant">Consultant</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-2">Areas of Interest (Select all that apply)</label>
-                  <div className="grid grid-cols-2 gap-2 mt-1">
-                    {[
-                      { key: "aiStrategy", label: "AI Strategy" },
-                      { key: "digitalTransformation", label: "Digital Transformation" },
-                      { key: "workforceTrends", label: "Workforce Trends" },
-                      { key: "cybersecurity", label: "Cybersecurity" },
-                      { key: "cloud", label: "Cloud" }
-                    ].map((item) => (
-                      <label key={item.key} className="flex items-center gap-2.5 text-xs text-slate-600 cursor-pointer select-none">
-                        <input
-                          type="checkbox"
-                          checked={interests[item.key as keyof typeof interests]}
-                          onChange={(e) => setInterests({ ...interests, [item.key]: e.target.checked })}
-                          className="rounded border-slate-300 text-[#8B5CF6] focus:ring-[#8B5CF6] h-4 w-4"
-                        />
-                        {item.label}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="default"
-                  size="hero"
-                  className="mt-2 w-full justify-center bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] text-white hover:opacity-90 shadow-lg shadow-purple-500/20 hover:scale-[1.01] transition-all cursor-pointer font-semibold"
-                >
-                  Subscribe & Get Insights
-                  <ArrowRight size={18} className="ml-2" />
-                </Button>
-                <div className="flex justify-center gap-4 text-[10px] text-slate-400 mt-2">
-                  <span>📅 Weekly insights</span>
-                  <span>🛡️ No spam</span>
-                  <span>🔒 Unsubscribe anytime</span>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Insight Section */}
-      <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1440px]">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6] mb-8">
-            Featured Insight
-          </h2>
-
-          <div className="grid gap-8 lg:grid-cols-12">
-            {/* Left Big Card */}
-            <article className="lg:col-span-7 flex flex-col justify-between rounded-3xl border border-slate-100 bg-[#f8fafc] overflow-hidden hover:shadow-xl transition-all duration-300 group">
-              <div className="relative h-[320px] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop"
-                  alt="AI Node Network Over City"
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <span className="absolute left-6 top-6 rounded-full bg-[#8B5CF6] text-white text-xs font-bold px-3 py-1 uppercase animate-pulse">
-                  Featured
-                </span>
-              </div>
-              <div className="p-8 flex-grow flex flex-col justify-between">
-                <div>
-                  <p className="text-xs font-semibold text-slate-400">May 20, 2024 &bull; 8 min read</p>
-                  <h3 className="font-display text-2xl sm:text-3xl font-semibold text-slate-800 mt-3 leading-tight group-hover:text-[#8B5CF6] transition-colors">
-                    The Enterprise AI Advantage: Turning Innovation into Measurable Business Impact
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-500">
-                    How forward-thinking organizations are leveraging AI to drive efficiency, enhance customer experiences, and unlock new growth opportunities in a hyper-competitive landscape.
-                  </p>
-                </div>
-                <a href="#newsletter-bar" className="mt-8 flex items-center text-sm font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors group-hover:translate-x-1 duration-200">
-                  Read More
-                  <ArrowRight size={16} className="ml-1.5" />
-                </a>
-              </div>
-            </article>
-
-            {/* Right List Column */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
-              {[
-                {
-                  kicker: "AI Strategy",
-                  title: "Building an AI Roadmap That Delivers Real ROI",
-                  meta: "May 15, 2024 &bull; 6 min read",
-                  color: "text-purple-600 bg-purple-50"
-                },
-                {
-                  kicker: "Future of Work",
-                  title: "Skills That Will Define the Future Workforce",
-                  meta: "May 10, 2024 &bull; 5 min read",
-                  color: "text-amber-600 bg-amber-50"
-                },
-                {
-                  kicker: "Technology",
-                  title: "Cloud, Data, and AI: The Power Trio for Digital Transformation",
-                  meta: "May 5, 2024 &bull; 7 min read",
-                  color: "text-emerald-600 bg-emerald-50"
-                }
-              ].map((article, i) => (
-                <article key={i} className="rounded-3xl border border-slate-100 bg-white p-6 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between flex-grow">
-                  <div>
-                    <span className={`inline-flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold uppercase ${article.color}`}>
-                      {article.kicker}
-                    </span>
-                    <h4 className="text-base font-bold text-slate-800 mt-4 leading-snug group-hover:text-[#8B5CF6] transition-colors">
-                      {article.title}
-                    </h4>
-                  </div>
-                  <div className="mt-6 flex justify-between items-center border-t border-slate-100 pt-4">
-                    <span className="text-xs text-slate-400 font-semibold">{article.meta}</span>
-                    <a href="#newsletter-bar" className="flex items-center text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">
-                      Read More
-                      <ArrowRight size={14} className="ml-1" />
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Articles Section */}
-      <section className="scroll-reveal-section bg-slate-50/50 px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8 border-t border-b border-slate-100">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col sm:flex-row justify-between items-end mb-12">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-                Latest Articles
-              </p>
-              <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-                Recent Insights & Perspectives
-              </h2>
-            </div>
-            <a href="#newsletter-bar" className="text-sm font-semibold text-[#8B5CF6] hover:text-[#7C3AED] flex items-center mt-4 sm:mt-0">
-              View All Articles
-              <ArrowRight size={16} className="ml-1.5" />
-            </a>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                category: "AI Strategy",
-                date: "May 12, 2024",
-                readTime: "6 min read",
-                title: "From Pilot to Scale: 7 Steps to Successful AI Implementation",
-                img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop",
-                color: "text-purple-600 bg-purple-50"
-              },
-              {
-                category: "Leadership",
-                date: "May 10, 2024",
-                readTime: "5 min read",
-                title: "Leading Through Change: How Leaders Can Drive AI Adoption",
-                img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop",
-                color: "text-blue-600 bg-blue-50"
-              },
-              {
-                category: "Industry Trends",
-                date: "May 5, 2024",
-                readTime: "7 min read",
-                title: "Sustainability and AI: Building a Smarter, Greener Tomorrow",
-                img: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?q=80&w=400&auto=format&fit=crop",
-                color: "text-emerald-600 bg-emerald-50"
-              }
-            ].map((article, i) => (
-              <article key={i} className="rounded-3xl border border-slate-200 bg-white overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
-                <div className="h-48 overflow-hidden relative">
-                  <img src={article.img} alt={article.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-center">
-                      <span className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${article.color}`}>
-                        {article.category}
-                      </span>
-                      <span className="text-[10px] text-slate-400 font-semibold">{article.date} &bull; {article.readTime}</span>
-                    </div>
-                    <h3 className="text-base font-bold text-slate-800 mt-4 leading-snug group-hover:text-[#8B5CF6] transition-colors">
-                      {article.title}
-                    </h3>
-                  </div>
-                  <a href="#newsletter-bar" className="mt-6 flex items-center text-xs font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">
-                    Read More
-                    <ArrowRight size={12} className="ml-1" />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Reports & Resources Section */}
-      <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col sm:flex-row justify-between items-end mb-12">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#f59e0c]">
-                Featured Reports & Resources
-              </p>
-              <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-                Deep-Dive Reports & Whitepapers
-              </h2>
-            </div>
-            <a href="#newsletter-bar" className="text-sm font-semibold text-[#8B5CF6] hover:text-[#7C3AED] flex items-center mt-4 sm:mt-0">
-              Explore All Resources
-              <ArrowRight size={16} className="ml-1.5" />
-            </a>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "AI Hiring Report 2026",
-                desc: "Key hiring trends, in-demand skills, and salary benchmarks.",
-                icon: BrainCircuit,
-                theme: "bg-slate-900 border-slate-800 text-white"
-              },
-              {
-                title: "Future of Work Outlook 2026",
-                desc: "Workforce trends shaping the next decade.",
-                icon: UsersRound,
-                theme: "bg-indigo-950 border-indigo-900 text-white"
-              },
-              {
-                title: "Enterprise AI Adoption Playbook",
-                desc: "A practical guide to successfully adopt AI at scale.",
-                icon: BadgeCheck,
-                theme: "bg-emerald-950 border-emerald-900 text-white"
-              },
-              {
-                title: "Digital Transformation Guide",
-                desc: "Strategies to modernize operations and drive growth.",
-                icon: TrendingUp,
-                theme: "bg-amber-950 border-amber-900 text-white"
-              }
-            ].map((report, i) => {
-              const Icon = report.icon;
-              return (
-                <div key={i} className={`rounded-3xl border p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group ${report.theme} min-h-[300px]`}>
-                  <div>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white mb-6">
-                      <Icon size={24} />
-                    </span>
-                    <h3 className="text-lg font-semibold tracking-tight">{report.title}</h3>
-                    <p className="mt-3 text-xs leading-relaxed text-white/70">{report.desc}</p>
-                  </div>
-                  <a href="#newsletter-bar" className="mt-8 flex items-center justify-start text-xs font-semibold text-white/90 hover:text-white transition-colors group-hover:translate-y-0.5 duration-200">
-                    Download Now
-                    <ArrowRight size={14} className="ml-1.5" />
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Weekly Newsletter Bar */}
-      <section id="newsletter-bar" className="scroll-reveal-section px-4 py-12 bg-slate-950 text-white border-t border-white/5">
-        <div className="mx-auto max-w-[1440px] flex flex-col lg:flex-row justify-between items-center gap-8 px-6">
-          <div className="flex gap-4 items-center">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-[#c4b5fd]">
-              <Mail size={22} />
-            </span>
-            <div>
-              <h3 className="text-xl font-bold font-display tracking-tight text-white sm:text-2xl">
-                The Future Belongs to Organizations That Learn Faster.
-              </h3>
-              <p className="mt-1 text-xs text-white/60 font-semibold">
-                Get practical insights from TechNova experts every week.
-              </p>
-            </div>
-          </div>
-          <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-3 min-w-[320px] lg:min-w-[420px]">
-            {newsletterSubscribed ? (
-              <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm bg-emerald-500/10 border border-emerald-500/20 px-5 py-3.5 rounded-xl w-full">
-                <Check size={16} strokeWidth={3} />
-                Subscribed successfully!
-              </div>
-            ) : (
-              <form onSubmit={handleNewsletterBarSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
-                <input
-                  type="email"
-                  placeholder="Enter your work email"
-                  required
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="flex-grow rounded-xl border border-white/10 bg-white/5 px-5 py-3.5 text-sm text-white placeholder-white/40 outline-none transition focus:border-white/20 focus:bg-white/10"
-                />
-                <button
-                  type="submit"
-                  className="rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] text-white hover:opacity-90 font-semibold px-6 py-3.5 text-sm transition-all shadow-lg shadow-purple-500/20 cursor-pointer text-center"
-                >
-                  Subscribe Now
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Read TechNova Insights Section */}
-      <section className="scroll-reveal-section bg-white px-4 py-20 text-[#0b132b] sm:px-6 lg:px-8 border-b border-slate-100">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="text-center mb-16">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#8B5CF6]">
-              Why Read TechNova Insights?
-            </p>
-            <h2 className="font-display mt-4 text-4xl font-normal leading-none sm:text-5xl">
-              Equip Your Organization with What's Next
-            </h2>
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Research-backed Insights",
-                desc: "In-depth analysis backed by data, research, and real-world experience.",
-                icon: Search,
-                color: "text-purple-600 bg-purple-50"
-              },
-              {
-                title: "Practical AI Strategies",
-                desc: "Actionable frameworks and strategies you can implement today.",
-                icon: Cpu,
-                color: "text-amber-600 bg-amber-50"
-              },
-              {
-                title: "Enterprise Case Studies",
-                desc: "Learn from real organizations driving transformation with technology.",
-                icon: Building2,
-                color: "text-emerald-600 bg-emerald-50"
-              },
-              {
-                title: "Industry Thought Leadership",
-                desc: "Expert opinions from leaders shaping the future of AI and work.",
-                icon: UsersRound,
-                color: "text-blue-600 bg-blue-50"
-              }
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="flex gap-4 items-start">
-                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${item.color} shadow-inner`}>
-                    <Icon size={22} />
-                  </span>
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-800 leading-snug">{item.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-500">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA Section */}
-      <section className="scroll-reveal-section px-4 pb-16 pt-16 bg-white">
-        <div className="relative mx-auto grid max-w-[1440px] gap-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-10 text-white lg:grid-cols-12 lg:items-center">
-          {/* Decorative shapes */}
-          <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
-            <img src={ctaCubes} alt="" className="h-64 w-auto object-contain" />
-          </div>
-
-          <div className="lg:col-span-8 relative z-10">
-            <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl">
-              Ready to Transform Your Workforce?
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-white/90 max-w-2xl">
-              Partner with TechNova to build future-ready teams and drive measurable business impact.
-            </p>
-          </div>
-          <div className="flex lg:col-span-4 lg:justify-end relative z-10">
-            <Button
-              variant="glass"
-              size="hero"
-              asChild
-              className="bg-white text-slate-900 border-white hover:bg-white/90 font-semibold cursor-pointer shadow-xl hover:scale-[1.03]"
-            >
-              <a href="#contact">
-                Schedule a Consultation
-                <ArrowRight size={18} className="ml-2" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <SiteFooter />
-    </main>
-  );
-}
-
 function TalentPage() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -4300,7 +3691,6 @@ function App() {
     if (path.endsWith("/industries")) return "#industries";
     if (path.endsWith("/employers")) return "#employers";
     if (path.endsWith("/talent")) return "#talent";
-    if (path.endsWith("/insights")) return "#insights";
     return window.location.hash || "#home";
   });
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -4313,7 +3703,6 @@ function App() {
       else if (path.endsWith("/industries")) setRouteHash("#industries");
       else if (path.endsWith("/employers")) setRouteHash("#employers");
       else if (path.endsWith("/talent")) setRouteHash("#talent");
-      else if (path.endsWith("/insights")) setRouteHash("#insights");
       else setRouteHash(window.location.hash || "#home");
     };
 
@@ -4395,10 +3784,6 @@ function App() {
 
   if (routeHash === "#talent") {
     return <TalentPage />;
-  }
-
-  if (routeHash === "#insights") {
-    return <InsightsPage />;
   }
 
   const displayArticles = latestPosts.length > 0 ? latestPosts : insightArticles;
@@ -4783,29 +4168,29 @@ function App() {
               <div className="md:col-span-5 flex flex-col justify-between h-full">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#0e2a90]">
-                    {window.wpData?.home_cta_right_kicker || "Insights & Resources"}
+                    {window.wpData?.home_cta_right_kicker || "About TechNova"}
                   </p>
                   <h3
                     className="font-display mt-5 text-3xl sm:text-4xl font-normal leading-tight text-[#001726]"
-                    aria-label={window.wpData?.home_cta_right_title || "Insights That Drive What's Next"}
+                    aria-label={window.wpData?.home_cta_right_title || "People. Technology. Impact."}
                   >
                     {window.wpData && window.wpData.home_cta_right_title ? (
                       <WaveLetters parts={parseHeadline(window.wpData.home_cta_right_title)} />
                     ) : (
                       <>
-                        Insights That <br />
-                        Drive What's Next
+                        People. Technology. <br />
+                        Impact.
                       </>
                     )}
                   </h3>
                   <p className="mt-5 text-sm text-slate-600 leading-relaxed">
-                    {window.wpData?.home_cta_right_desc || "Stay ahead with the latest trends, reports and expert perspectives."}
+                    {window.wpData?.home_cta_right_desc || "Discover how TechNova combines specialized talent, technology expertise and human-first partnerships."}
                   </p>
                 </div>
                 <div className="mt-8">
                   <Button variant="glass-dark" size="cta" className="transition-all hover:scale-[1.02]" asChild>
-                    <a href={window.wpData?.home_cta_right_btn_link || "/insights/"}>
-                      {window.wpData?.home_cta_right_btn_text || "View All Insights"}
+                    <a href={window.wpData?.home_cta_right_btn_link || "/about/"}>
+                      {window.wpData?.home_cta_right_btn_text || "About TechNova"}
                     </a>
                   </Button>
                 </div>
