@@ -795,6 +795,14 @@
     "title": "Talent Page Fields",
     "fields": [
       {
+        "key": "field_talent_hero_tab",
+        "label": "1. Hero & Background",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
         "key": "field_talent_kicker",
         "label": "Kicker Text",
         "name": "talent_kicker",
@@ -898,9 +906,11 @@
       },
       {
         "key": "field_talent_form_tab",
-        "label": "Resume Form",
+        "label": "2. Resume Form",
         "name": "",
-        "type": "tab"
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_form_id",
@@ -927,12 +937,6 @@
         "name": "talent_form_heading_color",
         "type": "color_picker",
         "default_value": "#0b132b"
-      },
-      {
-        "key": "field_talent_form_placeholders_tab",
-        "label": "Form Placeholders & Messages",
-        "name": "",
-        "type": "tab"
       },
       {
         "key": "field_talent_form_full_name_placeholder",
@@ -1068,9 +1072,11 @@
       },
       {
         "key": "field_talent_stats_tab",
-        "label": "Stats",
+        "label": "3. Stats Bar",
         "name": "",
-        "type": "tab"
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_stats_bg_color",
@@ -1117,6 +1123,14 @@
             "type": "color_picker"
           }
         ]
+      },
+      {
+        "key": "field_talent_jobs_tab",
+        "label": "4. Featured Opportunities",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_jobs_kicker",
@@ -1202,6 +1216,14 @@
         ]
       },
       {
+        "key": "field_talent_why_tab",
+        "label": "5. Career Support Cards",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
         "key": "field_talent_why_kicker",
         "label": "Why Choose Section Kicker",
         "name": "talent_why_kicker",
@@ -1284,6 +1306,14 @@
             "default_value": "#ffffff"
           }
         ]
+      },
+      {
+        "key": "field_talent_how_work_tab",
+        "label": "6. How It Works Journey",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_how_work_kicker",
@@ -1374,6 +1404,14 @@
             "type": "color_picker"
           }
         ]
+      },
+      {
+        "key": "field_talent_stories_tab",
+        "label": "7. Testimonials",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_stories_kicker",
@@ -1474,6 +1512,14 @@
         ]
       },
       {
+        "key": "field_talent_resources_tab",
+        "label": "8. Career Resources",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
         "key": "field_talent_resources_kicker",
         "label": "Career Resources Kicker",
         "name": "talent_resources_kicker",
@@ -1557,6 +1603,14 @@
         ]
       },
       {
+        "key": "field_talent_faqs_tab",
+        "label": "9. FAQs",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
         "key": "field_talent_faqs_kicker",
         "label": "FAQs Kicker",
         "name": "talent_faqs_kicker",
@@ -1602,6 +1656,14 @@
             "type": "textarea"
           }
         ]
+      },
+      {
+        "key": "field_talent_cta_tab",
+        "label": "10. Bottom CTA",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
       },
       {
         "key": "field_talent_cta_title",
