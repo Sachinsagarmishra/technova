@@ -2570,5 +2570,179 @@
       ]
     ],
     "active": true
+  },
+  {
+    "key": "group_solution_fields",
+    "title": "Solution Page Fields",
+    "fields": [
+      {
+        "key": "field_solution_hero_tab",
+        "label": "Hero",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_kicker",
+        "label": "Kicker",
+        "name": "solution_kicker",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_headline",
+        "label": "H1 Headline",
+        "name": "solution_headline",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_description",
+        "label": "Hero Description",
+        "name": "solution_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_solution_bg_media",
+        "label": "Hero Background Image or Video",
+        "name": "solution_bg_media",
+        "type": "file",
+        "return_format": "array",
+        "mime_types": "jpg,jpeg,png,gif,webp,avif,mp4,webm,ogg,ogv,mov,m4v"
+      },
+      {
+        "key": "field_solution_primary_text",
+        "label": "Hero Button Text",
+        "name": "solution_primary_text",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_primary_link",
+        "label": "Hero Button Link",
+        "name": "solution_primary_link",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_overview_tab",
+        "label": "Overview",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_overview_title",
+        "label": "Overview Heading",
+        "name": "solution_overview_title",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_overview_body",
+        "label": "Overview Content",
+        "name": "solution_overview_body",
+        "type": "textarea"
+      },
+      {
+        "key": "field_solution_features_tab",
+        "label": "Features",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_features",
+        "label": "Feature Cards",
+        "name": "solution_features",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Feature",
+        "sub_fields": [
+          { "key": "field_solution_feature_title", "label": "Title", "name": "title", "type": "text" },
+          { "key": "field_solution_feature_description", "label": "Description", "name": "description", "type": "textarea" },
+          { "key": "field_solution_feature_icon", "label": "Lucide Icon Name", "name": "icon_name", "type": "text" }
+        ]
+      },
+      {
+        "key": "field_solution_capabilities_tab",
+        "label": "Capabilities",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_roles_title",
+        "label": "Capabilities Heading",
+        "name": "solution_roles_title",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_roles",
+        "label": "Capabilities List",
+        "name": "solution_roles",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Add Capability",
+        "sub_fields": [
+          { "key": "field_solution_role_title", "label": "Capability", "name": "title", "type": "text" }
+        ]
+      },
+      {
+        "key": "field_solution_process_tab",
+        "label": "Process",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_process_title",
+        "label": "Process Heading",
+        "name": "solution_process_title",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_process",
+        "label": "Process Steps",
+        "name": "solution_process",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Step",
+        "sub_fields": [
+          { "key": "field_solution_process_step_title", "label": "Title", "name": "title", "type": "text" },
+          { "key": "field_solution_process_step_description", "label": "Description", "name": "description", "type": "textarea" }
+        ]
+      },
+      {
+        "key": "field_solution_cta_tab",
+        "label": "CTA",
+        "name": "",
+        "type": "tab"
+      },
+      {
+        "key": "field_solution_cta_title",
+        "label": "CTA Heading",
+        "name": "solution_cta_title",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_cta_description",
+        "label": "CTA Description",
+        "name": "solution_cta_description",
+        "type": "textarea"
+      },
+      {
+        "key": "field_solution_cta_text",
+        "label": "CTA Button Text",
+        "name": "solution_cta_text",
+        "type": "text"
+      },
+      {
+        "key": "field_solution_cta_link",
+        "label": "CTA Button Link",
+        "name": "solution_cta_link",
+        "type": "text"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "template-solution.php"
+        }
+      ]
+    ],
+    "active": true
   }
 ]

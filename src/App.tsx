@@ -132,28 +132,31 @@ const megaMenuDirections = [
     description: "Contract-to-hire, performance staffing and managed teams.",
     icon: BriefcaseBusiness,
     accent: "purple",
+    link: "/employers/",
   },
   {
     title: "Accelerate AI delivery",
     description: "AI, ML, data and digital transformation expertise.",
     icon: BrainCircuit,
     accent: "blue",
+    link: "/solutions/ai-talent-solutions/",
   },
   {
     title: "Build leadership capacity",
     description: "Executive search for critical technology and business roles.",
     icon: UserRoundSearch,
     accent: "orange",
+    link: "/solutions/executive-search/",
   },
 ];
 
 const megaMenuSolutions = [
-  { title: "AI Talent Solutions", description: "AI/ML, Data and Engineering talent", icon: BrainCircuit },
-  { title: "Executive Search", description: "C-Suite to Director-level hiring", icon: UserRoundSearch },
-  { title: "Workforce Consulting", description: "Strategic planning and team design", icon: UsersRound },
-  { title: "Digital Transformation", description: "Modernization, automation and delivery", icon: Cpu },
-  { title: "Contract Staffing", description: "Flexible teams for fast-moving needs", icon: FileUser },
-  { title: "Managed Teams", description: "Dedicated delivery pods built around outcomes", icon: BadgeCheck },
+  { title: "AI Talent Solutions", description: "AI/ML, Data and Engineering talent", icon: BrainCircuit, link: "/solutions/ai-talent-solutions/" },
+  { title: "Executive Search", description: "C-Suite to Director-level hiring", icon: UserRoundSearch, link: "/solutions/executive-search/" },
+  { title: "Workforce Consulting", description: "Strategic planning and team design", icon: UsersRound, link: "/solutions/workforce-consulting/" },
+  { title: "Digital Transformation", description: "Modernization, automation and delivery", icon: Cpu, link: "/solutions/digital-transformation/" },
+  { title: "Contract Staffing", description: "Flexible teams for fast-moving needs", icon: FileUser, link: "/solutions/contract-staffing/" },
+  { title: "Managed Teams", description: "Dedicated delivery pods built around outcomes", icon: BadgeCheck, link: "/solutions/managed-teams/" },
 ];
 
 type WavePart = {
@@ -458,7 +461,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                 Talent solutions and technology consulting for organizations
                 building what comes next.
               </p>
-              <a className="mega-menu-feature-link" href="#">
+              <a className="mega-menu-feature-link" href="/solutions/">
                 Explore solutions
                 <ArrowRight aria-hidden="true" size={18} strokeWidth={2.4} />
               </a>
@@ -470,7 +473,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
 
                 return (
                   <a
-                    href="#"
+                    href={item.link}
                     className={`mega-menu-direction mega-menu-direction-${item.accent}`}
                     key={item.title}
                   >
@@ -491,7 +494,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                   const Icon = item.icon;
 
                   return (
-                    <a className="mega-menu-solution" href="#" key={item.title}>
+                    <a className="mega-menu-solution" href={item.link} key={item.title}>
                       <Icon aria-hidden="true" size={22} strokeWidth={1.8} />
                       <span>
                         <strong>{item.title}</strong>
@@ -667,6 +670,133 @@ function SiteFooter() {
   );
 }
 
+function SolutionPage() {
+  const features = window.wpData?.solution_features?.length
+    ? window.wpData.solution_features
+    : [
+        { title: "Technical Expertise", description: "Specialists selected for the skills, domain knowledge, and delivery experience your work requires.", icon_name: "BrainCircuit" },
+        { title: "Flexible Engagement", description: "Direct hire, contract, contract-to-hire, and managed delivery options built around your goals.", icon_name: "UsersRound" },
+        { title: "Delivery Focus", description: "A practical, accountable approach designed to move priorities forward without compromising quality.", icon_name: "BadgeCheck" },
+      ];
+  const roles = window.wpData?.solution_roles?.length
+    ? window.wpData.solution_roles
+    : [
+        { title: "Specialized technology professionals" },
+        { title: "Experienced technical leaders" },
+        { title: "Cross-functional delivery teams" },
+      ];
+  const process = window.wpData?.solution_process?.length
+    ? window.wpData.solution_process
+    : [
+        { title: "Understand", description: "We define the outcomes, skills, timeline, and working model." },
+        { title: "Build", description: "We identify and evaluate the right specialists or team structure." },
+        { title: "Deliver", description: "We support onboarding, execution, and ongoing performance." },
+      ];
+
+  return (
+    <main className="bg-[#f4f6fa] font-body text-[#0b132b]">
+      <section className="relative min-h-[680px] overflow-hidden bg-[#071225] text-white">
+        <HeroBackgroundMedia media={window.wpData?.solution_bg_media} fallback={solutionsSkyline} />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061123]/95 via-[#061123]/80 to-[#061123]/55" />
+        <SiteHeader />
+        <div className="relative z-10 mx-auto flex min-h-[680px] max-w-[1440px] items-center px-6 pb-20 pt-36 lg:px-8">
+          <div className="max-w-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#a78bfa]">
+              {window.wpData?.solution_kicker || "TechNova Solutions"}
+            </p>
+            <h1 className="font-display mt-6 text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+              {window.wpData?.solution_headline || "Technology Talent and Consulting Built Around Your Outcomes"}
+            </h1>
+            <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
+              {window.wpData?.solution_description || "Combine the right people, expertise, and delivery model to move critical technology priorities forward."}
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button asChild size="hero" className="bg-[#f59e0c] text-white hover:bg-[#d97706]">
+                <a href={window.wpData?.solution_primary_link || "/contact/"}>
+                  {window.wpData?.solution_primary_text || "Talk to an Expert"}
+                  <ArrowRight size={18} className="ml-2" />
+                </a>
+              </Button>
+              <Button asChild size="hero" variant="glass">
+                <a href="/employers/">Explore Employer Solutions</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="scroll-reveal-section bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-12 lg:items-start">
+          <div className="lg:col-span-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B5CF6]">What We Deliver</p>
+            <h2 className="font-display mt-4 text-4xl font-normal leading-tight sm:text-5xl">
+              {window.wpData?.solution_overview_title || "Expertise That Moves the Work Forward"}
+            </h2>
+          </div>
+          <div className="lg:col-span-7">
+            <p className="text-lg leading-9 text-slate-600">
+              {window.wpData?.solution_overview_body || "TechNova Systems brings technical recruiting and consulting together, giving organizations a faster path from strategy to execution. Every engagement is shaped around the business outcome, technical environment, and team you already have."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="scroll-reveal-section px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid gap-6 md:grid-cols-3">
+            {features.map((feature: any) => {
+              const Icon = getIconComponent(feature.icon_name || "BadgeCheck");
+              return (
+                <article key={feature.title} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-[#8B5CF6]"><Icon size={24} /></div>
+                  <h3 className="mt-6 text-xl font-bold">{feature.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{feature.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="scroll-reveal-section bg-[#08152a] px-4 py-20 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#a78bfa]">Capabilities</p>
+            <h2 className="font-display mt-4 text-4xl font-normal sm:text-5xl">{window.wpData?.solution_roles_title || "Roles and Expertise"}</h2>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {roles.map((role: any) => (
+                <div key={role.title} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/85">
+                  <Check size={17} className="shrink-0 text-[#f59e0c]" />{role.title}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#f59e0c]">Our Approach</p>
+            <h2 className="font-display mt-4 text-4xl font-normal sm:text-5xl">{window.wpData?.solution_process_title || "A Clear Path to Delivery"}</h2>
+            <div className="mt-8 space-y-4">
+              {process.map((step: any, index: number) => (
+                <div key={step.title} className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#8B5CF6] text-sm font-bold">{index + 1}</span>
+                  <div><h3 className="font-bold">{step.title}</h3><p className="mt-1 text-sm leading-6 text-white/65">{step.description}</p></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="scroll-reveal-section bg-white px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-8 rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-10 text-white lg:flex-row lg:items-center">
+          <div><h2 className="font-display text-4xl font-normal">{window.wpData?.solution_cta_title || "Ready to Build the Right Team?"}</h2><p className="mt-3 max-w-2xl text-white/85">{window.wpData?.solution_cta_description || "Tell us what you are building, and we will help shape the right talent and delivery model."}</p></div>
+          <Button asChild size="hero" variant="glass"><a href={window.wpData?.solution_cta_link || "/contact/"}>{window.wpData?.solution_cta_text || "Start a Conversation"}<ArrowRight size={18} className="ml-2" /></a></Button>
+        </div>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+
 const capabilityCards = [
   {
     title: "AI Talent Solutions",
@@ -676,6 +806,7 @@ const capabilityCards = [
     visual: "orb",
     illustration: aiTalentIllustration,
     featured: true,
+    link: "/solutions/ai-talent-solutions/",
   },
   {
     title: "Executive Search",
@@ -683,6 +814,7 @@ const capabilityCards = [
     icon: UserRoundSearch,
     color: "orange",
     visual: "mini-building",
+    link: "/solutions/executive-search/",
   },
   {
     title: "Workforce Consulting",
@@ -692,6 +824,7 @@ const capabilityCards = [
     visual: "cubes",
     illustration: workforceConsultingIllustration,
     tall: true,
+    link: "/solutions/workforce-consulting/",
   },
   {
     title: "Contract Staffing",
@@ -700,12 +833,14 @@ const capabilityCards = [
     color: "coral",
     visual: "platform",
     illustration: contractStaffingIllustration,
+    link: "/solutions/contract-staffing/",
   },
   {
     title: "Digital Transformation",
     description: "Modernize your business with technology, data and automation.",
     icon: Cpu,
     color: "blue",
+    link: "/solutions/digital-transformation/",
   },
   {
     title: "Managed Teams",
@@ -714,6 +849,7 @@ const capabilityCards = [
     color: "purple",
     visual: "chart",
     illustration: managedTeamsIllustration,
+    link: "/solutions/managed-teams/",
   },
 ];
 
@@ -2423,7 +2559,7 @@ function EmployersPage() {
                 <div key={item.title} className="rounded-2xl border border-slate-100 bg-[#f8fafc] p-6 shadow-sm flex flex-col justify-between">
                   <div>
                     <div className="flex h-12 w-12 items-center justify-start rounded-xl overflow-hidden mb-5">
-                      <img src={item.gif} alt="" className="h-full w-auto object-contain object-left" />
+                      <img src={item.gif} alt={`${item.title} staffing solution`} className="h-full w-auto object-contain object-left" />
                     </div>
                     <h3 className="text-sm font-semibold text-slate-800">{item.title}</h3>
                   </div>
@@ -3737,6 +3873,7 @@ function App() {
     if (path.endsWith("/industries")) return "#industries";
     if (path.endsWith("/employers")) return "#employers";
     if (path.endsWith("/talent")) return "#talent";
+    if (path === "/solutions" || path.startsWith("/solutions/")) return "#solution";
     return window.location.hash || "#home";
   });
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -3749,6 +3886,7 @@ function App() {
       else if (path.endsWith("/industries")) setRouteHash("#industries");
       else if (path.endsWith("/employers")) setRouteHash("#employers");
       else if (path.endsWith("/talent")) setRouteHash("#talent");
+      else if (path === "/solutions" || path.startsWith("/solutions/")) setRouteHash("#solution");
       else setRouteHash(window.location.hash || "#home");
     };
 
@@ -3830,6 +3968,10 @@ function App() {
 
   if (routeHash === "#talent") {
     return <TalentPage />;
+  }
+
+  if (routeHash === "#solution") {
+    return <SolutionPage />;
   }
 
   const displayArticles = latestPosts.length > 0 ? latestPosts : insightArticles;
@@ -4013,7 +4155,7 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="building-illustration">
-                <img src={window.wpData?.home_employers_card_image || forEmployersGif} alt="" />
+                <img src={window.wpData?.home_employers_card_image || forEmployersGif} alt="TechNova staffing solutions for employers" />
               </div>
             </div>
           </article>
@@ -4052,7 +4194,7 @@ function App() {
 
             <div className="opportunity-visual" aria-hidden="true">
               <div className="stairs-illustration">
-                <img src={window.wpData?.home_talent_card_image || forTalentGif} alt="" />
+                <img src={window.wpData?.home_talent_card_image || forTalentGif} alt="TechNova career opportunities for technology professionals" />
               </div>
             </div>
           </article>
