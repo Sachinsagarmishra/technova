@@ -1633,6 +1633,16 @@ function ContactPage() {
 }
 
 function IndustriesPage() {
+  const getIndustryLink = (title: string) => {
+    const normalized = title.toLowerCase();
+    if (normalized.includes("financial") || normalized.includes("banking")) return "/industries/financial-services/";
+    if (normalized.includes("healthcare")) return "/industries/healthcare-life-sciences/";
+    if (normalized.includes("technology") || normalized.includes("software")) return "/industries/technology-software/";
+    if (normalized.includes("retail") || normalized.includes("commerce")) return "/industries/retail-ecommerce/";
+    if (normalized.includes("logistics") || normalized.includes("supply")) return "/industries/logistics-supply-chain/";
+    if (normalized.includes("manufacturing") || normalized.includes("industrial")) return "/industries/manufacturing-industrial/";
+    return "/contact/";
+  };
   const defaultIndustries = [
     {
       title: "Technology & IT",
@@ -1917,7 +1927,7 @@ function IndustriesPage() {
                     </p>
                   </div>
                   <a
-                    href="#contact"
+                    href={getIndustryLink(item.title)}
                     className="text-xs font-semibold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors mt-6 inline-flex items-center gap-1.5"
                   >
                     Explore Industry
@@ -3874,6 +3884,7 @@ function App() {
     if (path.endsWith("/employers")) return "#employers";
     if (path.endsWith("/talent")) return "#talent";
     if (path === "/solutions" || path.startsWith("/solutions/")) return "#solution";
+    if (path.startsWith("/industries/")) return "#solution";
     return window.location.hash || "#home";
   });
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -3887,6 +3898,7 @@ function App() {
       else if (path.endsWith("/employers")) setRouteHash("#employers");
       else if (path.endsWith("/talent")) setRouteHash("#talent");
       else if (path === "/solutions" || path.startsWith("/solutions/")) setRouteHash("#solution");
+      else if (path.startsWith("/industries/")) setRouteHash("#solution");
       else setRouteHash(window.location.hash || "#home");
     };
 

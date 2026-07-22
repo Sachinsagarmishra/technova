@@ -66,8 +66,38 @@ function technova_seo_config($page_id) {
         ],
     ];
 
+    $industries = [
+        'financial-services' => [
+            'title' => 'Financial Services IT Staffing & Technology Consulting - TechNova Systems',
+            'description' => 'Specialized IT staffing and AI consulting for banks, fintechs, and financial services teams modernizing secure, regulated technology platforms.',
+        ],
+        'healthcare-life-sciences' => [
+            'title' => 'Healthcare IT Staffing & Life Sciences Technology Talent - TechNova Systems',
+            'description' => 'Find healthcare IT, clinical data, interoperability, and engineering talent with the technical and regulatory knowledge your organization needs.',
+        ],
+        'technology-software' => [
+            'title' => 'Technology & Software IT Staffing - TechNova Systems',
+            'description' => 'Scale software, product, cloud, data, and DevOps teams with pre-vetted technology talent and flexible delivery models from TechNova Systems.',
+        ],
+        'retail-ecommerce' => [
+            'title' => 'Retail & E-Commerce IT Staffing - TechNova Systems',
+            'description' => 'Build retail and e-commerce technology teams for personalization, inventory, data, and omnichannel customer experiences.',
+        ],
+        'logistics-supply-chain' => [
+            'title' => 'Logistics & Supply Chain Technology Staffing - TechNova Systems',
+            'description' => 'Access technology talent for supply chain visibility, routing optimization, warehouse automation, data, and connected logistics operations.',
+        ],
+        'manufacturing-industrial' => [
+            'title' => 'Manufacturing IT Staffing & Digital Transformation - TechNova Systems',
+            'description' => 'Specialized IT, OT, automation, data, and engineering talent for manufacturers modernizing plant-floor and enterprise systems.',
+        ],
+    ];
+
     if ($parent_slug === 'solutions' && isset($solutions[$slug])) {
         return $solutions[$slug];
+    }
+    if ($parent_slug === 'industries' && isset($industries[$slug])) {
+        return $industries[$slug];
     }
     return $pages[$slug] ?? [
         'title' => get_the_title($page_id) . ' | TechNova Systems',
@@ -81,6 +111,36 @@ function technova_prepare_seo($page_id) {
     add_filter('rank_math/frontend/title', function () use ($seo) { return $seo['title']; }, 999);
     add_filter('rank_math/frontend/description', function () use ($seo) { return $seo['description']; }, 999);
     add_filter('rank_math/frontend/canonical', function () use ($page_id) { return get_permalink($page_id); }, 999);
+    add_filter('rank_math/json_ld', function ($data) {
+        $home = home_url('/');
+        foreach ($data as $key => &$entity) {
+            $type = $entity['@type'] ?? '';
+            $types = is_array($type) ? $type : [$type];
+            if (in_array('Article', $types, true) || in_array('Person', $types, true)) {
+                unset($data[$key]);
+                continue;
+            }
+            if (in_array('Organization', $types, true)) {
+                $logo = get_site_icon_url(512) ?: get_stylesheet_directory_uri() . '/react-app/dist/assets/favicon.png';
+                $entity['name'] = 'TechNova Systems Inc.';
+                $entity['url'] = $home;
+                $entity['logo'] = ['@type' => 'ImageObject', 'url' => $logo];
+                $entity['sameAs'] = ['https://www.linkedin.com/company/technovasystemsinc/'];
+                $entity['email'] = 'Info@technovasystemsinc.com';
+                $entity['telephone'] = '+1-571-651-0246';
+                $entity['address'] = [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => '3701 Pender Dr Suite 510',
+                    'addressLocality' => 'Fairfax',
+                    'addressRegion' => 'VA',
+                    'postalCode' => '22030',
+                    'addressCountry' => 'US',
+                ];
+            }
+        }
+        unset($entity);
+        return $data;
+    }, 99);
     return $seo;
 }
 
@@ -97,27 +157,31 @@ function technova_output_structured_data($page_id, $acf_data = []) {
     if (!$logo) $logo = get_stylesheet_directory_uri() . '/react-app/dist/assets/favicon.png';
     $same_as = ['https://www.linkedin.com/company/technovasystemsinc/'];
 
-    $schemas = [[
-        '@context' => 'https://schema.org',
-        '@type' => 'Organization',
-        '@id' => $home . '#organization',
-        'name' => 'TechNova Systems Inc.',
-        'url' => $home,
-        'logo' => ['@type' => 'ImageObject', 'url' => $logo],
-        'sameAs' => $same_as,
-        'email' => 'Info@technovasystemsinc.com',
-        'telephone' => '+1-571-651-0246',
-        'address' => [
-            '@type' => 'PostalAddress',
-            'streetAddress' => '3701 Pender Dr Suite 510',
-            'addressLocality' => 'Fairfax',
-            'addressRegion' => 'VA',
-            'postalCode' => '22030',
-            'addressCountry' => 'US',
-        ],
-    ]];
+    $schemas = [];
 
-    if ($slug === 'home') {
+    if (!defined('RANK_MATH_VERSION')) {
+        $schemas[] = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            '@id' => $home . '#organization',
+            'name' => 'TechNova Systems Inc.',
+            'url' => $home,
+            'logo' => ['@type' => 'ImageObject', 'url' => $logo],
+            'sameAs' => $same_as,
+            'email' => 'Info@technovasystemsinc.com',
+            'telephone' => '+1-571-651-0246',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => '3701 Pender Dr Suite 510',
+                'addressLocality' => 'Fairfax',
+                'addressRegion' => 'VA',
+                'postalCode' => '22030',
+                'addressCountry' => 'US',
+            ],
+        ];
+    }
+
+    if ($slug === 'home' && !defined('RANK_MATH_VERSION')) {
         $schemas[] = [
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
@@ -177,14 +241,17 @@ function technova_output_structured_data($page_id, $acf_data = []) {
             'provider' => ['@id' => $home . '#organization'],
             'areaServed' => ['@type' => 'Country', 'name' => 'United States'],
         ];
+    }
+    if (wp_get_post_parent_id($page_id) && get_post_field('post_name', wp_get_post_parent_id($page_id)) === 'industries') {
+        $seo = technova_seo_config($page_id);
         $schemas[] = [
             '@context' => 'https://schema.org',
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => [
-                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $home],
-                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Solutions', 'item' => home_url('/solutions/')],
-                ['@type' => 'ListItem', 'position' => 3, 'name' => get_the_title($page_id), 'item' => get_permalink($page_id)],
-            ],
+            '@type' => 'Service',
+            'name' => get_the_title($page_id) . ' IT Staffing and Consulting',
+            'description' => $seo['description'],
+            'url' => get_permalink($page_id),
+            'provider' => ['@id' => $home . '#organization'],
+            'areaServed' => ['@type' => 'Country', 'name' => 'United States'],
         ];
     }
 
