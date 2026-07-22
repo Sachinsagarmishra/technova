@@ -2,7 +2,9 @@
 /**
  * React-powered single blog post template for TechNova Systems.
  */
+require_once __DIR__ . '/technova-seo.php';
 $post_id = get_queried_object_id();
+technova_prepare_post_schema($post_id);
 $featured_id = get_post_thumbnail_id($post_id);
 $featured_url = $featured_id ? wp_get_attachment_image_url($featured_id, 'full') : '';
 $featured_alt = $featured_id ? get_post_meta($featured_id, '_wp_attachment_image_alt', true) : '';

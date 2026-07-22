@@ -10,86 +10,86 @@ function technova_seo_config($page_id) {
 
     $pages = [
         'home' => [
-            'title' => 'TechNova Systems | IT Staffing & AI Consulting - Hire Top Tech Talent, Fast',
-            'description' => 'TechNova Systems connects growing companies with vetted IT talent and AI consulting expertise. Direct hire, contract staffing, executive search & managed teams - start today.',
+            'title' => 'IT Staffing & AI Consulting | TechNova Systems',
+            'description' => 'Build high-performing technology teams with vetted IT talent, AI consulting, contract staffing, executive search, and managed teams.',
         ],
         'employers' => [
-            'title' => 'IT Staffing for Employers | Direct Hire, Contract & Executive Search - TechNova Systems',
-            'description' => 'Hire pre-vetted IT and AI talent fast. TechNova Systems offers direct hire, contract staffing, managed teams, and executive search for growing tech teams.',
+            'title' => 'IT Staffing for Employers | TechNova Systems',
+            'description' => 'Hire vetted IT and AI professionals through contract staffing, direct hire, executive search, and managed team solutions from TechNova.',
         ],
         'talent' => [
-            'title' => 'IT Jobs & Tech Careers | Submit Your Resume - TechNova Systems',
-            'description' => 'Explore IT, AI, and engineering job opportunities with TechNova Systems. Submit your resume and let our recruiters match you with your next career move.',
+            'title' => 'Technology Jobs & Careers | TechNova Systems',
+            'description' => 'Explore IT, AI, data, cloud, and engineering careers. Submit your resume and let TechNova connect you with the right opportunity.',
         ],
         'industries' => [
-            'title' => 'Industries We Serve | IT Staffing for Financial Services, Healthcare & More - TechNova Systems',
-            'description' => 'TechNova Systems delivers industry-specific IT staffing and AI consulting for financial services, healthcare, retail, manufacturing, and logistics.',
+            'title' => 'IT Staffing by Industry | TechNova Systems',
+            'description' => 'Explore specialized IT staffing and technology consulting for financial services, healthcare, software, retail, logistics, and manufacturing.',
         ],
         'about' => [
-            'title' => 'About TechNova Systems | IT Staffing & AI Consulting Company',
-            'description' => 'Learn about TechNova Systems - an IT staffing and AI consulting firm helping organizations build high-performance technology teams.',
+            'title' => 'About TechNova Systems | IT Staffing & AI Consulting',
+            'description' => 'Learn how TechNova combines specialized technology talent, AI expertise, and human-first partnerships to help organizations grow.',
         ],
         'contact' => [
-            'title' => 'Contact TechNova Systems | IT Staffing & AI Consulting',
-            'description' => 'Get in touch with TechNova Systems. Whether you are hiring or looking for your next opportunity, our team is ready to help.',
+            'title' => 'Contact TechNova Systems | Staffing & Consulting',
+            'description' => 'Contact TechNova Systems for technology staffing, AI consulting, career opportunities, or help building your next high-impact team.',
         ],
         'solutions' => [
-            'title' => 'IT Staffing & Technology Solutions - TechNova Systems',
-            'description' => 'Explore TechNova Systems solutions for AI talent, executive search, workforce consulting, digital transformation, contract staffing, and managed teams.',
+            'title' => 'IT Staffing & Technology Solutions | TechNova Systems',
+            'description' => 'Explore AI talent, executive search, workforce consulting, digital transformation, contract staffing, and managed team solutions.',
         ],
     ];
 
     $solutions = [
         'ai-talent-solutions' => [
-            'title' => 'AI Talent Solutions | AI, ML & Data Engineering Recruiting - TechNova Systems',
-            'description' => 'TechNova Systems places AI/ML engineers, data scientists, and data engineers for companies building real AI products. Contract, direct hire & managed teams.',
+            'title' => 'AI Talent Solutions | TechNova Systems',
+            'description' => 'Hire vetted AI engineers, machine learning specialists, data scientists, and data engineers through flexible talent solutions.',
         ],
         'executive-search' => [
-            'title' => 'Technology Executive Search | C-Suite & Director-Level Hiring - TechNova Systems',
-            'description' => 'TechNova Systems executive search practice places CTOs, VPs of Engineering, and other technology leaders who can execute, not just advise.',
+            'title' => 'Technology Executive Search | TechNova Systems',
+            'description' => 'Find CTOs, VPs of Engineering, CISOs, and technology leaders through a focused, confidential executive search process.',
         ],
         'workforce-consulting' => [
-            'title' => 'Workforce Consulting for Technology Teams - TechNova Systems',
-            'description' => 'Strategic workforce planning and org design from TechNova Systems - build the right team structure before you start hiring.',
+            'title' => 'Technology Workforce Consulting | TechNova Systems',
+            'description' => 'Align workforce planning, organization design, skills, and hiring strategy with your technology roadmap and business goals.',
         ],
         'digital-transformation' => [
-            'title' => 'Digital Transformation Consulting & Talent - TechNova Systems',
-            'description' => 'TechNova Systems pairs digital transformation consulting with the technical talent to execute it - modernization, automation, and delivery.',
+            'title' => 'Digital Transformation Consulting | TechNova Systems',
+            'description' => 'Modernize platforms, automate workflows, and accelerate delivery with digital transformation consulting and specialized talent.',
         ],
         'contract-staffing' => [
-            'title' => 'Contract IT Staffing | Flexible Technical Teams - TechNova Systems',
-            'description' => 'Need technical talent fast? TechNova Systems contract staffing gets pre-vetted IT and engineering professionals onboarded in days, not months.',
+            'title' => 'Contract IT Staffing | TechNova Systems',
+            'description' => 'Add vetted IT, engineering, cloud, data, and AI professionals quickly with flexible contract staffing from TechNova Systems.',
         ],
         'managed-teams' => [
-            'title' => 'Managed Teams | Dedicated Delivery Pods - TechNova Systems',
-            'description' => 'TechNova Systems builds and manages dedicated technical delivery teams so you get outcomes, not just headcount.',
+            'title' => 'Managed Technology Teams | TechNova Systems',
+            'description' => 'Build dedicated, outcome-focused technology teams with the skills, structure, and delivery support needed to execute your roadmap.',
         ],
     ];
 
     $industries = [
         'financial-services' => [
-            'title' => 'Financial Services IT Staffing & Technology Consulting - TechNova Systems',
-            'description' => 'Specialized IT staffing and AI consulting for banks, fintechs, and financial services teams modernizing secure, regulated technology platforms.',
+            'title' => 'Financial Services IT Staffing | TechNova Systems',
+            'description' => 'Hire specialized technology, data, AI, security, and compliance talent for banks, fintechs, and financial services organizations.',
         ],
         'healthcare-life-sciences' => [
-            'title' => 'Healthcare IT Staffing & Life Sciences Technology Talent - TechNova Systems',
-            'description' => 'Find healthcare IT, clinical data, interoperability, and engineering talent with the technical and regulatory knowledge your organization needs.',
+            'title' => 'Healthcare IT Staffing | TechNova Systems',
+            'description' => 'Find healthcare IT, clinical data, interoperability, security, and engineering talent with relevant regulatory knowledge.',
         ],
         'technology-software' => [
-            'title' => 'Technology & Software IT Staffing - TechNova Systems',
-            'description' => 'Scale software, product, cloud, data, and DevOps teams with pre-vetted technology talent and flexible delivery models from TechNova Systems.',
+            'title' => 'Technology & Software Staffing | TechNova Systems',
+            'description' => 'Scale software, product, cloud, data, cybersecurity, and DevOps teams with vetted talent and flexible delivery models.',
         ],
         'retail-ecommerce' => [
-            'title' => 'Retail & E-Commerce IT Staffing - TechNova Systems',
-            'description' => 'Build retail and e-commerce technology teams for personalization, inventory, data, and omnichannel customer experiences.',
+            'title' => 'Retail & E-Commerce IT Staffing | TechNova Systems',
+            'description' => 'Build retail and e-commerce technology teams for digital platforms, personalization, data, inventory, and omnichannel experiences.',
         ],
         'logistics-supply-chain' => [
-            'title' => 'Logistics & Supply Chain Technology Staffing - TechNova Systems',
-            'description' => 'Access technology talent for supply chain visibility, routing optimization, warehouse automation, data, and connected logistics operations.',
+            'title' => 'Logistics Technology Staffing | TechNova Systems',
+            'description' => 'Access technology talent for supply chain visibility, routing, warehouse automation, data platforms, and connected logistics.',
         ],
         'manufacturing-industrial' => [
-            'title' => 'Manufacturing IT Staffing & Digital Transformation - TechNova Systems',
-            'description' => 'Specialized IT, OT, automation, data, and engineering talent for manufacturers modernizing plant-floor and enterprise systems.',
+            'title' => 'Manufacturing IT Staffing | TechNova Systems',
+            'description' => 'Hire IT, OT, automation, data, and engineering talent for manufacturers modernizing plant-floor and enterprise systems.',
         ],
     ];
 
@@ -111,8 +111,11 @@ function technova_prepare_seo($page_id) {
     add_filter('rank_math/frontend/title', function () use ($seo) { return $seo['title']; }, 999);
     add_filter('rank_math/frontend/description', function () use ($seo) { return $seo['description']; }, 999);
     add_filter('rank_math/frontend/canonical', function () use ($page_id) { return get_permalink($page_id); }, 999);
-    add_filter('rank_math/json_ld', function ($data) {
+    add_filter('rank_math/json_ld', function ($data) use ($page_id) {
         $home = home_url('/');
+        $slug = get_post_field('post_name', $page_id);
+        $parent_id = wp_get_post_parent_id($page_id);
+        $parent_slug = $parent_id ? get_post_field('post_name', $parent_id) : '';
         foreach ($data as $key => &$entity) {
             $type = $entity['@type'] ?? '';
             $types = is_array($type) ? $type : [$type];
@@ -137,11 +140,162 @@ function technova_prepare_seo($page_id) {
                     'addressCountry' => 'US',
                 ];
             }
+            if (in_array('WebPage', $types, true)) {
+                if ($slug === 'about') $entity['@type'] = 'AboutPage';
+                if ($slug === 'contact') $entity['@type'] = 'ContactPage';
+                if ($slug === 'solutions' || $slug === 'industries') $entity['@type'] = 'CollectionPage';
+            }
         }
         unset($entity);
+
+        $schema_types = [];
+        foreach ($data as $entity) {
+            $type = $entity['@type'] ?? [];
+            $schema_types = array_merge($schema_types, is_array($type) ? $type : [$type]);
+        }
+        if (!in_array('Organization', $schema_types, true) && !in_array('Corporation', $schema_types, true)) {
+            $logo = get_site_icon_url(512) ?: get_stylesheet_directory_uri() . '/react-app/dist/assets/favicon.png';
+            $data['technova-organization'] = [
+                '@type' => ['Corporation', 'Organization'],
+                '@id' => $home . '#organization',
+                'name' => 'TechNova Systems Inc.',
+                'url' => $home,
+                'logo' => ['@type' => 'ImageObject', 'url' => $logo],
+                'sameAs' => ['https://www.linkedin.com/company/technovasystemsinc/'],
+                'email' => 'Info@technovasystemsinc.com',
+                'telephone' => '+1-571-651-0246',
+            ];
+        }
+        if (!in_array('WebSite', $schema_types, true)) {
+            $data['technova-website'] = [
+                '@type' => 'WebSite',
+                '@id' => $home . '#website',
+                'url' => $home,
+                'name' => 'TechNova Systems',
+                'publisher' => ['@id' => $home . '#organization'],
+                'inLanguage' => 'en-US',
+            ];
+        }
+        $page_types = ['WebPage', 'AboutPage', 'ContactPage', 'CollectionPage'];
+        if (!array_intersect($page_types, $schema_types)) {
+            $page_type = 'WebPage';
+            if ($slug === 'about') $page_type = 'AboutPage';
+            if ($slug === 'contact') $page_type = 'ContactPage';
+            if ($slug === 'solutions' || $slug === 'industries') $page_type = 'CollectionPage';
+            $seo = technova_seo_config($page_id);
+            $data['technova-webpage'] = [
+                '@type' => $page_type,
+                '@id' => get_permalink($page_id) . '#webpage',
+                'url' => get_permalink($page_id),
+                'name' => $seo['title'],
+                'description' => $seo['description'],
+                'isPartOf' => ['@id' => $home . '#website'],
+                'about' => ['@id' => $home . '#organization'],
+                'inLanguage' => 'en-US',
+            ];
+        }
+
+        if ($slug === 'contact') {
+            $data['technova-professional-service'] = [
+                '@type' => 'ProfessionalService',
+                '@id' => $home . '#professional-service',
+                'name' => 'TechNova Systems Inc.',
+                'url' => get_permalink($page_id),
+                'telephone' => '+1-571-651-0246',
+                'email' => 'Info@technovasystemsinc.com',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => '3701 Pender Dr Suite 510',
+                    'addressLocality' => 'Fairfax',
+                    'addressRegion' => 'VA',
+                    'postalCode' => '22030',
+                    'addressCountry' => 'US',
+                ],
+                'parentOrganization' => ['@id' => $home . '#organization'],
+            ];
+        }
+
+        if ($parent_slug === 'solutions' || $parent_slug === 'industries') {
+            $seo = technova_seo_config($page_id);
+            $data['technova-service'] = [
+                '@type' => 'Service',
+                '@id' => get_permalink($page_id) . '#service',
+                'name' => $parent_slug === 'industries'
+                    ? get_the_title($page_id) . ' IT Staffing and Consulting'
+                    : get_the_title($page_id),
+                'description' => $seo['description'],
+                'url' => get_permalink($page_id),
+                'provider' => ['@id' => $home . '#organization'],
+                'areaServed' => ['@type' => 'Country', 'name' => 'United States'],
+            ];
+        }
+
+        $faq_field = ['employers' => 'employers_faqs', 'talent' => 'talent_faqs', 'contact' => 'contact_faqs'][$slug] ?? '';
+        $faqs = $faq_field && function_exists('get_field') ? (get_field($faq_field, $page_id) ?: []) : [];
+        $entities = [];
+        foreach ($faqs as $faq) {
+            $question = wp_strip_all_tags($faq['q'] ?? '');
+            $answer = wp_strip_all_tags($faq['a'] ?? '');
+            if (!$question || !$answer) continue;
+            $entities[] = [
+                '@type' => 'Question',
+                'name' => $question,
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $answer],
+            ];
+        }
+        if ($entities) {
+            $data['technova-faq'] = [
+                '@type' => 'FAQPage',
+                '@id' => get_permalink($page_id) . '#faq',
+                'mainEntity' => $entities,
+            ];
+        }
         return $data;
     }, 99);
     return $seo;
+}
+
+function technova_prepare_post_schema($post_id) {
+    add_filter('rank_math/json_ld', function ($data) use ($post_id) {
+        foreach ($data as &$entity) {
+            $type = $entity['@type'] ?? '';
+            $types = is_array($type) ? $type : [$type];
+            if (in_array('Article', $types, true) || in_array('BlogPosting', $types, true)) {
+                $entity['@type'] = 'BlogPosting';
+                $entity['headline'] = get_the_title($post_id);
+                $entity['mainEntityOfPage'] = ['@id' => get_permalink($post_id) . '#webpage'];
+            }
+        }
+        unset($entity);
+
+        $content = get_post_field('post_content', $post_id);
+        $faq_start = stripos($content, '<h2>Frequently asked questions</h2>');
+        if ($faq_start === false) return $data;
+        $faq_html = substr($content, $faq_start + strlen('<h2>Frequently asked questions</h2>'));
+        $next_h2 = stripos($faq_html, '<h2>');
+        if ($next_h2 !== false) $faq_html = substr($faq_html, 0, $next_h2);
+
+        preg_match_all('/<h3[^>]*>(.*?)<\/h3>\s*<p[^>]*>(.*?)<\/p>/si', $faq_html, $matches, PREG_SET_ORDER);
+        $entities = [];
+        foreach ($matches as $match) {
+            $question = wp_strip_all_tags($match[1]);
+            $answer = wp_strip_all_tags($match[2]);
+            if (!$question || !$answer) continue;
+            $entities[] = [
+                '@type' => 'Question',
+                'name' => $question,
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $answer],
+            ];
+        }
+        if ($entities) {
+            $data['technova-post-faq'] = [
+                '@type' => 'FAQPage',
+                '@id' => get_permalink($post_id) . '#faq',
+                'mainEntity' => $entities,
+            ];
+        }
+        return $data;
+    }, 99);
 }
 
 function technova_output_meta_fallback($seo, $page_id) {
@@ -192,7 +346,7 @@ function technova_output_structured_data($page_id, $acf_data = []) {
         ];
     }
 
-    if ($slug === 'contact') {
+    if ($slug === 'contact' && !defined('RANK_MATH_VERSION')) {
         $schemas[] = [
             '@context' => 'https://schema.org',
             '@type' => 'ProfessionalService',
@@ -215,7 +369,7 @@ function technova_output_structured_data($page_id, $acf_data = []) {
 
     $faq_field = ['employers' => 'employers_faqs', 'talent' => 'talent_faqs', 'contact' => 'contact_faqs'][$slug] ?? '';
     $faqs = $faq_field && !empty($acf_data[$faq_field]) ? $acf_data[$faq_field] : [];
-    if ($faqs) {
+    if ($faqs && !defined('RANK_MATH_VERSION')) {
         $entities = [];
         foreach ($faqs as $faq) {
             $question = wp_strip_all_tags($faq['q'] ?? '');
@@ -230,7 +384,7 @@ function technova_output_structured_data($page_id, $acf_data = []) {
         if ($entities) $schemas[] = ['@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $entities];
     }
 
-    if (wp_get_post_parent_id($page_id) && get_post_field('post_name', wp_get_post_parent_id($page_id)) === 'solutions') {
+    if (!defined('RANK_MATH_VERSION') && wp_get_post_parent_id($page_id) && get_post_field('post_name', wp_get_post_parent_id($page_id)) === 'solutions') {
         $seo = technova_seo_config($page_id);
         $schemas[] = [
             '@context' => 'https://schema.org',
@@ -242,7 +396,7 @@ function technova_output_structured_data($page_id, $acf_data = []) {
             'areaServed' => ['@type' => 'Country', 'name' => 'United States'],
         ];
     }
-    if (wp_get_post_parent_id($page_id) && get_post_field('post_name', wp_get_post_parent_id($page_id)) === 'industries') {
+    if (!defined('RANK_MATH_VERSION') && wp_get_post_parent_id($page_id) && get_post_field('post_name', wp_get_post_parent_id($page_id)) === 'industries') {
         $seo = technova_seo_config($page_id);
         $schemas[] = [
             '@context' => 'https://schema.org',
