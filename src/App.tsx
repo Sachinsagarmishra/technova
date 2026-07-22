@@ -670,6 +670,54 @@ function SiteFooter() {
   );
 }
 
+function BlogPostPage() {
+  const post = window.wpData?.post;
+
+  if (!post) return null;
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fb] text-[#0b132b]">
+      <header className="border-b border-slate-200 bg-white">
+        <SiteHeader light />
+      </header>
+
+      <article>
+        <section className="bg-[#07172c] px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#f59e0b]">
+              {(post.categories || []).map((category: string) => <span key={category}>{category}</span>)}
+            </div>
+            <h1 className="font-display text-4xl font-normal leading-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
+            {post.excerpt && <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">{post.excerpt}</p>}
+            <p className="mt-6 text-sm text-slate-400">{post.date} · By {post.author || "TechNova Systems"}</p>
+          </div>
+        </section>
+
+        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+          {post.featuredImage && (
+            <img src={post.featuredImage} alt={post.featuredAlt || post.title} className="mb-10 aspect-[16/8] w-full rounded-3xl object-cover shadow-xl shadow-slate-900/10" />
+          )}
+          <div
+            className="blog-content mx-auto max-w-3xl rounded-3xl bg-white px-6 py-8 text-[17px] leading-8 text-slate-700 shadow-sm sm:px-10 sm:py-12 lg:px-14 [&_a]:font-semibold [&_a]:text-[#5b42d8] [&_a]:underline-offset-4 hover:[&_a]:underline [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-[#8b5cf6] [&_blockquote]:bg-violet-50 [&_blockquote]:px-6 [&_blockquote]:py-4 [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-normal [&_h2]:leading-tight [&_h2]:text-[#0b132b] [&_h3]:mb-3 [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-[#0b132b] [&_li]:mb-2 [&_ol]:my-5 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-5 [&_strong]:text-[#0b132b] [&_ul]:my-5 [&_ul]:list-disc [&_ul]:pl-6"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+          {(post.tags || []).length > 0 && (
+            <div className="mx-auto mt-8 flex max-w-3xl flex-wrap gap-2" aria-label="Article tags">
+              {post.tags.map((tag: string) => <span key={tag} className="rounded-full border border-violet-200 bg-white px-4 py-2 text-sm text-slate-600">{tag}</span>)}
+            </div>
+          )}
+          <div className="mx-auto mt-10 flex max-w-3xl flex-col items-start justify-between gap-5 rounded-3xl bg-gradient-to-r from-[#7c3aed] to-[#f59e0b] px-7 py-8 text-white sm:flex-row sm:items-center">
+            <div><h2 className="font-display text-3xl font-normal">Build your next high-impact team.</h2><p className="mt-2 text-sm text-white/85">Talk with TechNova about talent, staffing and technology consulting.</p></div>
+            <Button asChild variant="glass" size="cta"><a href="/contact/">Let&apos;s Talk <ArrowRight className="ml-2" size={18} /></a></Button>
+          </div>
+        </div>
+      </article>
+
+      <SiteFooter />
+    </main>
+  );
+}
+
 function SolutionPage() {
   const features = window.wpData?.solution_features?.length
     ? window.wpData.solution_features
@@ -896,17 +944,17 @@ const insightArticles = [
   {
     title: "The Future of Work in the Age of AI",
     thumbnail: futureOfWorkAiThumbnail,
-    link: "#",
+    link: "/future-of-work-age-of-ai/",
   },
   {
-    title: "Top 10 In-Demand Tech skills in 2026",
+    title: "Top 10 In-Demand Tech Skills in 2026",
     thumbnail: techSkills2026Thumbnail,
-    link: "#",
+    link: "/top-in-demand-tech-skills-2026/",
   },
   {
     title: "AI in Staffing: Trends Shaping the Industry",
     thumbnail: aiStaffingTrendsThumbnail,
-    link: "#",
+    link: "/ai-in-staffing-trends/",
   },
 ];
 
@@ -3877,6 +3925,7 @@ function App() {
   };
   const [isPlaying, setIsPlaying] = useState(true);
   const [routeHash, setRouteHash] = useState(() => {
+    if (window.wpData?.contentType === "post") return "#blog";
     const path = window.location.pathname.replace(/\/$/, "");
     if (path.endsWith("/contact")) return "#contact";
     if (path.endsWith("/about")) return "#about";
@@ -3964,6 +4013,10 @@ function App() {
 
   if (routeHash === "#contact") {
     return <ContactPage />;
+  }
+
+  if (routeHash === "#blog") {
+    return <BlogPostPage />;
   }
 
   if (routeHash === "#about") {
