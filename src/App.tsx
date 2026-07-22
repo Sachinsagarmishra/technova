@@ -434,7 +434,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
         aria-label="Technova Systems home"
       >
         <img
-          src={window.wpData?.header_logo || technovaLogo}
+          src={light ? (window.wpData?.footer_logo || darkLogo) : (window.wpData?.header_logo || technovaLogo)}
           alt="Technova Systems"
           className="h-12 w-auto"
         />
@@ -677,17 +677,19 @@ function BlogPostPage() {
 
   return (
     <main className="min-h-screen bg-[#f5f7fb] text-[#0b132b]">
-      <header className="border-b border-slate-200 bg-white">
-        <SiteHeader light />
+      <header className="relative z-[110] flex min-h-[118px] items-center border-b border-slate-200 bg-white shadow-sm">
+        <div className="w-full">
+          <SiteHeader light />
+        </div>
       </header>
 
       <article>
-        <section className="bg-[#07172c] px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-24">
+        <section className="flex min-h-[600px] items-center bg-[#07172c] px-4 py-20 text-white sm:px-6 lg:min-h-[660px] lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#f59e0b]">
               {(post.categories || []).map((category: string) => <span key={category}>{category}</span>)}
             </div>
-            <h1 className="font-display text-4xl font-normal leading-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
+            <h1 className="font-display !text-white text-4xl font-normal leading-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
             {post.excerpt && <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">{post.excerpt}</p>}
             <p className="mt-6 text-sm text-slate-400">{post.date} · By {post.author || "TechNova Systems"}</p>
           </div>
