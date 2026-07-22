@@ -3,6 +3,47 @@
  * TechNova SEO metadata and structured data helpers.
  */
 
+function technova_primary_navigation_tree() {
+    $locations = get_nav_menu_locations();
+    $menu_id = isset($locations['technova_primary']) ? (int) $locations['technova_primary'] : 0;
+    if (!$menu_id) return [];
+
+    $items = wp_get_nav_menu_items($menu_id, ['update_post_term_cache' => false]);
+    if (!$items || is_wp_error($items)) return [];
+
+    $nodes = [];
+    foreach ($items as $item) {
+        $nodes[(int) $item->ID] = [
+            'id' => (int) $item->ID,
+            'title' => html_entity_decode($item->title, ENT_QUOTES, get_bloginfo('charset')),
+            'url' => $item->url,
+            'description' => wp_strip_all_tags($item->description),
+            'target' => $item->target ?: '',
+            'classes' => array_values(array_filter((array) $item->classes)),
+            'parent' => (int) $item->menu_item_parent,
+            'children' => [],
+        ];
+    }
+
+    $tree = [];
+    foreach (array_keys($nodes) as $id) {
+        $parent = $nodes[$id]['parent'];
+        if ($parent && isset($nodes[$parent])) {
+            $nodes[$parent]['children'][] =& $nodes[$id];
+        } else {
+            $tree[] =& $nodes[$id];
+        }
+    }
+    return array_values($tree);
+}
+
+function technova_frontend_data($page_id) {
+    $data = function_exists('get_fields') ? get_fields($page_id) : [];
+    if (!is_array($data)) $data = [];
+    $data['primary_menu'] = technova_primary_navigation_tree();
+    return $data;
+}
+
 function technova_seo_config($page_id) {
     $slug = get_post_field('post_name', $page_id);
     $parent_id = wp_get_post_parent_id($page_id);

@@ -121,45 +121,64 @@ import futureOfWorkAiThumbnail from "../imges/future-of-work-ai.png";
 import techSkills2026Thumbnail from "../imges/tech-skills-2026.png";
 import aiStaffingTrendsThumbnail from "../imges/ai-staffing-trends.png";
 
-const navLinks = [
-  "Industries",
-  "For Employers",
-  "For Talent",
-  "About Us",
+type NavigationItem = {
+  id: number | string;
+  title: string;
+  url: string;
+  description?: string;
+  target?: string;
+  classes?: string[];
+  children?: NavigationItem[];
+};
+
+const defaultPrimaryMenu: NavigationItem[] = [
+  {
+    id: "solutions",
+    title: "Solutions",
+    url: "/solutions/",
+    description: "Talent, consulting, and delivery solutions built around measurable outcomes.",
+    children: [
+      { id: "ai-talent", title: "AI Talent Solutions", url: "/solutions/ai-talent-solutions/", description: "AI, machine learning, data, and engineering talent." },
+      { id: "executive", title: "Executive Search", url: "/solutions/executive-search/", description: "Technology leaders from Director through C-suite." },
+      { id: "workforce", title: "Workforce Consulting", url: "/solutions/workforce-consulting/", description: "Workforce planning, organization design, and talent strategy." },
+      { id: "transformation", title: "Digital Transformation", url: "/solutions/digital-transformation/", description: "Modernization, automation, and technology delivery." },
+      { id: "contract", title: "Contract Staffing", url: "/solutions/contract-staffing/", description: "Flexible specialists for fast-moving technology needs." },
+      { id: "managed", title: "Managed Teams", url: "/solutions/managed-teams/", description: "Dedicated delivery teams structured around outcomes." },
+    ],
+  },
+  {
+    id: "industries",
+    title: "Industries",
+    url: "/industries/",
+    description: "Specialized technology talent and consulting for complex industries.",
+    children: [
+      { id: "financial", title: "Financial Services", url: "/industries/financial-services/", description: "Technology, data, security, and compliance talent." },
+      { id: "healthcare", title: "Healthcare & Life Sciences", url: "/industries/healthcare-life-sciences/", description: "Healthcare IT, clinical data, and engineering expertise." },
+      { id: "technology", title: "Technology & Software", url: "/industries/technology-software/", description: "Software, product, cloud, data, and DevOps teams." },
+      { id: "retail", title: "Retail & E-Commerce", url: "/industries/retail-ecommerce/", description: "Digital commerce, inventory, data, and customer experience." },
+      { id: "logistics", title: "Logistics & Supply Chain", url: "/industries/logistics-supply-chain/", description: "Connected logistics, routing, data, and automation." },
+      { id: "manufacturing", title: "Manufacturing & Industrial", url: "/industries/manufacturing-industrial/", description: "IT, OT, automation, data, and engineering talent." },
+    ],
+  },
+  { id: "employers", title: "For Employers", url: "/employers/" },
+  { id: "talent", title: "For Talent", url: "/talent/" },
+  { id: "about", title: "About Us", url: "/about/" },
 ];
 
-const megaMenuDirections = [
-  {
-    title: "Hire high-impact talent",
-    description: "Contract-to-hire, performance staffing and managed teams.",
-    icon: BriefcaseBusiness,
-    accent: "purple",
-    link: "/employers/",
-  },
-  {
-    title: "Accelerate AI delivery",
-    description: "AI, ML, data and digital transformation expertise.",
-    icon: BrainCircuit,
-    accent: "blue",
-    link: "/solutions/ai-talent-solutions/",
-  },
-  {
-    title: "Build leadership capacity",
-    description: "Executive search for critical technology and business roles.",
-    icon: UserRoundSearch,
-    accent: "orange",
-    link: "/solutions/executive-search/",
-  },
-];
-
-const megaMenuSolutions = [
-  { title: "AI Talent Solutions", description: "AI/ML, Data and Engineering talent", icon: BrainCircuit, link: "/solutions/ai-talent-solutions/" },
-  { title: "Executive Search", description: "C-Suite to Director-level hiring", icon: UserRoundSearch, link: "/solutions/executive-search/" },
-  { title: "Workforce Consulting", description: "Strategic planning and team design", icon: UsersRound, link: "/solutions/workforce-consulting/" },
-  { title: "Digital Transformation", description: "Modernization, automation and delivery", icon: Cpu, link: "/solutions/digital-transformation/" },
-  { title: "Contract Staffing", description: "Flexible teams for fast-moving needs", icon: FileUser, link: "/solutions/contract-staffing/" },
-  { title: "Managed Teams", description: "Dedicated delivery pods built around outcomes", icon: BadgeCheck, link: "/solutions/managed-teams/" },
-];
+function getNavigationIcon(item: NavigationItem) {
+  const value = `${item.title} ${item.url}`.toLowerCase();
+  if (value.includes("executive")) return UserRoundSearch;
+  if (value.includes("workforce")) return UsersRound;
+  if (value.includes("contract")) return FileUser;
+  if (value.includes("managed")) return BadgeCheck;
+  if (value.includes("financial")) return Landmark;
+  if (value.includes("health")) return Heart;
+  if (value.includes("retail")) return ShoppingCart;
+  if (value.includes("logistics") || value.includes("supply")) return Truck;
+  if (value.includes("manufactur") || value.includes("industrial")) return Factory;
+  if (value.includes("digital") || value.includes("technology") || value.includes("software")) return Cpu;
+  return BrainCircuit;
+}
 
 type WavePart = {
   text: string;
@@ -422,15 +441,11 @@ const talentBenefits = [
 
 function SiteHeader({ light = false }: { light?: boolean }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMobileMenuId, setOpenMobileMenuId] = useState<number | string | null>(null);
   const navTextClass = light ? "!text-[#0b132b]" : "!text-white";
-  const mobileLinks = [
-    { label: "Solutions", href: "/solutions/" },
-    { label: "Industries", href: "/industries/" },
-    { label: "For Employers", href: "/employers/" },
-    { label: "For Talent", href: "/talent/" },
-    { label: "About Us", href: "/about/" },
-    { label: "Contact Us", href: "/contact/" },
-  ];
+  const primaryMenu: NavigationItem[] = Array.isArray(window.wpData?.primary_menu) && window.wpData.primary_menu.length
+    ? window.wpData.primary_menu
+    : defaultPrimaryMenu;
 
   return (
     <nav
@@ -451,95 +466,96 @@ function SiteHeader({ light = false }: { light?: boolean }) {
         />
       </a>
 
-      <div className={`nav-glass-menu hidden items-center md:flex ${light ? "nav-glass-menu-light" : ""}`}>
-        <div className="mega-menu-wrap">
-          <a
-            href="#"
-            className={`mega-menu-trigger text-sm font-medium transition-colors ${navTextClass}`}
-          >
-            Solutions
-            <span aria-hidden="true">⌄</span>
-          </a>
+      <div className={`nav-glass-menu hidden items-center lg:flex ${light ? "nav-glass-menu-light" : ""}`}>
+        {primaryMenu.map((item) => {
+          const hasChildren = Boolean(item.children?.length);
+          const isIndustries = item.title.toLowerCase().includes("industr") || item.url.includes("industr");
 
-          <div className="mega-menu-panel" role="menu">
-            <div className="mega-menu-feature">
-              <div className="mega-menu-feature-badge">
-                <img src={technovaFavicon} alt="" />
-              </div>
-              <p className="mega-menu-eyebrow">Technova Systems</p>
-              <h2>Future-ready teams, delivered with intelligence.</h2>
-              <p>
-                Talent solutions and technology consulting for organizations
-                building what comes next.
-              </p>
-              <a className="mega-menu-feature-link" href="/solutions/">
-                Explore solutions
-                <ArrowRight aria-hidden="true" size={18} strokeWidth={2.4} />
+          if (!hasChildren) {
+            return (
+              <a
+                key={item.id}
+                href={item.url}
+                target={item.target || undefined}
+                rel={item.target === "_blank" ? "noreferrer" : undefined}
+                className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
+              >
+                {item.title}
               </a>
-            </div>
+            );
+          }
 
-            <div className="mega-menu-directions">
-              {megaMenuDirections.map((item) => {
-                const Icon = item.icon;
+          return (
+            <div className="mega-menu-wrap" key={item.id}>
+              <a
+                href={item.url}
+                target={item.target || undefined}
+                rel={item.target === "_blank" ? "noreferrer" : undefined}
+                className={`mega-menu-trigger text-sm font-medium transition-colors ${navTextClass}`}
+              >
+                {item.title}
+                <ChevronDown aria-hidden="true" size={15} strokeWidth={2.2} />
+              </a>
 
-                return (
-                  <a
-                    href={item.link}
-                    className={`mega-menu-direction mega-menu-direction-${item.accent}`}
-                    key={item.title}
-                  >
-                    <span>
-                      <Icon aria-hidden="true" size={22} strokeWidth={1.8} />
-                    </span>
-                    <strong>{item.title}</strong>
-                    <small>{item.description}</small>
-                  </a>
-                );
-              })}
-            </div>
-
-            <div className="mega-menu-solutions">
-              <p className="mega-menu-section-label">Core Capabilities</p>
-              <div className="mega-menu-solution-grid">
-                {megaMenuSolutions.map((item) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <a className="mega-menu-solution" href={item.link} key={item.title}>
-                      <Icon aria-hidden="true" size={22} strokeWidth={1.8} />
-                      <span>
-                        <strong>{item.title}</strong>
-                        <small>{item.description}</small>
-                      </span>
+              <div className="mega-menu-panel" role="menu" aria-label={`${item.title} menu`}>
+                <div
+                  className="mega-menu-feature"
+                  style={{
+                    backgroundImage: `linear-gradient(180deg, rgba(1, 24, 45, 0.16), rgba(1, 24, 45, 0.9)), url(${isIndustries ? industryHeroBg : solutionsSkyline})`,
+                  }}
+                >
+                  <div className="mega-menu-feature-badge">
+                    <img src={technovaFavicon} alt="" />
+                  </div>
+                  <div className="mega-menu-feature-copy">
+                    <p className="mega-menu-eyebrow">TechNova Systems</p>
+                    <h2>{isIndustries ? "Expertise for the work that matters." : "Future-ready teams, built around outcomes."}</h2>
+                    <p>{item.description || (isIndustries ? "Industry-aware talent and consulting for complex business environments." : "Flexible talent and technology solutions designed to move your roadmap forward.")}</p>
+                    <a className="mega-menu-feature-link" href={item.url}>
+                      Explore {item.title}
+                      <ArrowRight aria-hidden="true" size={18} strokeWidth={2.4} />
                     </a>
-                  );
-                })}
+                  </div>
+                </div>
+
+                <div className="mega-menu-solutions">
+                  <p className="mega-menu-section-label">{isIndustries ? "Industries We Serve" : "Core Capabilities"}</p>
+                  <div className="mega-menu-solution-grid">
+                    {item.children?.map((child) => {
+                      const Icon = getNavigationIcon(child);
+                      return (
+                        <a
+                          className="mega-menu-solution"
+                          href={child.url}
+                          target={child.target || undefined}
+                          rel={child.target === "_blank" ? "noreferrer" : undefined}
+                          key={child.id}
+                          role="menuitem"
+                        >
+                          <Icon aria-hidden="true" size={21} strokeWidth={1.8} />
+                          <span>
+                            <strong>{child.title}</strong>
+                            {child.description ? <small>{child.description}</small> : null}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                  <a className="mega-menu-parent-link" href={item.url}>
+                    View all {item.title}
+                    <ArrowRight aria-hidden="true" size={16} />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {navLinks.map((link) => (
-          <a
-            key={link}
-            href={
-              link === "About Us" ? "/about/" :
-                link === "Industries" ? "/industries/" :
-                  link === "For Employers" ? "/employers/" :
-                    link === "For Talent" ? "/talent/" :
-                      "/"
-            }
-            className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
-          >
-            {link}
-          </a>
-        ))}
+          );
+        })}
       </div>
 
       <Button
         variant="default"
         size="nav"
-        className="hidden bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03] md:inline-flex"
+        className="hidden bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03] lg:inline-flex"
         asChild
       >
         <a href="/contact/">Let's Talk</a>
@@ -547,7 +563,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
 
       <button
         type="button"
-        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-sm backdrop-blur-md md:hidden ${light ? "border-slate-200 bg-white text-[#0b132b]" : "border-white/30 bg-black/20 text-white"}`}
+        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-sm backdrop-blur-md lg:hidden ${light ? "border-slate-200 bg-white text-[#0b132b]" : "border-white/30 bg-black/20 text-white"}`}
         aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={isMobileMenuOpen}
         aria-controls="technova-mobile-navigation"
@@ -559,19 +575,58 @@ function SiteHeader({ light = false }: { light?: boolean }) {
       {isMobileMenuOpen && (
         <div
           id="technova-mobile-navigation"
-          className={`absolute left-4 right-4 top-full z-[130] mt-2 overflow-hidden rounded-2xl border p-3 shadow-2xl backdrop-blur-xl md:hidden ${light ? "border-slate-200 bg-white/95 text-[#0b132b]" : "border-white/20 bg-[#07172c]/95 text-white"}`}
+          className={`absolute left-4 right-4 top-full z-[130] mt-2 max-h-[calc(100vh-110px)] overflow-y-auto rounded-2xl border p-3 shadow-2xl backdrop-blur-xl lg:hidden ${light ? "border-slate-200 bg-white/95 text-[#0b132b]" : "border-white/20 bg-[#07172c]/95 text-white"}`}
         >
           <div className="flex flex-col">
-            {mobileLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${light ? "hover:bg-slate-100" : "hover:bg-white/10"} ${item.label === "Contact Us" ? "mt-2 bg-[#f59e0c] !text-white hover:bg-[#d97706]" : ""}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+            {primaryMenu.map((item) => {
+              const hasChildren = Boolean(item.children?.length);
+              const expanded = openMobileMenuId === item.id;
+              return (
+                <div key={item.id} className="border-b border-current/10 last:border-b-0">
+                  <div className="flex items-center">
+                    <a
+                      href={item.url}
+                      className={`min-w-0 flex-1 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${light ? "hover:bg-slate-100" : "hover:bg-white/10"}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </a>
+                    {hasChildren ? (
+                      <button
+                        type="button"
+                        className={`mr-1 flex h-10 w-10 items-center justify-center rounded-lg ${light ? "hover:bg-slate-100" : "hover:bg-white/10"}`}
+                        aria-label={`${expanded ? "Close" : "Open"} ${item.title} submenu`}
+                        aria-expanded={expanded}
+                        onClick={() => setOpenMobileMenuId(expanded ? null : item.id)}
+                      >
+                        <ChevronDown size={18} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
+                      </button>
+                    ) : null}
+                  </div>
+                  {hasChildren && expanded ? (
+                    <div className={`mb-2 ml-3 border-l pl-3 ${light ? "border-slate-200" : "border-white/20"}`}>
+                      {item.children?.map((child) => (
+                        <a
+                          key={child.id}
+                          href={child.url}
+                          className={`block rounded-lg px-3 py-2.5 text-sm ${light ? "text-slate-600 hover:bg-slate-100 hover:text-[#0b132b]" : "text-white/75 hover:bg-white/10 hover:text-white"}`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {child.title}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+            <a
+              href="/contact/"
+              className="mt-3 rounded-xl bg-[#f59e0c] px-4 py-3 text-center text-sm font-semibold !text-white transition-colors hover:bg-[#d97706]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Let's Talk
+            </a>
           </div>
         </div>
       )}

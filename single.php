@@ -13,6 +13,7 @@ $tags = wp_get_post_terms($post_id, 'post_tag', ['fields' => 'names']);
 
 $post_data = [
     'contentType' => 'post',
+    'primary_menu' => technova_primary_navigation_tree(),
     'header_logo' => function_exists('get_field') ? get_field('header_logo', get_option('page_on_front')) : '',
     'footer_logo' => function_exists('get_field') ? get_field('footer_logo', get_option('page_on_front')) : '',
     'post' => [

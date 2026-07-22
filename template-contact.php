@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Contact Page Wrapper */
 require_once __DIR__ . '/technova-seo.php';
-$acf_data = get_fields(get_the_ID());
+$acf_data = technova_frontend_data(get_the_ID());
 $seo = technova_prepare_seo(get_the_ID());
 ?>
 <!DOCTYPE html>
