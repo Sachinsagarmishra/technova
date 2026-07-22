@@ -52,6 +52,8 @@ import {
   Lock,
   Upload,
   Palette,
+  Menu,
+  X,
 } from "lucide-react";
 import awsLogo from "@/assets/trusted-logos/aws.png";
 import ciscoLogo from "@/assets/trusted-logos/cisco.png";
@@ -419,12 +421,21 @@ const talentBenefits = [
 ];
 
 function SiteHeader({ light = false }: { light?: boolean }) {
-  const navTextClass = light ? "text-[#0b132b]" : "text-white";
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navTextClass = light ? "!text-[#0b132b]" : "!text-white";
+  const mobileLinks = [
+    { label: "Solutions", href: "/solutions/" },
+    { label: "Industries", href: "/industries/" },
+    { label: "For Employers", href: "/employers/" },
+    { label: "For Talent", href: "/talent/" },
+    { label: "About Us", href: "/about/" },
+    { label: "Contact Us", href: "/contact/" },
+  ];
 
   return (
     <nav
       className={[
-        "relative z-[100] mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6",
+        "relative z-[100] mx-auto flex max-w-7xl flex-row items-center justify-between px-4 py-5 sm:px-8 sm:py-6",
         light ? "text-[#0b132b]" : "",
       ].join(" ")}
     >
@@ -436,7 +447,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
         <img
           src={light ? (window.wpData?.footer_logo || darkLogo) : (window.wpData?.header_logo || technovaLogo)}
           alt="Technova Systems"
-          className="h-12 w-auto"
+          className="h-10 w-auto max-w-[190px] object-contain sm:h-12 sm:max-w-none"
         />
       </a>
 
@@ -528,11 +539,42 @@ function SiteHeader({ light = false }: { light?: boolean }) {
       <Button
         variant="default"
         size="nav"
-        className="bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03]"
+        className="hidden bg-[#f59e0c] text-white shadow-lg shadow-amber-500/20 hover:bg-[#d97706] hover:scale-[1.03] md:inline-flex"
         asChild
       >
         <a href="/contact/">Let's Talk</a>
       </Button>
+
+      <button
+        type="button"
+        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-sm backdrop-blur-md md:hidden ${light ? "border-slate-200 bg-white text-[#0b132b]" : "border-white/30 bg-black/20 text-white"}`}
+        aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isMobileMenuOpen}
+        aria-controls="technova-mobile-navigation"
+        onClick={() => setIsMobileMenuOpen((open) => !open)}
+      >
+        {isMobileMenuOpen ? <X size={23} /> : <Menu size={23} />}
+      </button>
+
+      {isMobileMenuOpen && (
+        <div
+          id="technova-mobile-navigation"
+          className={`absolute left-4 right-4 top-full z-[130] mt-2 overflow-hidden rounded-2xl border p-3 shadow-2xl backdrop-blur-xl md:hidden ${light ? "border-slate-200 bg-white/95 text-[#0b132b]" : "border-white/20 bg-[#07172c]/95 text-white"}`}
+        >
+          <div className="flex flex-col">
+            {mobileLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${light ? "hover:bg-slate-100" : "hover:bg-white/10"} ${item.label === "Contact Us" ? "mt-2 bg-[#f59e0c] !text-white hover:bg-[#d97706]" : ""}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
@@ -684,7 +726,7 @@ function BlogPostPage() {
       </header>
 
       <article>
-        <section className="flex min-h-[600px] items-center bg-[#07172c] px-4 py-20 text-white sm:px-6 lg:min-h-[660px] lg:px-8 lg:py-28">
+        <section className="flex min-h-[430px] items-center bg-[#07172c] px-4 py-14 text-white sm:min-h-[460px] sm:px-6 sm:py-16 lg:min-h-[500px] lg:px-8 lg:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#f59e0b]">
               {(post.categories || []).map((category: string) => <span key={category}>{category}</span>)}
