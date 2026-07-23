@@ -92,7 +92,6 @@ import manufacturingVideo from "../imges/Industries-videos/Manufacturing.mp4";
 import retailEcommerceVideo from "../imges/Industries-videos/Retail-E-Commerce.mp4";
 import technologyVideo from "../imges/Industries-videos/Technology.mp4";
 import logisticsVideo from "../imges/Industries-videos/Logistics.mp4";
-import realEstateVideo from "../imges/Industries-videos/Real-Estate.mp4";
 import educationVideo from "../imges/Industries-videos/Education.mp4";
 import contractStaffingVideo from "../imges/Industries-videos/Contract-Staffing.mp4";
 import directHireVideo from "../imges/Industries-videos/Direct Hire.mp4";
@@ -2076,14 +2075,6 @@ function IndustriesPage() {
       color: "text-sky-500 bg-sky-50 hover:bg-sky-100",
       themeColor: "#0EA5E9",
       video: educationVideo,
-    },
-    {
-      title: "Real Estate & Construction",
-      description: "Delivering on-time projects with specialized talent and solutions that build stronger tomorrow.",
-      icon: Building,
-      color: "text-teal-500 bg-teal-50 hover:bg-teal-100",
-      themeColor: "#14B8A6",
-      video: realEstateVideo,
     },
   ];
 

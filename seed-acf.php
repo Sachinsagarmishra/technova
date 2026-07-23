@@ -1112,13 +1112,6 @@ $pages = [
                     'icon_name' => 'GraduationCap',
                     'color_class' => 'text-sky-500 bg-sky-50 hover:bg-sky-100',
                     'video_file' => resolve_hashed_asset('Education')
-                ],
-                [
-                    'title' => 'Real Estate & Construction',
-                    'description' => 'Delivering on-time projects with specialized talent and solutions that build stronger tomorrow.',
-                    'icon_name' => 'Building',
-                    'color_class' => 'text-teal-500 bg-teal-50 hover:bg-teal-100',
-                    'video_file' => resolve_hashed_asset('Real-Estate')
                 ]
             ],
             'industries_stats' => [
