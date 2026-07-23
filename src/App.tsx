@@ -920,7 +920,7 @@ function SolutionPage() {
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#a78bfa]">
               {window.wpData?.solution_kicker || "TechNova Solutions"}
             </p>
-            <h1 className="font-display mt-6 text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-6 !text-white text-5xl font-normal leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
               {window.wpData?.solution_headline || "Technology Talent and Consulting Built Around Your Outcomes"}
             </h1>
             <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
@@ -978,7 +978,7 @@ function SolutionPage() {
         <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-2">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#a78bfa]">Capabilities</p>
-            <h2 className="font-display mt-4 text-4xl font-normal sm:text-5xl">{window.wpData?.solution_roles_title || "Roles and Expertise"}</h2>
+            <h2 className="font-display mt-4 !text-white text-4xl font-normal sm:text-5xl">{window.wpData?.solution_roles_title || "Roles and Expertise"}</h2>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {roles.map((role: any) => (
                 <div key={role.title} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/85">
@@ -989,12 +989,12 @@ function SolutionPage() {
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#f59e0c]">Our Approach</p>
-            <h2 className="font-display mt-4 text-4xl font-normal sm:text-5xl">{window.wpData?.solution_process_title || "A Clear Path to Delivery"}</h2>
+            <h2 className="font-display mt-4 !text-white text-4xl font-normal sm:text-5xl">{window.wpData?.solution_process_title || "A Clear Path to Delivery"}</h2>
             <div className="mt-8 space-y-4">
               {process.map((step: any, index: number) => (
                 <div key={step.title} className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-5">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#8B5CF6] text-sm font-bold">{index + 1}</span>
-                  <div><h3 className="font-bold">{step.title}</h3><p className="mt-1 text-sm leading-6 text-white/65">{step.description}</p></div>
+                  <div><h3 className="!text-white font-bold">{step.title}</h3><p className="mt-1 text-sm leading-6 text-white/65">{step.description}</p></div>
                 </div>
               ))}
             </div>
@@ -1004,7 +1004,7 @@ function SolutionPage() {
 
       <section className="scroll-reveal-section bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-8 rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-10 text-white lg:flex-row lg:items-center">
-          <div><h2 className="font-display text-4xl font-normal">{window.wpData?.solution_cta_title || "Ready to Build the Right Team?"}</h2><p className="mt-3 max-w-2xl text-white/85">{window.wpData?.solution_cta_description || "Tell us what you are building, and we will help shape the right talent and delivery model."}</p></div>
+          <div><h2 className="font-display !text-white text-4xl font-normal">{window.wpData?.solution_cta_title || "Ready to Build the Right Team?"}</h2><p className="mt-3 max-w-2xl text-white/85">{window.wpData?.solution_cta_description || "Tell us what you are building, and we will help shape the right talent and delivery model."}</p></div>
           <Button asChild size="hero" variant="glass"><a href={window.wpData?.solution_cta_link || "/contact/"}>{window.wpData?.solution_cta_text || "Start a Conversation"}<ArrowRight size={18} className="ml-2" /></a></Button>
         </div>
       </section>
