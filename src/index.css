@@ -401,8 +401,7 @@
     transition: transform 0.22s ease;
   }
 
-  .mega-menu-wrap:hover .mega-menu-trigger svg,
-  .mega-menu-wrap:focus-within .mega-menu-trigger svg {
+  .mega-menu-wrap.mega-menu-open .mega-menu-trigger svg {
     transform: rotate(180deg);
   }
 
@@ -447,8 +446,7 @@
     top: 128px;
   }
 
-  .mega-menu-wrap:hover .mega-menu-panel,
-  .mega-menu-wrap:focus-within .mega-menu-panel {
+  .mega-menu-wrap.mega-menu-open .mega-menu-panel {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0) scale(1);

@@ -442,10 +442,62 @@ const talentBenefits = [
 function SiteHeader({ light = false }: { light?: boolean }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileMenuId, setOpenMobileMenuId] = useState<number | string | null>(null);
+  const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | string | null>(null);
+  const megaMenuOpenTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const desktopMenuRef = useRef<HTMLDivElement | null>(null);
   const navTextClass = light ? "!text-[#0b132b]" : "!text-white";
   const primaryMenu: NavigationItem[] = Array.isArray(window.wpData?.primary_menu) && window.wpData.primary_menu.length
     ? window.wpData.primary_menu
     : defaultPrimaryMenu;
+
+  const cancelMegaMenuTimer = () => {
+    if (megaMenuOpenTimer.current) {
+      clearTimeout(megaMenuOpenTimer.current);
+      megaMenuOpenTimer.current = null;
+    }
+  };
+
+  const openMegaMenuWithDelay = (id: number | string) => {
+    cancelMegaMenuTimer();
+    if (activeMegaMenuId === id) return;
+    megaMenuOpenTimer.current = setTimeout(() => {
+      setActiveMegaMenuId(id);
+      megaMenuOpenTimer.current = null;
+    }, 260);
+  };
+
+  const openMegaMenuImmediately = (id: number | string) => {
+    cancelMegaMenuTimer();
+    setActiveMegaMenuId(id);
+  };
+
+  const closeMegaMenu = () => {
+    cancelMegaMenuTimer();
+    setActiveMegaMenuId(null);
+  };
+
+  useEffect(() => {
+    const handleOutsidePointer = (event: PointerEvent) => {
+      if (desktopMenuRef.current && !desktopMenuRef.current.contains(event.target as Node)) {
+        cancelMegaMenuTimer();
+        setActiveMegaMenuId(null);
+      }
+    };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        cancelMegaMenuTimer();
+        setActiveMegaMenuId(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsidePointer);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsidePointer);
+      document.removeEventListener("keydown", handleEscape);
+      cancelMegaMenuTimer();
+    };
+  }, []);
 
   return (
     <nav
@@ -466,7 +518,10 @@ function SiteHeader({ light = false }: { light?: boolean }) {
         />
       </a>
 
-      <div className={`nav-glass-menu hidden items-center lg:flex ${light ? "nav-glass-menu-light" : ""}`}>
+      <div
+        ref={desktopMenuRef}
+        className={`nav-glass-menu hidden items-center lg:flex ${light ? "nav-glass-menu-light" : ""}`}
+      >
         {primaryMenu.map((item) => {
           const hasChildren = Boolean(item.children?.length);
           const isIndustries = item.title.toLowerCase().includes("industr") || item.url.includes("industr");
@@ -479,19 +534,32 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                 target={item.target || undefined}
                 rel={item.target === "_blank" ? "noreferrer" : undefined}
                 className={`nav-glass-link text-sm font-medium transition-colors ${navTextClass}`}
+                onClick={closeMegaMenu}
               >
                 {item.title}
               </a>
             );
           }
 
+          const isMegaMenuOpen = activeMegaMenuId === item.id;
           return (
-            <div className="mega-menu-wrap" key={item.id}>
+            <div
+              className={`mega-menu-wrap ${isMegaMenuOpen ? "mega-menu-open" : ""}`}
+              key={item.id}
+              onMouseEnter={() => openMegaMenuWithDelay(item.id)}
+              onMouseLeave={() => {
+                if (!isMegaMenuOpen) cancelMegaMenuTimer();
+              }}
+            >
               <a
                 href={item.url}
                 target={item.target || undefined}
                 rel={item.target === "_blank" ? "noreferrer" : undefined}
                 className={`mega-menu-trigger text-sm font-medium transition-colors ${navTextClass}`}
+                aria-haspopup="true"
+                aria-expanded={isMegaMenuOpen}
+                onFocus={() => openMegaMenuImmediately(item.id)}
+                onClick={closeMegaMenu}
               >
                 {item.title}
                 <ChevronDown aria-hidden="true" size={15} strokeWidth={2.2} />
@@ -511,7 +579,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                     <p className="mega-menu-eyebrow">TechNova Systems</p>
                     <h2>{isIndustries ? "Expertise for the work that matters." : "Future-ready teams, built around outcomes."}</h2>
                     <p>{item.description || (isIndustries ? "Industry-aware talent and consulting for complex business environments." : "Flexible talent and technology solutions designed to move your roadmap forward.")}</p>
-                    <a className="mega-menu-feature-link" href={item.url}>
+                    <a className="mega-menu-feature-link" href={item.url} onClick={closeMegaMenu}>
                       Explore {item.title}
                       <ArrowRight aria-hidden="true" size={18} strokeWidth={2.4} />
                     </a>
@@ -531,6 +599,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                           rel={child.target === "_blank" ? "noreferrer" : undefined}
                           key={child.id}
                           role="menuitem"
+                          onClick={closeMegaMenu}
                         >
                           <Icon aria-hidden="true" size={21} strokeWidth={1.8} />
                           <span>
@@ -541,7 +610,7 @@ function SiteHeader({ light = false }: { light?: boolean }) {
                       );
                     })}
                   </div>
-                  <a className="mega-menu-parent-link" href={item.url}>
+                  <a className="mega-menu-parent-link" href={item.url} onClick={closeMegaMenu}>
                     View all {item.title}
                     <ArrowRight aria-hidden="true" size={16} />
                   </a>
