@@ -78,6 +78,18 @@ function technova_seo_config($page_id) {
             'title' => 'IT Staffing & Technology Solutions | TechNova Systems',
             'description' => 'Explore AI talent, executive search, workforce consulting, digital transformation, contract staffing, and managed team solutions.',
         ],
+        'privacy-policy' => [
+            'title' => 'Privacy Policy | TechNova Systems',
+            'description' => 'Learn how TechNova Systems collects, uses, protects, and shares personal information submitted through our staffing and consulting website.',
+        ],
+        'terms-of-service' => [
+            'title' => 'Terms of Service | TechNova Systems',
+            'description' => 'Review the terms governing your use of the TechNova Systems website, content, staffing resources, forms, and related online services.',
+        ],
+        'cookie-policy' => [
+            'title' => 'Cookie Policy | TechNova Systems',
+            'description' => 'Learn how TechNova Systems uses necessary, functional, analytics, and related technologies on our website and how to manage them.',
+        ],
     ];
 
     $solutions = [

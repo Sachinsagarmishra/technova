@@ -715,7 +715,7 @@ function SiteFooter() {
   const policyLinks = [
     { label: "Privacy Policy", href: "/privacy-policy/" },
     { label: "Terms of Service", href: "/terms-of-service/" },
-    { label: "Contact Us", href: "/contact/" },
+    { label: "Cookie Policy", href: "/cookie-policy/" },
   ];
 
   const socialUrl = "https://www.linkedin.com/company/technovasystemsinc/";
@@ -880,6 +880,40 @@ function BlogPostPage() {
           </div>
         </div>
       </article>
+
+      <SiteFooter />
+    </main>
+  );
+}
+
+function PolicyPage() {
+  const policy = window.wpData?.policy;
+  if (!policy) return null;
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fb] text-[#0b132b]">
+      <header className="relative z-[110] flex min-h-[118px] items-center border-b border-slate-200 bg-white shadow-sm">
+        <div className="w-full">
+          <SiteHeader light />
+        </div>
+      </header>
+
+      <section className="bg-[#07172c] px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#f59e0b]">TechNova Systems</p>
+          <h1 className="font-display mt-5 !text-white text-4xl font-normal leading-tight sm:text-5xl lg:text-6xl">
+            {policy.title}
+          </h1>
+          {policy.modified && <p className="mt-5 text-sm text-slate-300">Last updated: {policy.modified}</p>}
+        </div>
+      </section>
+
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <article
+          className="policy-content mx-auto max-w-5xl rounded-3xl border border-slate-200 bg-white px-6 py-9 text-[16px] leading-8 text-slate-700 shadow-sm sm:px-10 sm:py-12 lg:px-14"
+          dangerouslySetInnerHTML={{ __html: policy.content }}
+        />
+      </section>
 
       <SiteFooter />
     </main>
@@ -4094,6 +4128,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [routeHash, setRouteHash] = useState(() => {
     if (window.wpData?.contentType === "post") return "#blog";
+    if (window.wpData?.contentType === "policy") return "#policy";
     const path = window.location.pathname.replace(/\/$/, "");
     if (path.endsWith("/contact")) return "#contact";
     if (path.endsWith("/about")) return "#about";
@@ -4185,6 +4220,10 @@ function App() {
 
   if (routeHash === "#blog") {
     return <BlogPostPage />;
+  }
+
+  if (routeHash === "#policy") {
+    return <PolicyPage />;
   }
 
   if (routeHash === "#about") {
