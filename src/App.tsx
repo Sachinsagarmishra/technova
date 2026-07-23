@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import * as LucideIcons from "lucide-react";
 import {
   ArrowRight,
+  ArrowLeft,
   ArrowUp,
   BadgeCheck,
   BrainCircuit,
@@ -54,6 +55,8 @@ import {
   Palette,
   Menu,
   X,
+  House,
+  Headphones,
 } from "lucide-react";
 import awsLogo from "@/assets/trusted-logos/aws.png";
 import ciscoLogo from "@/assets/trusted-logos/cisco.png";
@@ -120,6 +123,7 @@ import ctaContactUsBackground from "../imges/ctacontactus.png";
 import futureOfWorkAiThumbnail from "../imges/future-of-work-ai.png";
 import techSkills2026Thumbnail from "../imges/tech-skills-2026.png";
 import aiStaffingTrendsThumbnail from "../imges/ai-staffing-trends.png";
+import error404Background from "../imges/404-error-tech.png";
 
 type NavigationItem = {
   id: number | string;
@@ -916,6 +920,116 @@ function PolicyPage() {
       </section>
 
       <SiteFooter />
+    </main>
+  );
+}
+
+function NotFoundPage() {
+  const helpfulLinks = [
+    { label: "Go to Homepage", href: "/", icon: House },
+    { label: "Explore Solutions", href: "/solutions/", icon: BriefcaseBusiness },
+    { label: "Contact Us", href: "/contact/", icon: Mail },
+  ];
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#020d1f] text-white">
+      <img
+        src={error404Background}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover object-[68%_center] opacity-75 lg:object-center lg:opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#020d1f] via-[#020d1f]/95 to-[#020d1f]/15 lg:via-[#020d1f]/68" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020d1f]/90 via-transparent to-[#020d1f]/35" />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1440px] flex-col px-5 py-6 sm:px-8 lg:px-12">
+        <header className="flex items-center justify-between gap-5">
+          <a href="/" aria-label="TechNova Systems home" className="inline-flex">
+            <img
+              src={window.wpData?.header_logo || technovaLogo}
+              alt="TechNova Systems"
+              className="h-11 w-auto max-w-[210px] object-contain sm:h-14"
+            />
+          </a>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/5 px-4 py-3 text-sm font-semibold !text-white backdrop-blur-md transition-colors hover:border-[#f59e0b] hover:bg-[#f59e0b] sm:px-5"
+          >
+            <ArrowLeft size={18} />
+            <span className="hidden sm:inline">Back to Home</span>
+            <span className="sm:hidden">Home</span>
+          </a>
+        </header>
+
+        <div className="grid flex-1 items-center py-12 lg:grid-cols-2 lg:py-16">
+          <section className="max-w-xl">
+            <div className="font-display text-[112px] font-normal leading-[0.78] tracking-[-0.06em] text-white sm:text-[150px] lg:text-[180px]">
+              4<span className="text-[#f59e0b]">0</span>4
+            </div>
+            <h1 className="font-display mt-10 !text-white text-4xl font-normal leading-[1.08] sm:text-5xl lg:text-6xl">
+              This page doesn&apos;t<br />
+              seem to <span className="text-[#f59e0b]">exist.</span>
+            </h1>
+            <div className="mt-6 h-1 w-16 rounded-full bg-[#f59e0b]" />
+            <p className="mt-7 max-w-lg text-base leading-7 text-slate-300 sm:text-lg">
+              It looks like the link pointing here was faulty. Try searching or choose one of the helpful links below.
+            </p>
+
+            <form action="/" method="get" role="search" className="mt-8 flex max-w-lg overflow-hidden rounded-xl border border-white/20 bg-white/5 backdrop-blur-md">
+              <label htmlFor="technova-404-search" className="sr-only">Search TechNova Systems</label>
+              <input
+                id="technova-404-search"
+                name="s"
+                type="search"
+                placeholder="Search..."
+                className="h-14 min-w-0 flex-1 border-0 bg-transparent px-5 text-base !text-white shadow-none outline-none placeholder:text-slate-400 focus:ring-0"
+              />
+              <button
+                type="submit"
+                aria-label="Search"
+                className="flex w-16 items-center justify-center bg-[#0b4f8f] text-white transition-colors hover:bg-[#f59e0b]"
+              >
+                <Search size={24} />
+              </button>
+            </form>
+
+            <div className="mt-9">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-400">You can also</p>
+              <div className="mt-4 grid max-w-lg gap-2">
+                {helpfulLinks.map(({ label, href, icon: LinkIcon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    className="group flex items-center gap-4 rounded-xl px-2 py-2 !text-white transition-colors hover:bg-white/5"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white">
+                      <LinkIcon size={20} />
+                    </span>
+                    <span className="flex-1 font-semibold">{label}</span>
+                    <ChevronRight size={20} className="transition-transform group-hover:translate-x-1 group-hover:text-[#f59e0b]" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+          <div aria-hidden="true" className="hidden lg:block" />
+        </div>
+
+        <aside className="mb-2 flex flex-col gap-5 rounded-2xl border border-white/15 bg-[#0a1b33]/80 p-5 shadow-2xl backdrop-blur-lg sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-center gap-4">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-blue-400/30 bg-blue-500/15 text-blue-300">
+              <Headphones size={27} />
+            </span>
+            <div>
+              <h2 className="!text-white text-lg font-bold">Need help finding something?</h2>
+              <p className="mt-1 text-sm text-slate-300">Our team is here to help you.</p>
+            </div>
+          </div>
+          <a href="/contact/" className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-[#f59e0b] px-8 font-bold !text-white transition-colors hover:bg-[#ea7e0b]">
+            Contact Us
+            <ArrowRight size={19} />
+          </a>
+        </aside>
+      </div>
     </main>
   );
 }
@@ -4129,6 +4243,7 @@ function App() {
   const [routeHash, setRouteHash] = useState(() => {
     if (window.wpData?.contentType === "post") return "#blog";
     if (window.wpData?.contentType === "policy") return "#policy";
+    if (window.wpData?.contentType === "404") return "#not-found";
     const path = window.location.pathname.replace(/\/$/, "");
     if (path.endsWith("/contact")) return "#contact";
     if (path.endsWith("/about")) return "#about";
@@ -4224,6 +4339,10 @@ function App() {
 
   if (routeHash === "#policy") {
     return <PolicyPage />;
+  }
+
+  if (routeHash === "#not-found") {
+    return <NotFoundPage />;
   }
 
   if (routeHash === "#about") {
