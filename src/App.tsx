@@ -1151,9 +1151,18 @@ function SolutionPage() {
       </section>
 
       <section className="scroll-reveal-section bg-white px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-8 rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-10 text-white lg:flex-row lg:items-center">
-          <div><h2 className="font-display !text-white text-4xl font-normal">{window.wpData?.solution_cta_title || "Ready to Build the Right Team?"}</h2><p className="mt-3 max-w-2xl text-white/85">{window.wpData?.solution_cta_description || "Tell us what you are building, and we will help shape the right talent and delivery model."}</p></div>
-          <Button asChild size="hero" variant="glass"><a href={window.wpData?.solution_cta_link || "/contact/"}>{window.wpData?.solution_cta_text || "Start a Conversation"}<ArrowRight size={18} className="ml-2" /></a></Button>
+        <div
+          className="relative mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-8 overflow-hidden rounded-3xl bg-[#071224] bg-cover bg-center p-10 text-white shadow-[0_8px_28px_rgba(15,23,42,0.10)] lg:flex-row lg:items-center"
+          style={{ backgroundImage: `url(${ctaContactUsBackground})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071224]/92 via-[#071224]/68 to-[#071224]/28" />
+          <div className="relative z-10">
+            <h2 className="font-display !text-white text-4xl font-normal">{window.wpData?.solution_cta_title || "Ready to Build the Right Team?"}</h2>
+            <p className="mt-3 max-w-2xl text-white/90">{window.wpData?.solution_cta_description || "Tell us what you are building, and we will help shape the right talent and delivery model."}</p>
+          </div>
+          <Button asChild size="hero" className="relative z-10 bg-[#f59e0c] text-white shadow-md shadow-amber-500/10 hover:bg-[#d97706]">
+            <a href={window.wpData?.solution_cta_link || "/contact/"}>{window.wpData?.solution_cta_text || "Start a Conversation"}<ArrowRight size={18} className="ml-2" /></a>
+          </Button>
         </div>
       </section>
       <SiteFooter />
@@ -1559,25 +1568,29 @@ function AboutPage() {
       </section>
 
       <section className="px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-        <div className="relative mx-auto grid max-w-[1440px] gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-8 text-white lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-6">
+        <div
+          className="relative mx-auto grid max-w-[1440px] gap-6 overflow-hidden rounded-3xl bg-[#071224] bg-cover bg-center p-8 text-white shadow-[0_8px_28px_rgba(15,23,42,0.10)] lg:grid-cols-12 lg:items-center"
+          style={{ backgroundImage: `url(${ctaContactUsBackground})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071224]/92 via-[#071224]/68 to-[#071224]/28" />
+          <div className="relative z-10 lg:col-span-6">
             <h2
-              className="font-display text-4xl font-normal"
+              className="font-display !text-white text-4xl font-normal"
               style={{ color: window.wpData?.about_cta_heading_color || "#ffffff" }}
             >
               {window.wpData?.about_cta_heading || "Let's Build the Future Together"}
             </h2>
-            <p className="mt-3 text-sm leading-7 text-white/84">
+            <p className="mt-3 text-sm leading-7 text-white/90">
               {window.wpData?.about_cta_description || "Partner with TechNova Systems for technology talent, strategic consulting, and measurable business impact."}
             </p>
           </div>
-          <div className="flex flex-wrap gap-4 lg:col-span-6 lg:justify-end">
-            <Button variant="glass" size="hero" asChild>
+          <div className="relative z-10 flex flex-wrap gap-4 lg:col-span-6 lg:justify-end">
+            <Button size="hero" className="bg-[#f59e0c] text-white shadow-md shadow-amber-500/10 hover:bg-[#d97706]" asChild>
               <a href={window.wpData?.about_cta_primary_link || "/contact/"}>
                 {window.wpData?.about_cta_primary_text || "Schedule a Consultation"}
               </a>
             </Button>
-            <Button variant="glass" size="hero" asChild>
+            <Button size="hero" className="bg-[#f59e0c] text-white shadow-md shadow-amber-500/10 hover:bg-[#d97706]" asChild>
               <a href={window.wpData?.about_cta_secondary_link || "/employers/"}>
                 {window.wpData?.about_cta_secondary_text || "Explore Our Solutions"}
                 <ArrowRight size={18} />
@@ -2391,15 +2404,14 @@ function IndustriesPage() {
 
       {/* CTA Section */}
       <section className="px-4 py-12 sm:px-6 lg:px-8 bg-white">
-        <div className="mx-auto max-w-[1440px] relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#8B5CF6] to-[#f59e0c] p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
-          <div className="flex items-center gap-6">
-            <img
-              src={ctaCubes}
-              alt=""
-              className="h-24 w-auto hidden sm:block object-contain mix-blend-normal opacity-90 hover:scale-[1.05] transition-transform duration-500"
-            />
+        <div
+          className="relative mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-8 overflow-hidden rounded-3xl bg-[#071224] bg-cover bg-center p-8 text-white shadow-[0_8px_28px_rgba(15,23,42,0.10)] sm:p-12 lg:flex-row"
+          style={{ backgroundImage: `url(${ctaContactUsBackground})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071224]/92 via-[#071224]/68 to-[#071224]/28" />
+          <div className="relative z-10 flex items-center gap-6">
             <div>
-              <h2 className="font-display text-3xl sm:text-4xl font-normal leading-tight">
+              <h2 className="font-display !text-white text-3xl sm:text-4xl font-normal leading-tight">
                 {window.wpData?.industries_cta_title || "Let's Drive Industry Innovation Together"}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-white/90 max-w-2xl">
@@ -2407,11 +2419,10 @@ function IndustriesPage() {
               </p>
             </div>
           </div>
-          <div className="shrink-0">
+          <div className="relative z-10 shrink-0">
             <Button
-              variant="glass"
               size="hero"
-              className="bg-white/10 hover:bg-white/20 border-white/25 shadow-lg"
+              className="bg-[#f59e0c] text-white shadow-md shadow-amber-500/10 hover:bg-[#d97706]"
               asChild
             >
               <a href={window.wpData?.industries_cta_button_link || "#contact"}>
@@ -4079,23 +4090,22 @@ function TalentPage() {
 
       {/* Bottom CTA Section */}
       <section className="scroll-reveal-section px-4 pb-16 pt-8 sm:px-6 lg:px-8 bg-white">
-        <div className="relative mx-auto grid max-w-[1440px] gap-8 overflow-hidden rounded-3xl p-10 text-white lg:grid-cols-12 lg:items-center" style={{ background: `linear-gradient(90deg, ${window.wpData?.talent_cta_start_color || "#8B5CF6"}, ${window.wpData?.talent_cta_end_color || "#f59e0c"})` }}>
-          {/* Decorative shapes */}
-          <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
-            <img src={ctaCubes} alt="" className="h-64 w-auto object-contain" />
-          </div>
+        <div
+          className="relative mx-auto grid max-w-[1440px] gap-8 overflow-hidden rounded-3xl bg-[#071224] bg-cover bg-center p-10 text-white shadow-[0_8px_28px_rgba(15,23,42,0.10)] lg:grid-cols-12 lg:items-center"
+          style={{ backgroundImage: `url(${ctaContactUsBackground})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071224]/92 via-[#071224]/68 to-[#071224]/28" />
 
           <div className="lg:col-span-8 relative z-10">
-            <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl" style={{ color: window.wpData?.talent_cta_heading_color || "#ffffff" }}>
+            <h2 className="font-display !text-white text-4xl font-normal tracking-tight sm:text-5xl" style={{ color: window.wpData?.talent_cta_heading_color || "#ffffff" }}>
               {window.wpData?.talent_cta_title || "Your Next Opportunity Starts Here"}
             </h2>
-            <p className="mt-4 text-base leading-relaxed max-w-2xl" style={{ color: window.wpData?.talent_cta_description_color || "rgba(255,255,255,.9)" }}>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed !text-white/90" style={{ color: window.wpData?.talent_cta_description_color || "rgba(255,255,255,.9)" }}>
               {window.wpData?.talent_cta_description || "Submit your resume today and let our experts help you find the right role, faster."}
             </p>
           </div>
           <div className="flex lg:col-span-4 lg:justify-end relative z-10">
             <Button
-              variant="glass"
               size="hero"
               onClick={() => {
                 const target = window.wpData?.talent_cta_button_link || "#resume-form";
@@ -4106,7 +4116,7 @@ function TalentPage() {
                   window.location.href = target;
                 }
               }}
-              className="bg-white text-slate-900 border-white hover:bg-white/90 font-semibold cursor-pointer shadow-xl hover:scale-[1.03]"
+              className="cursor-pointer bg-[#f59e0c] font-semibold text-white shadow-md shadow-amber-500/10 hover:scale-[1.03] hover:bg-[#d97706]"
             >
               {window.wpData?.talent_cta_button_text || "Submit Your Resume"}
               <ArrowRight size={18} className="ml-2" />
