@@ -2079,18 +2079,27 @@ function IndustriesPage() {
   ];
 
   const industries = window.wpData && window.wpData.industries_list
-    ? window.wpData.industries_list.map((item: any) => {
+    ? window.wpData.industries_list.map((item: any, index: number) => {
         const IconComponent = getIconComponent(item.icon_name || "Cpu");
+        const fallbackCard = defaultIndustries.find(
+          (candidate) => candidate.title.toLowerCase() === String(item.title || "").toLowerCase()
+        ) || defaultIndustries[index];
+        const fallbackMedia = fallbackCard?.video;
         return {
           title: item.title,
           description: item.description,
           icon: IconComponent,
           color: item.color_class || "text-purple-500 bg-purple-50 hover:bg-purple-100",
           themeColor: "#8B5CF6",
-          video: getAcfUrl(item.video_file) || undefined
+          media: item.video_file || fallbackMedia,
+          mediaUrl: getAcfUrl(item.video_file) || fallbackMedia,
         };
       })
-    : defaultIndustries;
+    : defaultIndustries.map((item: any) => ({
+        ...item,
+        media: item.video,
+        mediaUrl: item.video,
+      }));
 
   const stats = window.wpData?.industries_stats
     ? window.wpData.industries_stats.map((s: any) => ({
@@ -2269,18 +2278,27 @@ function IndustriesPage() {
                   className="group rounded-xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-slate-200 flex flex-col justify-between min-h-[240px]"
                 >
                   <div>
-                    {item.video ? (
+                    {item.mediaUrl ? (
                       <div className="relative w-[142px] h-[120px] -ml-8 -mt-4 mb-2 pointer-events-none" aria-hidden="true">
-                        <video
-                          src={item.video}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-contain"
-                          controlsList="nodownload"
-                          onContextMenu={(e) => e.preventDefault()}
-                        />
+                        {isVideoMedia(item.media, item.mediaUrl) ? (
+                          <video
+                            src={item.mediaUrl}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                            className="h-full w-full object-contain"
+                            controlsList="nodownload"
+                            onContextMenu={(e) => e.preventDefault()}
+                          />
+                        ) : (
+                          <img
+                            src={item.mediaUrl}
+                            alt=""
+                            className="h-full w-full object-contain"
+                          />
+                        )}
                       </div>
                     ) : (
                       <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.color} transition-colors duration-300`}>
@@ -2359,16 +2377,16 @@ function IndustriesPage() {
 
           {/* Right Column */}
           <div className="lg:col-span-6 rounded-3xl overflow-hidden relative p-8 sm:p-12 text-white min-h-[420px] flex flex-col justify-between shadow-xl">
-            <img
-              src={getAcfUrl(window.wpData?.industries_transform_bg) || solutionsSkyline}
-              alt=""
+            <HeroBackgroundMedia
+              media={window.wpData?.industries_transform_bg}
+              fallback={solutionsSkyline}
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-[#071224]/85 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#071224] via-[#071224]/50 to-transparent" />
+            <div className="absolute inset-0" style={{ backgroundColor: "rgba(7, 18, 36, 0.24)" }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071224]/55 via-[#071224]/15 to-transparent" />
 
             <div className="relative z-10">
-              <h3 className="text-2xl sm:text-3xl font-display font-normal leading-snug max-w-md">
+              <h3 className="max-w-md font-display text-2xl font-normal leading-snug !text-white drop-shadow-sm sm:text-3xl">
                 {window.wpData?.industries_transform_title || "We go beyond staffing. We build partnerships that transform industries."}
               </h3>
             </div>

@@ -2397,6 +2397,7 @@
         "name": "industries_list",
         "type": "repeater",
         "layout": "row",
+        "button_label": "Add Industry",
         "sub_fields": [
           {
             "key": "field_ind_item_title",
@@ -2424,9 +2425,13 @@
           },
           {
             "key": "field_ind_item_video",
-            "label": "Animation Video URL",
+            "label": "Animated Icon File",
             "name": "video_file",
-            "type": "text"
+            "type": "file",
+            "instructions": "Upload an image, animated GIF, or video for this industry card. Recommended: square or landscape media with a transparent or simple background.",
+            "return_format": "array",
+            "library": "all",
+            "mime_types": "jpg,jpeg,png,gif,webp,avif,svg,mp4,webm,ogg,ogv,mov,m4v"
           }
         ]
       },
@@ -2504,9 +2509,13 @@
       },
       {
         "key": "field_industries_transform_bg",
-        "label": "Transform Block Background Image URL",
+        "label": "Transform Block Background Media",
         "name": "industries_transform_bg",
-        "type": "text"
+        "type": "file",
+        "instructions": "Upload either an image, animated GIF, or video for the How We Help Industries feature box.",
+        "return_format": "array",
+        "library": "all",
+        "mime_types": "jpg,jpeg,png,gif,webp,avif,mp4,webm,ogg,ogv,mov,m4v"
       },
       {
         "key": "field_industries_transform_items",
